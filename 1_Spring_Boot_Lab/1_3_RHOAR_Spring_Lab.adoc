@@ -1,0 +1,348 @@
+:scrollbar:
+:data-uri:
+:toc2:
+:linkattrs:
+
+
+== Deployment on OpenShift Application Runtimes Lab
+
+In this lab, you step through a Spring Boot project. This gives you insight into how to deploy Spring applications on Red Hat OpenShift Application Runtimes.
+
+.Spring Boot Tested and Verified Version
+
+The Spring Boot runtime version 1.5.16 release is tested and verified to run with the embedded Apache Tomcat container on OpenShift. This embedded container, as well as other components such as the Java container image, is provided as part of a Red Hat subscription when used with Spring Boot. The tested and verified Spring Boot runtime artifacts are available from the link:https://maven.repository.redhat.com/ga/[Red Hat Middleware General Availability Maven Repository^].
+
+[NOTE]
+Check the link:https://access.redhat.com/documentation/en-us/red_hat_openshift_application_runtimes/1/html-single/spring_boot_runtime_guide/#runtime_details[Spring Boot Runtime Guide^] on the Red Hat Customer Portal for the latest supported version numbers.
+
+* Your Maven POM file can reference the Red Hat-supported bits using this snippet:
++
+[source,xml]
+----
+  ...
+
+  <spring-boot.bom.version>1.5.16.SP1-redhat-00001</spring-boot.bom.version>
+
+  ...
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>me.snowdrop</groupId>
+        <artifactId>spring-boot-bom</artifactId>
+        <version>${spring-boot.bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  ...
+
+  <repositories>
+    <repository>
+      <id>redhat</id>
+      <url>https://maven.repository.redhat.com/ga/</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>redhat</id>
+      <url>https://maven.repository.redhat.com/ga/</url>
+    </pluginRepository>
+  </pluginRepositories>
+----
+
+:numbered:
+== Set Up Project
+
+. In Developer Studio, open the Maven project:
++
+[source,sh]
+----
+~/appmod_foundations_training/spring/lab3
+----
+
+. Build and verify:
++
+[source,sh]
+----
+cd ~/appmod_foundations_training/spring/lab3
+
+mvn clean verify
+----
+
+
+== Review Support for PostgreSQL
+
+When you deploy this application to OpenShift, you are likely to prefer to use a database instance and not a local H2 instance. To do this, you introduce different profiles for OpenShift versus local.
+
+. Open the `pom.xml` file.
+
+. Review the profiles section:
++
+[source,xml]
+----
+  <profiles>
+    <profile>
+      <id>local</id>
+      <activation>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
+      <id>openshift</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>${postgresql.version}</version>
+          <scope>runtime</scope>
+        </dependency>
+      </dependencies>
+      <activation />
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>fmp</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>resource</goal>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+----
+
+. In the build section, note that the default build is set to use the local profile:
++
+[source,xml]
+----
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <configuration>
+          <profiles>
+            <profile>local</profile>
+          </profiles>
+          <classifier>exec</classifier>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+----
+
+== Review OpenShift Configuration Files
+
+In this section, you review three key configuration files. When the Fabric8 Maven plug-in runs, the processing of these files, along with the building of the application, cause the application and its database to be deployed to OpenShift.
+
+=== Review Deployment Configuration Template
+
+A deployment in OpenShift Container Platform is a replication controller based on a user-defined template called a _deployment configuration_.
+
+You can define new templates to make it easy to recreate all the objects of your application. The template defines the objects it creates along with some metadata to guide the creation of those objects.
+
+. Open the `src/main/fabric8/deployment.yml` file.
+
+. Review the contents:
++
+[source,sh]
+----
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: ${project.artifactId}
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: DB_USERNAME
+              valueFrom:
+                 secretKeyRef:
+                   name: my-database-secret
+                   key: user
+            - name: DB_PASSWORD
+              valueFrom:
+                 secretKeyRef:
+                   name: my-database-secret
+                   key: password
+            - name: JAVA_OPTIONS
+              value: "-Dspring.profiles.active=openshift"
+----
+
+* This file defines the container for the catalog service, how the container life cycle is managed, and many other configuration values.
+* Note in particular that this file defines the Spring Profile that is active via the `spring.profiles.active` Java system property.
+
+TIP: For more details on deployment templates, see link:https://docs.openshift.com/container-platform/3.11/dev_guide/templates.html#writing-templates["Red Hat OpenShift Documentation - Writing Templates^"].
+
+=== Review Secrets Configuration
+
+The `Secret` object type provides a mechanism to hold sensitive information such as passwords, OpenShift Container Platform client configuration files, Docker configuration files, private source repository credentials, and so on. Secrets decouple sensitive content from the pods. You can mount secrets into containers using a volume plug-in or the system can use secrets to perform actions on behalf of a pod.
+
+. Open the `src/main/fabric8/credentials-secret.yml` file.
+
+. Review the contents:
++
+[source,sh]
+----
+apiVersion: "v1"
+kind: "Secret"
+metadata:
+  name: "my-database-secret"
+stringData:
+  user: "luke"
+  password: "secret"
+----
+
+* This file defines the secrets for the database user and password.
+
+TIP: For more details on secrets, see link:https://docs.openshift.com/container-platform/3.11/dev_guide/secrets.html["Red Hat OpenShift Documentation - Secrets^"].
+
+
+=== Review Route Configuration
+
+An OpenShift Container Platform `Route` exposes a route at a host name, like `www.example.com`, so that external clients can reach it by name.
+
+. Open the `src/main/fabric8/route.yml` file.
+
+. Review the contents:
++
+[source,sh]
+----
+apiVersion: v1
+kind: Route
+metadata:
+  name: ${project.artifactId}
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: ${project.artifactId}
+----
+
+* This file allows consumers outside OpenShift to access the load-balanced service using an external DNS name, protocol, and well-known and typically unrestricted TCP ports, such as `80`, `8080`, and `8443`. For example, if you want to access the service from your colleague's desktop, you cannot use the service name, you must use this route's host name.
++
+TIP: For more details on routes, see link:https://docs.openshift.com/container-platform/3.11/dev_guide/routes.html["Red Hat OpenShift Documentation - Routes^"].
+
+. Note that there is no _route_ object for the database.
+* This means that the database is inaccessible from outside the OpenShift cluster. The only externally facing service is the inventory service.
+
+
+
+== Deploy to OpenShift
+
+In this section, you deploy the application to the OpenShift servers.
+
+. Log in to the remote OpenShift environment.
+
+. Create a new project and add your initials to the name to make it unique:
++
+[NOTE]
+====
+Project names in OpenShift must be all lowercase and unique.
+====
++
+[source,sh]
+----
+export CATALOG_PROJECT_NAME=lab3-product-catalog-<your-initials>
+
+oc new-project $CATALOG_PROJECT_NAME
+----
+
+. Create a PostgreSQL database:
++
+[source,sh]
+----
+oc new-app -e POSTGRESQL_USER=luke -ePOSTGRESQL_PASSWORD=secret -ePOSTGRESQL_DATABASE=my_data openshift/postgresql-92-centos7 --name=my-database
+----
+
+. Build and deploy your project to the OpenShift servers:
++
+[source,sh]
+----
+mvn clean fabric8:deploy -Popenshift
+----
+
+* This deployment uses the OpenShift configuration files in `src/main/fabric8`. In particular, it reads `deployment.yml`, `credentials-secret.yml`, and `route.yml`.
++
+NOTE: This command can take between 5 and 10 minutes to complete, depending on your Internet speed.
+
+. Check the status of the deployment in the OpenShift web console or by using the CLI:
++
+[source,sh]
+----
+oc get pods -w -n $CATALOG_PROJECT_NAME
+----
++
+.Sample Output
+[source,sh]
+----
+NAME                                  READY     STATUS      RESTARTS   AGE
+my-database-1-b5p5m                   1/1       Running     0          18m
+product-catalog-lab3-1-w725f          1/1       Running     0          17m
+product-catalog-lab3-s2i-1-build      0/1       Completed   0          18m
+----
+
+. Wait until you see the two pods `my-database-xxx` and `product-catalog-lab3-xxx` listed as *READY* `1/1` and *STATUS* `Running`.
++
+[NOTE]
+You can ignore the pods `xxx-build` and `xxx-deploy`. Those pods are only for building and deploying your project.
+
+. Once the two pods `my-database-xxx` and `product-catalog-lab3-xxx` are ready, press *Ctrl+C*.
+
+== Test Product Catalog REST API
+
+In this section, you test the product catalog REST API that you deployed to the OpenShift servers.
+
+. Get the URL of the product catalog application:
++
+[source,sh]
+----
+export PRODUCT_CATALOG_URL=http://$(oc get route product-catalog-lab3 \
+-n $CATALOG_PROJECT_NAME -o template --template='{{.spec.host}}')
+----
+
+. Get the products from the catalog REST API:
++
+[source,sh]
+----
+curl -X GET "$PRODUCT_CATALOG_URL/products"
+----
++
+.Sample Output
+[source,sh]
+----
+[{"itemId":329299,"name":"Red Fedora","description":"Official Red Hat Fedora",
+"price":34.99},{"itemId":329199,"name":"Forge Laptop Sticker",
+"description":"JBoss Community Forge Project Sticker","price":8.5}, ...
+----
+
+* This data is returned from the product catalog REST API deployed on the OpenShift servers.
