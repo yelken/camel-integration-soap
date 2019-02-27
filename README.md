@@ -1,6 +1,6 @@
 # Agile Integration for the Enterprise
 
-Organizations investment in a deep portfolio of technologies to meet diverse business requirements.The interconnectivity of these systems are fundamental to the success of the business. To keep pace with the competition, solutions must achieve scalability in order to meet market demand, as well as, to meet business stakeholder requirements. Agile Integration is the key to the success of organizations seeking to scale and support demanding stakeholder expectations.
+Organizations invest in a deep portfolio of technologies to meet diverse business requirements.The interconnectivity of these systems are fundamental to the success of the business. To keep pace with the competition, solutions must achieve scalability in order to meet market demand, as well as, to meet business stakeholder requirements. Agile Integration is the key to the success of organizations seeking to scale and support demanding stakeholder expectations.
 
 In this lab, attendees will learn to use Red Hat’s integration portfolio for various use cases, including:
 * Integrate applications without coding
