@@ -1,0 +1,88 @@
+:scrollbar:
+:data-uri:
+:toc2:
+
+== Migrate Red Hat Fuse 6 Applications Lab
+
+In this lab, you develop a Camel route to migrate legacy SOAP services to provide a REST API wrapper using Camel.
+
+SOAP-based services are plentiful in many enterprise solutions and are slowly being replaced by RESTful services to simplify their use. A new wizard is available in the latest version of Red Hat Fuse Tooling to help you make the transition with Apache Camel’s Rest DSL. This lab shows how to use the new wizard to transition from older SOAP-based services to more modern REST-based services.
+
+.Goals
+* Create REST API for the Customer SOAP service from previous lab.
+* Design Apache Camel route that exposes REST API consuming JSON.
+* Use the Red Hat Fuse Tooling in Red Hat Developer Studio to create *wsdl2rest* mapping.
+* Deploy and test the solution.
+
+
+:numbered:
+
+
+== Import the Project into Red Hat Developer Studio
+
+. Using the same method you used in the previous lab, import the `05_migrate_fuse6` use case into a new workspace. You will find 1 project:
+
+* legacy-soap-rest-wrapper
+
+== Develop the Solution
+
+
+=== SOAP Web Service 
+
+The SOAP Web Service from the previous lab, available at *04_enrich-content-REST-and-WS-microservices/soap-cxfws-service*, is used as the backend SOAP service for this lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL is accessible at the URL: http://$soap-cxfws-service-route/ws/customerService?wsdl.
+
+==== Create the Camel Route
+
+. Right-click the *legacy-soap-rest-wrapper* in the Red Hat Fuse Integration perspective and select *New->Camel Rest DSL from WSDL*, or click *File->New->Other…, Red Hat Fuse->Camel Rest DSL from WSDL*.
+. Provide the URL to soap-cxfws-service WSDL and ensure the *legacy-soap-rest-wrapper* project is selected:
++
+image::images/legacy-soap-wsdl-import.png[]
+
+. Click *Next*.
+. Keep the default values of fields unchanged and click *Finish*.
++
+image::images/legacy-soap-wsdl-import-2.png[]
+
+. Now you should see the Java classes and the Spring context XML *rest-springboot-context.xml*.
++
+image::images/legacy-soap-wsdl-import-3.png[]
+
+. Inspect the Camel route and notice that the solution is code-complete and ready to run.
+
+==== Run the REST service
+
+. To run the REST service locally, run the following Maven command from the project's root folder:
++
+----
+$ mvn spring-boot:run -Dfabric8.skip
+----
+
+. The Camel service should be running on port 808, and can be accessed through URL: http://localhost:8080/api/jaxrs/account.
+. Send a test request to the REST service and check if the backend service is invoked correctly:
++
+----
+$ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
+----
+
+. The response should be as below:
++
+----
+{"company":{"active":true,"geo":"NA","name":"Rotobots"},"contact":{"city":"Phoenix","firstName":"Bill","lastName":"Smith","phone":"602-555-1100","state":"AZ","streetAddr":"100 N Park Ave.","zip":"85017"},"id":33,"salesContact":"Bernard Tison"}
+----
+
+==== Deploy to OpenShift Container Platform
+
+
+. To deploy the application to OpenShift Container Platform, execute the following Maven command from the terminal:
++
+----
+$ mvn fabric8:deploy
+----
+
+. Check that the project is deployed successfully. A pod for the deployment *legacy-soap-rest-wrapper* should be started. 
+. Notice the URL of the endpoint for external traffic.
+
+. You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as in localhost.
+
+
+Congratulations, you have completed this lab.
