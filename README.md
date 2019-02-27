@@ -12,4 +12,6 @@ In this lab, attendees will learn to use Red Hat’s integration portfolio for v
 * Migrate legacy SOAP services to REST services
 * Chain and integrate SOAP and REST services using Agile Integration tooling like Fuse Online
 * Apply Service Level Agreements to microservice monitoring
-* Utilize cloud native infrastructure to host a highly available integration solution The products that lab attendees will have hands-on experience with include Fuse Online, Fuse on OpenShift, Fuse Standalone, AMQ on OpenShift, AMQ Streams, Spring Boot microservices
+* Utilize cloud native infrastructure to host a highly available integration solution The products that lab attendees will have hands-on experience with include Fuse Online, Fuse on OpenShift, Fuse Standalone, AMQ, ISTIO, 3scale API Management and Red Hat OpenShift Application Runtimes (RHOAR).
+
+Get ready to transform your organization into an Agile Enterprise!
