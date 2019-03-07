@@ -1,0 +1,2685 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Fuse Online Foundations - Module 1 - Product Overview</title>
+
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+		<!-- Team CSS -->
+		<style id="global-css-output" type="text/css">
+			@import url("https://s3.amazonaws.com/static.slid.es/fonts/overpass2/overpass2.css");
+.reveal {
+  
+
+  /*fix icon inversion*/
+
+}
+.reveal svg,
+.reveal text,
+.reveal tspan,
+.reveal svg text {
+  font-family: "Overpass 2", Overpass, sans-serif !important;
+  color: currentcolor;
+  fill: currentcolor;
+}
+.reveal .sl-block {
+  color: #354045;
+  fill: currentcolor;
+}
+.reveal .sl-block svg {
+  color: currentcolor;
+}
+.reveal .has-dark-background,
+.reveal .has-dark-background > .sl-block {
+  color: white;
+  fill: currentcolor;
+}
+.reveal section > .sl-block .redhat-logo .logotext {
+  fill: #000000;
+}
+.reveal .has-dark-background > .sl-block .redhat-logo .logotext {
+  fill: #ffffff;
+}
+.reveal .has-dark-background > .sl-block[data-block-type="image"] {
+  color: #ffffff;
+}
+.reveal [fill="none"] {
+  fill: none !important;
+}
+.reveal [fill="#a30000"] {
+  fill: #aa0000 !important;
+}
+.reveal [fill="#cc2029"],
+.reveal [fill="#cb2027"],
+.reveal [fill="#c00"] {
+  fill: #cc0000 !important;
+}
+.reveal [fill="#fff"] {
+  fill: #ffffff !important;
+}
+.reveal [fill="#6d6e70"] {
+  fill: #6d6e70 !important;
+}
+.reveal [fill="#231f20"] {
+  fill: currentcolor !important;
+}
+.reveal [fill="#efab1f"] {
+  fill: #efab1f !important;
+}
+.reveal [fill="#92d400"] {
+  fill: #92d400 !important;
+}
+.reveal .has-dark-background [fill="#6d6e70"] {
+  fill: #266272 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #555555 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #333333 !important;
+}
+.reveal .has-dark-background [stroke="#231f20"] {
+  stroke: currentcolor;
+}
+.reveal [data-inline-svg="true"] img {
+  display: none;
+}
+
+		</style>
+
+		<!-- Theme CSS -->
+		<style id="theme-css-output" type="text/css">
+			@import url(//overpassmonotest-30e2.kxcdn.com/overpass-mono.css);
+.reveal {
+  
+
+  /*
+.sl-block[data-block-type="snippet"],
+.sl-block[data-block-type="image"] 
+{
+text,
+tspan,
+polygon,
+path,
+rect,
+ellipse {
+  fill: currentcolor;
+}
+}
+*/
+
+  /*slide-default*/
+
+  /*Custom Ordered Lists */
+
+  /*helpers*/
+
+  /*fixing left aligned text*/
+
+  /*h1,h2,h3,h4,h5,h6{&::first-letter{margin-left:-.09em;}}*/
+
+  /*icon absolute brute-fix*/
+
+  /*
+.present .icon.stroked path.long{ stroke-width: 2px ;
+-webkit-animation: icon-animation-long 3.5s 1.5s 1;
+-moz-animation:    icon-animation-long 3.5s 1.5s 1;
+animation:         icon-animation-long 3.5s 1.5s 1;
+}*/
+
+  /*
+.present .icon.stroked path.short{
+-webkit-animation: icon-animation-short 3.5s 1.5s 1;
+-moz-animation:    icon-animation-short 3.5s 1.5s 1;
+animation:         icon-animation-short 3.5s 1.5s 1;
+}*/
+
+  /*controls logic*/
+
+  /*animated logos with complex svg segments*/
+
+  /*transitions*/
+
+  /*logos svg files that contain inverted path alternates */
+
+  /* call to action */
+
+  /* tables in snippets.... the devil */
+
+  /* tables in text */
+
+  /*testimonial snippet */
+
+  /*for inverting images*/
+
+  /**/
+
+  /*code blocks*/
+
+  /* round line arrows */
+
+  /*fix icon inversion*/
+
+  /*body:hover .corner svg{transform: translate(30%, 30%)}*/
+
+}
+.reveal.reveal[role="application"] > .backgrounds > .slide-background:not(.stack):first-child,
+.reveal.reveal[role="application"] > .backgrounds > .stack:first-child > .slide-background:first-child,
+.reveal.reveal[role="application"] .slides > .pdf-page:not(.stack):first-child .slide-background,
+.reveal.reveal[role="application"] .slides > .stack:first-child > .pdf-page:first-child .slide-background {
+  background-color: #900;
+  color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-image: linear-gradient(-45deg, #8e0000 20%, #820000 20%, #990000 85%, #890000 85%);
+  min-height: 100vh;
+}
+.reveal.reveal[role="application"] > .backgrounds > .slide-background:not(.stack):first-child.has-light-background,
+.reveal.reveal[role="application"] > .backgrounds > .stack:first-child > .slide-background:first-child.has-light-background,
+.reveal.reveal[role="application"] .slides > .pdf-page:not(.stack):first-child .slide-background.has-light-background,
+.reveal.reveal[role="application"] .slides > .stack:first-child > .pdf-page:first-child .slide-background.has-light-background {
+  background-image: none;
+}
+.reveal.reveal .slides > .section:first-child,
+.reveal.reveal[role="application"] > .slides > .section:first-child .sl-block {
+  color: #fff;
+}
+.reveal .name {
+  white-space: nowrap;
+}
+.reveal .reveal,
+.reveal .sl-block,
+.reveal .sl-block-content,
+.reveal .sl-block-content div,
+.reveal .sl-block-content p,
+.reveal .sl-block-content h1,
+.reveal .sl-block-content h2,
+.reveal .sl-block-content h3,
+.reveal .sl-block-content h4 {
+  font-family: "Overpass 2", overpass, "Hiragino Kaku Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", sans-serif;
+}
+.reveal .future .sl-block-content,
+.reveal .past .sl-block-content {
+  transition: none !important;
+}
+.reveal section,
+.reveal.reveal .has-dark-background,
+.reveal section.background-shade-dark {
+  color: #fff;
+}
+.reveal.reveal .has-dark-background a {
+  color: #eee;
+}
+.reveal.reveal .has-dark-background a:hover {
+  color: #fff;
+}
+.reveal .backgrounds {
+  background: #f3f4f4;
+}
+.reveal .slide-background {
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.reveal .slide-background.has-light-background {
+  /*background-image: url(//s3.amazonaws.com/media-p.slid.es/uploads/team-32/images/1297460/standard-background.svg);*/
+
+}
+.reveal .backgrounds .paint-it-red {
+  background-color: #c00 !important;
+  -moz-background-blend-mode: multiply;
+  -webkit-background-blend-mode: multiply;
+  -ms-background-blend-mode: multiply;
+  background-blend-mode: multiply;
+}
+.reveal .paint-it-red {
+  color: #fff;
+}
+.reveal .has-dark-background .icon.stroked path,
+.reveal section.background-shade-dark .icon.stroked path,
+.reveal section.light-foreground .icon.stroked path {
+  stroke: #fff !important;
+}
+.reveal .has-dark-background .redhat-product-logotype path,
+.reveal section.background-shade-dark .redhat-product-logotype path,
+.reveal section.light-foreground .redhat-product-logotype path {
+  fill: #ffffff;
+}
+.reveal .has-dark-background text.logotext,
+.reveal section.background-shade-dark text.logotext,
+.reveal section.light-foreground text.logotext,
+.reveal .has-dark-background .logotext text,
+.reveal section.background-shade-dark .logotext text,
+.reveal section.light-foreground .logotext text,
+.reveal .has-dark-background path.logotext,
+.reveal section.background-shade-dark path.logotext,
+.reveal section.light-foreground path.logotext,
+.reveal .has-dark-background path.logotype,
+.reveal section.background-shade-dark path.logotype,
+.reveal section.light-foreground path.logotype,
+.reveal .has-dark-background .logotext path,
+.reveal section.background-shade-dark .logotext path,
+.reveal section.light-foreground .logotext path {
+  fill: #fff !important;
+}
+.reveal .has-dark-background .closing-logo .logotext,
+.reveal section.background-shade-dark .closing-logo .logotext,
+.reveal section.light-foreground .closing-logo .logotext,
+.reveal .has-dark-background .redhat-logo .logotext,
+.reveal section.background-shade-dark .redhat-logo .logotext,
+.reveal section.light-foreground .redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal .has-light-background .icon.stroked path {
+  stroke: currentcolor;
+}
+.reveal .has-light-background .redhat-logo .logotext {
+  fill: #000000 !important;
+}
+.reveal .sl-block-content ol li {
+  position: relative;
+  padding-bottom: .5em;
+}
+.reveal .sl-block-content ol li > p:first-child {
+  margin: 0;
+}
+.reveal .sl-block-content ol > li::before {
+  margin-left: -2.5em;
+}
+.reveal .sl-block-content > ol > li:before {
+  float: left;
+  text-align: center;
+  box-shadow: inset 0 0 0 .1em;
+  border-radius: 50%;
+}
+.reveal .sl-block-content ol {
+  counter-reset: section;
+  list-style-type: none;
+  margin: 0 0 0 2.5em;
+  display: block;
+}
+.reveal .sl-block-content ol ol {
+  margin-top: .5em;
+}
+.reveal .sl-block-content ol > li:before {
+  font-weight: 400;
+  display: inline-block;
+  width: 1.75em;
+  height: 1.75em;
+  line-height: 1.75em;
+  text-align: center;
+  letter-spacing: 0;
+  font-size: .75em;
+  margin: 0 0.75em 0 -2.5em;
+  counter-increment: section;
+  content: counters(section, ".") " ";
+  white-space: nowrap;
+}
+.reveal .sl-block-content > ol > li ol li:before {
+  opacity: .5;
+  text-align: left;
+  box-shadow: none;
+  letter-spacing: .1em;
+}
+.reveal .sl-block-content > ol > li > ol > li > ol > li:before {
+  width: 4em;
+  left: -3em;
+  font-size: .75em;
+}
+.reveal .has-dark-background .sl-block-content > ol > li:before {
+  color: currentcolor;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 0.2em rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+.reveal .sl-block-content > ol ol ol li:before {
+  opacity: 1;
+  font-size: .55em !important;
+  width: 3.5em !important;
+}
+.reveal .sl-block-content > ol ol ol {
+  margin-left: 1.5em !important;
+}
+.reveal .uppercase {
+  text-transform: uppercase;
+}
+.reveal .sl-block[data-block-type="text"] > .initial h1,
+.reveal .sl-block[data-block-type="text"] > .initial h2,
+.reveal .sl-block[data-block-type="text"] > .initial h3 {
+  text-transform: initial;
+}
+.reveal .force-mono text,
+.reveal .force-mono tspan,
+.reveal .force-mono polygon,
+.reveal .force-mono path,
+.reveal .force-mono rect,
+.reveal .force-mono ellipse {
+  fill: currentcolor !important;
+}
+.reveal .force-red .stroked path {
+  stroke: #c00;
+}
+.reveal .force-red,
+.reveal .force-red text,
+.reveal .force-red tspan,
+.reveal .force-red polygon,
+.reveal .force-red path,
+.reveal .force-red rect,
+.reveal .force-red ellipse {
+  color: #c00;
+  fill: currentcolor !important;
+}
+.reveal .force-red .stroked {
+  fill: none;
+  stroke: #cc0000;
+}
+.reveal .background-shade-dark .sl-block {
+  color: #fff;
+}
+.reveal .dark-foreground text.logotext,
+.reveal section.background-shade-light text.logotext,
+.reveal section.dark-foreground text.logotext,
+.reveal .dark-foreground .logotext text,
+.reveal section.background-shade-light .logotext text,
+.reveal section.dark-foreground .logotext text,
+.reveal .dark-foreground path.logotext,
+.reveal section.background-shade-light path.logotext,
+.reveal section.dark-foreground path.logotext,
+.reveal .dark-foreground path.logotype,
+.reveal section.background-shade-light path.logotype,
+.reveal section.dark-foreground path.logotype,
+.reveal .dark-foreground .logotext path,
+.reveal section.background-shade-light .logotext path,
+.reveal section.dark-foreground .logotext path,
+.reveal .dark-foreground .product,
+.reveal section.background-shade-light .product,
+.reveal section.dark-foreground .product {
+  fill: currentcolor !important;
+}
+.reveal .dark-foreground .redhat-logo .logotext,
+.reveal section.background-shade-light .redhat-logo .logotext,
+.reveal section.dark-foreground .redhat-logo .logotext {
+  fill: currentcolor !important;
+}
+.reveal .slide-background.background-shade-dark:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(40, 40, 40, 0.8);
+}
+.reveal .slide-background.background-shade-light:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.reveal .slides section {
+  text-align: left;
+}
+.reveal .slides section h1 {
+  line-height: 1em;
+  font-weight: 700 ;
+  font-size: 3em ;
+}
+.reveal .slides section h2 {
+  font-size: 2em;
+  font-weight: 400 ;
+  line-height: 1.15em;
+}
+.reveal .slides section h3 {
+  font-weight: 700 ;
+  font-size: 1em ;
+  line-height: 1.25em;
+}
+.reveal .slides section p {
+  margin-bottom: .5em;
+}
+.reveal .slides section blockquote {
+  font-style: normal;
+  box-shadow: none;
+}
+.reveal .progress {
+  background-color: transparent;
+}
+.reveal .progress span {
+  background-color: #5e6a71;
+}
+.reveal .absolute-element svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.reveal .icon.stroked {
+  width: 282px;
+  height: 282px;
+}
+.reveal .icon.stroked.icon-arrow path {
+  stroke-width: 4px !important;
+}
+.reveal .icon.stroked path {
+  fill: none;
+  stroke-width: 1.5px;
+  transition-delay: .5s !important;
+  stroke-dashoffset: 0;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: currentcolor;
+}
+.reveal .icon.stroked path.long {
+  stroke-dasharray: 420,420;
+  transition: 2.5s all ease;
+}
+.reveal .icon.stroked path.longer {
+  stroke-dasharray: 512,512;
+  transition: 2.5s all ease;
+}
+.reveal .icon.stroked path.short {
+  stroke-dasharray: 90,90;
+  transition: 5s all ease;
+}
+.reveal .icon.stroked path.shortest {
+  stroke-dasharray: 5,5;
+  transition: 2s all ease;
+}
+.reveal .icon.stroked path.round {
+  stroke-linecap: round ;
+  stroke-linejoin: round ;
+}
+.reveal .icon.stroked path.virtual {
+  transition: .5s all ease;
+  stroke-dasharray: 1.1, 3;
+  stroke-linecap: round ;
+}
+.reveal .icon.stroked path.dashed {
+  stroke-dasharray: 3, 3;
+}
+.reveal .icon.stroked path.hand {
+  stroke-linecap: round;
+}
+.reveal .present path.virtual {
+  -webkit-animation: virtual-outline 60s infinite linear;
+  -moz-animation: virtual-outline 60s infinite linear;
+  animation: virtual-outline 60s infinite linear;
+}
+@-webkit-keyframes virtual-outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 512;
+  }
+}
+@-moz-keyframes virtual-outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 512;
+  }
+}
+@keyframes virtual-outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 512;
+  }
+}
+.reveal a {
+  box-shadow: 0 0.066666em;
+}
+.reveal .overview section.present {
+  border: 12px solid white !important;
+  box-shadow: 0 0 0 10px #ffffff, inset 0 0 0 6px rgba(0, 0, 0, 0.2);
+}
+.reveal .rh-pattern {
+  width: 256px;
+  height: 256px;
+}
+.reveal .rh-pattern path {
+  transition: all .5s ease;
+}
+.reveal .future .rh-pattern path {
+  stroke-dasharray: 0, 85 !important;
+}
+.reveal .present .rh-pattern path {
+  stroke-dasharray: 80, 0 !important;
+}
+.reveal div[data-block-type="snippet"] .sl-block-content > svg,
+.reveal div[data-block-type="snippet"] > .sl-block-content > svg,
+.reveal div[data-block-type="snippet"] .icon,
+.reveal div[data-block-type="snippet"] .product {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+.reveal div[data-block-type="snippet"] .sl-block-content > svg:not(:last-child) {
+  position: relative;
+}
+.reveal div[data-block-type="snippet"] .icon {
+  top: -15%;
+  right: -15%;
+  bottom: -15%;
+  left: -15%;
+  width: 130%;
+  height: 130%;
+}
+.reveal div[data-block-type="snippet"] {
+  min-width: 60px !important;
+}
+.reveal div[data-block-type="text"] {
+  font-size: 20px;
+}
+.reveal .triangle-element,
+.reveal .triangle-element * {
+  user-select: none;
+}
+.reveal .has-light-background .closing-logo.logotype path {
+  fill: black !important;
+}
+@-webkit-keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+@-moz-keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+@-o-keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+@keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+.reveal .present .closing-logo.icon {
+  -webkit-animation: closing-animation 1.5s 1;
+  -moz-animation: closing-animation 1.5s 1;
+  -o-animation: closing-animation 1.5s 1;
+  animation: closing-animation 1.5s 1;
+}
+.reveal .present .closing-logo.logotype {
+  -webkit-animation: closing-text-animation 1.8s 1;
+  -moz-animation: closing-text-animation 1.8s 1;
+  -o-animation: closing-text-animation 1.8s 1;
+  animation: closing-text-animation 1.8s 1;
+}
+@-webkit-keyframes closing-text-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+  }
+  70% {
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+@-moz-keyframes closing-text-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+  }
+  70% {
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+@keyframes closing-text-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+  }
+  70% {
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+.reveal .brand-pattern-paths path,
+.reveal .pattern-path {
+  stroke-width: 1;
+  fill: none;
+}
+.reveal .brand-pattern-paths path {
+  fill: none !important;
+}
+.reveal pattern {
+  patterntransform: scale(2) !important;
+}
+.reveal pattern.normal use {
+  stroke: currentcolor;
+  fill: none;
+}
+.reveal pattern.light use {
+  stroke: #fff !important;
+  fill: none;
+}
+.reveal pattern.dark use {
+  stroke: #000 !important;
+  fill: none;
+}
+.reveal .brand-pattern {
+  min-width: 40px;
+  min-height: 40px;
+  position: absolute;
+  top: 0 ;
+  left: 0 ;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+.reveal .brand-pattern path,
+.reveal .brand-pattern rect {
+  width: 100% !important;
+  height: 100%;
+}
+.reveal .brand-pattern.corporate {
+  fill: url(#pattern-corporate);
+}
+.reveal #pattern-corporate-2 use {
+  stroke: #dd0000;
+}
+.reveal #pattern-corporate use {
+  stroke: #cc0000;
+}
+.reveal section,
+.reveal .slide-background {
+  -webkit-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.reveal .slides > section.transition-slide,
+.reveal .slides > section.transition-slide + section.future,
+.reveal .slides > section.transition-slide + section.present,
+.reveal .backgrounds > .slide-background.transition-slide,
+.reveal .backgrounds > .slide-background.transition-slide + .slide-background.future,
+.reveal .backgrounds > .slide-background.transition-slide + .slide-background.present {
+  transition: all 1s ease  !important;
+}
+.reveal .backgrounds > .slide-background.transition-slide {
+  opacity: 1 ;
+}
+.reveal .backgrounds > .slide-background.transition-slide.past {
+  z-index: 99;
+  -webkit-transform: translate(-100%, 0);
+  -ms-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
+}
+.reveal .backgrounds > .slide-background.transition-slide.future,
+.reveal .backgrounds > .slide-background.transition-slide.present + .slide-background.future {
+  -webkit-transform: translate(100%, 0);
+  -ms-transform: translate(100%, 0);
+  transform: translate(100%, 0);
+}
+.reveal .slides > section.transition-slide.past {
+  z-index: 99;
+  -webkit-transform: translate(-150%, 0);
+  -ms-transform: translate(-150%, 0);
+  transform: translate(-150%, 0);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-slide.future,
+.reveal .slides > section.transition-slide.future + section {
+  -webkit-transform: translate(150%, 0);
+  -ms-transform: translate(150%, 0);
+  transform: translate(150%, 0);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-slide-up,
+.reveal .slides > section.transition-slide-up + section.future,
+.reveal .slides > section.transition-slide-up + section.present,
+.reveal .backgrounds > .slide-background.transition-slide-up,
+.reveal .backgrounds > .slide-background.transition-slide-up + .slide-background.future .backgrounds > .slide-background.transition-slide-up + .slide-background.present {
+  transition: all 1s ease  !important;
+}
+.reveal .backgrounds > .slide-background.transition-slide-up {
+  opacity: 1 ;
+}
+.reveal .backgrounds > .slide-background.transition-slide-up.past {
+  z-index: 99;
+  -webkit-transform: translate(0, -100%);
+  -ms-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+}
+.reveal .backgrounds > .slide-background.transition-slide-up.future,
+.reveal .backgrounds > .slide-background.transition-slide-up.present + .slide-background.future {
+  -webkit-transform: translate(0, 100%);
+  -ms-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+}
+.reveal .slides > section.transition-slide-up.past {
+  z-index: 99;
+  -webkit-transform: translate(0, -150%);
+  -ms-transform: translate(0, -150%);
+  transform: translate(0, -150%);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-slide-up.future,
+.reveal .slides > section.transition-slide-up.present + section {
+  -webkit-transform: translate(0, 150%);
+  -ms-transform: translate(0, 150%);
+  transform: translate(0, 150%);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-zoom-in,
+.reveal .slides > section.transition-zoom-in + section.future,
+.reveal .slides > section.transition-zoom-in + section.present,
+.reveal .backgrounds > .slide-background.transition-zoom-in,
+.reveal .backgrounds > .slide-background.transition-zoom-in + .slide-background.future .backgrounds > .slide-background.transition-zoom-in + .slide-background.present {
+  -webkit-transition: all 1s ease  !important;
+  -moz-transition: all 1s ease  !important;
+  transition: all 1s ease  !important;
+}
+.reveal .backgrounds > .slide-background.transition-zoom-in.past {
+  opacity: 0 !important;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(0.1 0.5);
+  transform: scale(1.5);
+}
+.reveal .backgrounds > .slide-background.transition-zoom-in.future,
+.reveal .backgrounds > .slide-background.transition-zoom-in.present + .slide-background.future {
+  opacity: 0 !important;
+  -webkit-transform: scale(0.01);
+  -ms-transform: scale(0.01);
+  transform: scale(0.01);
+}
+.reveal .past {
+  z-index: -1;
+  opacity: 0 !important;
+}
+.reveal .present + .slide-background.future {
+  z-index: 99;
+}
+.reveal .slides > section.transition-zoom-in.past {
+  z-index: 99;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-zoom-in.future {
+  -webkit-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  visibility: hidden;
+}
+@-webkit-keyframes icon-animation-long {
+  0% {
+    stroke-dashoffset: 420;
+    stroke-width: .5px;
+  }
+}
+@-moz-keyframes icon-animation-long {
+  0% {
+    stroke-dashoffset: 420;
+    stroke-width: .5px;
+  }
+}
+@keyframes icon-animation-long {
+  0% {
+    stroke-dashoffset: 420;
+    stroke-width: .5px;
+  }
+}
+@-webkit-keyframes icon-animation-short {
+  0% {
+    stroke-dashoffset: 90;
+  }
+}
+@-moz-keyframes icon-animation-short {
+  0% {
+    stroke-dashoffset: 90;
+  }
+}
+@keyframes icon-animation-short {
+  0% {
+    stroke-dashoffset: 90;
+  }
+}
+.reveal .present .animate.icon.stroked path,
+.reveal .present .animate .icon.stroked path,
+.reveal .fragment .icon.stroked path {
+  animation: 0;
+  -moz-animation: 0;
+  -webkit-animation: 0;
+  display: none;
+}
+.reveal .present .animate.icon.stroked path.long,
+.reveal .present .animate .icon.stroked path.long,
+.reveal .fragment.visible .icon.stroked path.long {
+  display: block;
+  stroke-width: 2px ;
+  -webkit-animation: icon-animation-long 3.5s 0.5s 1;
+  -moz-animation: icon-animation-long 3.5s 0.5s 1;
+  animation: icon-animation-long 3.5s 0.5s 1;
+}
+.reveal .present .animate.icon.stroked path.short,
+.reveal .present .animate .icon.stroked path.short,
+.reveal .fragment.visible .icon.stroked path.short {
+  display: block;
+  -webkit-animation: icon-animation-short 3.5s 0.5s 1 !important;
+  -moz-animation: icon-animation-short 3.5s 0.5s 1 !important;
+  animation: icon-animation-short 3.5s 0.5s 1 !important;
+}
+.reveal .triangle-element {
+  transition: all 0.4s cubic-bezier(0.21, 0.9, 0.55, 1) 5s;
+}
+.reveal.reveal:hover .triangle-element {
+  transition: all 1s cubic-bezier(0.21, 0.9, 0.55, 1.16) 0s !important;
+  top: 100% !important;
+  left: 100% !important;
+  opacity: 0.95;
+}
+.reveal .has-dark-background .only-dark {
+  display: none;
+}
+.reveal .has-light-background .only-light {
+  display: none;
+}
+.reveal .thinner .icon.stroked path {
+  stroke-width: 1px !important;
+}
+.reveal .thinnest .icon.stroked path {
+  stroke-width: 0.05em !important;
+}
+.reveal .thicker .icon.stroked path {
+  stroke-width: 3px !important;
+}
+.reveal .thickest .icon.stroked path {
+  stroke-width: 4px !important;
+}
+.reveal .angle {
+  -ms-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.reveal .rangle {
+  -ms-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.reveal .sl-block > .vertical {
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.reveal .skewed {
+  transition: all 1s cubic-bezier(0.13, 0.81, 0.08, 1);
+  -moz-transform: skew(-45deg, 0);
+  -ms-transform: skew(-45deg, 0);
+  -webkit-transform: skew(-45deg, 0);
+  transform: skew(-45deg, 0);
+}
+.reveal .future .skewed {
+  margin-left: -800%;
+  opacity: 0;
+}
+.reveal .past .skewed {
+  margin-left: 800%;
+  opacity: 0;
+}
+.reveal .item-label,
+.reveal .item-box {
+  letter-spacing: 0em;
+  font-weight: 500;
+}
+.reveal .epic-content-box {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.reveal .has-dark-background .epic-content-box {
+  box-shadow: inset 0 0 0.51em rgba(0, 0, 0, 0.25), 0 0.05em 0.05em rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.reveal .has-light-background .epic-content-box {
+  box-shadow: inset 0 0 0.2em rgba(255, 255, 255, 0.5), 0 0.06666em 0.555em 0 rgba(0, 0, 0, 0.12);
+}
+.reveal .controls {
+  bottom: 1%;
+  right: 1%;
+}
+.reveal .controls button {
+  opacity: 0;
+}
+.reveal .controls button.enabled {
+  opacity: 1;
+}
+.reveal .controls {
+  opacity: 0 !important;
+  transition: opacity .5s ease 4.8s, transform .5s ease 4.8s;
+  transform: scale(0.4);
+}
+.reveal.reveal:hover .controls {
+  transform: scale(1);
+  opacity: 1 !important;
+  transition: opacity .5s ease 0s, transform .5s ease 0s;
+}
+.reveal .backgrounds {
+  transition-property: height;
+  transition-duration: 1s;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+.reveal .complex-logo {
+  min-height: 70px;
+  min-width: 70px;
+  width: 100%;
+}
+.reveal .complex-logo,
+.reveal .complex-logo svg,
+.reveal .complex-logo > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.reveal .complex-logo > div.line-icon,
+.reveal .complex-logo svg > div.line-icon,
+.reveal .complex-logo > div > div.line-icon,
+.reveal .complex-logo > div.logomark,
+.reveal .complex-logo svg > div.logomark,
+.reveal .complex-logo > div > div.logomark {
+  transform-origin: 12% 50%;
+}
+.reveal .animated .complex-logo div {
+  transition: all .5s ease;
+}
+.reveal .animated .complex-logo div.line-icon {
+  transition-delay: 2s;
+}
+.reveal .animated .complex-logo div.line-icon path {
+  transition: all 1s ease .52s;
+  stroke-dasharray: 100 ,10;
+}
+.reveal .animated .complex-logo div.event-name {
+  transition-delay: 1s;
+}
+.reveal .animated .complex-logo div.location {
+  transition-delay: 1.4s;
+}
+.reveal .future .animated .complex-logo > div {
+  transition: none;
+}
+.reveal .future .animated .complex-logo > div.line-icon path {
+  stroke-dasharray: 0 ,100;
+  transition: none;
+}
+.reveal .future .animated .complex-logo {
+  /*.line-icon{transform:rotate(30deg); opacity:0;}*/
+
+}
+.reveal .future .animated .complex-logo .logomark {
+  transform: translate(0, -20%);
+}
+.reveal .future .animated .complex-logo .location {
+  transform: translate(0, 0.5em);
+  opacity: 0;
+}
+.reveal .future .animated .complex-logo .event-name {
+  opacity: 0;
+  transform: translate(-0.6em, 0);
+}
+.reveal .lowercase {
+  text-transform: lowercase;
+}
+.reveal .pop-in.fragment {
+  -webkit-transform: scale(0.2);
+  -moz-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  transform: scale(0.2);
+  -webkit-transition: 2s ease 0.25s;
+  -moz-transition: 2s ease 0.25s;
+  -ms-transition: 2s ease 0.25s;
+  transition: 2s ease 0.25s;
+  -webkit-animation-delay: 0.66s;
+  -moz-animation-delay: 0.66s;
+  -ms-animation-delay: 0.66s;
+  animation-delay: 0.66s;
+}
+.reveal .pop-in.fragment.visible {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+.reveal .pop-in.fragment.current-fragment {
+  color: #c22;
+}
+.reveal .grow-width {
+  -webkit-transition: all 0.5s ease 0.2s;
+  -moz-transition: all 0.5s ease 0.2s;
+  -o-transition: all 0.5s ease 0.2s;
+  -ms-transition: all 0.5s ease 0.2s;
+  transition: all 0.5s ease 0.2s;
+}
+.reveal .future .grow-width {
+  width: 0% !important;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  -ms-transition: none;
+  transition: none;
+}
+.reveal .stampit {
+  -webkit-transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+  -moz-transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+  -ms-transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+  transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+}
+.reveal .future .stampit {
+  -webkit-transform: rotate(-12deg) scale(2);
+  -moz-transform: rotate(-12deg) scale(2);
+  -ms-transform: rotate(-12deg) scale(2);
+  transform: rotate(-12deg) scale(2);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  transition: none;
+  opacity: 0;
+}
+.reveal .headshot img {
+  border-radius: 50%;
+  border: 4px solid #c00 !important;
+}
+.reveal .condensed {
+  letter-spacing: 0.02em;
+}
+.reveal .condensed li {
+  margin-bottom: 1em ;
+}
+.reveal .has-light-background .sl-block .has-dark-background > svg.redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal .has-light-background .sl-block .reversed.redhat-logo .logotext,
+.reveal .has-light-background .sl-block .reversed .redhat-logo .logotext,
+.reveal .has-light-background .sl-block .has-dark-background > .redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal .has-dark-background .sl-block .reversed.redhat-logo .logotext,
+.reveal .has-dark-background .sl-block .reversed .redhat-logo .logotext,
+.reveal .has-dark-background .sl-block .has-light-background > .redhat-logo .logotext {
+  fill: #000000 !important;
+}
+.reveal .has-dark-background .has-light-background .logo .only-dark path,
+.reveal .has-light-background .mono.redhat-logo path {
+  fill: #000000 !important;
+}
+.reveal .has-dark-background .mono.redhat-logo path {
+  fill: #ffffff;
+}
+.reveal .has-dark-background .logo .only-dark {
+  display: block;
+}
+.reveal .has-light-background .logo .only-light {
+  display: block;
+}
+.reveal .has-light-background .logo .only-dark {
+  display: none;
+}
+.reveal .has-dark-background .logo .only-light {
+  display: none;
+}
+.reveal .has-light-background .reversed svg path {
+  fill: #ffffff !important;
+}
+.reveal .has-dark-background .reversed svg path {
+  fill: currentcolor;
+}
+.reveal .has-dark-background .has-light-background .logo .only-light,
+.reveal .has-dark-background .reversed .logo .only-dark {
+  display: block;
+}
+.reveal .has-light-background .has-dark-background .logo .only-dark,
+.reveal .has-light-background .logo .only-light {
+  display: block;
+}
+.reveal .has-light-background .has-dark-background .redhat-logo .only-dark,
+.reveal .has-light-background .redhat-logo .only-light {
+  fill: #ffffff !important;
+}
+.reveal .has-light-background .has-dark-background .logo .only-light,
+.reveal .has-light-background .logo .only-dark,
+.reveal .has-dark-background .has-light-background .logo .only-dark,
+.reveal .has-dark-background .logo .only-light {
+  display: none;
+}
+.reveal .future .fade-up,
+.reveal .future .fade-down,
+.reveal .future .fade-left,
+.reveal .future .fade-right,
+.reveal .future .fade-zoom {
+  -webkit-transition: none;
+  transition: none;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-up,
+.reveal .fade-up.fragment {
+  -webkit-transform: translate(0, 2em);
+  -ms-transform: translate(0, 2em);
+  transform: translate(0, 2em);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-down,
+.reveal .fade-down.fragment {
+  -webkit-transform: translate(0, -2em);
+  -ms-transform: translate(0, -2em);
+  transform: translate(0, -2em);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-left,
+.reveal .fade-left.fragment {
+  -webkit-transform: translate(2em, 0);
+  -ms-transform: translate(2em, 0);
+  transform: translate(2em, 0);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-right,
+.reveal .fade-right.fragment {
+  -webkit-transform: translate(-2em, 0);
+  -ms-transform: translate(-2em, 0);
+  transform: translate(-2em, 0);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-zoom,
+.reveal .fade-zoom.fragment {
+  -webkit-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-in {
+  transition: none;
+  opacity: 0;
+}
+.reveal .present .fade-in,
+.reveal .present .fade-up,
+.reveal .present .fade-down,
+.reveal .present .fade-left,
+.reveal .present .fade-right,
+.reveal .present .fade-zoom {
+  -webkit-transition: all .5s ease .5s;
+  transition: all .5s ease .5s;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.reveal .present .fragment.visible.fade-up,
+.reveal .present .fragment.visible.fade-down,
+.reveal .present .fragment.visible.fade-left,
+.reveal .present .fragment.visible.fade-right,
+.reveal .present .fragment.visible.fade-zoom {
+  -webkit-transform: none ;
+  -ms-transform: none ;
+  transform: none ;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.reveal .sl-block {
+  font-family: "Overpass 2", "Hiragino Kaku Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Overpass, sans-serif !important;
+}
+.reveal .has-light-background .icon.stroked {
+  color: currentcolor;
+}
+.reveal .has-dark-background .icon.stroked path {
+  stroke: currentcolor;
+}
+.reveal .has-dark-background .only-light-background {
+  display: none !important;
+}
+.reveal .has-dark-background .only-dark-background {
+  display: block !important;
+}
+.reveal a.call-to-action:hover {
+  background-color: #d00 !important;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.05) !important;
+  text-shadow: none !important;
+}
+.reveal .sl-block[data-block-type="snippet"] table {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.reveal .sl-block[data-block-type="snippet"] table td {
+  border-color: currentcolor !important;
+}
+.reveal .sl-block[data-block-type="snippet"] table td {
+  text-align: inherit !important;
+}
+.reveal .sl-block[data-block-type="text"] table {
+  width: 100%;
+}
+.reveal .sl-block[data-block-type="text"] table td {
+  border-color: currentcolor;
+}
+.reveal .sl-block[data-block-type="text"] table td {
+  text-align: inherit;
+}
+.reveal.reveal .sl-block[data-block-type="image"] .person {
+  border-radius: 50%;
+  position: relative !important;
+  background-color: transparent;
+  height: auto !important;
+}
+.reveal.reveal .sl-block[data-block-type="image"] .person:before {
+  content: "" !important;
+  display: block !important;
+  padding-top: 100% ;
+  position: relative !important ;
+  /* 4:3 aspect ratio */
+
+}
+.reveal.reveal .sl-block[data-block-type="image"] .person > img {
+  position: absolute ;
+  margin: 0 auto !important;
+  left: 0% ;
+  right: 0 ;
+  width: auto !important;
+  top: 0  ;
+  bottom: 0 ;
+}
+.reveal .present .delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal .present .delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal .present .delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal .present .delay-4 {
+  transition-delay: 0.4s;
+}
+.reveal .present .delay-5 {
+  transition-delay: 0.5s;
+}
+.reveal .present .delay-6 {
+  transition-delay: 0.6s;
+}
+.reveal .present .delay-7 {
+  transition-delay: 0.7s;
+}
+.reveal .present .delay-8 {
+  transition-delay: 0.8s;
+}
+.reveal .present .delay-9 {
+  transition-delay: 0.9s;
+}
+.reveal .present .delay-10 {
+  transition-delay: 1s;
+}
+.reveal .present .delay-11 {
+  transition-delay: 1.1s;
+}
+.reveal .present .delay-12 {
+  transition-delay: 1.2s;
+}
+.reveal .present .delay-13 {
+  transition-delay: 1.3s;
+}
+.reveal .present .delay-14 {
+  transition-delay: 1.4s;
+}
+.reveal .present .delay-15 {
+  transition-delay: 1.5s;
+}
+.reveal .present .delay-16 {
+  transition-delay: 1.6s;
+}
+.reveal .present .delay-17 {
+  transition-delay: 1.7s;
+}
+.reveal .present .delay-18 {
+  transition-delay: 1.8s;
+}
+.reveal .present .delay-19 {
+  transition-delay: 1.9s;
+}
+.reveal .present .delay-20 {
+  transition-delay: 2s;
+}
+.reveal .present .delay-21 {
+  transition-delay: 2.1s;
+}
+.reveal .present .delay-22 {
+  transition-delay: 2.2s;
+}
+.reveal .present .delay-23 {
+  transition-delay: 2.3s;
+}
+.reveal .present .delay-24 {
+  transition-delay: 2.4s;
+}
+.reveal .present .delay-25 {
+  transition-delay: 2.5s;
+}
+.reveal .present .delay-26 {
+  transition-delay: 2.6s;
+}
+.reveal .present .delay-27 {
+  transition-delay: 2.7s;
+}
+.reveal .present .delay-28 {
+  transition-delay: 2.8s;
+}
+.reveal .present .delay-29 {
+  transition-delay: 2.9s;
+}
+.reveal .present .delay-30 {
+  transition-delay: 3s;
+}
+.reveal .present .delay-31 {
+  transition-delay: 3.1s;
+}
+.reveal .present .delay-32 {
+  transition-delay: 3.2s;
+}
+.reveal .present .delay-33 {
+  transition-delay: 3.3s;
+}
+.reveal .present .delay-34 {
+  transition-delay: 3.4s;
+}
+.reveal .present .delay-35 {
+  transition-delay: 3.5s;
+}
+.reveal .present .delay-36 {
+  transition-delay: 3.6s;
+}
+.reveal .present .delay-37 {
+  transition-delay: 3.7s;
+}
+.reveal .present .delay-38 {
+  transition-delay: 3.8s;
+}
+.reveal .present .delay-39 {
+  transition-delay: 3.9s;
+}
+.reveal .present .delay-40 {
+  transition-delay: 4s;
+}
+.reveal .light-foreground .sl-block * {
+  color: #fff;
+}
+.reveal .dark-foreground .sl-block * {
+  color: #000;
+}
+.reveal .has-dark-background .invert {
+  color: #000;
+}
+.reveal .has-light-background .invert * {
+  color: #fff ;
+}
+.reveal .has-light-background .invert .only-light-background {
+  display: none ;
+}
+.reveal .has-light-background .invert .only-dark-background {
+  display: block !important;
+}
+.reveal .has-dark-background .invert .only-light-background {
+  display: block !important ;
+}
+.reveal .has-dark-background .invert .only-dark-background {
+  display: none !important;
+}
+.reveal .slide-number {
+  position: absolute !important;
+  opacity: 1;
+  right: 1em;
+  height: 28px;
+  min-width: 28px;
+  bottom: auto;
+  left: auto;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 28px;
+  line-height: 28px;
+  color: white;
+  text-shadow: 0 0.1em 0.5em rgba(0, 0, 0, 0.4);
+  top: 1em;
+  font-family: "Overpass 2", Overpass, sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px;
+  box-sizing: content-box;
+}
+.reveal .slide-number-delimiter {
+  margin: 0 1px;
+}
+.reveal.reveal .present.in-3d-appear {
+  transform: translatez(0em) !important;
+  animation: none !important;
+  transition: transform 1s ease !important;
+}
+.reveal.reveal .future.in-3d-appear {
+  transform: translatez(10em) rotateX(21deg) !important;
+  animation: none !important;
+}
+.reveal .no-filter img,
+.reveal .no-filter {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+.reveal .present .fade-in-slow {
+  transition: all 5s ease;
+}
+.reveal .future .fade-in-slow {
+  transition: none;
+  opacity: 0;
+}
+.reveal .redhat-logo .logotext {
+  fill: #000000 !important;
+}
+.reveal .has-dark-background .redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal [data-block-type="table"] .sl-block-content {
+  font-size: .75em;
+  background-color: #c00;
+  color: #fff;
+}
+.reveal [data-block-type="table"] td {
+  background-color: #e5e5e5;
+  color: #333;
+  border-color: white;
+}
+.reveal div[data-block-type="table"] th {
+  font-weight: 500;
+}
+.reveal [data-block-type="table"] tr:nth-child(odd) td {
+  background-color: #f5f5f5;
+  color: #333;
+}
+.reveal .has-dark-background > [data-block-type="table"] td {
+  background-color: #131619;
+  color: #fff;
+}
+.reveal .has-dark-background > [data-block-type="table"] tr:nth-child(odd) td {
+  background-color: #232629;
+  color: #fff;
+}
+.reveal [data-block-type="code"],
+.reveal .hljs {
+  background-color: white ;
+  color: rgba(55, 55, 55, 0.85) !important;
+}
+.reveal section .hljs {
+  background-color: white !important;
+}
+.reveal .has-dark-background [data-block-type="code"],
+.reveal .has-dark-background .hljs {
+  background-color: #012736!important ;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.reveal [data-block-type="code"] pre {
+  letter-spacing: 0.015em;
+  line-height: 1.5em;
+}
+.reveal .has-light-background[data-block-type="code"] pre,
+.reveal [data-block-type="code"] pre {
+  background-color: white ;
+  color: currentcolor;
+  padding: 1em !important;
+}
+.reveal .has-dark-background [data-block-type="code"] pre {
+  background-color: #012736 ;
+}
+.reveal .hljs,
+.reveal pre,
+.reveal code {
+  font-family: 'Overpass Mono', monospace !important;
+  font-weight: 200 !important;
+}
+.reveal .hljs-literal {
+  color: #ffb612 !important;
+}
+.reveal .hljs-keyword {
+  color: #ffb612;
+  font-weight: 700 !important;
+}
+.reveal .hljs-string {
+  color: #88c639;
+  font-weight: 700;
+}
+.reveal .hljs-comment {
+  color: #94a0a7 !important;
+  font-weight: 400 !important;
+}
+.reveal .hljs-params {
+  color: #028c98 ;
+  font-weight: 700;
+}
+.reveal .hljs-attr {
+  color: #EC7A08 !important;
+}
+.reveal .hljs-tag {
+  color: #7F5FAE !important;
+}
+.reveal .hljs-name {
+  color: #028c98 !important;
+}
+.reveal .hljs-string {
+  color: #7f5fae !important;
+}
+.reveal .hljs-comment {
+  color: rgba(125, 125, 125, 0.65) !important;
+}
+.reveal .hljs-number {
+  color: #4e9fdd !important;
+}
+.reveal .hljs-attribute {
+  color: #ec9e34 !important;
+}
+.reveal .hljs-variable {
+  color: #4e9fdd !important;
+}
+.reveal .hljs-built_in {
+  color: #ee1122!important;
+}
+.reveal .hljs-selector-class {
+  color: #55aab2 !important;
+}
+.reveal [data-line-end-type="line-arrow"] line,
+.reveal [data-line-start-type="line-arrow"] line,
+.reveal [data-line-end-type="line-arrow"] path {
+  stroke-linecap: round;
+  stroke-linejoin: square;
+}
+.reveal div[data-block-type="line"] line[stroke="#000000"],
+.reveal div[data-block-type="line"] path[stroke="#000000"] {
+  stroke: currentcolor;
+}
+.reveal [fill="none"] {
+  fill: none !important;
+}
+.reveal [fill="#a30000"] {
+  fill: #aa0000 !important;
+}
+.reveal [fill="#cc2029"],
+.reveal [fill="#cb2027"],
+.reveal [fill="#c00"] {
+  fill: #cc0000 !important;
+}
+.reveal [fill="#fff"] {
+  fill: #ffffff !important;
+}
+.reveal [fill="#6d6e70"] {
+  fill: #6d6e70 !important;
+}
+.reveal [fill="#231f20"] {
+  fill: currentcolor !important;
+}
+.reveal [fill="#efab1f"] {
+  fill: #efab1f !important;
+}
+.reveal [fill="#92d400"] {
+  fill: #92d400 !important;
+}
+.reveal .has-dark-background [fill="#6d6e70"] {
+  fill: #266272 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #555555 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #333333 !important;
+}
+.reveal .has-dark-background [stroke="#231f20"] {
+  stroke: currentcolor;
+}
+.reveal .has-dark-background [fill="#221F1F"],
+.reveal .has-dark-background [fill="#221f1f"],
+.reveal .has-dark-background [fill="#231F20"],
+.reveal .has-dark-background [fill="#010101"] {
+  fill: #ffffff !important;
+}
+.reveal [data-inline-svg="true"] img {
+  display: none;
+}
+.reveal .corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 8;
+}
+.reveal .corner svg {
+  transition: all .75s ease 5s;
+}
+
+		</style>
+
+		<!-- User CSS -->
+		<style id="user-css-output" type="text/css">
+			.reveal .slides section h1 {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 36pt;
+  font-weight: bold;
+  text-transform: none;
+}
+.reveal .slides section h2 {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 26pt;
+  font-weight: bold;
+  text-transform: none;
+  padding-bottom: 24px;
+}
+.reveal .slides section h3 {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 20pt;
+  font-weight: bold;
+  text-transform: none;
+  padding-top: 14px;
+}
+.reveal .slides section {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 16pt;
+}
+.reveal .slides section li {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 16pt;
+}
+.reveal .slides section table {
+  border: solid;
+  border-color: black;
+}
+.reveal .slides section td {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 14pt;
+}
+.reveal .slides section th {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 14pt;
+  border: solid;
+  border-color: black;
+}
+.reveal .slides section code {
+  font-family: Overpass mono;
+  font-size: 10pt;
+  color: black;
+  background-color: #d8e1e9;
+  border: solid;
+}
+.reveal .slides section audio {
+  position: absolute;
+  left: 900px;
+  width: 300px;
+}
+
+		</style>
+	</head>
+	<body class="reveal-viewport theme-font-overpass2 theme-color-no-color">
+		<div class="reveal">
+			<div class="slides">
+				<section class="slide-outro mesh-zoom mesh-blue" data-background-color="#cc0000" data-id="c2df0175d46df5efdf6845e3eb19da9c" data-background-image="deck-8/32fa01ef1b64201650bdc7d29ce7c22c.svg">
+<div class="sl-block" data-block-type="text" style="height: auto; width: 898px; left: 150px; top: 289px;" data-block-id="dad64bb3945309a190b6777ebb70bf5d"><div class="sl-block-content show-in-thumb" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; font-size: 110%; text-align: center;" dir="ui">
+<h1 style="text-align:left">Red Hat Fuse 7 Foundations Part 1:<br>Fuse Online</h1>
+<h2 style="text-align:left">Product Overview</h2>
+</div></div>
+<div class="sl-block" data-block-type="image" style="width: 360px; height: 135px; left: 0px; top: 5px; min-width: 4px; min-height: 4px;" data-block-id="35b4c15ecb6a2bdf79c4b0def5f5033b"><div class="sl-block-content slide-outro-logo show-in-thumb" style="z-index: 12;" data-inline-svg="true">
+<img data-natural-width="320" data-natural-height="120" style="" data-lazy-loaded="" data-src="deck-8/8a1138d6941c53e0ed44dfa46b44f3af.svg">
+<svg xmlns="http://www.w3.org/2000/svg" class="redhat-logo" width="320" height="120" viewbox="0 0 494 180" preserveaspectratio="xMidYMid meet">
+<path class="logotext" style="" d="m 491.6,118.6 c 0,1.8 -1.5,3.3 -3.3,3.3 -1.8,0 -3.3,-1.5 -3.3,-3.3 0,-1.8 1.5,-3.3 3.3,-3.3 1.8,0 3.3,1.5 3.3,3.3 z m 0.7,0 c 0,-2.2 -1.8,-4 -4,-4 -2.2,0 -4,1.8 -4,4 0,2.2 1.8,4 4,4 2.2,0 4,-1.8 4,-4 m -4,-0.2 c 0.6,0 1,-0.1 1,-0.7 0,-0.5 -0.4,-0.6 -0.9,-0.6 l -0.8,0 0,1.3 z m -0.7,0.5 0,1.8 -0.6,0 0,-4.1 1.5,0 c 1,0 1.5,0.3 1.5,1.1 0,0.8 -0.5,1.1 -1.1,1.2 l 1.2,1.8 -0.7,0 -1.1,-1.8 -0.7,0 m -22.2,-63.12 -5.3,1.97 0,9.94 -9.1,0 0,4.34 9.1,0 0,34.17 c 0,5.5 0.8,10.1 3.3,12.9 2.1,2.6 5.4,3.9 9.3,3.9 3.3,0 5.7,-0.6 7.5,-1.3 l -0.7,-4.2 c -1.4,0.5 -3.3,0.9 -6.1,0.9 -5.8,0 -8,-4.3 -8,-11.2 l 0,-35.17 15.4,0 0,-4.34 -15.4,0 0,-11.91 m -26.6,48.72 c 0,0.9 -0.2,2.1 -0.6,3.2 -1.8,5.3 -7,10.9 -16,10.9 -5.6,0 -10.7,-3.5 -10.7,-11.3 0,-12.98 15.5,-14.77 27.3,-14.43 z m 5.3,4.4 0,-21.06 c 0,-9.67 -3,-21.38 -18.6,-21.38 -4.9,0 -10.9,1.32 -15.8,4.67 l 1.7,3.89 c 3.9,-2.76 8.8,-4.03 13.5,-4.03 12.8,-0.1 13.9,10.59 13.9,15.94 l 0,1.44 c -22,-0.23 -33,7.29 -33,19.73 0,7.3 5,14.9 15.9,14.9 8.6,0 14.6,-4.8 17.2,-9 l 0.3,0 0.8,7.8 4.9,0 c -0.6,-4.2 -0.8,-8.6 -0.8,-12.9 M 377.3,66.46 c 5.2,0 18.8,2.56 18.8,22.7 l 0,32.64 -5.3,0 0,-32.05 c 0,-9.74 -3.8,-18.62 -14.9,-18.62 -7.7,0 -14,5.52 -16.3,12.25 -0.6,1.6 -0.8,3.13 -0.8,5.33 l 0,33.09 -5.3,0 0,-71.31 5.3,1.58 0,25.29 0.3,0 c 1.5,-3.01 4.1,-5.92 7.3,-7.8 3.1,-1.91 6.8,-3.1 10.9,-3.1 m -36.1,40.14 c 0,5.6 0.2,11.5 0.5,15.2 l -12.2,0 -0.6,-8.6 -0.3,0 c -3.2,6.1 -9.7,9.8 -17.5,9.8 -12.9,0 -23.1,-11 -23.1,-27.62 -0.1,-18.11 11.2,-28.86 24.2,-28.86 7.4,0 12.7,3.05 15.1,7.04 l 0.3,0 0,-30.48 13.6,3.85 z m -13.6,-8.25 0,-8.1 c 0,-1.09 -0.1,-2.46 -0.3,-3.57 -1.3,-5.26 -5.7,-9.59 -11.8,-9.59 -8.8,0 -13.7,7.76 -13.7,17.79 0,9.92 4.9,17.22 13.5,17.22 5.6,0 10.5,-3.9 11.8,-9.8 0.4,-1.2 0.5,-2.52 0.5,-3.95 m -81.9,-9.43 c 0.6,-5.54 4.1,-13.17 12.5,-13.17 9.2,0 11.3,8.16 11.3,13.17 z m 0,9.51 36.2,0.1 c 0.2,-1.26 0.5,-3.3 0.5,-5.83 0,-11.83 -5.8,-26.28 -23.3,-26.28 -17.4,0 -26.5,14.11 -26.5,29.02 0,16.56 10.3,27.36 27.9,27.36 7.8,0 14.2,-1.4 18.8,-3.4 l -2,-9.4 c -4.1,1.5 -8.6,2.5 -14.9,2.5 -8.7,0 -16.3,-4.3 -16.7,-14.07 m -46.8,-13.33 -0.1,36.7 13.7,0 0,-28.05 c 0,-1.47 0.1,-2.92 0.4,-4.12 1.2,-6.19 5.7,-10.33 12.2,-10.33 1.7,0 2.8,0.13 4.1,0.38 l 0,-12.87 c -1.1,-0.29 -1.8,-0.29 -3.2,-0.29 -5.8,0 -12.1,3.88 -14.8,11.48 l -0.4,0 -0.5,-10.26 -11.8,0 c 0.3,4.81 0.4,10.13 0.4,17.36 m -37,33.5 c 0,1.8 -1.4,3.3 -3.2,3.3 -1.8,0 -3.3,-1.5 -3.3,-3.3 0,-1.8 1.5,-3.3 3.3,-3.3 1.8,0 3.2,1.5 3.2,3.3 z m 0.8,0 c 0,-2.2 -1.8,-4 -4,-4 -2.2,0 -4,1.8 -4,4 0,2.2 1.8,4 4,4 2.2,0 4,-1.8 4,-4 m -4,-0.2 c 0.5,0 1,-0.1 1,-0.7 0,-0.5 -0.5,-0.6 -0.9,-0.6 l -0.9,0 0,1.3 z m -0.8,0.5 0,1.8 -0.6,0 0,-4.1 1.6,0 c 0.9,0 1.4,0.3 1.4,1.1 0,0.8 -0.4,1.1 -1,1.2 l 1.1,1.8 -0.7,0 -1,-1.8 -0.8,0"></path>
+<path class="face" style="fill:white" d="M146.083 123.002c-3.04-.697-6.264-1.138-9.526-1.138-5.579 0-10.655.965-14.398 2.527-.413.204-.706.636-.706 1.125 0 .181.045.361.113.515.443 1.281-.284 2.671-3.908 3.469-5.372 1.181-8.764 6.725-10.704 8.565-2.279 2.165-8.716 3.493-7.747 2.203.758-1.006 3.654-4.154 5.416-7.553 1.576-3.04 2.979-3.904 4.912-6.805.566-.848 2.765-3.837 3.405-6.201.718-2.305.476-5.203.751-6.393.396-1.721 2.018-5.451 2.14-7.556.071-1.193-4.974 1.7-7.367 1.7-2.392 0-4.724-1.436-6.862-1.538-2.647-.122-4.347 2.043-6.742 1.664-1.366-.219-2.518-1.425-4.908-1.513-3.402-.124-7.56 1.892-15.368 1.641-7.68-.251-14.775-9.708-15.743-11.212-1.135-1.763-2.521-1.763-4.03-.375-1.513 1.384-3.375.295-3.905-.635-1.007-1.76-3.701-6.912-7.873-7.993-5.769-1.495-8.69 3.193-8.31 6.925.385 3.788 2.833 4.85 3.967 6.863 1.132 2.015 1.712 3.312 3.846 4.203 1.511.634 2.074 1.564 1.625 2.807-.395 1.08-1.968 1.327-3.002 1.378-2.198.105-3.739-.492-4.862-1.208-1.307-.836-2.37-1.992-3.51-3.955-1.32-2.168-3.398-3.113-5.82-3.113-1.154 0-2.234.304-3.193.798-3.794 1.978-8.312 3.144-13.175 3.144l-5.484.005c10.518 31.194 40.013 53.656 74.756 53.656 27.752 0 52.156-14.331 66.214-36.001"></path>
+<path class="black-circle" style="fill:black" d="m 96.89,115.8 c -1.02,1.2 -1.46,1.6 -2.2,2.2 -1.78,1.4 -3.81,-0.2 -5.11,-1 -2.9,-1.7 -5.23,-0.6 -5.8,0.7 -0.57,1.3 0.1,2.9 1.64,2.7 2.21,-0.3 2.31,0.1 3.9,1.1 2.98,1.9 5.15,0.8 6.26,-0.1 0.92,-0.7 1.43,-1.3 1.91,-2.2 0.86,-1.7 0.16,-3 -0.25,-3.4 -0.1,-0.1 -0.25,-0.1 -0.35,0 z m 49.21,7.2 c 8,-12.3 12.6,-27.06 12.6,-42.87 C 158.7,36.57 123.4,1.262 79.88,1.262 36.32,1.262 1.003,36.57 1.003,80.13 c 0,8.82 1.447,17.3 4.116,25.17 l 5.481,0 c 4.87,0 9.38,-1.1 13.18,-3.1 0.96,-0.5 2.04,-0.8 3.19,-0.8 2.42,0 4.5,0.9 5.82,3.1 1.14,2 2.2,3.1 3.51,4 1.12,0.7 2.66,1.3 4.86,1.2 1.04,-0.1 2.61,-0.3 3,-1.4 0.45,-1.2 -0.11,-2.2 -1.62,-2.8 -2.13,-0.9 -2.71,-2.2 -3.85,-4.2 -1.13,-2.03 -3.58,-3.09 -3.96,-6.88 -0.38,-3.73 2.54,-8.42 8.31,-6.92 4.17,1.08 6.86,6.23 7.87,8 0.53,0.92 2.39,2.01 3.9,0.63 1.51,-1.39 2.9,-1.39 4.03,0.38 0.97,1.5 8.07,10.99 15.75,11.19 7.81,0.3 11.96,-1.7 15.37,-1.6 2.39,0.1 3.54,1.3 4.9,1.5 2.4,0.4 4.1,-1.8 6.74,-1.7 2.1,0.1 4.5,1.6 6.9,1.6 2.4,0 7.4,-2.9 7.3,-1.7 -0.1,2.1 -1.7,5.8 -2.1,7.5 -0.3,1.2 0,4.1 -0.8,6.4 -0.6,2.4 -2.8,5.4 -3.4,6.2 -1.9,2.9 -3.3,3.8 -4.9,6.8 -1.7,3.4 -4.63,6.6 -5.39,7.6 -0.97,1.3 5.49,-0.1 7.79,-2.2 1.9,-1.9 5.3,-7.4 10.7,-8.6 3.6,-0.8 4.3,-2.2 3.9,-3.5 -0.1,-0.1 -0.1,-0.3 -0.1,-0.5 0,-0.5 0.2,-0.9 0.7,-1.1 3.7,-1.6 8.8,-2.5 14.4,-2.5 3.2,0 6.9,0.5 9.5,1.1 z"></path>
+<path class="hat" style="fill:#c00" d="m 117.6,67.65 c -0.8,0.37 -1,-0.24 -0.7,-0.8 1.9,-3.17 2.2,-3.97 2.7,-5.22 0.8,-1.83 1.2,-4.43 -0.3,-9.85 -3,-10.67 -9.2,-24.94 -13.7,-29.57 -4.3,-4.47 -12.18,-5.72 -19.28,-3.9 -2.62,0.67 -7.74,3.33 -17.24,1.19 -16.44,-3.7 -18.88,4.53 -19.82,8.12 -0.95,3.59 -3.21,13.78 -3.21,13.78 -0.76,4.15 -1.74,11.37 23.78,16.23 11.9,2.26 12.5,5.34 13.02,7.55 0.95,3.96 2.46,6.23 4.16,7.36 1.69,1.14 0,2.07 -1.89,2.27 C 80.06,75.33 61.34,69.96 50.27,63.67 41.21,58.13 41.05,53.15 43.13,48.92 29.44,47.44 19.17,50.2 17.31,56.68 14.11,67.8 41.75,86.79 73.23,96.32 106.3,106.3 140.2,99.34 144,78.58 c 1.7,-9.43 -6.2,-16.41 -19.6,-19.43 -1.3,4.87 -3.9,6.93 -6.8,8.5 z M 83.26,23.76 c -0.38,0.1 -0.4,-0.31 -0.11,-0.45 1.8,-0.88 4.4,-1.68 7.42,-1.98 1.11,-0.11 2.1,-0.17 3.09,-0.15 5.06,0.1 9.14,2.13 9.04,4.49 -0.1,2.36 -4.2,4.19 -9.26,4.07 -1.63,0 -3.17,-0.27 -4.49,-0.65 -0.16,0 -0.27,-0.18 -0.27,-0.33 0,-0.16 0.11,-0.3 0.27,-0.34 3.15,-0.73 5.28,-1.92 5.13,-3.05 -0.2,-1.49 -4.32,-2.3 -9.21,-1.81 -0.54,0.1 -1.33,0.17 -1.61,0.2 z m -4.87,12.67 c -0.14,-1.25 -2.77,-2.71 -6.67,-2.71 -3.84,0 -6.6,0.5 -8.99,0.56 -2.39,0.1 -4.24,-1.69 -5.1,-2.76 -0.71,-0.88 -2.97,-1.73 -4.2,1.1 -1.24,2.86 1.07,5.93 2.97,6.33 0,0 3.17,5.89 5.57,3.33 1.71,-1.82 2.65,-2.8 11.76,-3.46 4.35,-0.32 4.79,-1.32 4.66,-2.39 z"></path>
+</svg>
+</div></div></section><section data-id="4c591cb736a24cfbe6c8beca5a816fb1">
+<div class="sl-block" data-block-type="text" data-block-id="26846a61213eb62b927df0e6a77aefdf" style="height: auto; min-width: 30px; min-height: 30px; width: 1280px; left: 0px; top: 1px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<h2 style="color:rgb(53, 64, 69); text-align:left">Course Navigation Tips</h2>
+
+<ul>
+	<li style="color:rgb(53, 64, 69)">
+	<p>To receive credit for completing a module, you must click the <strong>Complete Module</strong> button on the Module Completion slide:<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	 </p>
+
+	<ul>
+		<li>
+		<p>To confirm that you received credit for completing a module, look for a check mark next to the module name on the left side of the screen</p>
+		</li>
+	</ul>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p> After exiting the course, close the course's tab in your browser</p>
+
+	<ul>
+		<li>
+		<p>If your course session expires before closing the course's browser tab, your progress in the course will be lost</p>
+		</li>
+	</ul>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>To display the audio transcript, press <strong>S</strong></p>
+
+	<ul>
+		<li>
+		<p>If the transcript does not display, click the slide and press <strong>S</strong> again</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="f33959929a21ecfc25bc502fe3ec2918" style="min-width: 4px; min-height: 4px; width: 418px; height: 139px; left: 37px; top: 139px;"><div class="sl-block-content" style="z-index: 13;"><img data-natural-width="418" data-natural-height="139" style="" data-lazy-loaded="" data-src="deck-8/dcbee5530f1a813102960aa3d69e5c34.png"></div></div>
+<div class="sl-block" data-block-type="line" data-block-id="531530cde33488a69b57f6a576050cef" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 194px; top: 258px;"><div class="sl-block-content" data-line-x1="-352" data-line-y1="46" data-line-x2="-300" data-line-y2="59" data-line-color="#cc0000" data-line-start-type="arrow" data-line-end-type="none" style="z-index: 15;" data-line-width="6px"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="52" height="13" viewbox="-352 46 52 13"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-343" y1="48" x2="-300" y2="59"></line><line stroke="#cc0000" stroke-width="6" x1="-343" y1="48" x2="-300" y2="59"></line><polygon fill="#cc0000" transform="translate(-343,48) rotate(104.036)" points="0,9 9,-9 -9,-9"></polygon></svg></div></div></section><section id="_topics" data-id="4a6c36d7b0eae29aeacfda03dda9d4a5"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1278px; left: 0px; top: 1px;" data-block-id="210d317147d254934338dba9b585ac68"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 12; text-align: left;">
+<h2 style="text-align: left;">Topics</h2>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; color: rgb(53, 64, 69);">Next Generation of Fuse Technology</p>
+	</li>
+	<li>
+	<p>Target Audience</p>
+	</li>
+	<li>
+	<p>Technical Feature Highlights</p>
+	</li>
+	<li>
+	<p>Terminology</p>
+	</li>
+	<li>
+	<p>Technical Architecture</p>
+	</li>
+	<li>
+	<p>Pod Architecture</p>
+	</li>
+	<li>
+	<p>Prepackaged Software</p>
+	</li>
+	<li>
+	<p>Operational Considerations</p>
+	</li>
+	<li>
+	<p>Pricing Models</p>
+	</li>
+	<li>
+	<p>Competitive Analysis</p>
+	</li>
+	<li>
+	<p>Future Roadmap</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div></section><section data-id="3496625e8f089557c83d4f2dd6a2e15b"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1251px; left: 3px; top: 0px;" data-block-id="906826cfbf9c3d685264481a8b4774ff"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<h2 style="text-align:left">Next Generation of Fuse Technology</h2>
+
+<h3 style="text-align:left"><span style="font-size:1.0em">Three Editions of Fuse v. 7</span></h3>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 358px; left: 24px; top: 415px;" data-block-id="ba99704f50985294ea018e1825519106"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" dir="ui">
+<p><strong>Fuse Standalone</strong></p>
+
+<ul>
+	<li style="text-align:left">
+	<p><span style="font-size:1.0em">Single Java</span><span><span>™</span></span><span style="font-size:1.0em"> VM Fuse</span></p>
+	</li>
+	<li style="text-align:left">
+	<p><span style="font-size:1.0em">Developer-focused</span></p>
+	</li>
+	<li style="text-align:left">
+	<p><span style="font-size:1.0em">Integration where you need it</span></p>
+	</li>
+	<li style="text-align:left">
+	<p><span style="font-size:1.0em">"Classic" integration</span></p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 328px; left: 480px; top: 424px;" data-block-id="8034d0acf57d2774c5f951a92bc7f6d2"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" dir="ui">
+<p><strong>Fuse on OpenShift</strong><span style="color:rgb(53, 64, 69); font-size:21.3333px">®</span></p>
+
+<ul>
+	<li>
+	<p><span style="font-size:1.0em">Scale out Fuse</span></p>
+	</li>
+	<li>
+	<p><span style="font-size:1.0em">Replaces Fabric v. 1</span></p>
+	</li>
+	<li>
+	<p><span style="font-size:1.0em">Developer-focused</span></p>
+	</li>
+	<li>
+	<p><span style="font-size:1.0em">"Cloud-native" integration</span></p>
+	</li>
+</ul>
+
+<ul>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 388px; left: 866px; top: 424px;" data-block-id="d5262ee016e8f6d9378df8e9ba84b340"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;">
+<p style="color:rgb(53, 64, 69); font-size:21.3333px"><strong>Fuse Online (iPaas)</strong></p>
+
+<ul>
+	<li style="color:rgb(53, 64, 69); font-size:21.3333px">
+	<p><span>Fuse for the masses</span></p>
+	</li>
+	<li style="color:rgb(53, 64, 69); font-size:21.3333px">
+	<p><span style="font-size:1.0em">Low/no-code UX</span></p>
+	</li>
+	<li style="color:rgb(53, 64, 69); font-size:21.3333px">
+	<p><span style="font-size:1.0em"><span style="font-size:1.0em">100% cloud-based</span></span></p>
+	</li>
+	<li style="color:rgb(53, 64, 69); font-size:21.3333px">
+	<p><span style="font-size:1.0em"><span style="font-size:1.0em"><span style="font-size:1.0em">Integration through web browser</span></span></span></p>
+	</li>
+	<li>
+	<p><span style="font-size:1.0em"><span style="font-size:1em">Ad hoc integration</span></span></p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="6e65c9d0c3c038e7c9239532165a6b91" style="min-width: 4px; min-height: 4px; width: 1251px; height: 203px; left: 3px; top: 179px;"><div class="sl-block-content" style="z-index: 15;"><img data-natural-width="1438" data-natural-height="233" style="" data-lazy-loaded="" data-src="deck-8/a8bb886f3a31fe42a607cba526f02e66.png"></div></div></section><section id="_target_audience" data-id="bda78c29ef8d2b9652bffd2a2a0b769c"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1280px; left: 0px; top: 0px;" data-block-id="67a6a701bc5e99f04e2345128bc6ab6e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; text-align: left;">
+<h2>Target Audience</h2>
+
+<div class="scrollbar">
+<div class="ulist">
+<h3>Citizen Developer</h3>
+
+<div class="ulist">
+<ul>
+	<li>
+	<p>Does not code</p>
+	</li>
+	<li>
+	<p>Strong in business requirements knowledge</p>
+	</li>
+	<li>
+	<p>Needs a tool like Red Hat<span id="docs-internal-guid-f31e490a-7fff-b1ec-181c-a3811d2cd831" style="font-weight:normal;"><span style=" font-family: Arial; background-color: transparent; font-weight: 400; font-style: normal; font-variant: normal; white-space: pre-wrap;">®</span></span> Fuse Online, which does not require coding skills to accomplish integrations</p>
+	</li>
+</ul>
+</div>
+</div>
+
+<div class="footer"> </div>
+</div>
+</div></div></section><section data-id="38a7cf2709345e0f4d7ab0107f29c68f"><div class="sl-block" data-block-type="text" style="height: auto; width: 1280px; left: 0px; top: 0px;" data-block-id="5d0a7aaeff14b891097c614c7942f7ae"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; text-align: left;">
+<h2>Technical Feature Highlights</h2>
+</div></div>
+<div class="sl-block" data-block-type="table" data-block-id="f90b32638d6edf147a6b2195b4c84089" style="height: auto; min-width: 120px; min-height: 30px; width: 987px; left: 0px; top: 156px;"><div class="sl-block-content" style="z-index: 12;" data-table-cols="2" data-table-rows="13"><table><tbody>
+<tr>
+<th style="width: 259px;"><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+
+
+
+
+
+
+<tr>
+<td>Generic API connector</td>
+<td>Allows any API to be imported as connector</td>
+</tr>
+<tr>
+<td>Step extensions</td>
+<td>Ability to natively extend platform by adding steps</td>
+</tr>
+<tr>
+<td>AMQ connector</td>
+<td>Compatible with AMQ xPaaS images</td>
+</tr>
+<tr>
+<td>Database connector</td>
+<td>Accepts user-defined SQL</td>
+</tr>
+<tr>
+<td>Amazon S3 connector</td>
+<td>Cloud-based file transfer</td>
+</tr>
+<tr>
+<td>SAP Concur connector</td>
+<td>Integration with SAP Concur</td>
+</tr>
+<tr>
+<td>Webhook connector</td>
+<td>REST service integration</td>
+</tr>
+<tr>
+<td>ServiceNow connector</td>
+<td>Integration with ServiceNow</td>
+</tr>
+<tr>
+<td>Kafka connector</td>
+<td>Integration with Apache Kafka/AMQ Streams</td>
+</tr>
+<tr>
+<td>Gmail connector</td>
+<td>Email integration</td>
+</tr>
+<tr>
+<td>Telegram connector</td>
+<td>Instant messaging integration</td>
+</tr>
+<tr>
+<td>Import and export</td>
+<td>Facilitates transfer of integrations between local and Fuse Online environments</td>
+</tr>
+</tbody></table></div></div></section><section id="_terminology" data-id="809ba74ad182e9f8705ec2c4322fa6c8"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1280px; left: 0px; top: 0px;" data-block-id="c539273da1cfefd6d8de78753f42eca3">
+    <div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; text-align: left;">
+<h2>Terminology</h2>
+</div>
+</div>
+<div class="sl-block" data-block-type="table" data-block-id="36f8188d56d37ce0e17ab8b8c4d927c9" style="height: auto; min-width: 120px; min-height: 30px; width: 960px; left: 0px; top: 144px;">
+    <div class="sl-block-content" style="z-index: 12;" data-table-cols="2" data-table-rows="5">
+        <table>
+            <tbody>
+                <tr>
+                    <th style="width: 238px;"><strong>Term</strong></th>
+                    <th><strong>Definition</strong></th>
+                </tr>
+                <tr>
+                    <td style="width: 238px;">Integration</td>
+                    <td>Integration project involving multiple data sources or applications</td>
+                </tr>
+                <tr>
+                    <td style="width: 238px;">Step</td>
+                    <td>Task that performs data manipulation, retrieval, or persistence<br>
+<br>
+Each integration typically comprises several of these</td>
+                </tr>
+                <tr>
+                    <td style="width: 238px;">Connection</td>
+                    <td>Link to either data source or application</td>
+                </tr>
+                <tr>
+                    <td style="width: 238px;">Connector</td>
+                    <td>Building block for connection</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div></section><section id="_technical_architecture" data-id="16aec54fc83c7fbb074a195bd5306dc0"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 560px; left: 0px; top: 0px;" data-block-id="9705e02e21f5fbeda74f1c64507dbc93"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; font-size: 95%; text-align: left;" dir="ui">
+<h2>Technical Architecture</h2>
+<div class="scrollbar"><div class="ulist"><ul>
+<li>
+<p>Container-driven architecture</p>
+<div class="ulist"><ul>
+<li><p>Enables modularity in deployment</p></li>
+<li><p>Ease of management and troubleshooting</p></li>
+</ul></div>
+</li>
+<li>
+<p>Powered by Red Hat OpenShift Container Platform</p>
+<div class="ulist"><ul><li><p>Kubernetes support enables security, scalability, manageability</p></li></ul></div>
+</li>
+</ul></div></div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="2b5b25fad4e11336d404c900c1fa48ef" style="min-width: 4px; min-height: 4px; width: 687px; height: 500px; left: 593px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="687" data-natural-height="500" style="" data-lazy-loaded="" data-src="deck-8/cd93e01a58cda7ab17a3570ac5ac15fc.png"></div></div></section><section id="_pod_architecture" data-id="fe90b26913b4df5fd3f5e215cd684bbb"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 398px; left: 2px; top: 0px;" data-block-id="e417eafa592b53599d8be092f552a12b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; font-size: 70%; text-align: left;">
+<h2>Pod Architecture</h2>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Application modules as Kubernetes pods</p>
+
+	<div class="ulist">
+	<ul>
+		<li>
+		<pre>syndesis-oauthproxy</pre>
+		</li>
+		<li>
+		<pre>syndesis-ui</pre>
+		</li>
+		<li>
+		<pre>syndesis-server</pre>
+		</li>
+		<li>
+		<pre>syndesis-meta</pre>
+		</li>
+		<li>
+		<pre>syndesis-prometheus</pre>
+		</li>
+		<li>
+		<pre>syndesis-db</pre>
+		</li>
+	</ul>
+	</div>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="93b4a52abbf18f3eff7cdcf32912a20f" style="min-width: 4px; min-height: 4px; width: 865px; height: 400px; left: 415px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="865" data-natural-height="400" style="" data-lazy-loaded="" data-src="deck-8/3e6ace635d33854353e6aec535d8d57a.png"></div></div></section><section data-id="7fbd2a6451573d1d8d503a8fd661ff58"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 0px; top: 0px;" data-block-id="023c651013545c0a611676c258e4e3f3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; text-align: left;">
+<h2>Pod Architecture</h2>
+
+<h3>Modules</h3>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="b4bb5885268e6ac2b8c8edfef355e8bc" style="min-width: 4px; min-height: 4px; width: 720px; height: 333px; left: 560px; top: 387px;"><div class="sl-block-content" style="z-index: 10;"><img data-natural-width="865" data-natural-height="400" style="" data-lazy-loaded="" data-src="deck-8/3e6ace635d33854353e6aec535d8d57a.png"></div></div>
+<div class="sl-block" data-block-type="table" data-block-id="a8cfc4621e9b705b9188c8bfc091a0e3" style="height: auto; min-width: 120px; min-height: 30px; width: 640px; left: 0px; top: 152px;"><div class="sl-block-content" style="z-index: 12;" data-table-cols="2" data-table-rows="7"><table><tbody>
+<tr>
+<th style="width: 228px;">Module</th>
+<th>Description</th>
+</tr>
+<tr>
+<td style="width: 228px;">syndesis-oauthproxy</td>
+<td>Single sign-on authorization service</td>
+</tr>
+<tr>
+<td style="width: 228px;">syndesis-ui</td>
+<td>Web console</td>
+</tr>
+<tr>
+<td style="width: 228px;">syndesis-server</td>
+<td>Application runtime</td>
+</tr>
+<tr>
+<td style="width: 228px;">syndesis-meta</td>
+<td>Metadata management service</td>
+</tr>
+<tr>
+<td style="width: 228px;">syndesis-prometheus</td>
+<td>Logging analysis service</td>
+</tr>
+<tr>
+<td style="width: 228px;">syndesis-db</td>
+<td>PostgreSQL database</td>
+</tr>
+</tbody></table></div></div></section><section id="_pre_packaged_software" data-id="22d1fee35e1467e8c2c8dcb1ef47d22e"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 960px; left: 0px; top: 0px;" data-block-id="be922e9c053df1e04dbc8870bb48de6e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 12; text-align: left;" dir="ui">
+<h2>Prepackaged Software</h2>
+
+<div class="scrollbar">
+<div>
+<ul>
+	<li>
+	<p>PostgreSQL and AMQ embedded by default</p>
+	</li>
+	<li>
+	<p>Default database: PostgreSQL</p>
+
+	<div>
+	<ul>
+		<li>
+		<p>Provides necessary persistent data storage</p>
+		</li>
+		<li>
+		<p>Suitable for user scenarios requiring data management</p>
+		</li>
+		<li>
+		<p>Can be ignored by users without data requirements</p>
+		</li>
+		<li>
+		<p>External databases can be integrated through JDBC drivers packaged as technical extensions and prepackaged SQL component</p>
+
+		<ul>
+			<li>
+			<p>Example databases: MariaDB, MySQL, IBM DB2, Microsoft SQL Server</p>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</div>
+	</li>
+	<li>
+	<p>Default message broker: Red Hat AMQ</p>
+
+	<div>
+	<ul>
+		<li>
+		<p>Provides reliable and asynchronous messaging support</p>
+		</li>
+		<li>
+		<p>Addresses use cases that require communication among systems</p>
+		</li>
+		<li>
+		<p>Can be ignored by users without reliable messaging requirements</p>
+		</li>
+	</ul>
+	</div>
+	</li>
+</ul>
+</div>
+</div>
+</div></div></section><section id="_operational_considerations" data-id="fa0a78decc4ead3bbdfb0f6732782135"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1274px; left: 0px; top: 0px;" data-block-id="796d8e8a846587a5f984948deeddb140"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 12; text-align: left;" dir="ui">
+<h2>Operational Considerations</h2>
+
+<div class="scrollbar">
+<h3>Fuse Online on OpenShift Container Platform</h3>
+
+<ul>
+	<li class="footer">
+	<p>Software application installed on OpenShift Container Platform</p>
+	</li>
+	<li class="footer">
+	<p>Clustering support to suit High Availability needs</p>
+	</li>
+	<li class="footer">
+	<p>Customers can add a load balancer if multiple OpenShift clusters implemented</p>
+	</li>
+	<li class="footer">
+	<p>Must grant access to OAuth user credentials prior to use</p>
+	</li>
+	<li class="footer">
+	<p>Subsequently, user has authority to access Fuse Ignite web console</p>
+	</li>
+</ul>
+
+<h3>Fuse Online on OpenShift Online</h3>
+
+<ul>
+	<li class="footer">
+	<p>Software application installed on Red Hat OpenShift Online</p>
+	</li>
+	<li class="footer">
+	<p>User must have OpenShift Online account registered</p>
+	</li>
+</ul>
+
+<h3>Upgrades and Patch Management</h3>
+
+<ul>
+	<li class="footer">
+	<p>Operator Framework used to deploy, upgrade and patch Fuse Online installations</p>
+	</li>
+</ul>
+</div>
+</div></div></section><section data-id="6516329ebb118dd49183651915dcfe63"><div class="sl-block" data-block-type="text" style="height: auto; width: 1274px; left: 0px; top: 0px;" data-block-id="bdb23327875af6e4b238d07bf9fd52ab"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 10; text-align: left;" dir="ui">
+<h2>Application Development Considerations</h2>
+
+<div class="scrollbar">
+<h3>Monitoring</h3>
+
+<p> </p>
+
+<ul>
+	<li class="footer">
+	<p>Metrics and Activity of Integrations can be monitored on Fuse Online console</p>
+	</li>
+</ul>
+
+<h3>Custom Datatypes</h3>
+
+<ul>
+	<li class="footer">
+	<p>Utilize API extensions support to create query mechanisms for custom datatypes in SaaS applications (like Salesforce, Concur)</p>
+	</li>
+</ul>
+
+<h3>Enterprise Integration Patterns</h3>
+
+<ul>
+	<li class="footer">
+	<p>EIP support in Fuse on OpenShift</p>
+	</li>
+	<li class="footer">
+	<p>Interoperability between Integrations created on Fuse Online and applications, services, EIPs deployed on Fuse on OpenShift</p>
+	</li>
+</ul>
+</div>
+</div></div></section><section id="_pricing_models" data-id="db2470f94289f6b59fce5dc60ba4f926"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 960px; left: 0px; top: 0px;" data-block-id="c9b721e52da6f67d844751efa203d5cd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 12; text-align: left;">
+<h2>Pricing Models</h2>
+
+<div class="scrollbar">
+<ul>
+	<li class="footer">
+	<p>These SKUs include Fuse Online subscription support:</p>
+
+	<ul>
+		<li class="footer">
+		<p>Fuse On OpenShift Dedicated</p>
+		</li>
+		<li class="footer">
+		<p>Fuse Standalone</p>
+		</li>
+	</ul>
+	</li>
+	<li class="footer">
+	<p>Refer to either:</p>
+
+	<ul>
+		<li class="footer">
+		<p>Red Hat Connect for Business Partners: <a href="https://partnercenter.redhat.com/" target="_blank">https://partnercenter.redhat.com/</a></p>
+		</li>
+		<li class="footer">
+		<p>Red Hat Customer Portal: <a href="https://access.redhat.com/" target="_blank">https://access.redhat.com</a>/</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div>
+</div></div></section><section id="_competitive_analysis" data-id="a29d6bdc34779e14bcdebc920e00518c"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 720px; left: 0px; top: 0px;" data-block-id="cc9f3dfdbca82d0cb3d17367edeac330"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; text-align: left;">
+<h2>Competitive Analysis</h2>
+
+<h3>Mulesoft</h3>
+
+<ul>
+	<li>
+	<p>Proprietary integration technology</p>
+	</li>
+	<li>
+	<p>Uncertain future after acquisition by Salesforce</p>
+	</li>
+	<li>
+	<p>Separate licensing for integration messaging support</p>
+	</li>
+	<li>
+	<p>Size of cluster limited to eight server instances</p>
+	</li>
+	<li>
+	<p>Public cloud offering only</p>
+	</li>
+	<li>
+	<p>No open source licensing, proprietary licensing only</p>
+	</li>
+	<li>
+	<p>Cluster deletion and re-creation mandatory for upgrades</p>
+	</li>
+	<li>
+	<p>No out-of-the-box Enterprise Integration Patterns</p>
+	</li>
+	<li>
+	<p>Local transaction support for JMS, JDBC, VM queues only</p>
+	</li>
+	<li>
+	<p>Unable to scale and support large population (&gt;100) of microservices</p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="e6a8f0008e9505e295876d612dbaaef0" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 680px; top: 173px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;">
+<ul>
+	<li style="color:rgb(53, 64, 69)">
+	<p>No support for AMQP, popular open standards messaging service</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>Inflexible tooling strategy limited to Mule Studio environment</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>No bundled messaging service</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>API monetization module absent</p>
+
+	<ul>
+		<li>
+		<p>Must be custom developed by end user</p>
+		</li>
+	</ul>
+	</li>
+</ul>
+</div></div></section><section data-id="1cc29f4ab54b2e96e62e198925db54c8"><div class="sl-block" data-block-type="text" style="height: auto; width: 510px; left: 1px; top: 1px;" data-block-id="2cc6eea12ffae0197181627457c196ac"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11; text-align: left;">
+<h2>Competitive Analysis</h2>
+
+<h3><span style="font-size:0.9em;">Talend</span></h3>
+
+<ul>
+	<li>
+	<p>Additional subscription costs for critical features:</p>
+
+	<ul>
+		<li>
+		<p>Enterprise Integration Patterns</p>
+		</li>
+		<li>
+		<p>Load-balancing</p>
+		</li>
+		<li>
+		<p>Failover</p>
+		</li>
+		<li>
+		<p>Monitoring</p>
+		</li>
+		<li>
+		<p>Administration</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Significantly higher in total cost of ownership due to multiple types of subscription costs</p>
+	</li>
+	<li>
+	<p>No complex event processing</p>
+	</li>
+	<li>
+	<p>Only partially open source</p>
+	</li>
+</ul>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="5ca195b4af941853355822f8872dd630" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 660px; top: 165px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;">
+<ul>
+	<li style="color:rgb(53, 64, 69)">
+	<p>Most supported connectors are database-centric</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>Few supported connectors suited for service integration</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>No Platform-as-a-Service offering</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>Small ecosystem community</p>
+	</li>
+	<li style="color:rgb(53, 64, 69)">
+	<p>Fewer contributions to upstream project vs. Red Hat's contribution to Apache Camel</p>
+	</li>
+</ul>
+</div></div></section><section id="_future_possibilities" data-id="20cae5822f8968552045ed35e38c7994"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1280px; left: 0px; top: 0px;" data-block-id="2d744324f70a01a33b1cc2910223c564"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 12; text-align: left;">
+<h2>Future Roadmap</h2>
+
+<div>
+<div>
+<ul>
+	<li>
+	<p>Integration monitoring: logging, metrics</p>
+	</li>
+	<li>
+	<p>Custom connectors</p>
+	</li>
+	<li>
+	<p>Data shape specification</p>
+	</li>
+	<li>
+	<p>Data buckets</p>
+	</li>
+	<li>
+	<p>Support page</p>
+	</li>
+	<li>
+	<p>DB driver upload</p>
+	</li>
+	<li>
+	<p>More connectors: FTP, SFTP, HTTP, Box, Dropbox</p>
+	</li>
+	<li>
+	<p>On-premise installation</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div></section><section id="_topics_2" data-id="c4db301329d9c500a97f34b8eb15b0c9"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 1280px; left: 0px; top: 2px;" data-block-id="766f7cbd28ab9be630051e50e73912ef"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 12; text-align: left;" dir="ui">
+<h2>Summary</h2>
+
+<div>
+<div>
+<ul>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal;">Next Generation of Fuse Technology</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Target Audience</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Technical Features</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Terminology</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Technical Architecture</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Pod Architecture</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Prepackaged Software</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Operational Considerations</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Pricing Models</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Competitive Analysis</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);">
+	<p>Future Roadmap</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":1215224,"slug":"deck-8","title":"Fuse Online Foundations - Module 1 - Product Overview","description":"","width":1280,"height":720,"visibility":"team","published_at":"2018-08-07T04:10:52.856Z","sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/07e1bdb3d08233ee79769c73f831c00a/thumb.jpg?1530643471","view_count":8,"user":{"id":354178,"username":"hchin","name":"Hong Hua Chin","description":null,"thumbnail_url":"https://www.gravatar.com/avatar/46aa09dd1dd291800ef54633a2b852a1?s=140\u0026d=https%3A%2F%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png","paid":true,"pro":true,"lite":false,"team_id":32,"settings":{"id":187807,"present_controls":true,"present_upsizing":true,"present_pointer":false,"present_notes":false,"default_deck_tag_id":null},"enterprise":true,"membership":{"role":"member","manager":false,"activated":true}},"background_transition":"none","transition":"none","theme_id":176,"theme_font":"overpass2","theme_color":"no-color","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":false,"rolling_links":false,"center":false,"shuffle":false,"should_loop":false,"share_notes":false,"slide_number":true,"slide_count":18,"rtl":false,"version":2,"collaborative":true,"deck_user_editor_limit":null,"data_updated_at":1551196328451,"font_typekit":null,"font_google":null,"notes":{"f230fc23f91cffdb2918e141938cbff2":"This module delves into the various aspects of Red Hat Fuse Online.","7041b2a9d862cecbdfc602aaddb5e7cd":"=== Transcript\nHere are a few tips to help you navigate through this course.\nTo move between slides, click the arrows in the lower-right corner. If you do not see the arrows, move your cursor to the lower-right corner and the arrows will appear.\nTo display the audio transcript, press the \"S\" key.\nSome lists have expandable items. To expand an item, click the \"+\" symbol that appears between the bullet symbol and the text. To collapse an item, click the \"-\" symbol that appears between the bullet symbol and the text.\nTo receive credit for completing a module, you must click the Module Complete button on the Module Completion slide. Once you receive credit for completing a module, the x next to the module name on the left side of the screen  changes to a check mark.","4a6c36d7b0eae29aeacfda03dda9d4a5":"This module delves into the various aspects of Red Hat Fuse Online.\n\nIt begins with a discussion of the next generation of Fuse technology and the target audience for the Fuse Online product. It continues with a description of technical features, terminology, technical architecture, pod architecture, and prepackaged software. The module then discusses operational considerations and pricing models and provides a competitive analysis. The module concludes with a look at the future roadmap for Fuse Online.\n\n","bda78c29ef8d2b9652bffd2a2a0b769c":"Fuse Online is a next-generation integration tooling and runtime engine designed to provide Integration-as-a-Service.\n\nThe citizen developer is anyone who wants to build either an application or an integration project but does not write code for a living.\n\nHowever, the citizen developer is strong in business requirements knowledge.\n\nA tool like Fuse Online provides the necessary technical capabilities to accomplish integration projects, without requiring any coding skills from the developer using this tool.","a3b32212317ee17673ca7da42b506cb4":"Transcript:\n\nFuse Online provides a generic API connector, which allows any API to be imported as a connector.\n\nStep extensions provide developers the power to natively extend the platform by adding steps.\n\nAn AMQ connector that is compatible with AMQ xPaaS images is also provided for reliable messaging.\n\nFuse Online also provides a database connector that accepts user-defined SQL procedures and statements to manipulate data, as well as an Amazon S3 connector for cloud-based file transfer and storage.\n\nImport and export of integrations through a facility allows transfer of integrations between environments","809ba74ad182e9f8705ec2c4322fa6c8":"Fuse Online introduces several new terms related to integration projects.\n\nAn integration is a project involving multiple data sources or applications.\n\nA step is a task that performs data manipulation, retrieval, or persistence. Each integration typically comprises several steps.\n\nA connection is a link to either a data source or an application through which data is transferred.\n\nA connector is a building block for a connection.","16aec54fc83c7fbb074a195bd5306dc0":"Fuse Online uses the Syndesis technology infrastructure.  (The Syndesis project is located on http://github.com/syndesisio). The code base is packaged into containers and hosted on Red Hat OpenShift Online. This enables modularity during deployment and ease of management and troubleshooting during operations.\n\nAs a result, Fuse Online is highly scalable and able to cater to different types of user workloads. With Kubernetes support in Red Hat OpenShift Container Platform, operational concerns of Fuse Online such as security, scalability, and manageability are made easy.","fe90b26913b4df5fd3f5e215cd684bbb":"The application logic of Fuse Online is packaged into several Kubernetes pods.\n\nThe pods are syndesis-oauthproxy, syndesis-ui, syndesis-server, syndesis-meta, syndesis-prometheus, and syndesis-db.\n","22d1fee35e1467e8c2c8dcb1ef47d22e":"By default, every Fuse Online instance contains a PostgresSQL database. This data store provides necessary persistent data storage and addresses user requirements involving data management.\n\nIn scenarios without data requirements, users can safely ignore the database.\n\nExternal databases--for instance, MariaDB, MySQL, IBM DB2, Microsoft SQL Server--can be integrated with Java Database Connectivity, or JDBC, drivers packaged as technical extensions, with help from the prepackaged SQL component.\n\nEvery Fuse Online instance also contains Red Hat AMQ as the default messaging broker. Red Hat AMQ provides reliable and asynchronous messaging support in integrations. It addresses use cases that require communication among systems. Users without reliable messaging requirements can safely ignore the Red Hat AMQ broker.","fa0a78decc4ead3bbdfb0f6732782135":"Fuse Online on OpenShift Container Platform is the software application that is installed on OpenShift Container Platform. Granting access to OAuth user credentials prior to use is a prerequisite for using Fuse Online on OpenShift. After being granted access, the user has the authority to access the Fuse Online web console and manage integrations and connections.\n\nFuse Online on OpenShift Online is the software application that is installed on OpenShift Online. A Fuse Online user must have an OpenShift Online account registered prior to using the product.","db2470f94289f6b59fce5dc60ba4f926":"For pricing information about Fuse version 7 products, refer to either Red Hat Connect for Business Partners or the Red Hat Customer Portal at the URLs shown here.","a29d6bdc34779e14bcdebc920e00518c":"The competitors of Fuse Online are Mulesoft and Talend.\n\nShown here are the points against adopting Mulesoft as an integration product.\n\nMulesoft has:\n\n* Proprietary integration technology\n* An uncertain future after its acquisition by Salesforce\n* Separate licensing for integration messaging support\n* A cluster size limitation of eight server instances\n* A public cloud offering only\n* No open source licensing--proprietary licensing only\n* Mandatory cluster deletion and re-creation for upgrades\n* No out-of-the-box Enterprise Integration Patterns\n* Local transaction support only for JMS, JDBC, and VM queues\n* An inability to scale and support large populations of microservices--for example, more than 100 microservices\n* No support for AMQP, a popular open-standards messaging service\n* An inflexible tooling strategy that is limited to the Mule Studio environment\n* No bundled messaging service\n* No included API monetization module, which must be custom-developed by the end user","20cae5822f8968552045ed35e38c7994":"The future roadmap for Fuse Online includes the following:\n\n* Integration monitoring, including logging and metrics\n* Custom connectors\n* Data shape specification\n* Data buckets\n* A support page\n* Database driver upload\n* More connectors, including FTP, SFTP, HTTP, Box, and Dropbox\n* On-premise installation","c4db301329d9c500a97f34b8eb15b0c9":"This module delved into the various aspects of Red Hat Fuse Online.\n\nIt began with a discussion of the next generation of Fuse technology and the target audience for the Fuse Online product. It continued with a description of technical features, terminology, technical architecture, pod architecture, and prepackaged software. The module then discussed operational considerations and pricing models and provides a competitive analysis. The module concluded with a look at the future roadmap for Fuse Online.\n\n","1cc29f4ab54b2e96e62e198925db54c8":"Here is a look at the limitations of Talend.\n\nAcquiring Talend requires additional subscription costs for critical features, including the following:\n* Enterprise Integration Patterns\n* Load-balancing\n* Failover\n* Monitoring\n* Administration\n\nIt incurs significantly higher total cost of ownership due to multiple types of subscription costs.\n\nOther disadvantages include the following:\n\n* No complex event processing\n* Only partially open source\n* Most supported connectors are database-centric\n* Few supported connectors suited for service integration\n* No Platform-as-a-Service offering\n* Small ecosystem community\n* Fewer contributions to the upstream project compared with Red Hat's contribution to Apache Camel","7fbd2a6451573d1d8d503a8fd661ff58":"syndesis-oauthproxy serves as the single sign-on authorization service.\n\nsyndesis-ui serves as the web console.\n\nsyndesis-server serves as the application runtime.\n\nsyndesis-meta serves as the metadata management service.\n\nsyndesis-prometheus serves as the logging analysis service.\n\nsyndesis-db serves as the embedded PostgreSQL database.\n\nUpon login, the single sign-on authorization service grants the necessary access privileges to the rest of the pods. Every interaction with the tool by the citizen developer--be it design or monitoring of integrations and connections--takes place via the web console.\n\nLogging and metadata storage and retrieval take place when integrations are active. The database provides the necessary management and persistence capabilities for operational data.","3496625e8f089557c83d4f2dd6a2e15b":"There are three editions of Fuse version 7 available.\n\nFuse Standalone is a single Java virtual machine, or Java VM, Fuse.  It is developer-focused and offers integration where you need it via \"classic\" integration.\n\nFuse OpenShift lets you scale out Fuse. This technology replaces Fabric version 1. It is also developer-focused but offers cloud-native integration.\n\nFuse Online, or \"Fuse for the masses,\" is an iPaaS solution that offers a low- or no-code user experience. It is 100% cloud-based and offers integration through a web browser. This allows for ad hoc integration.\n","38a7cf2709345e0f4d7ab0107f29c68f":"Fuse Online provides a generic API connector, which allows any API to be imported as a connector.\n\nStep extensions provide developers with the power to natively extend the platform by adding steps.\n\nAn AMQ connector compatible with AMQ xPaaS images is also provided for reliable messaging.\n\nFuse Online also provides a database connector that accepts user-defined SQL procedures and statements to manipulate data, as well as an Amazon S3 connector for cloud-based file transfer and storage.\n\nNew Fuse Online connectors available in version 7.2 include SAP Concur; webhook, for REST service integration; ServiceNow; Kafka, for integration with Apache Kafka and AMQ; Gmail, for email integration; and Telegram, for instant messaging integration.\n\nImport and export of integrations through a facility allows the transfer of integrations between environments."}}};
+
+				SLConfig.theme = {"id":176,"created_at":"2014-05-27T12:38:16.183Z","updated_at":"2018-05-04T07:53:25.097Z","name":"Red Hat Corporate","thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/66755080be2b0c8c0146bfa70069ef16/thumb.jpg?1525420403","sanitize_messages":null,"slide_template_ids":[56706,56689,28642,36442,27160,26765,26762,56684,56696,56704,56703],"font_typekit":"","font_google":"","width":960,"height":700};
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/reveal.min.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 1280,
+				height: 720,
+				margin: 0.05,
+
+				hash: true,
+				controls: true,
+				progress: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: true,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				center: false,
+				shuffle: false,
+				loop: false,
+				rtl: false,
+
+				transition: "none",
+				backgroundTransition: "none",
+
+				dependencies: [
+					{ src: 'lib/reveal-plugins/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/highlight/highlight.js', async: true, callback: function() { hljs.initHighlighting(); hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/reveal-plugins/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'lib/reveal-plugins/zoom/zoom.js', async: true }
+				]
+			});
+		</script>
+
+		
+  <script id="theme-js-output" type="text/javascript">var themeHTMLOutput = document.getElementById('theme-html-output');
+if( themeHTMLOutput ) {
+    themeHTMLOutput.innerHTML = '<link  rel="stylesheet" href="https://overpassmonotest-30e2.kxcdn.com/overpass-mono.css" />';
+}
+
+// (function() {
+// 
+//   var slidesInitInterval = setInterval( function() {
+//     if( window.SL && window.SL.view ) {
+//       // If we're in the editor, wait for the Blocks controller
+//       // to be initialized
+//       if( SL.editor ) {
+// 
+//         if( SL.editor.controllers && SL.editor.controllers.Blocks && SL.editor.controllers.Blocks.textSaved ) {
+//           SL.editor.controllers.Blocks.textSaved.add( function( element ) {
+//             var html = element.html();
+//             html = html.replace( /(@RedHat | @redhat)/g,                 '@redhat' );
+//             html = html.replace( 'redhat.com',                 'redhat.com' );
+//             html = html.replace( /(Red Hat|red hat|RedHat|Red hat|Redhat|redHat|red Hat)/g,  '<span class="name">Red Hat</span>' );
+//             html = html.replace( /( redhat |redhat )/g,  ' <span class="name">Red Hat</span> ' );
+//             html = html.replace( 'REDHAT',                    '<span class="name">RED HAT</span>' );
+//             html = html.replace( 'redhat<',                    '<span class="name">Red Hat</span><' );
+//             html = html.replace( 'openshift',                 '<span class="name">OpenShift</span>' );
+//             html = html.replace( '<span class="name"><span class="name">Red Hat</span></span>',                    '<span class="name">Red Hat</span>' );
+//             html = html.replace( 'redhat.com',                 'redhat.com' );
+//             html = html.replace( 'REDHAT.COM',                 'REDHAT.COM' );
+//             html = html.replace( '@redhat',                 '@redhat' );
+//             html = html.replace( /(@RedHatNews | @redhatnews)/g,                 '@RedHatNews' );
+//             html = html.replace( /(@RedHat | @redhat)/g,                 '@RedHatInc' );
+//             html = html.replace( /(RHEL-OSP|RHELOSP|Red Hat Enterprise Linux OpenStack Platform)/g,                 'Red Hat OpenStack Platform' );
+//             html = html.replace( /(openstack |openstack|open stack|openStack|Openstack)/g,                 'OpenStack' );
+//             html = html.replace( 'openstack',                    'OpenStack' );
+//             html = html.replace( 'openstack<',                    'OpenStack<' );
+// 
+//             element.html( html );
+//           } );
+// 
+//           clearInterval( slidesInitInterval );
+//         }
+// 
+//       }
+//       else {
+//         clearInterval( slidesInitInterval );
+//       }
+//     }
+//   }, 500 );
+// 
+// })();
+
+
+
+// piwik script
+var _paq = _paq || [];
+_paq.push(["trackPageView"]);
+_paq.push(["enableLinkTracking"]);
+
+(function() {
+var u = (("https:" == document.location.protocol) ? "https" : "http") +
+"://engstats.redhat.com/piwik/";
+_paq.push(["setTrackerUrl", u+"piwik.php"]);
+_paq.push(["setSiteId", "8"]);
+var d=document, g=d.createElement("script"),
+s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+})();
+
+
+
+ 
+function sliceString(selector) {
+    var elements = document.getElementsByClassName(selector);
+
+ 
+    for (var h=0; h<elements.length; h++){
+      var string = elements[h].innerText,
+          total = string.length,
+          div = '';
+
+// futile attempt to clean space
+var string = elements[h].innerText.trim();
+     
+      for (var i=0; i<total;  i++) {
+        var letter = string.charAt(i);
+        div+= '<span class="'+letter+'">'+letter+'</span>';
+      }
+      elements[h].innerHTML = div;
+    }        
+}
+sliceString('lettering');
+sliceString('lettering'); //no rogue spaces when fired twice for some reason
+
+
+
+// function sliceString(selector) {
+//    if (!document.querySelector) return;
+//    var string = document.querySelector(selector).innerText,
+//        total = string.length,
+//        html = '';
+//    for (var i=0; i<total; i++) {
+//        var letter = string.charAt(i);
+//        html+= '<span class="'+letter+'">'+letter+'</span>';
+//    }
+//    document.querySelector(selector).innerHTML = html;
+//}
+//sliceString('.lettering');</script>
+
+	</body>
+</html>

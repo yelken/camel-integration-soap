@@ -1,0 +1,35 @@
+QUESTIONBANKCODE|QUESTIONCODE|QUESTIONTYPE|QUESTIONTEXT|QUESTIONTEXTFORMAT|QUESTIONFEEDBACK|OPTION|RIGHTOPTION|OPTIONFEEDBACK|ISCORRECT|OPTIONWEIGHT|ISCASESENSITIVE|RANDOMIZEOPTIONS|STATUS
+IGNITE_DEV|IGNITE_FDS0101|1|Who is the target audience for Red Hat Fuse Online?|||Citizen developers|||1|100|||
+IGNITE_DEV|IGNITE_FDS0101|1|Who is the target audience for Red Hat Fuse Online?|||System administrators|||0|0|||
+IGNITE_DEV|IGNITE_FDS0101|1|Who is the target audience for Red Hat Fuse Online?|||C++ developers|||0|0|||
+IGNITE_DEV|IGNITE_FDS0101|1|Who is the target audience for Red Hat Fuse Online?|||All of the above|||0|0|||
+IGNITE_DEV|IGNITE_FDS0102|1|Which of the following is NOT a system metric that is visible from the Fuse Online console?|||Amount of time since Fuse Online became active|||0|0|||
+IGNITE_DEV|IGNITE_FDS0102|1|Which of the following is NOT a system metric that is visible from the Fuse Online console?|||Number of integrations in use|||0|0|||
+IGNITE_DEV|IGNITE_FDS0102|1|Which of the following is NOT a system metric that is visible from the Fuse Online console?|||Memory utilization|||1|100|||
+IGNITE_DEV|IGNITE_FDS0102|1|Which of the following is NOT a system metric that is visible from the Fuse Online console?|||Number of processed messages|||0|0|||
+IGNITE_DEV|IGNITE_FDS0103|5|A step is a task that performs data operations.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0103|5|A step is a task that performs data operations.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0104|5|Fuse Online scales as a result of Kubernetes suppport.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0104|5|Fuse Online scales as a result of Kubernetes suppport.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0105|5|Four of the Fuse Online infrastructure pods each use a database as a persistence store.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0105|5|Four of the Fuse Online infrastructure pods each use a database as a persistence store.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0106|1|Which Fuse Online infrastructure pod provides user authorization services?|||syndesis-ui|||0|0|||
+IGNITE_DEV|IGNITE_FDS0106|1|Which Fuse Online infrastructure pod provides user authorization services?|||syndesis-server|||1|100|||
+IGNITE_DEV|IGNITE_FDS0106|1|Which Fuse Online infrastructure pod provides user authorization services?|||syndesis-meta|||0|0|||
+IGNITE_DEV|IGNITE_FDS0106|1|Which Fuse Online infrastructure pod provides user authorization services?|||syndesis-prometheus|||0|0|||
+IGNITE_DEV|IGNITE_FDS0107|1|Which software is pre-packaged in Fuse Online?|||MySQL and HornetQ|||0|0|||
+IGNITE_DEV|IGNITE_FDS0107|1|Which software is pre-packaged in Fuse Online?|||MariaDB and Red Hat AMQ|||0|0|||
+IGNITE_DEV|IGNITE_FDS0107|1|Which software is pre-packaged in Fuse Online?|||PostgresDB and Red Hat AMQ|||1|100|||
+IGNITE_DEV|IGNITE_FDS0107|1|Which software is pre-packaged in Fuse Online?|||Red Hat EAP and Red Hat AMQ|||0|0|||
+IGNITE_DEV|IGNITE_FDS0108|5|Having an OpenShift Online account is a prerequisite to using Fuse Online.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0108|5|Having an OpenShift Online account is a prerequisite to using Fuse Online.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0109|5|Fuse Online is fully open source.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0109|5|Fuse Online is fully open source.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0110|1|Which type of connector is NOT available in the default installation of Fuse Online?|||ServiceNow|||0|0|||
+IGNITE_DEV|IGNITE_FDS0110|1|Which type of connector is NOT available in the default installation of Fuse Online?|||Gmail|||0|0|||
+IGNITE_DEV|IGNITE_FDS0110|1|Which type of connector is NOT available in the default installation of Fuse Online?|||Skype|||1|100|||
+IGNITE_DEV|IGNITE_FDS0110|1|Which type of connector is NOT available in the default installation of Fuse Online?|||Telegram|||0|0|||
+IGNITE_DEV|IGNITE_FDS0111|1|Which of the following companies compete with Red Hat in the iPaaS product category?|||HP and Cisco|||0|0|||
+IGNITE_DEV|IGNITE_FDS0111|1|Which of the following companies compete with Red Hat in the iPaaS product category?|||Mulesoft and Cisco|||0|0|||
+IGNITE_DEV|IGNITE_FDS0111|1|Which of the following companies compete with Red Hat in the iPaaS product category?|||Cloudera and Talend|||0|0|||
+IGNITE_DEV|IGNITE_FDS0111|1|Which of the following companies compete with Red Hat in the iPaaS product category?|||Talend and Mulesoft|||1|100|||

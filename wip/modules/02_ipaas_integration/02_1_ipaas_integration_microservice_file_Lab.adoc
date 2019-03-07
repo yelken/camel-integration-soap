@@ -1,0 +1,281 @@
+:scrollbar:
+:toc2:
+:linkattrs:
+:coursevm:
+
+
+== Microservice to Flat File Integration Lab
+
+NOTE: This lab takes about an hour to complete. It covers topics you need to know to correctly complete the final assessment.
+
+.Goals
+* Design an integration for a cloud-based data persistence solution, where JSON data from a microservice is synchronized and persisted to a flat file on a remote server.
+* Implement the planned integration using Fuse Online
+
+.Prerequisite
+* A provisioned Fuse Online environment
+* Completion of *Fuse Online Environment Setup Lab*
+
+.Overview
+In this lab, you fulfill the requirements for a cloud-based data synchronization solution by integrating a provider of JSON data, namely a microservice, with a remote file hosting server designated to host the destination copy of the data.
+The data is hosted by Coolstore, an online business that operates as a wholesaler of quality consumer products. The consumer of the data is any reseller of Coolstore products.
+
+image::images/architecture-microservice-to-file.png[]
+
+The data is to be persisted into a flat file, which is created upon the initial synchronization with the microservice using a Fuse Online integration. This integration scenario is real-time and remains active indefinitely unless you stop it.
+
+As the integration actively polls the microservice for product catalog data from the Coolstore e-commerce business, the flat file is constantly refreshed with the most current data that the microservice offers. This assurance of data quality makes resellers of Coolstore products confident that they can download correct data from the remote file hosting server at any time. Resellers of Coolstore products utilize this product catalog data as part of their business operations.
+
+:numbered:
+
+== Log In to Fuse Online Console
+
+. Log in to the OpenShift Container Platform web console if you are not already logged in.
++
+TIP: The link is in your confirmation email, if you need it.
+
+. Click your *fuse-ignite-$GUID* project.
+. Click the URL of your Fuse Online console.
+. Log in using your OPENTLC credentials.
++
+NOTE: Because you already authorized your *fuse-ignite-$GUID* project access to your OPENTLC account credentials in the previous lab, the Fuse Online console appears. If you see an authorization screen instead, go back and complete Lab 1.
+
+
+== Create HTTP Connection to Microservice
+
+In this section, you set up a connection to the microservice that provides product catalog data in JSON format.
+
+. In the left-hand panel of the Fuse Online console, click *Connections*.
+. Click the *Create Connection* button.
+. Select the *HTTP* connector.
+. On the *Configure Connection* screen, provide the URL to the Coolstore product catalog microservice as identified in the previous lab.
+. Click *Validate* and observe the result:
++
+image::images/http-connector-validate.png[]
++
+. Click *Next*.
+. On the *Name Connection* screen, type `coolstore-product-catalog-microservice` as the name of the HTTP connection.
+. Click *Create* to complete the connection creation process.
+
+== Set Up Web Hosting Account
+
+In the next part of the lab, you use a remote file hosting server as the environment for hosting the destination endpoint (which is a flat file) of the Fuse Online integration. In this section, you set up the account.
+
+. Set up a user account with a free web-hosting service provider.
+.. Make sure that you are able to use FTP and SFTP services with this account.
++
+NOTE: The lab examples use an account from link:https://infinityfree.net/[Infinity Free].
+
+. Note the username and password for your new account, as the Fuse Online integration creation process requires this information.
+
+== Create FTP Connection to Web Hosting Service Provider
+
+In this section, you set up a connection to the web hosting service where the flat file containing JSON data is to be stored.
+
+. In the left-hand panel of the Fuse Online console, click *Connections*.
+. Select the *FTP* connector:
++
+image::images/fi-connectors.png[]
+
+. Populate the form with the *Host*, *Username*, and *Password* of your web hosting service account.
+. Click *Next*.
+. On the *Name Connection* screen, type `hosting-server` as the name of the FTP connection.
+. Click *Create* to complete the connection creation process.
+
+== Create Integration from HTTP Connection to FTP Connection
+
+In this section, you set up an integration between the microservice and the web hosting service.
+
+. In the left-hand panel of the Fuse Online console, click *Integrations*.
+. Click *Create Integration*.
+. On the *Choose a Start Connection* screen, select the *coolstore-product-catalog-microservice* connection.
+. On the *Choose an Action* screen, select *Periodic invoke URL*.
+. On the *Properties* screen, assign the following values to the fields:
+* *URL Path*: `/products`
+* *HTTP Method*: *GET*
+* *Period*: *5 Seconds*
+
+. Click *Next*.
+. On the *Specify Output Data Type* screen, click the *Select Type* list to display all of the options.
+* Note that JSON and XML schemas and document instances are supported data types.
+. Select *Don't specify type* and click *Done*.
+* The *coolstore-product-catalog-microservice* connection is now officially the start connection in the integration.
+. On the *Choose a Finish Connection* screen, click the *hosting-server* connection icon.
+. On the *Choose an Action* screen, select *Upload*.
+. On the *Properties* screen, assign the following values to the fields:
+* *File name expression*: `product-catalog.txt`
+* *FTP Directory*: `/htdocs`
+
+. Click *Next*.
+. On the *Specify Input Data Type* screen, click the *Select Type* list to display the available data types.
+. Leave the default option and click *Done*.
+* The `hosting-server` connection is now part of the integration.
+. At the top left corner of the Fuse Online console, in the *Enter integration name...* field, type
+`Microservice to File`.
+. At the top right corner of the console, click *Publish*.
+* A green check mark appears to the right of the *Microservice to File* integration when the integration is successfully deployed.
+
+
+== Test Microservice to File Integration
+
+In this section, you test the integration.
+
+=== Interpret JSON Output from Microservice
+
+. In the left-hand panel of the Fuse Online console, click *Integrations*.
+. Select the *Microservice to File* integration.
+. Validate that the *Microservice to File* integration is active.
+. In a separate web browser window, access the Coolstore product catalog microservice using the URL identified earlier from the confirmation email.
+. Test the `/products` API operation.
+. Note the response in JSON format, displayed in the web browser window.
++
+****
+*Question:* Can you identify the individual products listed, as well as their attributes?
+****
+
+=== Validate Data Quality
+
+. Using an FTP client, or a web-based console if available, log in and navigate to the root directory of your web hosting service account.
+. Navigate to the `/htdocs` subdirectory.
+. Locate and download the `product-catalog.txt` file to your local PC.
+. Locate the `product-catalog.txt` file on your local PC and open it using your favorite text editor.
+. Compare the contents of the `product-catalog.txt` file with the response from the test of the `/products` API operation of the Coolstore product catalog microservice using the Swagger user interface of the microservice.
++
+****
+*Questions:*
+
+* Do the contents of the flat file differ from the JSON-based response from the earlier API operation test?
+* What are your conclusions regarding the function of the Microservice to File integration?
+****
+
+. On the *Integration Summary* screen of the Fuse Online console, explore both the *Activity* and *Metrics* tabs:
++
+image::images/integration-summary-metrics.png[]
+* Additional step activity are logged and made available through the *Activity* tab, while the uptime, total number of messages, and errors are listed on the *Metrics* tab.
+
+=== Test Data Transfer
+
+. Using the FTP client, or a web-based console if available, delete the `product-catalog.txt` files from the remote web host and the local PC.
+. After a minute or so, list the contents of the `/htdocs` subdirectory.
+. Verify that the `product-catalog.txt` file appears again.
++
+****
+*Question:* If the Microservice to File integration is not active, will this file appear?
+****
+. Locate and download the `product-catalog.txt` file to your local PC.
+. Locate the `product-catalog.txt` file on your local PC and open it using your favorite text editor.
+. Compare the contents of the `product-catalog.txt` file with the JSON-based response from the Coolstore product catalog microservice, which is displayed in the web browser window.
++
+****
+*Question:* Does this validate that the Microservice to File integration achieves its objective of real-time data synchronization for the benefit of resellers of Coolstore products?
+****
+
+== Design Integrations to Enable Microservice Operations (Optional)
+
+In this section, you implement the rest of the API operations of the Coolstore product catalog microservice. In the event that you choose to use connectors apart from HTTP and FTP, you are encouraged to research and experiment with the use of those connectors. Other connectors that you may consider using for this section of the lab are introduced subsequently in other labs, so feel free to revisit this lab section to improve your integration design, once you have completed a certain lab and learned the use of a new connector.
+
+. Access the Swagger user interface of the Coolstore product catalog microservice, using the URL provided in the confirmation email.
+. Test the various API operations of the microservice through the use of the Swagger user interface, taking note of the parameters and responses.
+. Provide an architecture design, with description, of each new Fuse Online integration that supports a distinct API operation of the Coolstore product catalog microservice.
+* Every integration must map to a distinct endpoint of the Coolstore product catalog microservice, thereby enabling a business operation--for example, the Microservice to File integration performs a retrieval of the current product catalog.
++
+****
+*Questions:*
+
+* Should all API operations of this microservice be implemented using Fuse Online integrations, or is there a better alternative for some API operations?
+* Does this hybrid integration approach suit any business use case that you have encountered?
+****
+
+== Import and Export Integration
+
+In this section, you back up your integration and then import and retest it.
+
+. From the Fuse Online console, select *Integrations* from the left-hand panel.
+. Select the *Microservice to File* integration.
+. Click the *Export* button at the top right-hand corner of the Fuse Online console.
+. Save the archive file.
+. Using your favorite file archival tool, unzip the archive file.
+. Analyze the contents of the JSON files that were extracted from the archive file.
++
+****
+*Question:* Can you recognize the configuration for the Microservice to File integration?
+****
++
+. Select *Integrations* from the left-hand panel.
+. Locate the *Microservice to File* integration and click image:images/more_options_icon.png[] (*More Options*) to the right of the green check box, and then select *Delete*.
+. Click *OK*.
+. Click the *Import* button at the top right-hand corner of the Fuse Online console.
+. Click *Browse*:
++
+image::images/import-integration.png[]
+
+. Select the archive file that you exported earlier and click *Open*.
+* The *Integrations* screen is displayed.
+. Click image:images/more_options_icon.png[] (*More Options*) next to the green check box and select *Publish*.
+. Once the status of the Microservice to File integration becomes *Published*, repeat the earlier tests in this lab.
++
+****
+*Question:* Can you validate that the behavior of the Microservice to File integration remains the same even after import?
+****
++
+[NOTE]
+With the Fuse Online Technology Preview release, exactly one integration at a time can be active--that is, in a *Published* state. Although you can create a second Fuse Online integration, you cannot publish it while another integration is active. As a good housekeeping practice, it is recommended that you unpublish any integration that you no longer wish to test.
+
+== Clean Up Integration
+
+In this section, you clean up the integration.
+
+. In the left-hand panel, click *Integrations*.
+. Locate the *Microservice to File* integration and click image:images/more_options_icon.png[] (*More Options*) to the right of the green check box, and then select *Unpublish*.
+. Click *OK*.
+* This deactivates the integration.
+* If you are using the Fuse Online Technology Preview release, other integrations can now be published and tested.
++
+[NOTE]
+The next few steps are optional. Use them only when you are certain that the integration will never be required again.
+
+. Locate the *Microservice to File* integration and click image:images/more_options_icon.png[] (*More Options*), and then select *Delete Integration*.
+. Click *OK* at the bottom of the summary panel.
+
+You have completed, tested, and cleaned up your integration in Fuse Online.
+
+ifdef::showscript[]
+
+== Monitor Camel Route Within Integration
+
+In this section, you analyze the statistics of the Camel route that the Microservice to File integration is built on.
+
+As the underlying technology for Fuse Online integration are Apache Camel routes, it is useful to access the Hawtio console, embedded in every integration, in order to monitor the Camel routes and inflight exchange messages.
+
+. From the OpenShift Container Platform web console, select *Overview* from the left-hand panel.
+. Click the pod icon next to the Microservice to File deployment:
++
+image::images/pod-integration.png[]
++
+[NOTE]
+====
+Each Fuse Online integration is containerized in its own OpenShift pod.
+Having access to the pod logs for each integration helps in diagnosing the status and issues regarding the use of the integration.
+====
++
+. Click the *Open Java Console* link:
++
+image::images/open-java-console.png[]
+* This launches the Hawtio console that monitors the activity and performance statistics of the Apache Camel route that forms the structure of the integration.
+
+. Explore the console and take note of the various statistics for the Camel route that belongs to the Microservice to File integration.
+. Select the *Attributes* tab on the Hawtio console:
++
+image::images/attributes-java-console.png[]
+* Note the number of inflight exchanges, delta processing time, last processing time, and minimum processing times.
+. Select the *Trace* tab and then click *Start tracing* to activate tracing on the screen displayed:
++
+image::images/trace-java-console.png[]
+
+. Observe the trace statistics and the inflight exchange activity.
++
+****
+*Question:* Are you able to explain these statistics meaningfully to a business stakeholder who needs to understand the performance of the solution?
+****
+
+endif::showscript[]

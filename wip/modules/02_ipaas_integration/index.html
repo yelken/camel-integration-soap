@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Fuse Online Foundations - Module 2 - Integrations</title>
+
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+		<!-- Team CSS -->
+		<style id="global-css-output" type="text/css">
+			@import url("https://s3.amazonaws.com/static.slid.es/fonts/overpass2/overpass2.css");
+.reveal {
+  
+
+  /*fix icon inversion*/
+
+}
+.reveal svg,
+.reveal text,
+.reveal tspan,
+.reveal svg text {
+  font-family: "Overpass 2", Overpass, sans-serif !important;
+  color: currentcolor;
+  fill: currentcolor;
+}
+.reveal .sl-block {
+  color: #354045;
+  fill: currentcolor;
+}
+.reveal .sl-block svg {
+  color: currentcolor;
+}
+.reveal .has-dark-background,
+.reveal .has-dark-background > .sl-block {
+  color: white;
+  fill: currentcolor;
+}
+.reveal section > .sl-block .redhat-logo .logotext {
+  fill: #000000;
+}
+.reveal .has-dark-background > .sl-block .redhat-logo .logotext {
+  fill: #ffffff;
+}
+.reveal .has-dark-background > .sl-block[data-block-type="image"] {
+  color: #ffffff;
+}
+.reveal [fill="none"] {
+  fill: none !important;
+}
+.reveal [fill="#a30000"] {
+  fill: #aa0000 !important;
+}
+.reveal [fill="#cc2029"],
+.reveal [fill="#cb2027"],
+.reveal [fill="#c00"] {
+  fill: #cc0000 !important;
+}
+.reveal [fill="#fff"] {
+  fill: #ffffff !important;
+}
+.reveal [fill="#6d6e70"] {
+  fill: #6d6e70 !important;
+}
+.reveal [fill="#231f20"] {
+  fill: currentcolor !important;
+}
+.reveal [fill="#efab1f"] {
+  fill: #efab1f !important;
+}
+.reveal [fill="#92d400"] {
+  fill: #92d400 !important;
+}
+.reveal .has-dark-background [fill="#6d6e70"] {
+  fill: #266272 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #555555 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #333333 !important;
+}
+.reveal .has-dark-background [stroke="#231f20"] {
+  stroke: currentcolor;
+}
+.reveal [data-inline-svg="true"] img {
+  display: none;
+}
+
+		</style>
+
+		<!-- Theme CSS -->
+		<style id="theme-css-output" type="text/css">
+			@import url(//overpassmonotest-30e2.kxcdn.com/overpass-mono.css);
+.reveal {
+  
+
+  /*
+.sl-block[data-block-type="snippet"],
+.sl-block[data-block-type="image"] 
+{
+text,
+tspan,
+polygon,
+path,
+rect,
+ellipse {
+  fill: currentcolor;
+}
+}
+*/
+
+  /*slide-default*/
+
+  /*Custom Ordered Lists */
+
+  /*helpers*/
+
+  /*fixing left aligned text*/
+
+  /*h1,h2,h3,h4,h5,h6{&::first-letter{margin-left:-.09em;}}*/
+
+  /*icon absolute brute-fix*/
+
+  /*
+.present .icon.stroked path.long{ stroke-width: 2px ;
+-webkit-animation: icon-animation-long 3.5s 1.5s 1;
+-moz-animation:    icon-animation-long 3.5s 1.5s 1;
+animation:         icon-animation-long 3.5s 1.5s 1;
+}*/
+
+  /*
+.present .icon.stroked path.short{
+-webkit-animation: icon-animation-short 3.5s 1.5s 1;
+-moz-animation:    icon-animation-short 3.5s 1.5s 1;
+animation:         icon-animation-short 3.5s 1.5s 1;
+}*/
+
+  /*controls logic*/
+
+  /*animated logos with complex svg segments*/
+
+  /*transitions*/
+
+  /*logos svg files that contain inverted path alternates */
+
+  /* call to action */
+
+  /* tables in snippets.... the devil */
+
+  /* tables in text */
+
+  /*testimonial snippet */
+
+  /*for inverting images*/
+
+  /**/
+
+  /*code blocks*/
+
+  /* round line arrows */
+
+  /*fix icon inversion*/
+
+  /*body:hover .corner svg{transform: translate(30%, 30%)}*/
+
+}
+.reveal.reveal[role="application"] > .backgrounds > .slide-background:not(.stack):first-child,
+.reveal.reveal[role="application"] > .backgrounds > .stack:first-child > .slide-background:first-child,
+.reveal.reveal[role="application"] .slides > .pdf-page:not(.stack):first-child .slide-background,
+.reveal.reveal[role="application"] .slides > .stack:first-child > .pdf-page:first-child .slide-background {
+  background-color: #900;
+  color: #fff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-image: linear-gradient(-45deg, #8e0000 20%, #820000 20%, #990000 85%, #890000 85%);
+  min-height: 100vh;
+}
+.reveal.reveal[role="application"] > .backgrounds > .slide-background:not(.stack):first-child.has-light-background,
+.reveal.reveal[role="application"] > .backgrounds > .stack:first-child > .slide-background:first-child.has-light-background,
+.reveal.reveal[role="application"] .slides > .pdf-page:not(.stack):first-child .slide-background.has-light-background,
+.reveal.reveal[role="application"] .slides > .stack:first-child > .pdf-page:first-child .slide-background.has-light-background {
+  background-image: none;
+}
+.reveal.reveal .slides > .section:first-child,
+.reveal.reveal[role="application"] > .slides > .section:first-child .sl-block {
+  color: #fff;
+}
+.reveal .name {
+  white-space: nowrap;
+}
+.reveal .reveal,
+.reveal .sl-block,
+.reveal .sl-block-content,
+.reveal .sl-block-content div,
+.reveal .sl-block-content p,
+.reveal .sl-block-content h1,
+.reveal .sl-block-content h2,
+.reveal .sl-block-content h3,
+.reveal .sl-block-content h4 {
+  font-family: "Overpass 2", overpass, "Hiragino Kaku Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", sans-serif;
+}
+.reveal .future .sl-block-content,
+.reveal .past .sl-block-content {
+  transition: none !important;
+}
+.reveal section,
+.reveal.reveal .has-dark-background,
+.reveal section.background-shade-dark {
+  color: #fff;
+}
+.reveal.reveal .has-dark-background a {
+  color: #eee;
+}
+.reveal.reveal .has-dark-background a:hover {
+  color: #fff;
+}
+.reveal .backgrounds {
+  background: #f3f4f4;
+}
+.reveal .slide-background {
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.reveal .slide-background.has-light-background {
+  /*background-image: url(//s3.amazonaws.com/media-p.slid.es/uploads/team-32/images/1297460/standard-background.svg);*/
+
+}
+.reveal .backgrounds .paint-it-red {
+  background-color: #c00 !important;
+  -moz-background-blend-mode: multiply;
+  -webkit-background-blend-mode: multiply;
+  -ms-background-blend-mode: multiply;
+  background-blend-mode: multiply;
+}
+.reveal .paint-it-red {
+  color: #fff;
+}
+.reveal .has-dark-background .icon.stroked path,
+.reveal section.background-shade-dark .icon.stroked path,
+.reveal section.light-foreground .icon.stroked path {
+  stroke: #fff !important;
+}
+.reveal .has-dark-background .redhat-product-logotype path,
+.reveal section.background-shade-dark .redhat-product-logotype path,
+.reveal section.light-foreground .redhat-product-logotype path {
+  fill: #ffffff;
+}
+.reveal .has-dark-background text.logotext,
+.reveal section.background-shade-dark text.logotext,
+.reveal section.light-foreground text.logotext,
+.reveal .has-dark-background .logotext text,
+.reveal section.background-shade-dark .logotext text,
+.reveal section.light-foreground .logotext text,
+.reveal .has-dark-background path.logotext,
+.reveal section.background-shade-dark path.logotext,
+.reveal section.light-foreground path.logotext,
+.reveal .has-dark-background path.logotype,
+.reveal section.background-shade-dark path.logotype,
+.reveal section.light-foreground path.logotype,
+.reveal .has-dark-background .logotext path,
+.reveal section.background-shade-dark .logotext path,
+.reveal section.light-foreground .logotext path {
+  fill: #fff !important;
+}
+.reveal .has-dark-background .closing-logo .logotext,
+.reveal section.background-shade-dark .closing-logo .logotext,
+.reveal section.light-foreground .closing-logo .logotext,
+.reveal .has-dark-background .redhat-logo .logotext,
+.reveal section.background-shade-dark .redhat-logo .logotext,
+.reveal section.light-foreground .redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal .has-light-background .icon.stroked path {
+  stroke: currentcolor;
+}
+.reveal .has-light-background .redhat-logo .logotext {
+  fill: #000000 !important;
+}
+.reveal .sl-block-content ol li {
+  position: relative;
+  padding-bottom: .5em;
+}
+.reveal .sl-block-content ol li > p:first-child {
+  margin: 0;
+}
+.reveal .sl-block-content ol > li::before {
+  margin-left: -2.5em;
+}
+.reveal .sl-block-content > ol > li:before {
+  float: left;
+  text-align: center;
+  box-shadow: inset 0 0 0 .1em;
+  border-radius: 50%;
+}
+.reveal .sl-block-content ol {
+  counter-reset: section;
+  list-style-type: none;
+  margin: 0 0 0 2.5em;
+  display: block;
+}
+.reveal .sl-block-content ol ol {
+  margin-top: .5em;
+}
+.reveal .sl-block-content ol > li:before {
+  font-weight: 400;
+  display: inline-block;
+  width: 1.75em;
+  height: 1.75em;
+  line-height: 1.75em;
+  text-align: center;
+  letter-spacing: 0;
+  font-size: .75em;
+  margin: 0 0.75em 0 -2.5em;
+  counter-increment: section;
+  content: counters(section, ".") " ";
+  white-space: nowrap;
+}
+.reveal .sl-block-content > ol > li ol li:before {
+  opacity: .5;
+  text-align: left;
+  box-shadow: none;
+  letter-spacing: .1em;
+}
+.reveal .sl-block-content > ol > li > ol > li > ol > li:before {
+  width: 4em;
+  left: -3em;
+  font-size: .75em;
+}
+.reveal .has-dark-background .sl-block-content > ol > li:before {
+  color: currentcolor;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 0.2em rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+}
+.reveal .sl-block-content > ol ol ol li:before {
+  opacity: 1;
+  font-size: .55em !important;
+  width: 3.5em !important;
+}
+.reveal .sl-block-content > ol ol ol {
+  margin-left: 1.5em !important;
+}
+.reveal .uppercase {
+  text-transform: uppercase;
+}
+.reveal .sl-block[data-block-type="text"] > .initial h1,
+.reveal .sl-block[data-block-type="text"] > .initial h2,
+.reveal .sl-block[data-block-type="text"] > .initial h3 {
+  text-transform: initial;
+}
+.reveal .force-mono text,
+.reveal .force-mono tspan,
+.reveal .force-mono polygon,
+.reveal .force-mono path,
+.reveal .force-mono rect,
+.reveal .force-mono ellipse {
+  fill: currentcolor !important;
+}
+.reveal .force-red .stroked path {
+  stroke: #c00;
+}
+.reveal .force-red,
+.reveal .force-red text,
+.reveal .force-red tspan,
+.reveal .force-red polygon,
+.reveal .force-red path,
+.reveal .force-red rect,
+.reveal .force-red ellipse {
+  color: #c00;
+  fill: currentcolor !important;
+}
+.reveal .force-red .stroked {
+  fill: none;
+  stroke: #cc0000;
+}
+.reveal .background-shade-dark .sl-block {
+  color: #fff;
+}
+.reveal .dark-foreground text.logotext,
+.reveal section.background-shade-light text.logotext,
+.reveal section.dark-foreground text.logotext,
+.reveal .dark-foreground .logotext text,
+.reveal section.background-shade-light .logotext text,
+.reveal section.dark-foreground .logotext text,
+.reveal .dark-foreground path.logotext,
+.reveal section.background-shade-light path.logotext,
+.reveal section.dark-foreground path.logotext,
+.reveal .dark-foreground path.logotype,
+.reveal section.background-shade-light path.logotype,
+.reveal section.dark-foreground path.logotype,
+.reveal .dark-foreground .logotext path,
+.reveal section.background-shade-light .logotext path,
+.reveal section.dark-foreground .logotext path,
+.reveal .dark-foreground .product,
+.reveal section.background-shade-light .product,
+.reveal section.dark-foreground .product {
+  fill: currentcolor !important;
+}
+.reveal .dark-foreground .redhat-logo .logotext,
+.reveal section.background-shade-light .redhat-logo .logotext,
+.reveal section.dark-foreground .redhat-logo .logotext {
+  fill: currentcolor !important;
+}
+.reveal .slide-background.background-shade-dark:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(40, 40, 40, 0.8);
+}
+.reveal .slide-background.background-shade-light:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.reveal .slides section {
+  text-align: left;
+}
+.reveal .slides section h1 {
+  line-height: 1em;
+  font-weight: 700 ;
+  font-size: 3em ;
+}
+.reveal .slides section h2 {
+  font-size: 2em;
+  font-weight: 400 ;
+  line-height: 1.15em;
+}
+.reveal .slides section h3 {
+  font-weight: 700 ;
+  font-size: 1em ;
+  line-height: 1.25em;
+}
+.reveal .slides section p {
+  margin-bottom: .5em;
+}
+.reveal .slides section blockquote {
+  font-style: normal;
+  box-shadow: none;
+}
+.reveal .progress {
+  background-color: transparent;
+}
+.reveal .progress span {
+  background-color: #5e6a71;
+}
+.reveal .absolute-element svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.reveal .icon.stroked {
+  width: 282px;
+  height: 282px;
+}
+.reveal .icon.stroked.icon-arrow path {
+  stroke-width: 4px !important;
+}
+.reveal .icon.stroked path {
+  fill: none;
+  stroke-width: 1.5px;
+  transition-delay: .5s !important;
+  stroke-dashoffset: 0;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: currentcolor;
+}
+.reveal .icon.stroked path.long {
+  stroke-dasharray: 420,420;
+  transition: 2.5s all ease;
+}
+.reveal .icon.stroked path.longer {
+  stroke-dasharray: 512,512;
+  transition: 2.5s all ease;
+}
+.reveal .icon.stroked path.short {
+  stroke-dasharray: 90,90;
+  transition: 5s all ease;
+}
+.reveal .icon.stroked path.shortest {
+  stroke-dasharray: 5,5;
+  transition: 2s all ease;
+}
+.reveal .icon.stroked path.round {
+  stroke-linecap: round ;
+  stroke-linejoin: round ;
+}
+.reveal .icon.stroked path.virtual {
+  transition: .5s all ease;
+  stroke-dasharray: 1.1, 3;
+  stroke-linecap: round ;
+}
+.reveal .icon.stroked path.dashed {
+  stroke-dasharray: 3, 3;
+}
+.reveal .icon.stroked path.hand {
+  stroke-linecap: round;
+}
+.reveal .present path.virtual {
+  -webkit-animation: virtual-outline 60s infinite linear;
+  -moz-animation: virtual-outline 60s infinite linear;
+  animation: virtual-outline 60s infinite linear;
+}
+@-webkit-keyframes virtual-outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 512;
+  }
+}
+@-moz-keyframes virtual-outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 512;
+  }
+}
+@keyframes virtual-outline {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 512;
+  }
+}
+.reveal a {
+  box-shadow: 0 0.066666em;
+}
+.reveal .overview section.present {
+  border: 12px solid white !important;
+  box-shadow: 0 0 0 10px #ffffff, inset 0 0 0 6px rgba(0, 0, 0, 0.2);
+}
+.reveal .rh-pattern {
+  width: 256px;
+  height: 256px;
+}
+.reveal .rh-pattern path {
+  transition: all .5s ease;
+}
+.reveal .future .rh-pattern path {
+  stroke-dasharray: 0, 85 !important;
+}
+.reveal .present .rh-pattern path {
+  stroke-dasharray: 80, 0 !important;
+}
+.reveal div[data-block-type="snippet"] .sl-block-content > svg,
+.reveal div[data-block-type="snippet"] > .sl-block-content > svg,
+.reveal div[data-block-type="snippet"] .icon,
+.reveal div[data-block-type="snippet"] .product {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+.reveal div[data-block-type="snippet"] .sl-block-content > svg:not(:last-child) {
+  position: relative;
+}
+.reveal div[data-block-type="snippet"] .icon {
+  top: -15%;
+  right: -15%;
+  bottom: -15%;
+  left: -15%;
+  width: 130%;
+  height: 130%;
+}
+.reveal div[data-block-type="snippet"] {
+  min-width: 60px !important;
+}
+.reveal div[data-block-type="text"] {
+  font-size: 20px;
+}
+.reveal .triangle-element,
+.reveal .triangle-element * {
+  user-select: none;
+}
+.reveal .has-light-background .closing-logo.logotype path {
+  fill: black !important;
+}
+@-webkit-keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+@-moz-keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+@-o-keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+@keyframes closing-animation {
+  0% {
+    -webkit-transform: scale(4) translate(40%);
+    transform: scale(4) translate(40%);
+    opacity: 0;
+  }
+  80% {
+    -webkit-transform: scale(1) translate(30%);
+    transform: scale(1) translate(30%);
+  }
+}
+.reveal .present .closing-logo.icon {
+  -webkit-animation: closing-animation 1.5s 1;
+  -moz-animation: closing-animation 1.5s 1;
+  -o-animation: closing-animation 1.5s 1;
+  animation: closing-animation 1.5s 1;
+}
+.reveal .present .closing-logo.logotype {
+  -webkit-animation: closing-text-animation 1.8s 1;
+  -moz-animation: closing-text-animation 1.8s 1;
+  -o-animation: closing-text-animation 1.8s 1;
+  animation: closing-text-animation 1.8s 1;
+}
+@-webkit-keyframes closing-text-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+  }
+  70% {
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+@-moz-keyframes closing-text-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+  }
+  70% {
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+@keyframes closing-text-animation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+  }
+  70% {
+    -webkit-transform: translate(-10%);
+    transform: translate(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    -webkit-transform: none;
+  }
+}
+.reveal .brand-pattern-paths path,
+.reveal .pattern-path {
+  stroke-width: 1;
+  fill: none;
+}
+.reveal .brand-pattern-paths path {
+  fill: none !important;
+}
+.reveal pattern {
+  patterntransform: scale(2) !important;
+}
+.reveal pattern.normal use {
+  stroke: currentcolor;
+  fill: none;
+}
+.reveal pattern.light use {
+  stroke: #fff !important;
+  fill: none;
+}
+.reveal pattern.dark use {
+  stroke: #000 !important;
+  fill: none;
+}
+.reveal .brand-pattern {
+  min-width: 40px;
+  min-height: 40px;
+  position: absolute;
+  top: 0 ;
+  left: 0 ;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+.reveal .brand-pattern path,
+.reveal .brand-pattern rect {
+  width: 100% !important;
+  height: 100%;
+}
+.reveal .brand-pattern.corporate {
+  fill: url(#pattern-corporate);
+}
+.reveal #pattern-corporate-2 use {
+  stroke: #dd0000;
+}
+.reveal #pattern-corporate use {
+  stroke: #cc0000;
+}
+.reveal section,
+.reveal .slide-background {
+  -webkit-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.reveal .slides > section.transition-slide,
+.reveal .slides > section.transition-slide + section.future,
+.reveal .slides > section.transition-slide + section.present,
+.reveal .backgrounds > .slide-background.transition-slide,
+.reveal .backgrounds > .slide-background.transition-slide + .slide-background.future,
+.reveal .backgrounds > .slide-background.transition-slide + .slide-background.present {
+  transition: all 1s ease  !important;
+}
+.reveal .backgrounds > .slide-background.transition-slide {
+  opacity: 1 ;
+}
+.reveal .backgrounds > .slide-background.transition-slide.past {
+  z-index: 99;
+  -webkit-transform: translate(-100%, 0);
+  -ms-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
+}
+.reveal .backgrounds > .slide-background.transition-slide.future,
+.reveal .backgrounds > .slide-background.transition-slide.present + .slide-background.future {
+  -webkit-transform: translate(100%, 0);
+  -ms-transform: translate(100%, 0);
+  transform: translate(100%, 0);
+}
+.reveal .slides > section.transition-slide.past {
+  z-index: 99;
+  -webkit-transform: translate(-150%, 0);
+  -ms-transform: translate(-150%, 0);
+  transform: translate(-150%, 0);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-slide.future,
+.reveal .slides > section.transition-slide.future + section {
+  -webkit-transform: translate(150%, 0);
+  -ms-transform: translate(150%, 0);
+  transform: translate(150%, 0);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-slide-up,
+.reveal .slides > section.transition-slide-up + section.future,
+.reveal .slides > section.transition-slide-up + section.present,
+.reveal .backgrounds > .slide-background.transition-slide-up,
+.reveal .backgrounds > .slide-background.transition-slide-up + .slide-background.future .backgrounds > .slide-background.transition-slide-up + .slide-background.present {
+  transition: all 1s ease  !important;
+}
+.reveal .backgrounds > .slide-background.transition-slide-up {
+  opacity: 1 ;
+}
+.reveal .backgrounds > .slide-background.transition-slide-up.past {
+  z-index: 99;
+  -webkit-transform: translate(0, -100%);
+  -ms-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+}
+.reveal .backgrounds > .slide-background.transition-slide-up.future,
+.reveal .backgrounds > .slide-background.transition-slide-up.present + .slide-background.future {
+  -webkit-transform: translate(0, 100%);
+  -ms-transform: translate(0, 100%);
+  transform: translate(0, 100%);
+}
+.reveal .slides > section.transition-slide-up.past {
+  z-index: 99;
+  -webkit-transform: translate(0, -150%);
+  -ms-transform: translate(0, -150%);
+  transform: translate(0, -150%);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-slide-up.future,
+.reveal .slides > section.transition-slide-up.present + section {
+  -webkit-transform: translate(0, 150%);
+  -ms-transform: translate(0, 150%);
+  transform: translate(0, 150%);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-zoom-in,
+.reveal .slides > section.transition-zoom-in + section.future,
+.reveal .slides > section.transition-zoom-in + section.present,
+.reveal .backgrounds > .slide-background.transition-zoom-in,
+.reveal .backgrounds > .slide-background.transition-zoom-in + .slide-background.future .backgrounds > .slide-background.transition-zoom-in + .slide-background.present {
+  -webkit-transition: all 1s ease  !important;
+  -moz-transition: all 1s ease  !important;
+  transition: all 1s ease  !important;
+}
+.reveal .backgrounds > .slide-background.transition-zoom-in.past {
+  opacity: 0 !important;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(0.1 0.5);
+  transform: scale(1.5);
+}
+.reveal .backgrounds > .slide-background.transition-zoom-in.future,
+.reveal .backgrounds > .slide-background.transition-zoom-in.present + .slide-background.future {
+  opacity: 0 !important;
+  -webkit-transform: scale(0.01);
+  -ms-transform: scale(0.01);
+  transform: scale(0.01);
+}
+.reveal .past {
+  z-index: -1;
+  opacity: 0 !important;
+}
+.reveal .present + .slide-background.future {
+  z-index: 99;
+}
+.reveal .slides > section.transition-zoom-in.past {
+  z-index: 99;
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  visibility: hidden;
+}
+.reveal .slides > section.transition-zoom-in.future {
+  -webkit-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  visibility: hidden;
+}
+@-webkit-keyframes icon-animation-long {
+  0% {
+    stroke-dashoffset: 420;
+    stroke-width: .5px;
+  }
+}
+@-moz-keyframes icon-animation-long {
+  0% {
+    stroke-dashoffset: 420;
+    stroke-width: .5px;
+  }
+}
+@keyframes icon-animation-long {
+  0% {
+    stroke-dashoffset: 420;
+    stroke-width: .5px;
+  }
+}
+@-webkit-keyframes icon-animation-short {
+  0% {
+    stroke-dashoffset: 90;
+  }
+}
+@-moz-keyframes icon-animation-short {
+  0% {
+    stroke-dashoffset: 90;
+  }
+}
+@keyframes icon-animation-short {
+  0% {
+    stroke-dashoffset: 90;
+  }
+}
+.reveal .present .animate.icon.stroked path,
+.reveal .present .animate .icon.stroked path,
+.reveal .fragment .icon.stroked path {
+  animation: 0;
+  -moz-animation: 0;
+  -webkit-animation: 0;
+  display: none;
+}
+.reveal .present .animate.icon.stroked path.long,
+.reveal .present .animate .icon.stroked path.long,
+.reveal .fragment.visible .icon.stroked path.long {
+  display: block;
+  stroke-width: 2px ;
+  -webkit-animation: icon-animation-long 3.5s 0.5s 1;
+  -moz-animation: icon-animation-long 3.5s 0.5s 1;
+  animation: icon-animation-long 3.5s 0.5s 1;
+}
+.reveal .present .animate.icon.stroked path.short,
+.reveal .present .animate .icon.stroked path.short,
+.reveal .fragment.visible .icon.stroked path.short {
+  display: block;
+  -webkit-animation: icon-animation-short 3.5s 0.5s 1 !important;
+  -moz-animation: icon-animation-short 3.5s 0.5s 1 !important;
+  animation: icon-animation-short 3.5s 0.5s 1 !important;
+}
+.reveal .triangle-element {
+  transition: all 0.4s cubic-bezier(0.21, 0.9, 0.55, 1) 5s;
+}
+.reveal.reveal:hover .triangle-element {
+  transition: all 1s cubic-bezier(0.21, 0.9, 0.55, 1.16) 0s !important;
+  top: 100% !important;
+  left: 100% !important;
+  opacity: 0.95;
+}
+.reveal .has-dark-background .only-dark {
+  display: none;
+}
+.reveal .has-light-background .only-light {
+  display: none;
+}
+.reveal .thinner .icon.stroked path {
+  stroke-width: 1px !important;
+}
+.reveal .thinnest .icon.stroked path {
+  stroke-width: 0.05em !important;
+}
+.reveal .thicker .icon.stroked path {
+  stroke-width: 3px !important;
+}
+.reveal .thickest .icon.stroked path {
+  stroke-width: 4px !important;
+}
+.reveal .angle {
+  -ms-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.reveal .rangle {
+  -ms-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.reveal .sl-block > .vertical {
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.reveal .skewed {
+  transition: all 1s cubic-bezier(0.13, 0.81, 0.08, 1);
+  -moz-transform: skew(-45deg, 0);
+  -ms-transform: skew(-45deg, 0);
+  -webkit-transform: skew(-45deg, 0);
+  transform: skew(-45deg, 0);
+}
+.reveal .future .skewed {
+  margin-left: -800%;
+  opacity: 0;
+}
+.reveal .past .skewed {
+  margin-left: 800%;
+  opacity: 0;
+}
+.reveal .item-label,
+.reveal .item-box {
+  letter-spacing: 0em;
+  font-weight: 500;
+}
+.reveal .epic-content-box {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.reveal .has-dark-background .epic-content-box {
+  box-shadow: inset 0 0 0.51em rgba(0, 0, 0, 0.25), 0 0.05em 0.05em rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.reveal .has-light-background .epic-content-box {
+  box-shadow: inset 0 0 0.2em rgba(255, 255, 255, 0.5), 0 0.06666em 0.555em 0 rgba(0, 0, 0, 0.12);
+}
+.reveal .controls {
+  bottom: 1%;
+  right: 1%;
+}
+.reveal .controls button {
+  opacity: 0;
+}
+.reveal .controls button.enabled {
+  opacity: 1;
+}
+.reveal .controls {
+  opacity: 0 !important;
+  transition: opacity .5s ease 4.8s, transform .5s ease 4.8s;
+  transform: scale(0.4);
+}
+.reveal.reveal:hover .controls {
+  transform: scale(1);
+  opacity: 1 !important;
+  transition: opacity .5s ease 0s, transform .5s ease 0s;
+}
+.reveal .backgrounds {
+  transition-property: height;
+  transition-duration: 1s;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+.reveal .complex-logo {
+  min-height: 70px;
+  min-width: 70px;
+  width: 100%;
+}
+.reveal .complex-logo,
+.reveal .complex-logo svg,
+.reveal .complex-logo > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.reveal .complex-logo > div.line-icon,
+.reveal .complex-logo svg > div.line-icon,
+.reveal .complex-logo > div > div.line-icon,
+.reveal .complex-logo > div.logomark,
+.reveal .complex-logo svg > div.logomark,
+.reveal .complex-logo > div > div.logomark {
+  transform-origin: 12% 50%;
+}
+.reveal .animated .complex-logo div {
+  transition: all .5s ease;
+}
+.reveal .animated .complex-logo div.line-icon {
+  transition-delay: 2s;
+}
+.reveal .animated .complex-logo div.line-icon path {
+  transition: all 1s ease .52s;
+  stroke-dasharray: 100 ,10;
+}
+.reveal .animated .complex-logo div.event-name {
+  transition-delay: 1s;
+}
+.reveal .animated .complex-logo div.location {
+  transition-delay: 1.4s;
+}
+.reveal .future .animated .complex-logo > div {
+  transition: none;
+}
+.reveal .future .animated .complex-logo > div.line-icon path {
+  stroke-dasharray: 0 ,100;
+  transition: none;
+}
+.reveal .future .animated .complex-logo {
+  /*.line-icon{transform:rotate(30deg); opacity:0;}*/
+
+}
+.reveal .future .animated .complex-logo .logomark {
+  transform: translate(0, -20%);
+}
+.reveal .future .animated .complex-logo .location {
+  transform: translate(0, 0.5em);
+  opacity: 0;
+}
+.reveal .future .animated .complex-logo .event-name {
+  opacity: 0;
+  transform: translate(-0.6em, 0);
+}
+.reveal .lowercase {
+  text-transform: lowercase;
+}
+.reveal .pop-in.fragment {
+  -webkit-transform: scale(0.2);
+  -moz-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  transform: scale(0.2);
+  -webkit-transition: 2s ease 0.25s;
+  -moz-transition: 2s ease 0.25s;
+  -ms-transition: 2s ease 0.25s;
+  transition: 2s ease 0.25s;
+  -webkit-animation-delay: 0.66s;
+  -moz-animation-delay: 0.66s;
+  -ms-animation-delay: 0.66s;
+  animation-delay: 0.66s;
+}
+.reveal .pop-in.fragment.visible {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+.reveal .pop-in.fragment.current-fragment {
+  color: #c22;
+}
+.reveal .grow-width {
+  -webkit-transition: all 0.5s ease 0.2s;
+  -moz-transition: all 0.5s ease 0.2s;
+  -o-transition: all 0.5s ease 0.2s;
+  -ms-transition: all 0.5s ease 0.2s;
+  transition: all 0.5s ease 0.2s;
+}
+.reveal .future .grow-width {
+  width: 0% !important;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  -ms-transition: none;
+  transition: none;
+}
+.reveal .stampit {
+  -webkit-transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+  -moz-transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+  -ms-transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+  transition: all 1s cubic-bezier(0.79, 0.53, 0.46, 1.3) 1s;
+}
+.reveal .future .stampit {
+  -webkit-transform: rotate(-12deg) scale(2);
+  -moz-transform: rotate(-12deg) scale(2);
+  -ms-transform: rotate(-12deg) scale(2);
+  transform: rotate(-12deg) scale(2);
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  transition: none;
+  opacity: 0;
+}
+.reveal .headshot img {
+  border-radius: 50%;
+  border: 4px solid #c00 !important;
+}
+.reveal .condensed {
+  letter-spacing: 0.02em;
+}
+.reveal .condensed li {
+  margin-bottom: 1em ;
+}
+.reveal .has-light-background .sl-block .has-dark-background > svg.redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal .has-light-background .sl-block .reversed.redhat-logo .logotext,
+.reveal .has-light-background .sl-block .reversed .redhat-logo .logotext,
+.reveal .has-light-background .sl-block .has-dark-background > .redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal .has-dark-background .sl-block .reversed.redhat-logo .logotext,
+.reveal .has-dark-background .sl-block .reversed .redhat-logo .logotext,
+.reveal .has-dark-background .sl-block .has-light-background > .redhat-logo .logotext {
+  fill: #000000 !important;
+}
+.reveal .has-dark-background .has-light-background .logo .only-dark path,
+.reveal .has-light-background .mono.redhat-logo path {
+  fill: #000000 !important;
+}
+.reveal .has-dark-background .mono.redhat-logo path {
+  fill: #ffffff;
+}
+.reveal .has-dark-background .logo .only-dark {
+  display: block;
+}
+.reveal .has-light-background .logo .only-light {
+  display: block;
+}
+.reveal .has-light-background .logo .only-dark {
+  display: none;
+}
+.reveal .has-dark-background .logo .only-light {
+  display: none;
+}
+.reveal .has-light-background .reversed svg path {
+  fill: #ffffff !important;
+}
+.reveal .has-dark-background .reversed svg path {
+  fill: currentcolor;
+}
+.reveal .has-dark-background .has-light-background .logo .only-light,
+.reveal .has-dark-background .reversed .logo .only-dark {
+  display: block;
+}
+.reveal .has-light-background .has-dark-background .logo .only-dark,
+.reveal .has-light-background .logo .only-light {
+  display: block;
+}
+.reveal .has-light-background .has-dark-background .redhat-logo .only-dark,
+.reveal .has-light-background .redhat-logo .only-light {
+  fill: #ffffff !important;
+}
+.reveal .has-light-background .has-dark-background .logo .only-light,
+.reveal .has-light-background .logo .only-dark,
+.reveal .has-dark-background .has-light-background .logo .only-dark,
+.reveal .has-dark-background .logo .only-light {
+  display: none;
+}
+.reveal .future .fade-up,
+.reveal .future .fade-down,
+.reveal .future .fade-left,
+.reveal .future .fade-right,
+.reveal .future .fade-zoom {
+  -webkit-transition: none;
+  transition: none;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-up,
+.reveal .fade-up.fragment {
+  -webkit-transform: translate(0, 2em);
+  -ms-transform: translate(0, 2em);
+  transform: translate(0, 2em);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-down,
+.reveal .fade-down.fragment {
+  -webkit-transform: translate(0, -2em);
+  -ms-transform: translate(0, -2em);
+  transform: translate(0, -2em);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-left,
+.reveal .fade-left.fragment {
+  -webkit-transform: translate(2em, 0);
+  -ms-transform: translate(2em, 0);
+  transform: translate(2em, 0);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-right,
+.reveal .fade-right.fragment {
+  -webkit-transform: translate(-2em, 0);
+  -ms-transform: translate(-2em, 0);
+  transform: translate(-2em, 0);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-zoom,
+.reveal .fade-zoom.fragment {
+  -webkit-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.reveal .future .fade-in {
+  transition: none;
+  opacity: 0;
+}
+.reveal .present .fade-in,
+.reveal .present .fade-up,
+.reveal .present .fade-down,
+.reveal .present .fade-left,
+.reveal .present .fade-right,
+.reveal .present .fade-zoom {
+  -webkit-transition: all .5s ease .5s;
+  transition: all .5s ease .5s;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.reveal .present .fragment.visible.fade-up,
+.reveal .present .fragment.visible.fade-down,
+.reveal .present .fragment.visible.fade-left,
+.reveal .present .fragment.visible.fade-right,
+.reveal .present .fragment.visible.fade-zoom {
+  -webkit-transform: none ;
+  -ms-transform: none ;
+  transform: none ;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.reveal .sl-block {
+  font-family: "Overpass 2", "Hiragino Kaku Gothic", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ Pro W3", Overpass, sans-serif !important;
+}
+.reveal .has-light-background .icon.stroked {
+  color: currentcolor;
+}
+.reveal .has-dark-background .icon.stroked path {
+  stroke: currentcolor;
+}
+.reveal .has-dark-background .only-light-background {
+  display: none !important;
+}
+.reveal .has-dark-background .only-dark-background {
+  display: block !important;
+}
+.reveal a.call-to-action:hover {
+  background-color: #d00 !important;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.05) !important;
+  text-shadow: none !important;
+}
+.reveal .sl-block[data-block-type="snippet"] table {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.reveal .sl-block[data-block-type="snippet"] table td {
+  border-color: currentcolor !important;
+}
+.reveal .sl-block[data-block-type="snippet"] table td {
+  text-align: inherit !important;
+}
+.reveal .sl-block[data-block-type="text"] table {
+  width: 100%;
+}
+.reveal .sl-block[data-block-type="text"] table td {
+  border-color: currentcolor;
+}
+.reveal .sl-block[data-block-type="text"] table td {
+  text-align: inherit;
+}
+.reveal.reveal .sl-block[data-block-type="image"] .person {
+  border-radius: 50%;
+  position: relative !important;
+  background-color: transparent;
+  height: auto !important;
+}
+.reveal.reveal .sl-block[data-block-type="image"] .person:before {
+  content: "" !important;
+  display: block !important;
+  padding-top: 100% ;
+  position: relative !important ;
+  /* 4:3 aspect ratio */
+
+}
+.reveal.reveal .sl-block[data-block-type="image"] .person > img {
+  position: absolute ;
+  margin: 0 auto !important;
+  left: 0% ;
+  right: 0 ;
+  width: auto !important;
+  top: 0  ;
+  bottom: 0 ;
+}
+.reveal .present .delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal .present .delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal .present .delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal .present .delay-4 {
+  transition-delay: 0.4s;
+}
+.reveal .present .delay-5 {
+  transition-delay: 0.5s;
+}
+.reveal .present .delay-6 {
+  transition-delay: 0.6s;
+}
+.reveal .present .delay-7 {
+  transition-delay: 0.7s;
+}
+.reveal .present .delay-8 {
+  transition-delay: 0.8s;
+}
+.reveal .present .delay-9 {
+  transition-delay: 0.9s;
+}
+.reveal .present .delay-10 {
+  transition-delay: 1s;
+}
+.reveal .present .delay-11 {
+  transition-delay: 1.1s;
+}
+.reveal .present .delay-12 {
+  transition-delay: 1.2s;
+}
+.reveal .present .delay-13 {
+  transition-delay: 1.3s;
+}
+.reveal .present .delay-14 {
+  transition-delay: 1.4s;
+}
+.reveal .present .delay-15 {
+  transition-delay: 1.5s;
+}
+.reveal .present .delay-16 {
+  transition-delay: 1.6s;
+}
+.reveal .present .delay-17 {
+  transition-delay: 1.7s;
+}
+.reveal .present .delay-18 {
+  transition-delay: 1.8s;
+}
+.reveal .present .delay-19 {
+  transition-delay: 1.9s;
+}
+.reveal .present .delay-20 {
+  transition-delay: 2s;
+}
+.reveal .present .delay-21 {
+  transition-delay: 2.1s;
+}
+.reveal .present .delay-22 {
+  transition-delay: 2.2s;
+}
+.reveal .present .delay-23 {
+  transition-delay: 2.3s;
+}
+.reveal .present .delay-24 {
+  transition-delay: 2.4s;
+}
+.reveal .present .delay-25 {
+  transition-delay: 2.5s;
+}
+.reveal .present .delay-26 {
+  transition-delay: 2.6s;
+}
+.reveal .present .delay-27 {
+  transition-delay: 2.7s;
+}
+.reveal .present .delay-28 {
+  transition-delay: 2.8s;
+}
+.reveal .present .delay-29 {
+  transition-delay: 2.9s;
+}
+.reveal .present .delay-30 {
+  transition-delay: 3s;
+}
+.reveal .present .delay-31 {
+  transition-delay: 3.1s;
+}
+.reveal .present .delay-32 {
+  transition-delay: 3.2s;
+}
+.reveal .present .delay-33 {
+  transition-delay: 3.3s;
+}
+.reveal .present .delay-34 {
+  transition-delay: 3.4s;
+}
+.reveal .present .delay-35 {
+  transition-delay: 3.5s;
+}
+.reveal .present .delay-36 {
+  transition-delay: 3.6s;
+}
+.reveal .present .delay-37 {
+  transition-delay: 3.7s;
+}
+.reveal .present .delay-38 {
+  transition-delay: 3.8s;
+}
+.reveal .present .delay-39 {
+  transition-delay: 3.9s;
+}
+.reveal .present .delay-40 {
+  transition-delay: 4s;
+}
+.reveal .light-foreground .sl-block * {
+  color: #fff;
+}
+.reveal .dark-foreground .sl-block * {
+  color: #000;
+}
+.reveal .has-dark-background .invert {
+  color: #000;
+}
+.reveal .has-light-background .invert * {
+  color: #fff ;
+}
+.reveal .has-light-background .invert .only-light-background {
+  display: none ;
+}
+.reveal .has-light-background .invert .only-dark-background {
+  display: block !important;
+}
+.reveal .has-dark-background .invert .only-light-background {
+  display: block !important ;
+}
+.reveal .has-dark-background .invert .only-dark-background {
+  display: none !important;
+}
+.reveal .slide-number {
+  position: absolute !important;
+  opacity: 1;
+  right: 1em;
+  height: 28px;
+  min-width: 28px;
+  bottom: auto;
+  left: auto;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 28px;
+  line-height: 28px;
+  color: white;
+  text-shadow: 0 0.1em 0.5em rgba(0, 0, 0, 0.4);
+  top: 1em;
+  font-family: "Overpass 2", Overpass, sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px;
+  box-sizing: content-box;
+}
+.reveal .slide-number-delimiter {
+  margin: 0 1px;
+}
+.reveal.reveal .present.in-3d-appear {
+  transform: translatez(0em) !important;
+  animation: none !important;
+  transition: transform 1s ease !important;
+}
+.reveal.reveal .future.in-3d-appear {
+  transform: translatez(10em) rotateX(21deg) !important;
+  animation: none !important;
+}
+.reveal .no-filter img,
+.reveal .no-filter {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+.reveal .present .fade-in-slow {
+  transition: all 5s ease;
+}
+.reveal .future .fade-in-slow {
+  transition: none;
+  opacity: 0;
+}
+.reveal .redhat-logo .logotext {
+  fill: #000000 !important;
+}
+.reveal .has-dark-background .redhat-logo .logotext {
+  fill: #ffffff !important;
+}
+.reveal [data-block-type="table"] .sl-block-content {
+  font-size: .75em;
+  background-color: #c00;
+  color: #fff;
+}
+.reveal [data-block-type="table"] td {
+  background-color: #e5e5e5;
+  color: #333;
+  border-color: white;
+}
+.reveal div[data-block-type="table"] th {
+  font-weight: 500;
+}
+.reveal [data-block-type="table"] tr:nth-child(odd) td {
+  background-color: #f5f5f5;
+  color: #333;
+}
+.reveal .has-dark-background > [data-block-type="table"] td {
+  background-color: #131619;
+  color: #fff;
+}
+.reveal .has-dark-background > [data-block-type="table"] tr:nth-child(odd) td {
+  background-color: #232629;
+  color: #fff;
+}
+.reveal [data-block-type="code"],
+.reveal .hljs {
+  background-color: white ;
+  color: rgba(55, 55, 55, 0.85) !important;
+}
+.reveal section .hljs {
+  background-color: white !important;
+}
+.reveal .has-dark-background [data-block-type="code"],
+.reveal .has-dark-background .hljs {
+  background-color: #012736!important ;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.reveal [data-block-type="code"] pre {
+  letter-spacing: 0.015em;
+  line-height: 1.5em;
+}
+.reveal .has-light-background[data-block-type="code"] pre,
+.reveal [data-block-type="code"] pre {
+  background-color: white ;
+  color: currentcolor;
+  padding: 1em !important;
+}
+.reveal .has-dark-background [data-block-type="code"] pre {
+  background-color: #012736 ;
+}
+.reveal .hljs,
+.reveal pre,
+.reveal code {
+  font-family: 'Overpass Mono', monospace !important;
+  font-weight: 200 !important;
+}
+.reveal .hljs-literal {
+  color: #ffb612 !important;
+}
+.reveal .hljs-keyword {
+  color: #ffb612;
+  font-weight: 700 !important;
+}
+.reveal .hljs-string {
+  color: #88c639;
+  font-weight: 700;
+}
+.reveal .hljs-comment {
+  color: #94a0a7 !important;
+  font-weight: 400 !important;
+}
+.reveal .hljs-params {
+  color: #028c98 ;
+  font-weight: 700;
+}
+.reveal .hljs-attr {
+  color: #EC7A08 !important;
+}
+.reveal .hljs-tag {
+  color: #7F5FAE !important;
+}
+.reveal .hljs-name {
+  color: #028c98 !important;
+}
+.reveal .hljs-string {
+  color: #7f5fae !important;
+}
+.reveal .hljs-comment {
+  color: rgba(125, 125, 125, 0.65) !important;
+}
+.reveal .hljs-number {
+  color: #4e9fdd !important;
+}
+.reveal .hljs-attribute {
+  color: #ec9e34 !important;
+}
+.reveal .hljs-variable {
+  color: #4e9fdd !important;
+}
+.reveal .hljs-built_in {
+  color: #ee1122!important;
+}
+.reveal .hljs-selector-class {
+  color: #55aab2 !important;
+}
+.reveal [data-line-end-type="line-arrow"] line,
+.reveal [data-line-start-type="line-arrow"] line,
+.reveal [data-line-end-type="line-arrow"] path {
+  stroke-linecap: round;
+  stroke-linejoin: square;
+}
+.reveal div[data-block-type="line"] line[stroke="#000000"],
+.reveal div[data-block-type="line"] path[stroke="#000000"] {
+  stroke: currentcolor;
+}
+.reveal [fill="none"] {
+  fill: none !important;
+}
+.reveal [fill="#a30000"] {
+  fill: #aa0000 !important;
+}
+.reveal [fill="#cc2029"],
+.reveal [fill="#cb2027"],
+.reveal [fill="#c00"] {
+  fill: #cc0000 !important;
+}
+.reveal [fill="#fff"] {
+  fill: #ffffff !important;
+}
+.reveal [fill="#6d6e70"] {
+  fill: #6d6e70 !important;
+}
+.reveal [fill="#231f20"] {
+  fill: currentcolor !important;
+}
+.reveal [fill="#efab1f"] {
+  fill: #efab1f !important;
+}
+.reveal [fill="#92d400"] {
+  fill: #92d400 !important;
+}
+.reveal .has-dark-background [fill="#6d6e70"] {
+  fill: #266272 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #555555 !important;
+}
+.reveal .has-dark-background [fill="#fff"] {
+  fill: #333333 !important;
+}
+.reveal .has-dark-background [stroke="#231f20"] {
+  stroke: currentcolor;
+}
+.reveal .has-dark-background [fill="#221F1F"],
+.reveal .has-dark-background [fill="#221f1f"],
+.reveal .has-dark-background [fill="#231F20"],
+.reveal .has-dark-background [fill="#010101"] {
+  fill: #ffffff !important;
+}
+.reveal [data-inline-svg="true"] img {
+  display: none;
+}
+.reveal .corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 8;
+}
+.reveal .corner svg {
+  transition: all .75s ease 5s;
+}
+
+		</style>
+
+		<!-- User CSS -->
+		<style id="user-css-output" type="text/css">
+			.reveal .slides section h1 {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 36pt;
+  font-weight: bold;
+  text-transform: none;
+}
+.reveal .slides section h2 {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 26pt;
+  font-weight: bold;
+  text-transform: none;
+  padding-bottom: 24px;
+}
+.reveal .slides section h3 {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 20pt;
+  font-weight: bold;
+  text-transform: none;
+  padding-top: 14px;
+}
+.reveal .slides section {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 16pt;
+}
+.reveal .slides section li {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 16pt;
+}
+.reveal .slides section table {
+  border: solid;
+  border-color: black;
+}
+.reveal .slides section td {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 14pt;
+}
+.reveal .slides section th {
+  font-family: Overpass, Open Sans, "Helvetica";
+  font-size: 14pt;
+  border: solid;
+  border-color: black;
+}
+.reveal .slides section code {
+  font-family: Overpass mono;
+  font-size: 10pt;
+  color: black;
+  background-color: #d8e1e9;
+  border: solid;
+}
+.reveal .slides section audio {
+  position: absolute;
+  left: 900px;
+  width: 300px;
+}
+
+		</style>
+	</head>
+	<body class="reveal-viewport theme-font-overpass2 theme-color-no-color">
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-color="rgb(156,0,0)" data-background-image="deck-10/32fa01ef1b64201650bdc7d29ce7c22c.svg" data-id="7da074b376c511dfd52b0c7bc8134b07"><div class="sl-block" data-block-type="text" style="height: auto; width: 848px; left: 192px; top: 338px;" data-block-id="04b46b6399d8affd799a4f991799915d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 10; text-align: left;" data-has-custom-html="" dir="ui">
+<h1 style="font-size:2.25em">Red Hat Fuse 7 Foundations Part 1:<br>
+Fuse Online</h1>
+
+<h2 style="font-size:1.5em">Integration</h2>
+
+<h3> </h3>
+
+<h3> </h3>
+</div></div>
+<div class="sl-block" data-block-type="image" style="width: 360px; height: 122.4px; left: 45px; top: 76.5px; min-width: 4px; min-height: 4px;" data-block-id="6974bf934ed6f8c5d6fdb7311e2eb6cf"><div class="sl-block-content" style="z-index: 11;" data-inline-svg="true">
+<img data-natural-width="500" data-natural-height="170" data-lazy-loaded="" style="" data-src="deck-10/bfa11a84cdd2fc0f50cb6fb54942bd62.svg"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 500 170" height="170" width="500" class="redhat-logo" preserveaspectratio="xMidYMid meet">
+<path class="logotext" d="m 495.6,120.6 c 0,1.8 -1.5,3.3 -3.3,3.3 -1.8,0 -3.3,-1.5 -3.3,-3.3 0,-1.8 1.5,-3.3 3.3,-3.3 1.8,0 3.3,1.5 3.3,3.3 z m -3.3,-4 c -2.2,0 -4,1.8 -4,4 0,2.2 1.8,4 4,4 2.2,0 4,-1.8 4,-4 0,-2.2 -1.8,-4 -4,-4 z m 0,3.8 c 0.6,0 1,-0.1 1,-0.7 0,-0.5 -0.4,-0.6 -0.9,-0.6 l -0.8,0 0,1.3 z m -0.7,2.3 -0.6,0 0,-4.1 1.5,0 c 1,0 1.5,0.3 1.5,1.1 0,0.8 -0.5,1.1 -1.1,1.2 l 1.2,1.8 -0.7,0 -1.1,-1.8 -0.7,0 z m -22.2,-64.92 0,11.91 15.4,0 0,4.34 -15.4,0 0,35.17 c 0,6.9 2.2,11.2 8,11.2 2.8,0 4.7,-0.4 6.1,-0.9 l 0.7,4.2 c -1.8,0.7 -4.2,1.3 -7.5,1.3 -3.9,0 -7.2,-1.3 -9.3,-3.9 -2.5,-2.8 -3.3,-7.4 -3.3,-12.9 l 0,-34.17 -9.1,0 0,-4.34 9.1,0 0,-9.94 z m -21.3,32.06 c 0,-9.67 -3,-21.38 -18.6,-21.38 -4.9,0 -10.9,1.32 -15.8,4.67 l 1.7,3.89 c 3.9,-2.76 8.8,-4.03 13.5,-4.03 12.8,-0.1 13.9,10.59 13.9,15.94 l 0,1.44 c -22,-0.23 -33,7.33 -33,19.73 0,7.3 5,14.9 15.9,14.9 8.6,0 14.6,-4.8 16,-6.9 l 2.3,5.7 4.9,0 c -0.6,-4.2 -0.8,-8.6 -0.8,-12.9 z m -5.3,16.66 c 0,0.9 -0.2,2.1 -0.6,3.2 -1.8,5.3 -7,10.9 -16,10.9 -5.6,0 -10.7,-3.5 -10.7,-11.3 0,-13 15.5,-14.77 27.3,-14.43 z m -42.7,-15.34 0,32.64 -5.3,0 0,-32.05 c 0,-9.74 -3.8,-18.62 -14.9,-18.62 -7.7,0 -14,5.52 -16.3,12.25 -0.6,1.6 -0.8,3.13 -0.8,5.33 l 0,33.09 -5.3,0 0,-71.31 5.3,1.58 0,25.29 0.3,0 c 1.5,-3.01 4.1,-5.92 7.3,-7.8 3.1,-1.91 6.8,-3.1 10.9,-3.1 5.2,0 18.8,2.56 18.8,22.7 z m -68.5,1.09 c 0,-1.09 -0.1,-2.46 -0.3,-3.57 -1.3,-5.26 -5.7,-9.59 -11.8,-9.59 -8.8,0 -13.7,7.76 -13.7,17.81 0,9.9 4.9,17.2 13.5,17.2 5.6,0 10.5,-3.9 11.8,-9.8 0.4,-1.2 0.5,-2.5 0.5,-3.9 z M 202.9,87.1 c 0,-7.23 -0.1,-12.55 -0.4,-17.36 l 11.8,0 0.5,10.26 0.4,0 c 2.7,-7.6 9,-11.48 14.8,-11.48 1.4,0 2.1,0 3.2,0.29 l 0,12.87 c -1.3,-0.25 -2.4,-0.38 -4.1,-0.38 -6.5,0 -11,4.14 -12.2,10.33 -0.3,1.2 -0.4,2.65 -0.4,4.17 l 0,28 -13.7,0 z m 142.3,21.5 c 0,5.6 0.2,11.5 0.5,15.2 l -12.2,0 -0.6,-8.6 -0.3,0 c -3.2,6.1 -9.7,9.8 -17.5,9.8 -12.9,0 -23.1,-11 -23.1,-27.6 -0.1,-18.13 11.2,-28.88 24.2,-28.88 7.4,0 12.7,3.05 15.1,7.04 l 0.3,0 0,-30.48 13.6,3.85 z m -59.3,-8.1 c 0.2,-1.2 0.5,-3.3 0.5,-5.8 0,-11.83 -5.8,-26.28 -23.3,-26.28 -17.4,0 -26.5,14.11 -26.5,28.98 0,16.6 10.3,27.4 27.9,27.4 7.8,0 14.2,-1.4 18.8,-3.4 l -2,-9.4 c -4.1,1.5 -8.6,2.5 -14.9,2.5 -8.7,0 -16.3,-4.3 -16.7,-14.1 z m -36.2,-9.58 c 0.6,-5.54 4.1,-13.17 12.5,-13.17 9.2,0 11.3,8.16 11.3,13.17 z m -83.8,29.68 c 0,1.8 -1.4,3.3 -3.2,3.3 -1.8,0 -3.3,-1.5 -3.3,-3.3 0,-1.8 1.5,-3.3 3.3,-3.3 1.8,0 3.2,1.5 3.2,3.3 z m -3.2,-4 c -2.2,0 -4,1.8 -4,4 0,2.2 1.8,4 4,4 2.2,0 4,-1.8 4,-4 0,-2.2 -1.8,-4 -4,-4 z m 0,3.8 c 0.5,0 1,-0.1 1,-0.7 0,-0.5 -0.5,-0.6 -0.9,-0.6 l -0.9,0 0,1.3 z m -0.8,2.3 -0.6,0 0,-4.1 1.6,0 c 0.9,0 1.4,0.3 1.4,1.1 0,0.8 -0.4,1.1 -1,1.2 l 1.1,1.8 -0.7,0 -1,-1.8 -0.8,0 z"></path>
+<path style="fill:#fff" d="M150.1 125c-3.1-.7-6.3-1.1-9.5-1.1-5.6 0-10.8.8-14.4 2.5-.8.4-.8.9-.6 1.6.4 1.3-.3 2.7-3.9 3.5-5.4 1.2-8.8 6.7-10.7 8.6-2.3 2.1-8.8 3.5-7.8 2.2.8-1 3.7-4.2 5.4-7.6 1.6-3 3-3.9 4.9-6.8.6-.8 2.8-3.8 3.4-6.2.8-2.3.5-5.2.8-6.4.4-1.7 2-5.4 2.1-7.5.1-1.2-4.9 1.7-7.3 1.7-2.4 0-4.8-1.5-6.9-1.6-2.7-.1-4.4 2.1-6.74 1.7-1.37-.2-2.52-1.4-4.9-1.5-3.4-.2-7.57 1.9-15.38 1.6-7.68-.2-14.77-9.7-15.74-11.2-1.13-1.8-2.52-1.8-4.03-.4-1.5 1.4-3.36.3-3.9-.6-1-1.8-3.7-6.92-7.87-8-5.77-1.5-8.7 3.2-8.3 6.9.38 3.8 2.83 4.9 3.96 6.9 1.12 2 1.7 3.3 3.84 4.2 1.5.6 2.07 1.6 1.62 2.8-.4 1.1-1.97 1.3-3 1.4-2.2.1-3.74-.5-4.86-1.2-1.3-.9-2.37-2-3.5-4-1.33-2.2-3.4-3.1-5.83-3.1-1.16 0-2.24.3-3.2.8-3.8 2-8.3 3.1-13.17 3.1H9.1C19.64 138.5 49.14 161 83.88 161c27.73 0 52.13-14.3 66.23-36"></path>
+<path style="fill:#000" d="m 150.1,125 c -2.6,-0.6 -6.3,-1.1 -9.5,-1.1 -5.6,0 -10.7,0.9 -14.4,2.5 -0.5,0.2 -0.7,0.6 -0.7,1.1 0,0.2 0,0.4 0.1,0.5 0.4,1.3 -0.3,2.7 -3.9,3.5 -5.4,1.2 -8.8,6.7 -10.7,8.6 -2.3,2.1 -8.8,3.5 -7.8,2.2 0.8,-1 3.7,-4.2 5.4,-7.6 1.6,-3 3,-3.9 4.9,-6.8 0.6,-0.8 2.8,-3.8 3.4,-6.2 0.8,-2.3 0.5,-5.2 0.8,-6.4 0.4,-1.7 2,-5.4 2.1,-7.5 0.1,-1.2 -4.9,1.7 -7.3,1.7 -2.4,0 -4.8,-1.5 -6.9,-1.6 -2.6,-0.1 -4.3,2.1 -6.74,1.7 -1.36,-0.2 -2.51,-1.4 -4.9,-1.5 -3.41,-0.1 -7.56,1.9 -15.37,1.6 -7.68,-0.2 -14.78,-9.7 -15.75,-11.2 -1.13,-1.8 -2.52,-1.8 -4.03,-0.4 -1.51,1.4 -3.37,0.3 -3.9,-0.6 -1.01,-1.8 -3.7,-6.92 -7.87,-8 -5.77,-1.5 -8.69,3.19 -8.31,6.9 0.38,3.8 2.83,4.9 3.96,6.9 1.14,2 1.72,3.3 3.85,4.2 1.51,0.6 2.07,1.6 1.62,2.8 -0.39,1.1 -1.96,1.3 -3,1.4 -2.2,0.1 -3.74,-0.5 -4.86,-1.2 -1.31,-0.9 -2.37,-2 -3.51,-4 -1.32,-2.2 -3.4,-3.1 -5.82,-3.1 -1.15,0 -2.23,0.3 -3.19,0.8 -3.8,2 -8.31,3.1 -13.18,3.1 l -5.481,0 C 6.45,99.4 5,90.95 5,82.13 5,38.57 40.32,3.26 83.88,3.262 c 43.52,0 78.82,35.31 78.82,78.87 0,15.77 -4.6,30.57 -12.6,42.87 z m -49.2,-7.2 c -1.03,1.2 -1.47,1.6 -2.21,2.2 -1.78,1.4 -3.81,-0.2 -5.11,-1 -2.9,-1.7 -5.23,-0.6 -5.8,0.7 -0.57,1.3 0.1,2.9 1.64,2.7 2.21,-0.3 2.31,0.1 3.9,1.1 2.98,1.9 5.15,0.8 6.26,-0.1 0.92,-0.7 1.42,-1.3 1.92,-2.2 0.9,-1.7 0.2,-3 -0.3,-3.4 -0.1,-0.1 -0.2,-0.1 -0.3,0 z"></path>
+<path style="fill:#c00" d="m 87.26,25.76 c 3.86,-0.47 10.35,-1.28 10.82,1.61 0.18,1.13 -1.98,2.32 -5.13,3.05 -0.34,0.1 -0.33,0.54 0,0.67 1.32,0.38 2.86,0.65 4.49,0.65 5.06,0.12 9.16,-1.71 9.26,-4.07 0.1,-2.36 -4,-4.39 -9.04,-4.49 -0.99,0 -1.98,0 -3.09,0.15 -3.02,0.3 -5.62,1.1 -7.42,1.98 -0.29,0.14 -0.28,0.45 0.11,0.45 z m -9.53,15.06 c 4.35,-0.32 4.79,-1.32 4.66,-2.39 -0.14,-1.25 -2.77,-2.71 -6.67,-2.71 -3.84,0 -6.6,0.46 -8.99,0.56 -2.39,0.1 -4.24,-1.69 -5.1,-2.76 -0.71,-0.88 -2.97,-1.73 -4.2,1.1 -1.24,2.86 1.07,5.93 2.97,6.33 0,0 3.17,5.89 5.57,3.33 1.71,-1.82 2.65,-2.8 11.76,-3.46 z m 43.87,28.83 c 2.9,-1.57 5.5,-3.63 6.8,-8.5 13.4,3.02 21.3,10 19.6,19.43 C 144.2,101.3 110.3,108.3 77.23,98.3 45.75,88.79 18.11,69.8 21.31,58.68 c 1.86,-6.48 12.13,-9.24 25.82,-7.76 -2.08,4.23 -1.92,9.21 7.14,14.75 11.07,6.29 29.79,11.66 34.85,11.14 1.89,-0.2 3.58,-1.13 1.89,-2.27 -1.7,-1.13 -3.21,-3.4 -4.16,-7.36 C 86.33,64.97 85.73,61.89 73.83,59.63 48.31,54.77 49.29,47.55 50.05,43.4 c 0,0 2.26,-10.19 3.21,-13.78 0.94,-3.59 3.38,-11.82 19.82,-8.12 9.5,2.14 14.62,-0.52 17.24,-1.19 7.1,-1.82 14.98,-0.57 19.28,3.9 4.5,4.63 10.7,18.9 13.7,29.57 1.5,5.42 1.1,8.02 0.3,9.85 -0.5,1.25 -0.8,2.05 -2.7,5.22 -0.3,0.56 -0.1,1.17 0.7,0.8 z"></path>
+</svg>
+</div></div></section><section id="_topics" data-id="a24163900b69fe9069761ab7d72e2edc"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 424px; left: 0px; top: 0px;" data-block-id="d2e885411f66a5dc8692fe242fbf12c6"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 10;">
+<h2 style="text-align: left;">Topics</h2>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Managing Integrations</p>
+	</li>
+	<li>
+	<p>Packaged Connectors</p>
+	</li>
+	<li>
+	<p>Connector Configuration</p>
+	</li>
+	<li>
+	<p>Shapeless vs. Shaped Connectors</p>
+	</li>
+	<li>
+	<p>Connector Types</p>
+	</li>
+	<li>
+	<p>Steps</p>
+	</li>
+</ul>
+</div>
+
+<div class="footer" style="text-align: left;"> </div>
+</div>
+</div></div></section><section id="_managing_integrations" data-id="865f52183b604ada8ece185c51916af0"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 960px; left: 0px; top: 0px;" data-block-id="773f6bb4ff41c36ecf7f13636ecee688">
+    <div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 10;" dir="ui">
+        <h2 style="text-align: left;">Managing Integrations</h2>
+        <div class="scrollbar">
+            <div class="ulist">
+                <ul>
+                    <li>
+                        <p>Integration portability</p>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>Support for multiple Fuse Online environments: Development, Test, Production</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Environment portability</p>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>To and from cloud</p>
+                                </li>
+                                <li>
+                                    <p>To and from on-premise</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Integration export</p>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>Packages everything needed to run integration within single ZIP archive</p>
+                                </li>
+                                <li>
+                                    <p>Connections, extensions, metadata</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Integration import</p>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>Uploads integration with all dependencies into Fuse Online environment</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Update of connections</p>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p>Needed when porting between environments</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer"> </div>
+        </div>
+    </div>
+</div></section><section id="_packaged_connectors" data-id="a47ad7f144ba2a4b972f1a4764b7cf41"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 856px; left: 0px; top: 0px;" data-block-id="9a7d34ae60d0bdf76904b27296970682"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 10;">
+<h2 style="text-align: left;">Packaged Connectors</h2>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Connector: Template used to create one or more connections</p>
+	</li>
+	<li>
+	<p>Packaged connector: Connector provided out-of-the-box with Fuse Online</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 1085px; height: 538px; left: 98px; top: 182px;" data-block-id="1203db69c32d3747c882c223fc62f0bb"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="2500" data-natural-height="1240" data-lazy-loaded="" data-src="deck-10/fdd4089e6c8f575d274961b62d1b122c.png"></div></div></section><section data-id="1eee41bf3d6ee8369ecef046d3f24def"><div class="sl-block" data-block-type="text" style="height: auto; width: 960px; left: 0px; top: 0px;" data-block-id="4e7b65ad7f6477a02fe742d8fd530dd8"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Configuration</h2>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="8783bd02051e43c082e88e2072ed1a6c" style="min-width: 30px; min-height: 30px; width: 546px; height: 405px; left: 367px; top: 216px;"><div class="sl-block-content notranslate" style="z-index: 12;"><pre><code>{
+    "id": "mqtt",
+    "name": "MQTT",
+    "description": "Publish and Subscribe Messages to a MQTT broker.",
+    "icon": "paho",
+    "dependencies": [
+        {
+            "type": "MAVEN",
+            "id": "@project.groupId@:@project.artifactId@:@project.version@"
+        }
+    ],
+    "componentScheme": "paho",
+    "configuredProperties": {
+
+    },
+    "tags": [
+        "verifier"
+    ],</code></pre></div></div></section><section data-id="333594fc0c108159d41882233e773458"><div class="sl-block" data-block-type="text" style="height: auto; width: 960px; left: 0px; top: 0px;" data-block-id="e1b3b475af968d7abad3001c8a899562"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;" dir="ui">
+<h2 style="text-align: left;">Connector Configuration</h2>
+
+<h3 style="text-align: left;">Properties</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="f10e4a9687b662fbfc329f23a9ddc19b" style="min-width: 30px; min-height: 30px; width: 500px; height: 300px; left: 390px; top: 262px;"><div class="sl-block-content notranslate" style="z-index: 12;"><pre class="json"><code>    "properties": {
+        "brokerUrl": {
+            "kind": "parameter",
+            "displayName": "MQTT broker URL",
+            "group": "common",
+            "required": true,
+            "type": "string",
+            "javaType": "java.lang.String",
+            "deprecated": false,
+            "secret": false,
+            "labelHint": "MQTT broker URL",
+            "placeholder": "eg 'tcp://localhost:1833'"
+        }
+    },</code></pre></div></div></section><section data-id="bbca8956c40e8104036e25a4d64af59b"><div class="sl-block" data-block-type="text" style="height: auto; width: 960px; left: 1px; top: 1px;" data-block-id="89fbc4170604e73dfbe4c32db3844987"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;" dir="ui">
+<h2 style="text-align: left;">Connector Configuration</h2>
+
+<h3 style="text-align: left;">Actions</h3>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="838f1088db8bff5f2c2bd82e86869aeb" style="min-width: 30px; min-height: 30px; width: 742px; height: 493px; left: 269px; top: 204px;"><div class="sl-block-content notranslate" style="z-index: 12;"><pre class="json"><code>{    "actions": [
+        {
+            "name": "Publish",
+            "description": "Publish a message to a MQTT Broker",
+            "id": "io.syndesis:paho-publish-connector",
+            "pattern": "To",
+            "actionType": "connector",
+            "descriptor": {
+                "inputDataShape": {
+                    "kind": "java",
+                    "type": "java.lang.String"
+                },
+                "outputDataShape": {
+                    "kind": "none"
+                },
+                "configuredProperties": {
+                },
+                "propertyDefinitionSteps": [
+                   {
+                        "name":"Publish",
+                        "description":"Publish a message from MQTT Broker",
+                        "properties":{
+                            "topic": {
+                                "kind": "path",
+                                "displayName": "MQTT queue/topic name",</code></pre></div></div></section><section data-id="68d7f3ef85c36e8359443f13d37f4d84"><div class="sl-block" data-block-type="text" style="height: auto; width: 917px; left: 1px; top: 0px;" data-block-id="7615b9357e8e704ef03953fad3ab2f92"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;" dir="ui">
+<h2 style="text-align: left;">Shapeless vs. Shaped Connectors</h2>
+
+<ul>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; color: rgb(53, 64, 69);">
+	<p><strong>Shapeless content:</strong> Data type defined at configuration time</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; color: rgb(53, 64, 69);">
+	<p><strong>Shaped content:</strong> Data type not defined at configuration time, only discovered at runtime</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; color: rgb(53, 64, 69);">
+	<p><strong>Shapeless connector: </strong>Handles shapeless content</p>
+	</li>
+	<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; color: rgb(53, 64, 69);">
+	<p><strong>Shaped connector:</strong> Handles shaped content</p>
+	</li>
+</ul>
+</div></div>
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 518px; left: 28px; top: 360px;" data-block-id="3320b6a24df23dc6744d502b907c3c66"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" dir="ui">
+<h3><strong>Shapeless Connector Configuration</strong></h3>
+</div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 480px; left: 724px; top: 360px;" data-block-id="7c66f81a710e5065b104b15212c198ef"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 15;" dir="ui">
+<h3><strong>Shaped Connector Configuration</strong></h3>
+</div></div>
+<div class="sl-block" data-block-type="code" data-block-id="27da9129bae757845f164a04a94c83df" style="min-width: 30px; min-height: 30px; width: 500px; height: 300px; left: 28px; top: 420px;"><div class="sl-block-content notranslate" style="z-index: 16;"><pre class="json"><code>{    "actions": [
+        {
+...
+            "descriptor": {
+                "inputDataShape": {
+                    "kind": "none"
+                },
+                "outputDataShape": {
+                    "kind": "none"
+                },</code></pre></div></div>
+<div class="sl-block" data-block-type="code" data-block-id="44127176bdbcf525de1ff9960dec7379" style="min-width: 30px; min-height: 30px; width: 500px; height: 300px; left: 710px; top: 420px;"><div class="sl-block-content notranslate" style="z-index: 17;"><pre class="json"><code>"actions": [
+  {
+...
+      "inputDataShape": {
+        "kind": "json-schema"
+      },
+      "outputDataShape": {
+        "kind": "java",
+        "type": "org.apache.camel.component.salesforce.api.dto.CreateSObjectResult"
+      },</code></pre></div></div></section><section data-id="66b82dc7d2d03f3b74378392d3e4a656"><div class="sl-block" data-block-type="text" style="height: auto; width: 356px; left: 0px; top: 2px;" data-block-id="6747d1b71d2156ae850f1703f957250e"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">SFTP Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Supports upload and download</p>
+	</li>
+	<li>
+	<p>Automatic reconnect handling</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="10a372fe35b2ec61ddc3c3bd8d411f2a" style="min-width: 4px; min-height: 4px; width: 354px; height: 370px; left: 560px; top: 146px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="354" data-natural-height="370" data-lazy-loaded="" data-src="deck-10/432c15b66f5b26f1f658bf41fdc75a0b.png"></div></div></section><section data-id="c3df16718c45d57e9c8079618364f884"><div class="sl-block" data-block-type="text" style="height: auto; width: 347px; left: 1px; top: 2px;" data-block-id="0dd1caf9e3ebb6b72f03a14ee4a5e83a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">FTP Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Supports upload and download</p>
+	</li>
+	<li>
+	<p>Automatic reconnect handling</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="37c8890ce4b68d5ab0b52fc91edfb011" style="min-width: 4px; min-height: 4px; width: 384px; height: 398px; left: 560px; top: 146px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="384" data-natural-height="398" style="" data-lazy-loaded="" data-src="deck-10/d05304425609e1030a8a16782dfc8ed9.png"></div></div></section><section data-id="a9b4ad522d07a08ef39f7621c8551be4"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 0px; top: 2px;" data-block-id="54ce63fb255658ace2ab6963d3f5bb0f"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">HTTPS Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Low-level HTTPS requests</p>
+	</li>
+	<li>
+	<p>Supports issuing request against any HTTPS endpoint</p>
+	</li>
+	<li>
+	<p>Supports periodic polling of endpoints</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="8db37f2431ce8694d08deeecb30ec60d" style="min-width: 4px; min-height: 4px; width: 399px; height: 397px; left: 561px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="399" data-natural-height="397" style="" data-lazy-loaded="" data-src="deck-10/645f75561f376ac92b4e8cd328a0d7f1.png"></div></div></section><section data-id="ec72ac1a9c1dd4be63461d2a69f64e13"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 0px; top: 2px;" data-block-id="dc0853b2be654ab202d0bcfce60b41a3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">HTTP Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Low-level HTTP requests</p>
+	</li>
+	<li>
+	<p>Supports issuing request against any HTTP endpoint</p>
+	</li>
+	<li>
+	<p>Supports periodic polling of endpoints</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="933121d4691e7a033df87b936e1b0d52" style="min-width: 4px; min-height: 4px; width: 413px; height: 425px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="413" data-natural-height="425" data-lazy-loaded="" data-src="deck-10/66564bd3c754012d615e143cefe7fec9.png"></div></div></section><section data-id="b4d997acd2e77fa60a34e230fa93eecb"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 0px; top: 2px;" data-block-id="fb753dcca62593a65cbd3d087b218cd3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">Twitter Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Search for tweets that mention you</p>
+	</li>
+	<li>
+	<p>Search for tweets that contain text that you specify</p>
+	</li>
+	<li>
+	<p>Secured via access/secret keys</p>
+	</li>
+	<li>
+	<p>Supports shaped data</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="21cdbc291ba9f003614ee15b79f25d2e" style="min-width: 4px; min-height: 4px; width: 386px; height: 393px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="386" data-natural-height="393" style="" data-lazy-loaded="" data-src="deck-10/0c8fc2535b2693db490c98efa0e29d41.png"></div></div></section><section data-id="c31d9d00e6a041bb46d116da68103397"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 2px; top: 2px;" data-block-id="115caa3cda4ea43f06c70cd31c5ca3ad"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">Salesforce Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Supports creating, fetching, updating, deleting Salesforce records</p>
+
+	<ul>
+		<li>
+		<p>Uses record ID or external ID</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Supports receiving notifications of modifications to records</p>
+	</li>
+	<li>
+	<p>Shaped connector</p>
+	</li>
+	<li>
+	<p>Retrieves data schema from Salesforce objects being accessed</p>
+	</li>
+	<li>
+	<p>Secured via access/secret keys</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="842c8d0400a4839c649bd378924d9594" style="min-width: 4px; min-height: 4px; width: 341px; height: 350px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="341" data-natural-height="350" style="" data-lazy-loaded="" data-src="deck-10/e43efbff0d3d16853786f17854026b81.png"></div></div></section><section data-id="02c171a893ce5b2228f4f8b87fa93efc"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 2px; top: 2px;" data-block-id="44449eeb1c4719da04d0d1d7fbf48bac"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">Slack Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Supports publishing messages to user or channel on Slack collaboration software</p>
+	</li>
+	<li>
+	<p>Supports shaped data</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="32e0f09f6f6bc06a4678a05a0f7cb784" style="min-width: 4px; min-height: 4px; width: 386px; height: 393px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="386" data-natural-height="393" style="" data-lazy-loaded="" data-src="deck-10/c375719b6e065030733972b34b30f072.png"></div></div></section><section data-id="9cec48b925c7301ab6dc36c2be5f875b"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 2px; top: 2px;" data-block-id="5195d28c511ea6e7df46ca28f25ff1a7"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">Database Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>JDBC-like syntax for SQL statements</p>
+	</li>
+	<li>
+	<p>Supports periodic and event-driven SQL invocation</p>
+	</li>
+	<li>
+	<p>Data types dynamically generated by SQL</p>
+
+	<ul>
+		<li>
+		<p>Not bulletproof</p>
+		</li>
+		<li>
+		<p>Feedback appreciated</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Baseline SQL verification to prevent careless errors</p>
+	</li>
+	<li>
+	<p>Built-in driver support for:</p>
+
+	<ul>
+		<li>
+		<p>PostgreSQL</p>
+		</li>
+		<li>
+		<p>MySQL</p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p>Supports add-your-own driver </p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="53b6b11fbc65f54930fe1b5d9fa549e7" style="min-width: 4px; min-height: 4px; width: 400px; height: 407px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="400" data-natural-height="407" style="" data-lazy-loaded="" data-src="deck-10/babaa09f7c366d43412601cadc585e84.png"></div></div></section><section data-id="071b7abf6791851d57c28bae01d435f7"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 2px; top: 2px;" data-block-id="56ddd4669ef45b5b54d905e559731ee0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">AMQP Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Compatible with xPaaS AMQ broker images, AMQ Online</p>
+	</li>
+	<li>
+	<p>Cold AMQ instance included in Fuse Online environment for messaging scenarios</p>
+	</li>
+	<li>
+	<p>Supports Subscribe-Publish, Request-Response typologies</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+	<li>
+	<p>Supports SSL/TLS encryption, basic authentication</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="74b2ed31866d998fe4629227258017a3" style="min-width: 4px; min-height: 4px; width: 392px; height: 402px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="392" data-natural-height="402" data-lazy-loaded="" data-src="deck-10/5782869db22151bbb89ad148defe1c89.png"></div></div></section><section data-id="700bf4b75fd6197954ead1c9bf0c45ce"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 2px; top: 2px;" data-block-id="533075492ada32d0f0da046368ea3e5a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">AMQ Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Compatible with xPaaS AMQ broker images</p>
+	</li>
+	<li>
+	<p>Cold AMQ instance included in Fuse Online environment for messaging scenarios</p>
+	</li>
+	<li>
+	<p>Supports Subscribe-Publish, Request-Response typologies</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+	<li>
+	<p>Supports SSL/TLS encryption, basic authentication</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="f2776d7ff06638bf92fb4783993dd4b9" style="min-width: 4px; min-height: 4px; width: 415px; height: 459px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img data-natural-width="415" data-natural-height="459" style="" data-lazy-loaded="" data-src="deck-10/a463a4334946b6d1d8b4f81ea7b05c56.png"></div></div></section><section data-id="f07b50d7a424a88cf2623c84bd05e04a"><div class="sl-block" data-block-type="text" style="height: auto; width: 480px; left: 2px; top: 2px;" data-block-id="11ba7a70eeaadbdd4dd4bbe6dc8ffded"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">MQTT Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Compatible with xPaaS AMQ broker images</p>
+	</li>
+	<li>
+	<p>Cold AMQ instance included in Fuse Online environment for messaging scenarios</p>
+	</li>
+	<li>
+	<p>Supports Subscribe-Publish, Request-Response typologies</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+	<li>
+	<p>Supports SSL/TLS encryption, basic authentication</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="7273474b2c1a07b7f0b1a3f26be3f318" style="min-width: 4px; min-height: 4px; width: 365px; height: 376px; left: 560px; top: 144px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="365" data-natural-height="376" data-lazy-loaded="" data-src="deck-10/4cdb4dade8612b8209b84c232e78db1b.png"></div></div></section><section data-id="629adbb7790bf7a87eb8a379c9f00dfd"><div class="sl-block" data-block-type="text" style="height: auto; width: 405px; left: 0px; top: 2px;" data-block-id="80614f51754ca21dc6d9ce9c0ffba84c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">Dropbox Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Supports file upload and download</p>
+	</li>
+	<li>
+	<p>Access secured via access/secret keys</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="7a9a9f1c6ade98d44f9ae5ef8b6c06a0" style="min-width: 4px; min-height: 4px; width: 370px; height: 383px; left: 560px; top: 146px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="369" data-natural-height="382" data-lazy-loaded="" data-src="deck-10/c1837654c87dda15ba863a382a9bda99.png"></div></div></section><section data-id="da2fb3f0e7f8bc751932f5f64c71d4dd"><div class="sl-block" data-block-type="text" style="height: auto; width: 405px; left: 2px; top: 2px;" data-block-id="202b0f11d9cfaccdec91a4551d6db995"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 11;">
+<h2 style="text-align: left;">Connector Types</h2>
+
+<h3 style="text-align: left;">AWS S3 Connector</h3>
+
+<div class="scrollbar">
+<div class="ulist">
+<ul>
+	<li>
+	<p>Send and receive files located in AWS S3 buckets</p>
+	</li>
+	<li>
+	<p>Supports Get, Poll, Copy</p>
+	</li>
+	<li>
+	<p>Secured via access/secret keys</p>
+	</li>
+	<li>
+	<p>Shapeless connector</p>
+	</li>
+</ul>
+</div>
+</div>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="feea9a7c13da390ba559d8d151dee8df" style="min-width: 4px; min-height: 4px; width: 402px; height: 433px; left: 560px; top: 143px;"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="402" data-natural-height="433" data-lazy-loaded="" data-src="deck-10/918fe7593708b9ae121688eaeda5d95d.png"></div></div></section><section data-id="56810d7c8d708c659b6fc8b87fa876ca">
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 631px; height: 231px; left: 183px; top: 464px;" data-block-id="8648f9dd513e120fb2d76e971fa99c1b"><div class="sl-block-content" style="z-index: 11;"><img style="" data-natural-width="1492" data-natural-height="546" data-lazy-loaded="" data-src="deck-10/510efce933228eacba2aba0c102f3419.png"></div></div>
+
+
+
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 234px; height: 55px; left: 215px; top: 434px;" data-block-id="ff7d5fab8ae645ef341f1c0638b90912"><div class="sl-block-style" style="z-index: 12; transform: rotate(296deg);"><div class="sl-block-content" data-shape-type="arrow-right" data-shape-fill-color="rgb(204, 33, 20)" data-shape-stretch="true" style="z-index: 12;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 234 55"><polygon points="0,16.5 117,16.5 117,0 234,27.5 117,55 117,38.5 0,38.5" class="shape-element" fill="rgb(204, 33, 20)"></polygon></svg></div></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 6px; top: 0px;" data-block-id="45da3dc2132bb0a528ff704cd44318b5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13; background-color: rgba(0, 0, 0, 0);" dir="ui">
+<h2 style="text-align: left;"><span style="font-size:1.0em"><strong>Steps</strong></span></h2>
+</div></div>
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 1075px; height: 241px; left: 80px; top: 160px;" data-block-id="debc8be4035631823f577b60fc432314"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1822" data-natural-height="408" data-lazy-loaded="" data-src="deck-10/9e3bd6ab2a5beae5e979efc2923d296f.png"></div></div></section><section data-id="701d3c614ed283ff72a4176cd4a770e0"><div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 806px; height: 383px; left: 240px; top: 216px;" data-block-id="f4966d3df27b759419a8a73e01c88d8e"><div class="sl-block-content" style="z-index: 10;"><img style="" data-natural-width="1744" data-natural-height="828" data-lazy-loaded="" data-src="deck-10/2f6e53631469579d9ca1b9561345a0c6.png"></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 0px; top: 0px;" data-block-id="31b1ae011c9b205cb90760e942f96f3a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" dir="ui">
+<h2 style="text-align:left">Steps</h2>
+
+<h3 style="text-align: left;"><span style="font-size:1.0em"><strong>Basic Filter Step</strong></span></h3>
+</div></div></section><section data-id="94dc47574285e18a42cd13b59c4b103f">
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 806px; height: 524px; left: 240px; top: 181px;" data-block-id="b3dca3fa3e81246d2e4905d4f63a69af"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="1290" data-natural-height="838" data-lazy-loaded="" data-src="deck-10/c689f5c2d6f396485c53064b5b1def68.png"></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 0px; top: 0px;" data-block-id="36cbd0b1f656639819e0593b34aefc6b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" dir="ui">
+<h2 style="text-align:left">Steps</h2>
+
+<h3 style="text-align: left;"><span style="font-size:1.0em"><strong>Advanced Filter Step</strong></span></h3>
+</div></div></section><section data-id="129c63e1d2b9e137b5bcbcde2d48de22">
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 806px; height: 484px; left: 240px; top: 165px;" data-block-id="88b467d385d970a7cf5af32f5ffd4e18"><div class="sl-block-content" style="z-index: 12;"><img style="" data-natural-width="1040" data-natural-height="624" data-lazy-loaded="" data-src="deck-10/d3344685a694c2f13e72a1352af936fc.png"></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 0px; top: 0px;" data-block-id="f281d585510495876d38d7c18a2b9eca"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;" dir="ui">
+<h2 style="text-align:left">Steps</h2>
+
+<h3 style="text-align: left;"><span style="font-size:1.0em"><strong>Log Step</strong></span></h3>
+</div></div></section><section data-id="4840586180fd5bd15ef7553eaadf8b10">
+
+
+<div class="sl-block" data-block-type="image" style="min-width: 4px; min-height: 4px; width: 703px; height: 504px; left: 567px; top: 172px;" data-block-id="af3bfa771ac047aecc99c7d7a8291ae0"><div class="sl-block-content" style="z-index: 14;"><img style="" data-natural-width="1884" data-natural-height="1350" data-lazy-loaded="" data-src="deck-10/be4d1e62e4ba06d0108970ab8169154b.png"></div></div>
+
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 517px; left: 7px; top: 0px;" data-block-id="8ff8c82bb346a849d6e83a9f40a16e02"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;" dir="ui" data-has-custom-html="">
+<h2 style="text-align:left">Steps</h2>
+
+<h3 style="text-align: left;"><span style="font-size:1.0em"><strong>Data Mapper Step</strong></span></h3>
+
+<ul>
+	<li style="color: rgb(53, 64, 69); font-size: 21.3333px; text-align: left;">
+	<p><span style="font-size:1.0em">Allows mapping of shaped output from previous steps to shaped input of next step</span></p>
+	</li>
+	<li style="color: rgb(53, 64, 69); font-size: 21.3333px; text-align: left;">
+	<p><span style="font-size:1.0em">Supports:</span></p>
+
+	<ul>
+		<li>
+		<p><span style="font-size:1.0em">Splitting fields</span></p>
+		</li>
+		<li>
+		<p><span style="font-size:1.0em">Combining fields</span></p>
+		</li>
+		<li>
+		<p><span style="font-size:1.0em">Field-level transformations</span></p>
+		</li>
+		<li>
+		<p><span style="font-size:1.0em">Access to data output of all previous steps</span></p>
+		</li>
+	</ul>
+	</li>
+	<li>
+	<p dir="ltr" style="line-height:1.38;margin-top:0pt;margin-bottom:0pt;">"Moon" icons represent degree of completeness in data mapping</p>
+
+	<ul>
+		<li>Half moon = elements are mapped partially for instance a body contains many elements and some of them are mapped</li>
+		<li>Full moon = All elements are fully mapped  </li>
+		<li>Lightening = A method or transformation is applied to the data that is mapped</li>
+	</ul>
+	</li>
+</ul>
+
+<p> </p>
+</div></div>
+</section><section id="_summary" data-id="ab63ae8d0a0f42fe2ceaa0a41b3cd4a4"><div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 421px; left: 0px; top: 0px;" data-block-id="072a79f7cc72fe56841f33afcc23266a"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" data-has-custom-html="" style="z-index: 10;" dir="ui">
+<h2 style="text-align: left;">Summary</h2>
+<div class="scrollbar"><div class="ulist"><ul>
+<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);"><p>Managing Integrations</p></li>
+<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);"><p>Packaged Connectors</p></li>
+<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);"><p>Connector Configuration</p></li>
+<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);"><p>Shapeless vs. Shaped Connectors</p></li>
+<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);"><p>Connector Types</p></li>
+<li style="font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; font-size: 21.3333px; color: rgb(53, 64, 69);"><p>Steps<br></p></li>
+</ul></div></div>
+</div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":1218126,"slug":"deck-10","title":"Fuse Online Foundations - Module 2 - Integrations","description":"","width":1280,"height":720,"visibility":"self","published_at":null,"sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/dda901d60690bbe6dc6ea1de1facb1a4/thumb.jpg?1530199477","view_count":3,"user":{"id":354178,"username":"hchin","name":"Hong Hua Chin","description":null,"thumbnail_url":"https://www.gravatar.com/avatar/46aa09dd1dd291800ef54633a2b852a1?s=140\u0026d=https%3A%2F%2Fstatic.slid.es%2Fimages%2Fdefault-profile-picture.png","paid":true,"pro":true,"lite":false,"team_id":32,"settings":{"id":187807,"present_controls":true,"present_upsizing":true,"present_pointer":false,"present_notes":false,"default_deck_tag_id":null},"enterprise":true,"membership":{"role":"member","manager":false,"activated":true}},"background_transition":"none","transition":"none","theme_id":176,"theme_font":"overpass2","theme_color":"no-color","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":false,"rolling_links":false,"center":false,"shuffle":false,"should_loop":false,"share_notes":false,"slide_number":true,"slide_count":27,"rtl":false,"version":2,"collaborative":true,"deck_user_editor_limit":null,"data_updated_at":1551196739864,"font_typekit":null,"font_google":null,"notes":{"a24163900b69fe9069761ab7d72e2edc":"This module covers the design and life cycle management of integrations, as well as packaged connectors used in integrations. It then provides examples of connector configuration and describes the 13 packaged connector types.\n\nThe module concludes by explaining step actions and the four actions bundled with Fuse Onlilne.\n","865f52183b604ada8ece185c51916af0":"Some planning so that you have answers to the following questions is helpful before you create an integration.\n\nTo start the integration:\n* Which application does the integration obtain data from?\n* In that application, what triggers the action that obtains the data? For example, an integration that starts by obtaining data from Twitter might trigger on a Twitter mention.\n* What are the data fields of interest?\n* What credentials does Fuse Online use to access this application?\n\nTo finish the integration:\n* Which application receives the data?\n* In that application, what action does the integration perform?\n* What are the data fields of interest?\n* What credentials does Fuse Online use to access this application?\n\nIn between the start and finish applications:\n* Do you need to access any other applications? \n* For any other applications the integration accesses, which application does the integration need to connect to?\n* What actions does the integration perform in this other application?\n* What are the data fields of interest?\n* What credentials does the integration use to connect to this application?\n* Between connections, does the integration need to operate on the data? For example, does the integration filter the data it operates on?\n* Do field names differ between source and target applications If they do, then data mapping is required.\n* Does the integration need to operate on the data in some customized way?\n\nAfter you log in to the Fuse Online console, the general steps for integrating applications are as follows:\n1. For each application that you want to integrate and that uses the OAuth protocol, register Fuse Online as a client of that application.\n2. For each application you want to integrate, create a connection.\n\nTo support multiple Fuse Online environments such as Development, Test, and Production, integrations are made portable.\n\nEnvironment portability is possible to and from the cloud and to and from a Fuse Online environment that is on-premise.\n\nExport of an integration results in a single ZIP archive, which packages everything needed to run that integration--connections, extensions, and metadata.\n\nImport of an integration uploads that integration with all of its dependencies into a Fuse Online environment.\n\nWhen porting between Fuse Online environments, updates need to be made to connections in the integration.","a47ad7f144ba2a4b972f1a4764b7cf41":"A connector is a template that a citizen developer uses to create one or more connections in Fuse Online.\n\nA packaged connector is provided out-of-the-box with Fuse Online.\n\nEvery packaged connector encapsulates important technology that addresses a need of clients and stakeholders for an integration project.","ab63ae8d0a0f42fe2ceaa0a41b3cd4a4":"This module covered the design and life cycle management of integrations, as well as packaged connectors used in integrations. It then provided examples of connector configuration and described the 13 packaged connector types.\n\nThe module concluded by explaining step actions and the four actions bundled with Fuse Online.","1eee41bf3d6ee8369ecef046d3f24def":"Fuse Online connectors are implemented in Java. Their configuration are defined in a JSON format file that has the same name as the connector.\n\nThe configuration of a connector consists of the following elements: ID, name, description, icon, dependencies, componentScheme, configuredProperties, properties, tags, and actions.\n\nThe ID is a unique identifier for the connector. Dependencies comprise Maven dependencies of the connector. ComponentScheme is the protocol that the component supports. \n\nTags usually contain a verifier entry, which activates verification for input data to the connector. ","333594fc0c108159d41882233e773458":"configuredProperties and properties are parameters, some of which are fields that are displayed on the Fuse Online console and which are captured as input during configuration time via user interaction with the Fuse Online console. \n\nOther properties are preassigned by default and configurable through administrator access to the connector configuration files.","bbca8956c40e8104036e25a4d64af59b":"Actions are the data operations that the connector engages in when it is active. ","68d7f3ef85c36e8359443f13d37f4d84":"Shaped content are data types not defined at configuration time and only discovered at runtime.\n\nShapeless content are data types defined at configuration time.\n\nA shaped connector handles shaped content, while a shapeless connector handles shapeless content.\n\nThe configurations shown here are for a shapeless connector and a shaped connector. Notice that the inputDataShape and outputDataShape are undefined at configuration time for a shapeless connector. However, these elements are defined at configuration time for a shaped connector.","ed0c72d326e917ad6906cd0a3dc77aaa":"MQTT Connector is designed to work with IOT solutions, requiring integration over the MQTT protocol","0dde039ade26b2f7ff3473ccce6e17b4":"Amazon S3 Connector is designed to integrate with Amazon S3 buckets, facilitating get, poll and copy operations.","d36f092ef89e7735143e811ab59848e5":"Dropbox Connector is designed to work with Dropbox service, files can be uploaded and downloaded via this connector to Dropbox accounts.","365676dc4bc137221ff79ef9d0de1c2a":"FTP Connector is designed to support FTP operations targeting remote hosts.","6514c1a8b5a66053e732056f39da9c0b":"An SFTP connector is designed to support secure FTP operations targeting remote hosts.","ece03aa8202723b7d1df71c91299fa9b":"HTTP Connector is designed to support HTTP operations targeting remote service endpoints.","0a4364eaa97bb4db53933cbe0a09709a":"HTTPS Connector is designed to support HTTPS operations targeting remote service endpoints.","7ff9a8f79b21a08a685c471c50c91e73":"The Fuse Ignite Twitter connector supports Twitter account integration using OAuth secured connections, and searches for tweets.","93c668b671ac7c01162cc11c35dbda56":"The Fuse Ignite Salesforce connector supports Salesforce account integration using OAuth secured connections. It also supports CRUD operations on Salesforce records based on external or record IDs, receiving of notifications of record modifications and retrieves data schema from Salesforce objects that are accessed.","5c8668a3cb41a06028a6678d074a3ed8":"The Fuse Ignite Slack connector supports publishing of messages to a user or channel on Slack, a popular real-time collaboration software. It is a shaped connector that handles shaped data that Slack recognizes and consumes.","1e48c667575d8d47440173f86c89ac7f":"The Fuse Ignite SQL connector supports the propagation of SQL statements for database operations. Users can write and execute SQL statements on the Fuse Ignite console, and observe subsequent results. ","0634e4274591199a41f29878e5656a4e":"The Fuse Ignite AMQP connector supports the message queue connectivity and messaging styles like publish and subscribe as well as request-response. It is compatible with OpenShift xPaaS AMQ broker images and AMQ Online. It supports shapeless content, authentication and TLS security.","8ad365ae99485a8f759e73fa29206f84":"The Fuse Ignite MQTT connector supports the message queue connectivity and message styles like publish and subscribe. It is compatible with OpenShift xPaaS AMQ broker images and AMQ Online. It supports shapeless content.","d3d21919567095c5cfca322107a987c5":"The Fuse Ignite AMQ connector supports the message queue connectivity and message styles like publish and subscribe as well as request-response. It is compatible with OpenShift xPaaS AMQ broker images and AMQ Online. It supports shapeless content.","56810d7c8d708c659b6fc8b87fa876ca":"Step actions are data operations that change and manipulate data sets, including aggregating, splitting, mapping, and filtering them.\n\nData sets are first transferred over connectors into a Fuse Online environment before being utilized as part of the inputs of step actions.\n\nThere are four bundled step actions in Fuse Online, which work with the 13 bundled connectors.\n","94dc47574285e18a42cd13b59c4b103f":"To filter data and integration activity, expressions and expression languages are supported in Fuse Online steps.","129c63e1d2b9e137b5bcbcde2d48de22":"Log steps in Fuse Online are used to log a message or other types of integration data. Message context and body can be logged, in addition with custom text that you can introduce at integration design time. You can locate and examine these logged messages using the Integration Activity tab.","4840586180fd5bd15ef7553eaadf8b10":"The data mapper step allows mapping of shaped output from the previous steps to the shaped input of the next step.\n\nIt also supports splitting fields, combining fields, field-level transformations, and access to the data output of all previous steps.","701d3c614ed283ff72a4176cd4a770e0":"When adding a basic filter step in Fuse Online to your integration, a guided form is provided for you to construct a logical, rules-based filter of integration data and activity. ","66b82dc7d2d03f3b74378392d3e4a656":"The SFTP connector is designed to support secure FTP operations targeting remote hosts.","c3df16718c45d57e9c8079618364f884":"The FTP connector is designed to support FTP operations targeting remote hosts.","a9b4ad522d07a08ef39f7621c8551be4":"The HTTPS connector is designed to support HTTPS operations targeting remote service endpoints.","ec72ac1a9c1dd4be63461d2a69f64e13":"The HTTP connector is designed to support HTTP operations targeting remote service endpoints.","b4d997acd2e77fa60a34e230fa93eecb":"The Twitter connector supports Twitter account integration using connections secured by OAuth. It also searches for tweets.","c31d9d00e6a041bb46d116da68103397":"The Salesforce connector supports Salesforce account integration using connections secured by OAuth. It also supports create, read, update, and delete, or CRUD, operations on Salesforce records based on external or record IDs. It also receives notifications of record modifications and retrieves data schema from Salesforce objects that it accesses.","02c171a893ce5b2228f4f8b87fa93efc":"The Slack connector supports publishing of messages to a user or channel on Slack, a popular real-time collaboration software. It is a shaped connector that handles shaped data that Slack recognizes and consumes.","9cec48b925c7301ab6dc36c2be5f875b":"The SQL database connector supports the propagation of SQL statements for database operations. Users can write and execute SQL statements on the Fuse Online console and observe subsequent results. ","071b7abf6791851d57c28bae01d435f7":"The AMQP connector supports message queue connectivity and messaging styles including publish-subscribe and request-response. It is compatible with OpenShift xPaaS AMQ broker images and AMQ Online. It supports shapeless content, authentication, and TLS security.","700bf4b75fd6197954ead1c9bf0c45ce":"The AMQ connector supports message queue connectivity and message styles including publish-subscribe and request-response. It is compatible with OpenShift xPaaS AMQ broker images and AMQ Online. It supports shapeless content.","f07b50d7a424a88cf2623c84bd05e04a":"The MQTT connector supports message queue connectivity and message styles including publish-subscribe. It is compatible with OpenShift xPaaS AMQ broker images and AMQ Online. It supports shapeless content.","629adbb7790bf7a87eb8a379c9f00dfd":"The Dropbox connector is designed to work with the Dropbox service. Files can be uploaded and downloaded via this connector to Dropbox accounts.","da2fb3f0e7f8bc751932f5f64c71d4dd":"The Amazon S3 connector is designed to integrate with Amazon S3 buckets, facilitating get, poll, and copy operations."}}};
+
+				SLConfig.theme = {"id":176,"created_at":"2014-05-27T12:38:16.183Z","updated_at":"2018-05-04T07:53:25.097Z","name":"Red Hat Corporate","thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/66755080be2b0c8c0146bfa70069ef16/thumb.jpg?1525420403","sanitize_messages":null,"slide_template_ids":[56706,56689,28642,36442,27160,26765,26762,56684,56696,56704,56703],"font_typekit":"","font_google":"","width":960,"height":700};
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/reveal.min.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 1280,
+				height: 720,
+				margin: 0.05,
+
+				hash: true,
+				controls: true,
+				progress: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: true,
+
+				autoSlide: 0,
+				autoSlideStoppable: true,
+
+				center: false,
+				shuffle: false,
+				loop: false,
+				rtl: false,
+
+				transition: "none",
+				backgroundTransition: "none",
+
+				dependencies: [
+					{ src: 'lib/reveal-plugins/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/highlight/highlight.js', async: true, callback: function() { hljs.initHighlighting(); hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/reveal-plugins/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'lib/reveal-plugins/zoom/zoom.js', async: true }
+				]
+			});
+		</script>
+
+		
+  <script id="theme-js-output" type="text/javascript">var themeHTMLOutput = document.getElementById('theme-html-output');
+if( themeHTMLOutput ) {
+    themeHTMLOutput.innerHTML = '<link  rel="stylesheet" href="https://overpassmonotest-30e2.kxcdn.com/overpass-mono.css" />';
+}
+
+// (function() {
+// 
+//   var slidesInitInterval = setInterval( function() {
+//     if( window.SL && window.SL.view ) {
+//       // If we're in the editor, wait for the Blocks controller
+//       // to be initialized
+//       if( SL.editor ) {
+// 
+//         if( SL.editor.controllers && SL.editor.controllers.Blocks && SL.editor.controllers.Blocks.textSaved ) {
+//           SL.editor.controllers.Blocks.textSaved.add( function( element ) {
+//             var html = element.html();
+//             html = html.replace( /(@RedHat | @redhat)/g,                 '@redhat' );
+//             html = html.replace( 'redhat.com',                 'redhat.com' );
+//             html = html.replace( /(Red Hat|red hat|RedHat|Red hat|Redhat|redHat|red Hat)/g,  '<span class="name">Red Hat</span>' );
+//             html = html.replace( /( redhat |redhat )/g,  ' <span class="name">Red Hat</span> ' );
+//             html = html.replace( 'REDHAT',                    '<span class="name">RED HAT</span>' );
+//             html = html.replace( 'redhat<',                    '<span class="name">Red Hat</span><' );
+//             html = html.replace( 'openshift',                 '<span class="name">OpenShift</span>' );
+//             html = html.replace( '<span class="name"><span class="name">Red Hat</span></span>',                    '<span class="name">Red Hat</span>' );
+//             html = html.replace( 'redhat.com',                 'redhat.com' );
+//             html = html.replace( 'REDHAT.COM',                 'REDHAT.COM' );
+//             html = html.replace( '@redhat',                 '@redhat' );
+//             html = html.replace( /(@RedHatNews | @redhatnews)/g,                 '@RedHatNews' );
+//             html = html.replace( /(@RedHat | @redhat)/g,                 '@RedHatInc' );
+//             html = html.replace( /(RHEL-OSP|RHELOSP|Red Hat Enterprise Linux OpenStack Platform)/g,                 'Red Hat OpenStack Platform' );
+//             html = html.replace( /(openstack |openstack|open stack|openStack|Openstack)/g,                 'OpenStack' );
+//             html = html.replace( 'openstack',                    'OpenStack' );
+//             html = html.replace( 'openstack<',                    'OpenStack<' );
+// 
+//             element.html( html );
+//           } );
+// 
+//           clearInterval( slidesInitInterval );
+//         }
+// 
+//       }
+//       else {
+//         clearInterval( slidesInitInterval );
+//       }
+//     }
+//   }, 500 );
+// 
+// })();
+
+
+
+// piwik script
+var _paq = _paq || [];
+_paq.push(["trackPageView"]);
+_paq.push(["enableLinkTracking"]);
+
+(function() {
+var u = (("https:" == document.location.protocol) ? "https" : "http") +
+"://engstats.redhat.com/piwik/";
+_paq.push(["setTrackerUrl", u+"piwik.php"]);
+_paq.push(["setSiteId", "8"]);
+var d=document, g=d.createElement("script"),
+s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+})();
+
+
+
+ 
+function sliceString(selector) {
+    var elements = document.getElementsByClassName(selector);
+
+ 
+    for (var h=0; h<elements.length; h++){
+      var string = elements[h].innerText,
+          total = string.length,
+          div = '';
+
+// futile attempt to clean space
+var string = elements[h].innerText.trim();
+     
+      for (var i=0; i<total;  i++) {
+        var letter = string.charAt(i);
+        div+= '<span class="'+letter+'">'+letter+'</span>';
+      }
+      elements[h].innerHTML = div;
+    }        
+}
+sliceString('lettering');
+sliceString('lettering'); //no rogue spaces when fired twice for some reason
+
+
+
+// function sliceString(selector) {
+//    if (!document.querySelector) return;
+//    var string = document.querySelector(selector).innerText,
+//        total = string.length,
+//        html = '';
+//    for (var i=0; i<total; i++) {
+//        var letter = string.charAt(i);
+//        html+= '<span class="'+letter+'">'+letter+'</span>';
+//    }
+//    document.querySelector(selector).innerHTML = html;
+//}
+//sliceString('.lettering');</script>
+
+	</body>
+</html>

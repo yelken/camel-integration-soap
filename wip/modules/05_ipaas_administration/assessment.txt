@@ -1,0 +1,31 @@
+QUESTIONBANKCODE|QUESTIONCODE|QUESTIONTYPE|QUESTIONTEXT|QUESTIONTEXTFORMAT|QUESTIONFEEDBACK|OPTION|RIGHTOPTION|OPTIONFEEDBACK|ISCORRECT|OPTIONWEIGHT|ISCASESENSITIVE|RANDOMIZEOPTIONS|STATUS
+IGNITE_DEV|IGNITE_FDS0501|1|Which of the following is NOT a valid deployment configuration in Red Hat Fuse Online?|||syndesis-meta|||0|0|||
+IGNITE_DEV|IGNITE_FDS0501|1|Which of the following is NOT a valid deployment configuration in Red Hat Fuse Online?|||syndesis-prometheus|||0|0|||
+IGNITE_DEV|IGNITE_FDS0501|1|Which of the following is NOT a valid deployment configuration in Red Hat Fuse Online?|||syndesis-server|||0|0|||
+IGNITE_DEV|IGNITE_FDS0501|1|Which of the following is NOT a valid deployment configuration in Red Hat Fuse Online?|||syndesis-client|||1|100|||
+IGNITE_DEV|IGNITE_FDS0502|5|https://localhost:4200 is the static redirect URL for the Fuse Online console.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0502|5|https://localhost:4200 is the static redirect URL for the Fuse Online console.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0503|1|What parameter must be passed during Fuse Online installation in order to change the memory limit for a PostgreSQL database?|||POSTGRESQL_MEMORY_LIMIT|||1|100|||
+IGNITE_DEV|IGNITE_FDS0503|1|What parameter must be passed during Fuse Online installation in order to change the memory limit for a PostgreSQL database?|||PROMETHEUS_MEMORY_LIMIT|||0|0|||
+IGNITE_DEV|IGNITE_FDS0503|1|What parameter must be passed during Fuse Online installation in order to change the memory limit for a PostgreSQL database?|||SERVER_MEMORY_LIMIT|||0|0|||
+IGNITE_DEV|IGNITE_FDS0503|1|What parameter must be passed during Fuse Online installation in order to change the memory limit for a PostgreSQL database?|||DB_MEMORY_LIMIT|||0|0|||
+IGNITE_DEV|IGNITE_FDS0504|1|Which of the following is NOT a valid Persistent Volume Claim in Fuse Online?|||syndesis-server|||1|100|||
+IGNITE_DEV|IGNITE_FDS0504|1|Which of the following is NOT a valid Persistent Volume Claim in Fuse Online?|||syndesis-prometheus|||0|0|||
+IGNITE_DEV|IGNITE_FDS0504|1|Which of the following is NOT a valid Persistent Volume Claim in Fuse Online?|||syndesis-meta|||0|0|||
+IGNITE_DEV|IGNITE_FDS0504|1|Which of the following is NOT a valid Persistent Volume Claim in Fuse Online?|||syndesis-db|||0|0|||
+IGNITE_DEV|IGNITE_FDS0505|1|Which command retrieves the OAuth token associated with the Fuse Online service account?|||oc get-token sa syndesis-oauth-client -n fuse-ignite-manual-provision-&lt;your initials&gt;|||0|0|||
+IGNITE_DEV|IGNITE_FDS0505|1|Which command retrieves the OAuth token associated with the Fuse Online service account?|||oc sa get-token fuse-ignite-manual-provision-&lt;your initials&gt; -n syndesis-oauth-client|||0|0|||
+IGNITE_DEV|IGNITE_FDS0505|1|Which command retrieves the OAuth token associated with the Fuse Online service account?|||oc sa get-token syndesis-oauth-client -n fuse-ignite-manual-provision-&lt;your initials&gt;|||1|100|||
+IGNITE_DEV|IGNITE_FDS0505|1|Which command retrieves the OAuth token associated with the Fuse Online service account?|||oc get-token sa fuse-ignite-manual-provision-&lt;your initials&gt; -n syndesis-oauth-client|||0|0|||
+IGNITE_DEV|IGNITE_FDS0506|5|The Update pod of Fuse Online runs only if an existing installation of Fuse Online exists.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0506|5|The Update pod of Fuse Online runs only if an existing installation of Fuse Online exists.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0507|5|Executing Ansible Playbook Bundles is an alternative method of installing Fuse Online.|||TRUE|||1|100|||
+IGNITE_DEV|IGNITE_FDS0507|5|Executing Ansible Playbook Bundles is an alternative method of installing Fuse Online.|||FALSE|||0|0|||
+IGNITE_DEV|IGNITE_FDS0508|1|Which of the following react on custom resources?|||Default Controller|||0|0|||
+IGNITE_DEV|IGNITE_FDS0508|1|Which of the following react on custom resources?|||Custom Controller|||1|100|||
+IGNITE_DEV|IGNITE_FDS0508|1|Which of the following react on custom resources?|||Custom Resource Definition|||0|0|||
+IGNITE_DEV|IGNITE_FDS0508|1|Which of the following react on custom resources?|||Default Resource Definition|||0|0|||
+IGNITE_DEV|IGNITE_FDS0509|1|Which of the following is NOT part of the Operator Framework in Fuse Online?|||Operator Metering|||0|0|||
+IGNITE_DEV|IGNITE_FDS0509|1|Which of the following is NOT part of the Operator Framework in Fuse Online?|||Operator SDK|||1|100|||
+IGNITE_DEV|IGNITE_FDS0509|1|Which of the following is NOT part of the Operator Framework in Fuse Online?|||Operator Lifecycle Manager|||0|0|||
+IGNITE_DEV|IGNITE_FDS0509|1|Which of the following is NOT part of the Operator Framework in Fuse Online?|||Operator Logger|||0|0|||

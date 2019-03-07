@@ -10,7 +10,7 @@ In this lab, you explore the basics of Spring development and how to get started
 
 .Background
 
-In the past, Spring Framework was criticized for being difficult to get started with. More recently, the Spring community addressed this concern with the addition of the Spring Boot project and the Spring Initalizr service hosted at link:http://start.spring.io["start.spring.io^"]. Both Spring Boot and Spring Initializr favor specific frameworks and third-party libraries. Red Hat provides a similar service at link:https://launch.openshift.io["launch.openshift.io^"] that also favors specific frameworks and a target platform (OpenShift).
+In the past, Spring Framework was criticized for being difficult to get started with. More recently, the Spring community addressed this concern with the addition of the Spring Boot project and the Spring Initalizr service hosted at link:http://start.spring.io["start.spring.io^"]. Both Spring Boot and Spring Initializr favor specific frameworks and third-party libraries. Red Hat provides a similar service at link:https://launch.openshift.io[*Red Hat Developer Launcher*] that also favors specific frameworks and a target platform (OpenShift).
 
 Because the purpose of this lab is to teach you to work with an existing Spring application and run it on Red Hat OpenShift Application Runtimes, you use Spring Initalizr. While you could also use link:https://launch.openshift.io["launch.openshift.io^"] or JBoss Forge to initiate the project, both skip steps that are crucial to your understanding of how to run Spring on Red Hat OpenShift Application Runtimes.
 

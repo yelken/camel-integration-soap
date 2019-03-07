@@ -1,0 +1,355 @@
+:scrollbar:
+:toc2:
+:linkattrs:
+:coursevm:
+
+
+== Database to RESTful Service Connector Lab
+
+NOTE: This lab takes about an hour to complete. It covers topics you need to know to correctly complete the final assessment.
+
+.Goals
+* Create an API client connector to an external REST service, using a Swagger document
+* Create an integration using this new API client connector and the PostgresDB connector, using Fuse Online
+* Use a data mapper step to map fields between the PostgresDB schema and the external REST service schema
+
+.Overview
+CoolWater Inc. is a local water utility company that requires you to implement a payment management system that provides their clients with a convenient online water bill payment interface. The design of the integration involves capturing input from the To Do web application in a PostgreSQL database, which then initiates a REST API connection to a web service that displays the water bill payment details on the Payments Summary page of CoolWater Inc. In this lab, you implement this client use case that supports recurring billing for clients of CoolWater Inc.
+
+image::images/01-Step-01.png[]
+
+
+:numbered:
+
+== Log In to Fuse Online Console
+
+. Log in to the OpenShift Container Platform web console if you are not already logged in.
++
+TIP: The link is in your confirmation email, if you need it.
+
+. Click your *fuse-ignite-$GUID* project.
+. Click the URL of your Fuse Online console.
+. Log in using your OPENTLC credentials.
+* The Fuse Online console appears.
+
+== Access To Do Application
+
+In this section, you access the web application that triggers the Fuse Online integration.
+
+. In the left-hand panel of the Fuse Online console, click *Home*.
+. Copy the URL for the Fuse Online console.
+. Open another browser window, paste the URL into the URL field, and append `todo-` as shown:
++
+.Sample URL
+----
+https://todo-fuse.fuse-ignite-<guid>.apps.<$Environment_ID>.openshift.opentlc.com
+----
+. Press *Enter* to access the To Do application:
++
+image::images/01-Step-02.png[]
++
+[NOTE]
+====
+Data posted from the To Do application is persisted in the PostgreSQL database embedded in Fuse Online.
+
+image::images/01-Step-03.png[]
+====
++
+[TIP]
+====
+Alternatively, you can retrieve the route address for the To Do Application by accessing the OpenShift Container Platform Application Console:
+
+. Following the links, *Applications* -> *Routes*
++
+image::images/ocp-console-routes.png[]
++
+. Click on the link to the To Do application, located below the *Hostname* category.
++
+image::images/ocp-routes.png[]
+====
+
+
+== Access Payments Summary Page
+
+In this section, you access the CoolWater Inc. Payments Summary page, which is exposed using REST APIs.
+
+. Using a new web browser window, launch the link:https://water-company-tp3demo.4b63.pro-ap-southeast-2.openshiftapps.com/main[Payments Summary page].
+. Leaving the web browser window open, note the entries that appear under the *All Payments* section.
+
+* At this point, the Fuse Online integration for CoolWater has not been set up, once the lab is complete the transaction entries will appear in the Account Summary page.
++
+image::images/01-Step-37.png[]
++
+[NOTE]
+Note that the results expire every three hours.
+
+
+== Create API Client Connector
+
+Next, you create an API client connector using an existing Swagger document.
+
+[NOTE]
+A link:https://swagger.io/docs/specification/about/[Swagger] document is a JSON object, developed with the link:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md[OpenAPI Specification] in mind.
+It serves as both a standards-based interface, as well as documentation, for a RESTful service. With the Swagger interface, minimal implementation logic needs to be generated in order to connect to RESTful services. This ease of use has led to the rapid adoption of Swagger in application development projects.
+
+. In the left-hand panel of the Fuse Online console, select *Customizations*:
++
+image::images/01-Step-04.png[]
+
+. On the *API Client Connectors* screen, click *Create API Connector*.
+* The *Upload Swagger Specification* screen appears. You have the option to either upload a Swagger document through a file upload facility, or to access a hosted Swagger document.
++
+. Select the *Use a URL* radio button.
+. Enter the location of the Swagger document for the Payments Summary REST service: `https://raw.githubusercontent.com/weimeilin79/fuse7tp3demo/master/waterpayment.yml`.
++
+image::images/01-Step-05.png[]
+. Click *Next*.
+* The *Review Actions* screen appears:
++
+image::images/01-Step-06.png[]
++
+****
+*Question:* Can you recognize the various operations that are imported?
+
+* *Hint* You use these operations while using the API client connector as part of an active integration, and understanding their objectives is important for your integration project.
+****
++
+. Click *Review/Edit*.
++
+image::images/01-Step-06a.png[]
++
+. Review the API Definition for the Payments Summary REST service, by switching between *Design* and *Source* tabs.
++
+****
+*Questions:* What are the input and output data types for the REST service? What are the paths and data types?
+
+* *Tip* You can add additional paths and data types by clicking on the `+` button next to the respective entity section.
+****
++
+. Click *Back*.
+. Back at the *Review Actions* page, click *Next*.
+* The *Specify Security* screen appears:
++
+image::images/01-Step-07.png[]
+
+. Click *Next*.
+* The *Review/Edit Connector Details* screen appears:
++
+image::images/01-Step-08.png[]
++
+. Review and take note of the the data on the screen.
+. Click *Create API Connector*.
+* The new *Pay Water Bill* connector appears as an entry on the *API Client Connectors* screen:
++
+image::images/01-Step-09.png[]
+
+* Note the description of the connector, as well as the frequency of use by Fuse Online integrations.
+. Click the *Pay Water Bill* connector.
++
+image::images/01-Step-09a.png[]
+
+* Note the details of the connector which appear, including the imported operations, host, base URL, and description.
++
+****
+* Using a web browser, view the link:https://raw.githubusercontent.com/weimeilin79/fuse7tp3demo/master/waterpayment.yml[Swagger document] for the Payments Summary REST service.
+* Compare the contents of the Swagger document with the details of the *Pay Water Bill* connector.
+* *Question:* Can you identify similar details between the *Pay Water Bill* connector that have you just set up and the Swagger document for the REST service? Are there any differences?
+****
+
+You have created an API client connector to a RESTful service, by providing a Swagger document to Fuse Online.
+
+
+== Create Connection
+
+In this section, you create a connection using the *Pay Water Bill* API client connector. This provides access to the Payments Summary page's hosted RESTful service.
+
+. In the left-hand panel of the Fuse Online console, select *Connections*:
+. Click *Create Connection*.
+* The *Create Connection* screen appears.
+. Select *Pay Water Bill* from the catalog of available connectors:
++
+image::images/01-Step-10.png[]
+. On the *Pay Water Bill Configuration* screen, enter `/` as the *Base path*.
+. Take note of the other fields and their values:
++
+image::images/01-Step-12.png[]
+. Click *Next*.
+. On the *Name Connection* screen, type `PayBill` in the *Connection Name* field:
++
+image::images/01-Step-13.png[]
+
+. Click *Create*.
+* The *Connections* screen appears with the *PayBill* connection displayed:
++
+image::images/01-Step-14.png[]
+
+The *PayBill* connection is now ready for use as part of an integration. In the same manner, you can create a wide variety of connections and access them on the *Connections* screen.
+
+
+== Create Integration
+
+In this section, you create an integration between the PostgresDB connection (the PostgreSQL database) and the PayBill connection (the Payments Summary REST service).
+The integration functions based on the content of database entries.
+Every entry containing `recurring` in the PostgresDB will be formatted and sent as a payload to the Payments Summary REST service.
+
+=== Add PostgresDB Connection to Integration
+
+. In the left-hand panel of the Fuse Online console, select *Integrations*, then click *Create Integration*:
++
+image::images/01-Step-15.png[]
+
+* This displays the *Choose a Start Connection* screen at the *START* connection point of the integration you are creating. The available connections, including the *PayBill* connection that you just created, are displayed.
+
+. Select the *PostgresDB* connection:
++
+image::images/01-Step-16.png[]
++
+[NOTE]
+====
+Credentials defined with the PostgresDB connection are used when connecting to the database.
+====
++
+. On the *Choose an Action* screen, select *Periodic SQL Invocation*:
++
+image::images/01-Step-17.png[]
+
+* Recurring payment data from the To Do application is inserted into the PostgreSQL database, as part of the integration.
+
+. Provide the following data for these fields:
+* *SQL Statement*: `SELECT TASK FROM TODO WHERE TASK LIKE 'recurring%'`
+* *Period*: *30000* and *Milliseconds*
+
+. Click *Done*.
+
+=== Add PayBill Connection to Integration
+
+. On the *Choose a Finish Connection* screen, select *PayBill*:
++
+image::images/01-Step-19.png[]
+* This assigns *PayBill* as the *FINISH* connection of the integration.
+
+. On the *Choose an Action* screen, select *Payment*:
++
+image::images/01-Step-20.png[]
+* This initiates a water utility bill payment.
+
+=== Add Data Mapping Step
+
+. In the left-hand panel, hover over the image:images/add_filter_icon.png[] icon located between the *PERIODIC SQL INVOCATION* connection and the *PAYMENT* connection, then select *Add a step*:
++
+image::images/01-Step-21.png[]
+
+. On the *Choose a Step* screen, select *Data Mapper*:
++
+image::images/01-Step-22.png[]
++
+[NOTE]
+On the *Configure Mapper* screen that appears, the *Sources* panel displays the fields in the output from the To Do application, while the *Target* panel displays the fields from the CoolWater REST API service.
+
+. In the *Target* panel, expand the body folder to reveal *amount* and *senderID* fields.
+. Map the *task* field from the *Sources* panel to the *senderId* field in the *Target* panel.
+* A solid line appears, connecting the two fields:
++
+image::images/01-Step-23.png[]
+
+. In the *Action* section of the *Mapping Details* panel on the right, select *Separate* from the *Action* list.
+. Leave *Space* selected in the *Separator* field:
++
+image::images/01-Step-24.png[]
++
+. In the *Targets* section, locate the arrow icon that adds a transformation when selected. It is located next to the garbage bin icon.
+. Click that arrow icon, to add a transformation.
++
+image::images/01-Step-25.png[]
++
+. In the *Targets* section of the *Mapping Details* panel, select *Trim* from the *Transformation* list that appears.
+. Still in the *Targets* section, type `2` in the *Index* field.
+. Click *Add Target*:
++
+image::images/01-Step-26.png[]
+
+. Type `amount` in the *Target* field and make sure that the *Index* field is set to `3`:
++
+image::images/01-Step-27.png[]
+
+. Click *Done*:
++
+image::images/01-Step-28.png[]
+
+. Click *Save as Draft* to save this integration.
+. Type `PayRecurringBill` in the *Integration Name* field and provide a meaningful description:
++
+image::images/01-Step-29.png[]
+
+. Click *Publish* to build, deploy and start the integration.
+* The build and deployment tasks take several minutes.
+* You can monitor the status of the integration from the *Integration Summary* screen:
++
+image::images/01-Step-30a.png[]
++
+. Once the integration status is *Published*, the integration is ready for testing.
+. Click on the *Integrations* tab found on the menu, and validate that the *PayRecurringBill* integration is present and is in *Running* state.
++
+image::images/01-Step-30.png[]
+
+
+== Test Integration
+
+In this section, you test the integration.
+
+. Access the To Do application.
+. In the form, enter `recurring <name> 200`, replacing `<name>` with any name:
++
+image::images/01-Step-31.png[]
+
+. Launch the link:https://water-company-tp3demo.4b63.pro-ap-southeast-2.openshiftapps.com/main[Payments Summary page] back-end dashboard and observe the results:
++
+image::images/01-Step-32.png[]
++
+. On the form submission screen of the To Do application, enter another value: `recurring <name> 100`, replacing `<name>` with a different name:
++
+image::images/01-Step-33.png[]
+
+. Launch the link:https://water-company-tp3demo.4b63.pro-ap-southeast-2.openshiftapps.com/main[Payments Summary page] back-end dashboard and observe the results:
++
+image::images/01-Step-34.png[]
+
+. Delete all entries from the To Do application:
++
+image::images/01-Step-35.png[]
+
+. Repeat the test, this time making multiple entries in the To Do application, some without the word `recurring`.
+. Record your observations.
+. Switch to the *Integration Summary* page for the *PayRecurringBill* integration.
+. Observe the total message count periodically increases, based on the same time interval that was set during the setup of the *Start* connection of the *PayRecurringBill* integration.
++
+****
+*Questions:*
+
+* What conclusions can you derive from all of the test results?
+* Can you imagine other use cases that also require such an integration design?
+****
+
+== Clean Up Integration
+
+In this section, you clean up the integration as a housekeeping best practice.
+
+. In the left-hand panel, click *Integrations*.
+. Locate the *PayRecurringBill* integration.
+. Click image:images/more_options_icon.png[] (*More Options*) next to the green check box and select *Unpublish*.
+. Click *OK*.
+* This deactivates the integration.
+* If you are using the Fuse Online Technology Preview release, other integrations can now be published and tested.
++
+[NOTE]
+The next two steps are optional. Use them only when you are certain you do not need the integration anymore.
++
+. Locate the *PayRecurringBill* integration and click image:images/more_options_icon.png[] (*More Options*), and then select *Delete Integration*.
+. Click *OK* at the bottom of the summary panel.
+
+You have completed, tested, and cleaned up your integration in Fuse Online.
+
+
+ifdef::showscript[]
+
+endif::showscript[]

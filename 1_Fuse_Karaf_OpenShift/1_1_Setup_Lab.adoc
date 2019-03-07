@@ -4,15 +4,62 @@
 
 == Agile Integration for the Enterprise- Setup Lab
 
-In this lab, you set up the environment for the labs in this course.
+In this lab, review the business use case for this Agile Enterprise technical workshop. Next, proceed to set up the environment for the labs in this course.
 
-.Goals
+
+.Business Use Case
+
+_Coolstore Inc._ is an ambitious e-commerce company that market quality consumer products on their portal. The company has bold plans in transforming itself into an link:https://www.cio.com/article/3269444/the-characteristics-of-an-agile-enterprise.html[*Agile Enterprise*]. At the link:https://www.redhat.com/en/services/consulting/open-innovation-labs[*Red Hat Open Innovation Labs*] in Boston, _Coolstore Inc._ attended a link:https://www.redhat.com/en/services/consulting#GatedFormContainer[*discovery workshop*] organized by link:https://www.redhat.com/en/services/consulting[*Red Hat Consulting*], and documented their business priorities into a discovery paper.
+The business priorities are simply: to improve _Coolstore Inc._ end-customer satisfaction levels, which will lead to increased sales and revenue.
+
+_Coolstore Inc._'s key takeway from the discovery workshop was appreciating the compelling value proposition of the link:https://www.redhat.com/en/topics/integration[*Red Hat Enterprise Integration strategy*] in helping enterprises become agile, which was clearly demonstrated by link:https://www.redhat.com/en/services/consulting[*Red Hat Consulting*].
+As a result, the C-suite of _Coolstore Inc._ is firmly committed in adopting link:https://www.redhat.com/en/technologies[*Red Hat technologies*] as the fundamental infrastructure for their Agile Enterprise.
+
+_Coolstore Inc_ insist on the highest availability and performance service level agreements (SLA) for their new Agile Integration infrastructure. That is why their technical staff has tested and chosen link:https://www.openshift.com/products/container-platform/[*Red OpenShift Container Platform*] to host and workload manage their containerized applications. Thanks to its reliability, scalability and performance, the product met the stringent SLAs set by _Coolstore Inc_. After all, link:https://www.openshift.com/products/container-platform/[*Red OpenShift Container Platform*] is powered by link:https://kubernetes.io/[*Kubernetes*] technology.
+
+With the help of Red Hat, _Coolstore Inc._ has developed the following roadmap to achieving Enterprise Agility:
+
+* Design Apache Camel routes, deployed on link:https://www.redhat.com/en/technologies/jboss-middleware/fuse[*Red Hat Fuse*] that consume JSON records from link:https://www.redhat.com/en/technologies/jboss-middleware/amq[*Red Hat AMQ*]
+* Use the multicast EIP pattern to distribute the messages to the services
+* Design the CXF web service using JAX-WS annotations to consume from SOAP backend service
+* Consume data from the backend REST service
+* Aggregate the messages received using the aggregation EIP pattern
+* Save the aggregated message in an SQL database using the Spring SQL Camel component
+* Use the Red Hat Fuse Tooling in Red Hat Developer Studio to create a *wsdl2rest* mapping
+* Transform legacy SOAP-based services to more modern REST-based services using the *wsdl2rest* mapping
+* Create a REST API layer on top of the Customer SOAP service
+* Design an Apache Camel route that exposes REST API consuming JSON
+* Implement JSON-based customer account record processing, with link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.2/html/fuse_on_openshift_guide/[*Fuse on OpenShift*] as the production environment
+* Data enrichment and aggregation using REST services, to create customer account records stored in a database
+* Design a hybrid-cloud-based integration solution, using link:https://www.openshift.com/products/fuse[*Fuse Online*], that consumes JSON records from link:https://www.redhat.com/en/technologies/jboss-middleware/amq[*Red Hat AMQ*]
+* Implement a REST-service interface for the cloud-based integration solution
+* Enable service discovery in the cloud-based integration solution
+* Integrate the cloud-based integration solution with a new API Management layer, built using link:https://developers.redhat.com/products/3scale/overview/[*3scale API Management*]
+* Secure and manage API traffic routed to the integration solution through the link:https://developers.redhat.com/products/3scale/overview/[*3scale API Management*] Gateway
+* Create Application Plan & Application in link:https://developers.redhat.com/products/3scale/overview/[*3scale API Management*]
+* Deploy and test the solution end-to-end
+
+As a second phase of their roadmap, _Coolstore Inc._ has plans to:
+
+* Create an link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] deployment using an Apache Kafka cluster operator
+* Create an link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] publisher and consumer for message delivery and retrieval
+* Create an link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] Connect deployment
+* With a File connector and link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] Connect, implement a publishing mechanism for customer account records
+* Enhance existing _Coolstore Inc._ portal using new Spring Boot applications, generated using link:https://launch.openshift.io[*Red Hat Developer Launcher*]
+* Enable data persistence capabilities in the Spring Boot applications using Spring Data and JPA
+* Deploy and test the Spring Boot applications on link:https://www.redhat.com/en/technologies/cloud-computing/openshift/application-runtimes[*Red Hat OpenShift Application Runtimes*]
+
+[NOTE]
+As a trusted Enterprise Integration consultant contracted by _Coolstore Inc._, your responsibility is to implement all the steps and milestones of the Agile Enterprise roadmap and fulfill the business requirements of _Coolstore Inc._ You are expected to deliver a comprehensive Enterpise Integration solution at the conclusion of this technical workshop, *based on the architecture diagram shown below.*
+
+image::images/architecture-usecase.png[]
+
+.Lab Goals
 * Set up the developer tools on your desktop
 * Authenticate the OpenShift client with the OpenShift Container Platform master API
 * Install and use the OpenShift command line interface (CLI)
 
-
-.Prerequisites
+.Lab Prerequisites
 * An open broadband Internet connection
 * A terminal client, such as PuTTy for Microsoft Windows
 * A current browser, such as Google Chrome or Mozilla Firefox
@@ -22,13 +69,11 @@ In this lab, you set up the environment for the labs in this course.
 [IMPORTANT]
 Make sure that the Internet connection is free of corporate proxies or other network rules that prevent access to remote servers on the Internet.
 
-
-
 :numbered:
 
 == Install Required Software
 
-In this lab, you create Red Hat Fuse on OpenShift applications, using Red Hat JBoss Developer Studio and OpenShift CLI tools on the desktop, and deploy them to an OpenShift project.
+In this setup lab, you create Red Hat Fuse on OpenShift applications, using Red Hat JBoss Developer Studio and OpenShift CLI tools on the desktop, and deploy them to an OpenShift project.
 
 . Install the software listed here on your local machine:
 
