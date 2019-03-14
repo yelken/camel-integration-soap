@@ -69,7 +69,92 @@ image::images/architecture-usecase.png[]
 [IMPORTANT]
 Make sure that the Internet connection is free of corporate proxies or other network rules that prevent access to remote servers on the Internet.
 
+
+.Deployment
+
+The following diagram shows the high level deployment topology in the OpenShift Container Platform cluster used in the lab.
+
+.Deployment Topology
+image::images/AI_Advanced_Deployment_dDagram.png[]
+
+
 :numbered:
+
+:scrollbar:
+:data-uri:
+:imagesdir: images
+:toc2:
+
+
+
+== Introduction
+
+This lab shows the set up of Red Hat OpenShift Container Platform cluster, common projects and applications necessary for running the *Advanced Agile Integration lab*.
+
+.Goal
+
+* Provision an OpenShift Container Platform cluster to be used for the lab with the following applications:
+** Red Hat 3scale API Management Multitenant Platform
+** Red Hat 3scale Tenant API Managers and gateway
+** APIcurito studio
+** Red Hat Fuse Online for each user
+
+IMPORTANT: [red yellow-background big]*If you are a student accessing the labs in a classroom, please skip this lab as the set up detailed here has already been completed for your environment.*
+
+
+== Deployment Architecture
+
+The following diagram shows the high level deployment topology in the OpenShift Container Platform cluster.
+
+.Deployment Topology
+image::AI_Advanced_Deployment_dDagram.png[]
+
+== Software Installation
+
+=== OpenShift Container Platform Cluster:
+
+. Lab-specific cluster
+. Seeded with user1-100 identities
+. Ansible Playbook and scripts for automated deployment.
++
+.Environment Variables:
+|=======================
+  | Variable | Value | Remarks
+  | REGION | TBD | GUID of the server to be provided.
+  | OCP_DOMAIN |  $REGION.openshift.opentlc.com |
+  | PROJECT_NAME_3SCALE | 3scale-mt-opentlc-mgr | Project for deploying multi-tenant Red Hat 3scale API Management (User: opentlc-mgr)
+  | PROJECT_NAME_API | apicurito | Project for deploying common instance of Apicurito Studio (User: opentlc-mgr)
+  | PROJECT_NAME_IGNITE | userX-fuse-online | Project for each user's individual Red Hat Fuse Online instance
+|=======================
++
+NOTE: Cluster Quota for secrets and service accounts needs to be configured based on the number of projects running in the cluster. A rough estimate is calculated by the following formula: 9 x number of Projects + any custom secrets.
+
+
+=== Application Deployments
+
+The following applications need to be deployed to the OpenShift Container Platform cluster. Login as `opentlc-mgr` (user with admin access) to deploy.
+
+==== Red Hat 3scale (Multi-tenant):
+
+. Multi-tenant environment
+. Each user gets own tenant for setting up APIs & dev Portal
+. Integrate Dev Portal for SSO with OpenShift identity
+. Template with multi-tenant deployment & creating tenants.
+
+
+==== Accessing Applications on OpenShift Container Platform
+
+. The following installations must be completed as the user `userX` on the OpenShift Container Platform cluster, where is X is the unique number assigned to your ID.
+
+. Login to OpenShift Container Platform as user 'userX' with the provided password.
++
+----
+$ oc login https://${OPENSHIFT_MASTER} -u opentlc-mgr
+----
+
+===== Red Hat Fuse Online
+
+. One instance per student
 
 == Install Required Software
 
