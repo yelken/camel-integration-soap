@@ -57,7 +57,7 @@ Check the link:https://access.redhat.com/documentation/en-us/red_hat_openshift_a
 :numbered:
 == Set Up Project
 
-. In Developer Studio, open the Maven project:
+. In Red Hat CodeReady Studio, open the Apache Maven project:
 +
 [source,sh]
 ----

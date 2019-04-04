@@ -11,23 +11,23 @@ SOAP-based services are plentiful in many enterprise solutions and are slowly be
 .Goals
 * Create REST API for the Customer SOAP service from previous lab.
 * Design Apache Camel route that exposes REST API consuming JSON.
-* Use the Red Hat Fuse Tooling in Red Hat Developer Studio to create *wsdl2rest* mapping.
+* Use the Red Hat Fuse Tooling in Red Hat CodeReady Studio to create *wsdl2rest* mapping.
 * Deploy and test the solution.
 
 
 :numbered:
 
 
-== Import the Project into Red Hat Developer Studio
+== Import the Project into Red Hat CodeReady Studio
 
-. Using the same method you used in the previous lab, import the `05_migrate_fuse6` use case into a new workspace. You will find 1 project:
+. Using the same method you used in the previous lab, import the `05_migrate_fuse6` use case into a new Red Hat CodeReady Studio workspace. You will find 1 project:
 
 * legacy-soap-rest-wrapper
 
 == Develop the Solution
 
 
-=== SOAP Web Service 
+=== SOAP Web Service
 
 The SOAP Web Service from the previous lab, available at *04_enrich-content-REST-and-WS-microservices/soap-cxfws-service*, is used as the backend SOAP service for this lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL is accessible at the URL: http://$soap-cxfws-service-route/ws/customerService?wsdl.
 
@@ -79,7 +79,7 @@ $ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name"
 $ mvn fabric8:deploy
 ----
 
-. Check that the project is deployed successfully. A pod for the deployment *legacy-soap-rest-wrapper* should be started. 
+. Check that the project is deployed successfully. A pod for the deployment *legacy-soap-rest-wrapper* should be started.
 . Notice the URL of the endpoint for external traffic.
 
 . You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as in localhost.

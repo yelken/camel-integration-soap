@@ -211,7 +211,7 @@ image::images/import-extensions.png[]
 image::images/import-extension.png[]
 +
 [TIP]
-If the import of an archive file containing a technical extension fails, it is likely that the extension contains invalid code--according to the rules contained in the Meta OpenShift pod--that causes the validation to fail. Analyze and debug the code using Red Hat Developer Studio and the link:https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.3/html/tooling_user_guide/igniteextension/[Tooling User Guide] before attempting the import process again.
+If the import of an archive file containing a technical extension fails, it is likely that the extension contains invalid code--according to the rules contained in the Meta OpenShift pod--that causes the validation to fail. Analyze and debug the code using Red Hat CodeReady Studio and the link:https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.3/html/tooling_user_guide/igniteextension/[Tooling User Guide] before attempting the import process again.
 
 * The *Loop* extension connector appears in the list of Extensions.
 

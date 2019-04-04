@@ -46,7 +46,7 @@ Each lab is contained in its own subdirectory.
 
 To provide you with a checkpoint, this lab starts with the solution code from the previous lab. This ensures that you start at the correct point. Also, it is useful in case you did not successfully complete the previous lab.
 
-. Launch Developer Studio.
+. Launch Red Hat CodeReady Studio.
 . Select *File -> Import*.
 . In the *Import* dialog box, select *Maven -> Existing Maven Projects* and click *Next*.
 . Click *Browse* and navigate to `~/appmod_foundations_training/spring/lab2`.
@@ -98,7 +98,7 @@ spring.datasource.driver-class-name=org.h2.Driver
 
 In this section, you create a unit test for `ProductCatalogService`.
 
-. In Developer Studio, navigate to your project directory and select `src/test/java`.
+. In Red Hat CodeReady Studio, navigate to your project directory and select `src/test/java`.
 
 . Expand the `com.redhat.coolstore.productcatalog` package.
 
@@ -147,7 +147,7 @@ mvn clean verify
 
 In this section, you create a product entity and add sample data.
 
-. In Developer Studio, navigate to your project directory and select `src/main/java`.
+. In Red Hat CodeReady Studio, navigate to your project directory and select `src/main/java`.
 
 . Expand the `com.redhat.coolstore.productcatalog` package.
 
@@ -258,7 +258,7 @@ org.hibernate.tool.hbm2ddl.SchemaExport  : HHH000230: Schema export complete
 
 == Create Database Repository Interface and Implement `testFindAll`
 
-. In Developer Studio, navigate to your project directory and select `src/main/java`.
+. In Red Hat CodeReady Studio, navigate to your project directory and select `src/main/java`.
 
 . Expand the `com.redhat.coolstore.productcatalog` package.
 
@@ -277,7 +277,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 }
 ----
 
-. In Developer Studio, navigate to your project directory and select `src/test/java`.
+. In Red Hat CodeReady Studio, navigate to your project directory and select `src/test/java`.
 
 . Open `ProductCatalogJPATests` and inject `ProductRepository` as a class variable:
 +

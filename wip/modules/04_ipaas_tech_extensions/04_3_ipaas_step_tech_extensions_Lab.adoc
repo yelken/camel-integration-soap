@@ -41,23 +41,24 @@ TIP: The link is in your confirmation email, if you need it.
 * The Fuse Online console appears.
 
 
-== Install Red Hat Developer Studio
+== Install Red Hat CodeReady Studio
 
-In this section, you install Developer Studio 11.2 and the Fuse Online technical extension plug-in.
+In this section, you install CodeReady Studio v12.11
+// and the Fuse Online technical extension plug-in.
 
-. Download version 11.2 of link:https://developers.redhat.com/products/devstudio/download/[Developer Studio], which is packaged as a JAR archive:
+. Download version 12.11 of link:https://developers.redhat.com/products/codeready-studio/download/[CodeReady Studio], which is packaged as a JAR archive:
 +
 image::images/jbds-download.png[]
 
-. Once the download is complete, launch a command-line terminal window and change to the directory containing the JAR archive for Developer Studio 11.2.
+. Once the download is complete, launch a command-line terminal window and change to the directory containing the JAR archive for CodeReady Studio v12.11
 . Execute the following command:
 +
 ----
-$ java -jar devstudio-11.2.0.GA-installer-standalone.jar
+$ java -jar devstudio-12.11.0.GA-installer-standalone.jar
 ----
 
 . Accept the defaults provided by the installation wizard by clicking *Next* on every screen, and then click *Install*.
-. After the installation is complete, launch Developer Studio, either from the command line or by clicking the Developer Studio icon.
+. After the installation is complete, launch Red Hat CodeReady Studio, either from the command line or by clicking the Red Hat CodeReady Studio icon.
 . Select *Help -> Install New Software*.
 . To the right of the *Work with* field, click *Add* and complete the fields as follows:
 * *Name*: `Fuse Integration Tooling Builds`
@@ -70,12 +71,12 @@ image::images/nightly-builds.png[]
 . Review the items to be installed and click *Next*.
 . Accept the terms and conditions and click *Finish*.
 * This starts the installation of the Fuse Online technical extension plug-in.
-. After the plug-in is installed, agree to allow Developer Studio to restart.
+. After the plug-in is installed, agree to allow Red Hat CodeReady Studio to restart.
 
 
 == Import Damage Reporter Application
 
-In this section, you import the damage reporter application into Developer Studio for analysis and eventual compilation of the code.
+In this section, you import the damage reporter application into Red Hat CodeReady Studio for analysis and eventual compilation of the code.
 
 . Download the repository containing the lab assets to the `<$lab_dir>` working directory using `git`:
 +
@@ -84,13 +85,13 @@ $ cd <$lab_dir>
 $ git clone https://github.com/gpe-mw-training/fuse-ipaas-labs
 ----
 
-. From the Developer Studio menu, select *File -> Import -> Existing Maven Projects*.
+. From the Red Hat CodeReady Studio menu, select *File -> Import -> Existing Maven Projects*.
 . Navigate to the directory containing the `pom.xml` file for the `damage-reporter` project:
 +
 ----
 /<$lab_dir>/fuse_ipaas_labs/04_technical_extensions/damage_reporter
 ----
-. After the project finishes importing, look for the `damage-reporter` project in the *Project Explorer* view in Developer Studio.
+. After the project finishes importing, look for the `damage-reporter` project in the *Project Explorer* view in Red Hat CodeReady Studio.
 +
 [NOTE]
 The `damage-reporter` project is a Java application that uses an Apache Camel route. The project also implements a Spring-managed component called `reportService`, which generates a list of damaged items that are eventually included, together with the vendor contact list, in the damaged-product report.
@@ -146,7 +147,7 @@ Use the link:https://access.redhat.com/documentation/en-us/red_hat_jboss_fuse/6.
 [TIP]
 For technical extensions that you develop based on an Apache Camel route instead of a bean, the entry point of the extension must correspond to a Camel endpoint on that route. In addition, you have to specify both the input data shape and the output data shape for a technical extension that transforms data types.
 
-. Walk through the `damage-reporter` project's code in your Developer Studio workspace:
+. Walk through the `damage-reporter` project's code in your Red Hat CodeReady Studio workspace:
 +
 image::images/damage-reporter-jbds.png[]
 +
@@ -209,7 +210,7 @@ image::images/damage-reporter-jbds-compile.png[]
 
 == Export Damage Reporter Application
 
-In this section, you export the `damage-reporter` project from Developer Studio to your local working directory as a JAR archive file.
+In this section, you export the `damage-reporter` project from Red Hat CodeReady Studio to your local working directory as a JAR archive file.
 
 . In the *Project Explorer* view, expand the `target` branch of the `damage-reporter` project.
 . Right-click the JAR file and select *Export*:

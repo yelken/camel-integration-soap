@@ -19,11 +19,11 @@ image::images/Fuse_Exp_Usecase_Mod2.png[]
 :numbered:
 
 
-== Import the Project into Red Hat Developer Studio
+== Import the Project into Red Hat CodeReady Studio
 
 . Download the `Enrich-content-REST-and-WS-microservices` lab assets.
 
-. Import the `Enrich-content-REST-and-WS-microservices` lab assets that you have downloaded, into a new JBDS workspace. You will find 3 projects:
+. Import the `Enrich-content-REST-and-WS-microservices` lab assets that you have downloaded, into a new Red Hat CodeReady Studio workspace. You will find 3 projects:
 
 * soap-cxfws-service
 * rest-cxfrs-service

@@ -61,11 +61,11 @@ cd lab1
 mvn clean package
 ----
 
-== Import Project into Red Hat Developer Studio
+== Import Project into Red Hat CodeReady Studio
 
-In this section, you import the project into Red Hat Developer Studio.
+In this section, you import the project into Red Hat CodeReady Studio.
 
-. Launch Developer Studio.
+. Launch Red Hat CodeReady Studio.
 . Select *File -> Import*.
 . In the *Import* dialog box, select *Maven -> Existing Maven Projects* and click *Next*.
 . Click *Browse* and navigate to `~/appmod_foundations_spring_demo/spring/lab1`.
@@ -80,7 +80,7 @@ image::images/lab/product-catalog-lab1.png[product-catalog-lab1]
 
 In this section, you create a component in your project.
 
-. In Developer Studio, navigate to your project directory and select `src/main/java`.
+. In Red Hat CodeReady Studio, navigate to your project directory and select `src/main/java`.
 
 . Create a new package named `com.redhat.coolstore.productcataloglab1.service`.
 
@@ -106,7 +106,7 @@ import org.springframework.stereotype.Component;
 
 In this section, you create a unit test for `ProductCatalogService`.
 
-. In Developer Studio, navigate to your project directory and select `src/test/java`.
+. In Red Hat CodeReady Studio, navigate to your project directory and select `src/test/java`.
 
 . Expand the `com.redhat.coolstore.productcataloglab1` package.
 
