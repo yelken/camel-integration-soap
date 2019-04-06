@@ -20,6 +20,28 @@
         </dataFormats>
         <!-- this is the route called by DEIMServiceImpl -->
         <route id="handleRest">
+            <!-- EXCLUDE-BEGIN -->
+            <!-- recipientList is used when the output destination needs to be dynmaic -->
+            <from id="_from1" uri="direct:integrateRoute"/>
+            <log id="_log1" message="The REST method is: ${in.header.METHOD}"/>
+            <recipientList id="_recipientList1">
+                <!-- The only method we have is match so this will go to direct:match -->
+                <simple>direct:${in.header.METHOD}</simple>
+            </recipientList>
+        </route>
+        <route id="matchRoute">
+            <from id="_from2" uri="direct:match"/>
+            <!-- normally this queue would be set with a property value -->
+            <marshal id="_marshal1" ref="personFormat"/>
+            <log id="_log2" message="The payload is : ${body}"/>
+            <inOut id="_inOut1" uri="activemqService:queue:customer"/>
+            <!-- Comment out the line above and uncomment the section below
+      if you would like to see the route function asynchronously -->
+            <!--inOnly uri="activemqService:queue:customer" />
+        <transform>
+          <constant>2</constant>
+        </transform-->
+            <!-- EXCLUDE-END -->
         </route>
     </camelContext>
 </beans>

@@ -19,6 +19,18 @@
             <jaxb contextPath="com.customer.app" id="personFormat" partClass="com.customer.app.Person"/>
         </dataFormats>
         <route id="translate">
+            <!-- EXCLUDE-BEGIN -->
+            <!-- Normally queue values are set as dynamic properties
+      so we can change them without rebuilding the code -->
+            <from id="_from1" uri="activemqService:queue:customer"/>
+            <unmarshal id="_unmarshal1" ref="personFormat"/>
+            <convertBodyTo id="_convertBodyTo1" type="com.sun.mdm.index.webservice.ExecuteMatchUpdate"/>
+            <log id="_log1" message="Converted body: ${body}"/>
+            <!-- Notice in the inbound route we just used the InOut component
+      here we used a pattern on the to component, they both work -->
+            <marshal id="_marshal1" ref="nextgateFormat"/>
+            <to id="_to1" pattern="InOut" uri="activemqService:queue:nextgate"/>
+            <!-- EXCLUDE-END -->
         </route>
     </camelContext>
 </beans>

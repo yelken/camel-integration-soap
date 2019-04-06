@@ -21,6 +21,36 @@
         <propertyPlaceholder id="myPropertyPlaceholder" location="ref:outboundProps"/>
         <!-- stream caching has to be enabled to process the message and log it from cxf -->
         <route id="sendToNextGate" streamCache="true">
+            <!-- EXCLUDE-BEGIN -->
+            <!-- the queue that we receive from is normally set as a property -->
+            <from id="_from1" uri="activemqService:queue:nextgate"/>
+            <log id="_log1" loggingLevel="INFO" message="Message from outbound queue: ${body}"/>
+            <setHeader headerName="operationName" id="_setHeader1">
+                <constant>executeMatchUpdate</constant>
+            </setHeader>
+            <!-- here we will look at the result code and set the body based on it -->
+            <to id="_to1" pattern="InOut" uri="{{nextgate.url}}"/>
+            <log id="_log2" message="Response from CXF : ${body}"/>
+            <choice id="_choice1">
+                <when id="_when1">
+                    <xpath>//resultCode = '0'</xpath>
+                    <transform id="_transform1">
+                        <simple>0</simple>
+                    </transform>
+                </when>
+                <when id="_when2">
+                    <xpath>//resultCode = '1'</xpath>
+                    <transform id="_transform2">
+                        <simple>1</simple>
+                    </transform>
+                </when>
+                <otherwise id="_otherwise1">
+                    <transform id="_transform3">
+                        <simple>-1</simple>
+                    </transform>
+                </otherwise>
+            </choice>
+            <!-- EXCLUDE-END -->
         </route>
     </camelContext>
 </beans>

@@ -5,5 +5,82 @@
     <!-- Define a traditional camel context here -->
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <propertyPlaceholder id="properties" location="route.properties"/>
+        <!-- EXCLUDE-BEGIN -->
+        <endpoint id="csv2json" uri="dozer:csv2json2?sourceModel=org.acme.Customer&amp;targetModel=org.globex.Account&amp;marshalId=json&amp;unmarshalId=csv&amp;mappingFile=transformation.xml"/>
+        <!-- CSV Input & JSon OutPut DataFormat -->
+        <dataFormats>
+            <bindy classType="org.acme.Customer" id="csv" type="Csv"/>
+            <json id="json" library="Jackson"/>
+        </dataFormats>
+        <restConfiguration bindingMode="off" component="servlet" contextPath="/rest"/>
+        <rest apiDocs="true"
+            id="rest-130579d7-1c1b-409c-a496-32d6feb03006" path="/service">
+            <post id="32d64e54-9ae4-42d3-b175-9cfd81733379" uri="/customers">
+                <to uri="direct:inbox"/>
+            </post>
+        </rest>
+        <route id="_injectroute" streamCache="true">
+            <from id="_fromIR1" uri="direct:inbox"/>
+            <setExchangePattern id="_setExchangePattern3" pattern="InOnly"/>
+            <to id="_to1" uri="amqp:queue:inputQueue"/>
+            <transform id="_transform1">
+                <constant>Processed the customer data</constant>
+            </transform>
+        </route>
+        <route id="_route1" streamCache="true">
+            <!-- Consume files from input directory -->
+            <from id="_from1" uri="amqp:queue:inputQueue"/>
+            <onException id="_onException1">
+                <exception>java.lang.IllegalArgumentException</exception>
+                <handled>
+                    <constant>true</constant>
+                </handled>
+                <log id="_log1" message=">> Exception : ${body}"/>
+                <setExchangePattern id="_setExchangePattern1" pattern="InOnly"/>
+                <to id="_to2" uri="direct:error"/>
+            </onException>
+            <split id="_split1">
+                <tokenize token=";"/>
+                <to id="_to3" ref="csv2json"/>
+                <setExchangePattern id="_setExchangePattern2" pattern="InOnly"/>
+                <to id="_to4" uri="amqp:queue:accountQueue"/>
+                <log id="_log2" message=">> Completed JSON: ${body}"/>
+            </split>
+        </route>
+        <!-- Publish the error code and error message on a topic -->
+        <route id="direct-error-queue">
+            <from id="_from2" uri="direct:error"/>
+            <setHeader headerName="error-code" id="_setHeader1">
+                <constant>111</constant>
+            </setHeader>
+            <setHeader headerName="error-message" id="_setHeader2">
+                <simple>${exception.message}</simple>
+            </setHeader>
+            <setHeader headerName="message" id="_setHeader3">
+                <simple>${body}</simple>
+            </setHeader>
+            <log id="_log3" logName="org.fuse.usecase"
+                loggingLevel="DEBUG" message="!!!! ERROR NOTIFICATION SEND"/>
+            <to id="error-queue-endpoint" uri="amqp:{{topicNotification}}"/>
+        </route>
+        <!-- Consume the Topic message and publish it into the DB -->
+        <route id="error-queue-sql">
+            <from id="_from3" uri="amqp:{{topicNotification}}?clientId=update-rest-publish-and-fix-errors&amp;durableSubscriptionName=errors-subscription"/>
+            <log id="_log4" logName="org.fuse.usecase"
+                loggingLevel="DEBUG" message="!!!! NOTIFICATION RECEIVED"/>
+            <log id="_log5" logName="org.fuse.usecase"
+                loggingLevel="DEBUG" message=">> Error code : ${header.error-code}, Error Message : ${header.error-message}"/>
+            <to id="_to5" uri="sql:insert into USECASE.T_ERROR(ERROR_CODE,ERROR_MESSAGE,MESSAGE,STATUS)                      values (:#${header.error-code}, :#${header.error-message}, :#${header.message}, 'ERROR');"/>
+        </route>
+        <!-- Inject correct record/message and update their status to CLOSE -->
+        <route id="sql-queue-input">
+            <from id="_from4" uri="sql:select MESSAGE, ID from USECASE.T_ERROR where STATUS = 'FIXED' ?consumer.onConsume=update USECASE.T_ERROR set STATUS='CLOSE' where ID = :#ID"/>
+            <setBody id="_setBody1">
+                <simple>${body[message]}</simple>
+            </setBody>
+            <log id="_log6" message=">> Body : ${body}"/>
+            <to id="_to6" uri="amqp:queue:inputQueue"/>
+        </route>
+        <!-- EXCLUDE-END -->
     </camelContext>
 </beans>
