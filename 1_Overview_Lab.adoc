@@ -189,7 +189,7 @@ Red Hat CodeReady Studio includes a variety of plug-ins for Eclipse. You use the
 
 This course comes with a variety of lab assets that are version controlled in GitHub. In this section, you clone or update the lab assets on your desktop so that they are available locally for use in the course's other labs.
 
-=== Clone Lab Project from Git
+=== Examine Lab Assets Project
 
 . In a terminal shell, locate a directory named `ai_labs` and navigate to the subdirectory within this directory:
 +
