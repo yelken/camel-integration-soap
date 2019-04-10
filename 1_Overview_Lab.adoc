@@ -200,6 +200,7 @@ $ cd agile-integration-for-the-enterprise
 -----
 +
 [NOTE]
-This is the `labs` root folder. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
+This is the root folder containing labs. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
+The subdirectory named `$AI_EXERCISE_HOME/code` contains the lab assets used in the individual labs.
 
 *Congratulations, you have completed this lab.*
