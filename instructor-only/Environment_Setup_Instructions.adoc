@@ -2,7 +2,7 @@
 :data-uri:
 :toc2:
 
-== Agile Integration for the Enterprise - Instructor Setup Lab
+== Agile Integration for the Enterprise - Instructor Setup Procedure
 
 This lab is for the instructor's preparation of the lab.
 In this lab, review the business use case for this Agile Enterprise technical workshop. Next, proceed to set up the environment for the labs in this course.
@@ -64,10 +64,11 @@ image::AI_Advanced_Deployment_dDagram.png[]
 
 === OpenShift Container Platform Cluster:
 
-. Provision an OCP cluster which is:
+. Provision an OCP cluster using the Ansible playbook located in this subdirectory *./ansible/* of this current directory.
+. The resulting OCP cluster is a:
 * Lab-specific cluster
 * Seeded with user1-100 identities
-* Using an Ansible Playbook and scripts for automated deployment.
+* Hosting 3scale, AMQ, Fuse on OpenShift and Fuse Online.
 +
 . Create the following variables in each student workstation:
 +
