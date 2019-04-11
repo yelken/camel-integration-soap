@@ -118,7 +118,7 @@ public interface CustomerWS {
 . Uses an Apache Camel CXF endpoint bean to configure the service and create it using these parameters:
 
 * `id`: `customerWebService`
-* `address`: `http://localhost:9090/ws/customerService`
+* `address`: `http://localhost:8080/ws/customerService`
 * `serviceClass`: `org.fuse.usecase.service.CustomerWS`
 * `loggingFeatureEnabled`: `true`
 
@@ -130,7 +130,7 @@ public interface CustomerWS {
 $ mvn camel:run -Dfabric8.skip
 ----
 
-. The Camel service should be running on port 9090, and can be accessed through URL: link:http://localhost:9090/ws/customerService[http://localhost:9090/ws/customerService]
+. The Camel CXF service is running on port 8080, and can be accessed through URL: link:http://localhost:8080/ws/customerService[http://localhost:8080/ws/customerService]
 
 . You can try a sample request using the SOAP UI:
 +
@@ -208,7 +208,7 @@ NOTE: Notice that the account is updated with the sales contact details.
 
 ==== Deploy to OpenShift Container Platform
 
-. Change the cxf endpoint to port 8080, as this is the default HTTP port exposed in the OpenShift Karaf container.
+. By examining the code, note that the cxf endpoint is set to port 8080, as this is the default HTTP port exposed in the OpenShift Karaf container.
 . Notice the OpenShift YAML files provided for deployment, service, and route configuration.
 . To deploy the application to OpenShift Container Platform, execute the following Maven command from the terminal:
 +
