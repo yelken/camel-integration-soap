@@ -126,7 +126,7 @@ $ oc login https://${OPENSHIFT_MASTER} -u opentlc-mgr
 +
 NOTE: The image streams available in the above template will need to be downloaded from `https://registry.redhat.io` which needs login access. Use the template created here instead: link:https://raw.githubusercontent.com/gpe-mw-training/agile_integration_advanced_labs/master/code/script/fis-image-streams.json[https://raw.githubusercontent.com/gpe-mw-training/agile_integration_advanced_labs/master/code/script/fis-image-streams.json].
 
-===== Red Hat AMQ Online
+==== Red Hat AMQ Online
 
 . Import the Red Hat AMQ Images and templates to the OpenShift Container Platform cluster, using this link:ansible/amq_online[Ansible Playbook].
 . Alternatively, follow the setup instructions here link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/deploying_amq_broker_on_openshift_container_platform/#installing-broker-ocp_broker-ocp[Installing AMQ Broker on OpenShift Container Platform image streams and application templates] for instructions.
