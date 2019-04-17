@@ -109,7 +109,7 @@ $ oc login https://${OPENSHIFT_MASTER} -u opentlc-mgr
 
 ==== Red Hat Fuse Online
 
-. This can be installed using this link:ansible/fuse_online[Fuse Online Ansible Playbook]
+. This can be installed using this link:https://github.com/honghuac/rhsummit_ansible/tree/master/ansible/fuse_online[Fuse Online Ansible Playbook]
 
 . Install as many instances of Fuse Online as there are students (one per student)
 
@@ -119,17 +119,11 @@ $ oc login https://${OPENSHIFT_MASTER} -u opentlc-mgr
 .. In addition to the Fuse Online application pods, an AMQ Broker and a PHP app called `Todo` are also installed.
 
 
-==== Red Hat Fuse On OpenShift
+==== Red Hat Fuse On OpenShift and AMQ Online
 
-. Import the Red Hat Fuse images and templates to the OpenShift Container Platform cluster.
-. See link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.0/html/fuse_on_openshift_guide/get-started-admin#prepare_the_openshift_server[Prepare the OpenShift Server] for instructions.
+. Import the Red Hat Fuse images and templates to the OpenShift Container Platform cluster, using this https://github.com/honghuac/rhsummit_ansible/tree/master/ansible/amq_fuse_templates_is[Ansible Playbook].
 +
-NOTE: The image streams available in the above template will need to be downloaded from `https://registry.redhat.io` which needs login access. Use the template created here instead: link:https://raw.githubusercontent.com/gpe-mw-training/agile_integration_advanced_labs/master/code/script/fis-image-streams.json[https://raw.githubusercontent.com/gpe-mw-training/agile_integration_advanced_labs/master/code/script/fis-image-streams.json].
-
-==== Red Hat AMQ Online
-
-. Import the Red Hat AMQ Images and templates to the OpenShift Container Platform cluster, using this link:ansible/amq_online[Ansible Playbook].
-. Alternatively, follow the setup instructions here link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/deploying_amq_broker_on_openshift_container_platform/#installing-broker-ocp_broker-ocp[Installing AMQ Broker on OpenShift Container Platform image streams and application templates] for instructions.
+NOTE: The image streams available in the above template will need to be downloaded from `https://registry.redhat.io` which needs login access. Use the template created here instead: link:https://raw.githubusercontent.com/honghuac/rhsummit_ansible/master/json/fis-image-streams.json[https://raw.githubusercontent.com/honghuac/rhsummit_ansible/master/json/fis-image-streams.json].
 
 
 == Install Required Software on Student Workstations
