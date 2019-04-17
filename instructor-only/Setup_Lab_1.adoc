@@ -2,9 +2,9 @@
 :data-uri:
 :toc2:
 
-== Agile Integration for the Enterprise - Instructor Setup Procedure
+== Agile Integration for the Enterprise - for Instructors to setup the environment
 
-This lab is for the instructor's preparation of the lab.
+This lab is for the instructor's preparation of the lab environment.
 In this lab, review the business use case for this Agile Enterprise technical workshop. Next, proceed to set up the environment for the labs in this course.
 
 .Lab Goals
@@ -42,7 +42,7 @@ image::images/AI_Advanced_Deployment_dDagram.png[]
 
 == Introduction
 
-This lab shows the set up of Red Hat OpenShift Container Platform cluster, common projects and applications necessary for running the *Advanced Agile Integration lab*.
+You will set up the student lab environment consisting of CodeReady Studio, a Red Hat OpenShift Container Platform cluster, common projects and middleware applications necessary for running the *Advanced Agile Integration lab*.
 
 .Goal
 
@@ -99,16 +99,40 @@ $ oc login https://${OPENSHIFT_MASTER} -u opentlc-mgr
 
 ==== Red Hat 3scale (Multi-tenant):
 
-. Multi-tenant environment
-. Each user gets own tenant for setting up APIs & dev Portal
-. Integrate Dev Portal for SSO with OpenShift identity
-. Template with multi-tenant deployment & creating tenants.
+. Install a Red Hat 3scale Multi-tenant environment using this link:ansible/3scale_multitenant[Ansible Playbook]
+
+. Examine the Ansible Playbook template
+.. Note that it installs with multi-tenant deployment & creating tenants.
+.. Each user gets own tenant for setting up APIs & dev Portal.
+.. The Red Hat 3scale API Management Platform is integrated with the Red HAt 3scale Developer Portal, using Red Hat SSO with OpenShift identity management.
+
 
 ==== Red Hat Fuse Online
 
-. One instance per student
+. This can be installed using this link:ansible/fuse_online[Fuse Online Ansible Playbook]
 
-== Install Required Software
+. Install as many instances of Fuse Online as there are students (one per student)
+
+. Examine the Ansible Playbook template
+.. Note that it installs without multi-tenancy.
+.. Each installation involves the use of a Syndesis operator that manages the installation.
+.. In addition to the Fuse Online application pods, an AMQ Broker and a PHP app called `Todo` are also installed.
+
+
+==== Red Hat Fuse On OpenShift
+
+. Import the Red Hat Fuse images and templates to the OpenShift Container Platform cluster.
+. See link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.0/html/fuse_on_openshift_guide/get-started-admin#prepare_the_openshift_server[Prepare the OpenShift Server] for instructions.
++
+NOTE: The image streams available in the above template will need to be downloaded from `https://registry.redhat.io` which needs login access. Use the template created here instead: link:https://raw.githubusercontent.com/gpe-mw-training/agile_integration_advanced_labs/master/code/script/fis-image-streams.json[https://raw.githubusercontent.com/gpe-mw-training/agile_integration_advanced_labs/master/code/script/fis-image-streams.json].
+
+===== Red Hat AMQ Online
+
+. Import the Red Hat AMQ Images and templates to the OpenShift Container Platform cluster, using this link:ansible/amq_online[Ansible Playbook].
+. Alternatively, follow the setup instructions here link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/deploying_amq_broker_on_openshift_container_platform/#installing-broker-ocp_broker-ocp[Installing AMQ Broker on OpenShift Container Platform image streams and application templates] for instructions.
+
+
+== Install Required Software on Student Workstations
 
 In this setup lab, you create Red Hat Fuse on OpenShift applications, using Red Hat CodeReady Studio and OpenShift CLI tools on the desktop, and deploy them to an OpenShift project.
 
@@ -162,29 +186,32 @@ Red Hat CodeReady Studio includes a variety of plug-ins for Eclipse. You use the
 You can select the plug-in installation during the Red Hat CodeReady Studio installation process, or you can select these from the welcome page.
 
 
-== Obtain Course Lab Assets
+== Obtain Course Lab Assets (Instructor to guide student on this during labs)
 
 This course comes with a variety of lab assets that are version controlled in GitHub. In this section, you clone or update the lab assets on your desktop so that they are available locally for use in the course's other labs.
 
 === Clone Lab Project from Git
 
-. In a terminal shell, create a directory named `ai_labs` and navigate to it:
+. In a terminal shell, perform the following commands:
 +
 [source,text]
 -----
-$ mkdir ai_labs
-$ cd ai_labs
------
-
-. Import the lab assets from GitHub:
-+
-[source,text]
------
+$ cd $HOME
 $ git clone https://gitlab.com/redhatsummitlabs/agile-integration-for-the-enterprise.git
 $ cd agile-integration-for-the-enterprise
+$ git checkout development
+$ cd code
 -----
 +
 [NOTE]
-This is the `labs` root folder. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
+`$HOME/agile-integration-for-the-enterprise` is the root folder containing lab assets and lab sheets. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
+The subdirectory named `$AI_EXERCISE_HOME/code` contains the lab assets used in the individual labs.
+
+
+=== Access lab sheets and lab assets
+
+. Familiarize yourselves with the instructor lab assets in `$AI_EXERCISE_HOME/instructor-only`
+. Familiarize yourselves with the student lab sheets in `$AI_EXERCISE_HOME/
+. Familiarize yourselves with the lab assets in `$AI_EXERCISE_HOME/code`
 
 *Congratulations, you have completed this lab.*

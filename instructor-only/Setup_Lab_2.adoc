@@ -9,7 +9,7 @@ endif::[]
 :toc:
 :toc-placement!:
 
-= Installing the lab environment
+= Installing the Integreatly lab environment - for Instructors
 
 :toc:
 toc::[]

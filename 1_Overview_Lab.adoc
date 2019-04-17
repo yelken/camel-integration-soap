@@ -191,16 +191,19 @@ This course comes with a variety of lab assets that are version controlled in Gi
 
 === Examine Lab Assets Project
 
-. In a terminal shell, locate a directory named `ai_labs` and navigate to the subdirectory within this directory:
+. In a terminal shell, perform the following commands:
 +
 [source,text]
 -----
-$ cd ai_labs
+$ cd $HOME
+$ git clone https://gitlab.com/redhatsummitlabs/agile-integration-for-the-enterprise.git
 $ cd agile-integration-for-the-enterprise
+$ git checkout development
+$ cd code
 -----
 +
 [NOTE]
-This is the root folder containing labs. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
+`$HOME/agile-integration-for-the-enterprise` is the root folder containing lab assets and lab sheets. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
 The subdirectory named `$AI_EXERCISE_HOME/code` contains the lab assets used in the individual labs.
 
 *Congratulations, you have completed this lab.*
