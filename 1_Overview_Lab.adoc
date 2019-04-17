@@ -206,4 +206,9 @@ $ cd code
 `$HOME/agile-integration-for-the-enterprise` is the root folder containing lab assets and lab sheets. The absolute path to this folder is referred to as `$AI_EXERCISE_HOME` in the instructions.
 The subdirectory named `$AI_EXERCISE_HOME/code` contains the lab assets used in the individual labs.
 
+=== Access lab sheets and lab assets
+
+. Familiarize yourselves with the student lab sheets in `$AI_EXERCISE_HOME/
+. Familiarize yourselves with the lab assets in `$AI_EXERCISE_HOME/code`
+
 *Congratulations, you have completed this lab.*
