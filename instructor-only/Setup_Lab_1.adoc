@@ -99,12 +99,12 @@ $ oc login https://${OPENSHIFT_MASTER} -u opentlc-mgr
 
 ==== Red Hat 3scale (Multi-tenant):
 
-. Install a Red Hat 3scale Multi-tenant environment using this link:ansible/3scale_multitenant[Ansible Playbook]
+. Install a Red Hat 3scale Multi-tenant environment using this link:https://github.com/honghuac/rhsummit_ansible/tree/master/ansible/3scale_multitenant[Ansible Playbook]
 
 . Examine the Ansible Playbook template
 .. Note that it installs with multi-tenant deployment & creating tenants.
-.. Each user gets own tenant for setting up APIs & dev Portal.
-.. The Red Hat 3scale API Management Platform is integrated with the Red HAt 3scale Developer Portal, using Red Hat SSO with OpenShift identity management.
+.. Each user gets own tenant for setting up APIs and the Red Hat 3scale Developer Portal.
+.. The Red Hat 3scale API Management Platform is integrated with the Red Hat 3scale Developer Portal, using Red Hat SSO with OpenShift identity management.
 
 
 ==== Red Hat Fuse Online
