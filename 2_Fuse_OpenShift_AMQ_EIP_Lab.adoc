@@ -220,15 +220,16 @@ $ mvn fabric8:deploy
 
 . You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
 
-=== Develop the Integration Module
+=== Test the Integration Module
 
-Now you will be implementing the Camel routes for enriching the Account data with the 2 backend services, aggregate the responses, and finally persist the data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
+Now you will be testing the Camel routes that (1) enrich the Account data with the 2 backend services, (2) aggregate the responses, and finally (3) persist the data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
 
 ==== H2 database
 
-As part of this integration, you will be writing the records into a database. For the purposes of this lab, an embedded H2 database is provided to run the solution on localhost. You can find the configuration details in the `pom.xml` and `application-dev.properties` files.
+The first Camel route updates the records in an embedded H2 database, running on localhost.
 
-An SQL script for creating the USECASE schema and the table required is provided in the `schema.sql` file.
+. Inspect the configuration details in the `pom.xml` and `application-dev.properties` files.
+. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `schema.sql` file.
 
 You can access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
 
@@ -236,20 +237,20 @@ NOTE: The console will be available only after the routes are started. As the da
 
 ==== Develop the Camel routes
 
-. Based on the code provided, create a new route that consumes the JSON objects created in the previous exercise. You can have your route start from the *accountQueue*.
-. Set up the AMQP configuration and queues based on the previous lab.
-. Convert the content to a string and unmarshall the JSON content to a POJO using the `<unmarshal>` processor.
+. Analyze the second Camel route that consumes the JSON objects and starts from the *accountQueue*.
+.. Note the AMQP configuration and queues based on the previous lab.
+.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO is done using the `<unmarshal>` processor.
 * JSON library: `jackson`
 * `unmarshalTypeName` attribute: `org.globex.Account`
 * The result is used to multicast the exchange to the REST and web service endpoints.
 +
-IMPORTANT: Do not multicast the exchange in parallel. To simplify the legibility of the code, use a direct endpoint (`callRestEndpoint`) to call the REST service and a different direct endpoint (`callWSEndpoint`) to call the web service service.
+IMPORTANT: It is a best practice not to multicast data in parallel. To simplify the legibility of the code, a direct endpoint (`callRestEndpoint`) is used to call the REST service and a different direct endpoint (`callWSEndpoint`) to call the web service service.
 
 ==== Define the REST Direct Routes
 
-. To call the backend services, create two routes: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
+. To call the backend services, two Camel routes were created: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
 
-* To correctly invoke the declared REST service, use an HTTP producer component and make sure the following `{header,value}` pairs are specified:
+* To correctly invoke the declared REST service, a HTTP producer component is used and make sure the following `{header,value}` pairs are specified:
 
 ** `Content-Type=application/json`
 ** `Accept=application/json`
@@ -257,38 +258,36 @@ IMPORTANT: Do not multicast the exchange in parallel. To simplify the legibility
 ** `CamelCxfRsUsingHttpAPI=True`
 
 
-==== Define the Web Service Direct Route
+==== The Web Service Direct Route
 
-. Develop a direct web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer.
+. Note the direct web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer.
 
 
-==== Design the Aggregation Strategy
+==== The Aggregation Strategy
 
-. From the results collected by the two services, aggregate the content in the `multicast` processor to reconcile the information received from the `CorporateAccount` POJO with the `Account` POJO.
+. From the results collected by the two services, analyse how the content is aggregated in the `multicast` processor to reconcile the information received from the `CorporateAccount` POJO with the `Account` POJO.
 
 * This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
 +
 NOTE: The aggregation strategy must be developed within the `AccountAggregator` class.
 
-==== Insert the Aggregated Data into the H2 Database
+==== The Aggregated Data into the H2 Database
 
-Next you create a new Apache Camel route to insert the `Account` information into the `T_ACCOUNT` table of the `ACCOUNT` database.
-
-. Use the Spring SQL component and specify the SQL query to be used to insert the `Account` record within the `option` parameter of the SQL endpoint.
+. Analyze the Apache Camel route that inserts the `Account` information into the `T_ACCOUNT` table of the `ACCOUNT` database.
+..  The Spring SQL component in the route uses a SQL query to insert the `Account` record within the `option` parameter of the SQL endpoint.
 * Method: `defineNamedParameters(Account account)`
 
-. Define the named parameters using a `Map<String, Object>` that you create within a bean that is called by the route to set the body, before calling the SQL endpoint.
+.. The named parameters are defined using a `Map<String, Object>` created within a bean that is called by the route to set the body, before calling the SQL endpoint.
 * Bean: `ProcessorBean.class`
 
 . After calling the SQL endpoint, add a log message processor to display the contents of the received body.
 
+==== Using a JUnit Test
 
-==== Develop a JUnit Test
-
-. Develop a JUnit test case to validate that the `jackson` ObjectMapper can read the string content of the JSON `Account` message and generate an `Account` object.
+. Analyze the JUnit test case that validates the `jackson` ObjectMapper can read the string content of the JSON `Account` message and generate an `Account` object.
 * JUnit test class: `JacksonCompanyTest`
 
-. Define two assert conditions: one to check that the object is not null, and the other to verify that the name of the company is equal to "Robocops".
+. Note the two assert conditions: one to check that the object is not null, and the other to verify that the name of the company is equal to "Robocops".
 
 
 ==== Build the `routing` Project and Test it Locally
@@ -299,7 +298,7 @@ Next you create a new Apache Camel route to insert the `Account` information int
 $ mvn spring-boot:run -Dfabric8.skip
 ----
 
-* If your code is correct, you will see output similar to the following:
+* You will see output similar to the following:
 +
 ----
 {CONTACT_STATE=NC, SALES_CONTACT=Guillaume Nodet, CREATION_USER=fuse_usecase, CREATION_DATE=2015-12-11 18:18:01.55, CONTACT_PHONE=600-555-7000, CONTACT_CITY=Raleigh, CONTACT_ADDRESS=1101 Smith St., COMPANY_NAME=MountainBikers, COMPANY_ACTIVE=true, CLIENT_ID=46, CONTACT_LAST_NAME=Jungle, CONTACT_ZIP=27519, COMPANY_GEO=SOUTH_AMERICA, CONTACT_FIRST_NAME=George}
@@ -328,18 +327,5 @@ $ mvn fabric8:deploy -Popenshift
 . Check that the pod *amq-enrich-persist-lab* starts up correctly.
 . Check that the route runs successfully, consuming all 3 messages from accountQueue, and writing to the database.
 
-
-== Useful SQL Scripts
-
-
-----
-
-INSERT INTO USECASE.T_ACCOUNT (CLIENT_ID,SALES_CONTACT,COMPANY_NAME,COMPANY_GEO,COMPANY_ACTIVE,CONTACT_FIRST_NAME,CONTACT_LAST_NAME,CONTACT_ADDRESS,CONTACT_CITY,CONTACT_STATE,CONTACT_ZIP,CONTACT_PHONE,CREATION_DATE,CREATION_USER) VALUES ('95','Rachel Cassidy','MountainBikers','SOUTH_AMERICA',true,'George','Jungle','1101 Smith St.','Raleigh','NC','27519','919-555-0800','2015-12-15','fuse_usecase');
-
-DELETE FROM USECASE.T_ACCOUNT;
-
-SELECT * FROM USECASE.T_ACCOUNT;
-
-----
 
 Congratulations, you have completed this lab.
