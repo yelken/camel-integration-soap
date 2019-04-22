@@ -153,17 +153,13 @@ To complete the labs in the course, you must have Red Hat CodeReady Studio insta
 . On the left side, click *Download*.
 * Note that the latest release of Red Hat CodeReady Studio is highlighted near the top of the page.
 
-. Click *Installer* to download the installer for version 12.11 of Red Hat CodeReady Studio:
-+
-image::images/jbds_download_selection.png[]
+. Click *Installer* to download the installer for version 12.11 of Red Hat CodeReady Studio.
 
 . Proceed to log in.
 * The download begins shortly after you log in.
 
 . Follow the onscreen instructions to install Red Hat CodeReady Studio, substituting the name of the JAR file with the one you downloaded:
-+
-image::images/dl_instructions.png[]
-+
+
 [NOTE]
 The installation guide is also available on the link:https://access.redhat.com/documentation/en-us/red_hat_developer_studio/[Red Hat CodeReady Studio Product Documentation^] page, where you can select the version you are using.
 
@@ -178,7 +174,6 @@ Red Hat CodeReady Studio includes a variety of plug-ins for Eclipse. You use the
 * *M2E*: Red Hat CodeReady Studio includes the Eclipse M2E plug-in, which provides support for Apache Maven projects. No additional installation is required. The M2E plug-in enables you to edit a Maven project’s `pom.xml` and run a Maven build from the IDE.
 
 You can select the plug-in installation during the Red Hat CodeReady Studio installation process, or you can select these from the welcome page.
-
 
 == Obtain Course Lab Assets (Instructor to guide student on this during labs)
 
@@ -207,5 +202,123 @@ The subdirectory named `$AI_EXERCISE_HOME/code` contains the lab assets used in 
 . Familiarize yourselves with the instructor lab assets in `$AI_EXERCISE_HOME/instructor-only`
 . Familiarize yourselves with the student lab sheets in `$AI_EXERCISE_HOME/
 . Familiarize yourselves with the lab assets in `$AI_EXERCISE_HOME/code`
+
+
+== Deploy AMQ Broker on OpenShift Container Platform
+
+We need to deploy AMQ 7 broker on OpenShift Container Platform. The general installation steps are documented here: link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html-single/deploying_amq_broker_on_openshift_container_platform/[AMQ Installation of OpenShift Guide].
+
+. In the terminal, log in to the OpenShift Container Platform cluster.
+. Switch OpenShift project:
++
+----
+$ oc project $OCP_PROJECT_PREFIX-fuse
+----
+
+. Add the *view* role to the service account:
++
+----
+$ echo '{"kind": "ServiceAccount", "apiVersion": "v1", "metadata": {"name": "amq-service-account"}}' | oc create -f -
+$ oc policy add-role-to-user view system:serviceaccount:$OCP_PROJECT_PREFIX-fuse:amq-service-account
+----
+
+. Deploy the broker:
++
+----
+$ oc new-app --namespace $OCP_PROJECT_PREFIX-fuse \
+   --template=amq-broker-72-basic \
+   -e AMQ_PROTOCOL=openwire,amqp,stomp,mqtt,hornetq \
+   -e AMQ_USER=admin \
+   -e AMQ_PASSWORD=password \
+   -e AMQ_ROLE=admin
+----
+
+. Check that the broker pod is running.
+. Make a note of the console URL. You can access the console URL from a web browser and ensure the broker is started correctly.
+. The broker service url for AMQP would be `broker-amq-amqp:5672`. Make a note of this when configuring the AMQ connection for the labs.
+
+== Deploy PostgreSQL on OpenShift Container Platform
+
+We need to deploy PostgreSQL database on OpenShift Container Platform. The general installation steps are documented here: link:https://docs.openshift.com/container-platform/3.10/using_images/db_images/postgresql.html[PostgreSQL on OpenShift guide].
+
+. In the terminal, log in to the OpenShift Container Platform cluster.
+. Switch OpenShift project:
++
+----
+$ oc project $OCP_PROJECT_PREFIX-fuse
+----
+
+. Deploy the database:
++
+----
+$ oc new-app --namespace $OCP_PROJECT_PREFIX-fuse \
+    -e POSTGRESQL_USER=postgres \
+    -e POSTGRESQL_PASSWORD=postgres \
+    -e POSTGRESQL_DATABASE=sampledb \
+    postgresql-persistent
+----
+
+. Check that the database pod is running.
+. Identify the name of the pod running PostgreSQL and open a remote shell to the pod:
++
+----
+$  oc get pods | grep postgresql
+$  oc rsh <pod>
+----
+
+. Log in to PostgreSQL and create the *sampledb* database.
++
+----
+sh-4.2$ createdb -h localhost -p 5432 -U postgres sampledb
+sh-4.2$ PGPASSWORD=$POSTGRESQL_PASSWORD psql -h postgresql $POSTGRESQL_DATABASE $POSTGRESQL_USER
+psql (9.6.10)
+Type "help" for help.
+
+sampledb=#
+
+----
+
+. Create the tables.
++
+Run the following commands on the PostgreSQL command line:
++
+----
+CREATE SCHEMA USECASE;
+CREATE TABLE USECASE.T_ACCOUNT (
+    id  SERIAL PRIMARY KEY,
+    CLIENT_ID integer,
+    SALES_CONTACT VARCHAR(30),
+    COMPANY_NAME VARCHAR(50),
+    COMPANY_GEO CHAR(20) ,
+    COMPANY_ACTIVE BOOLEAN,
+    CONTACT_FIRST_NAME VARCHAR(35),
+    CONTACT_LAST_NAME VARCHAR(35),
+    CONTACT_ADDRESS VARCHAR(255),
+    CONTACT_CITY VARCHAR(40),
+    CONTACT_STATE VARCHAR(40),
+    CONTACT_ZIP VARCHAR(10),
+    CONTACT_EMAIL VARCHAR(60),
+    CONTACT_PHONE VARCHAR(35),
+    CREATION_DATE TIMESTAMP,
+    CREATION_USER VARCHAR(255)
+);
+CREATE TABLE USECASE.T_ERROR (
+    ID SERIAL PRIMARY KEY,
+    ERROR_CODE VARCHAR(4) NOT NULL,
+    ERROR_MESSAGE VARCHAR(255),
+    MESSAGE VARCHAR(512),
+    STATUS CHAR(6)
+);
+----
++
+NOTE: You can use `\q` to exit the PostgreSQL command line.
+
+== Install Red Hat AMQ 7.2.0
+
+You need to run a Red Hat AMQ broker locally to execute some of the labs in this course. Please download the link:https://developers.redhat.com/products/amq/download/[Red Hat AMQ 7.2.0 Broker installer] and follow the link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_broker/installation[instructions] to install it on your laptop.
+
+Once installed, please follow the link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_broker/getting_started[Getting Started] steps to start a new broker running locally on your laptop.
+
+IMPORTANT: Provide the user ID and password for the broker as `admin` and `password`.
 
 *Congratulations, you have completed this lab.*
