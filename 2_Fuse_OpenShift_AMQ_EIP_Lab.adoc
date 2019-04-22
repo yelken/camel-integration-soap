@@ -59,7 +59,7 @@ Account enrich(Account customer);
 
 ==== Run the REST service
 
-. To run the REST service locally, run the following Apache Maven command from the project's root folder:
+. To run the REST service locally, run the following Apache Maven command from the project's root folder `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service`:
 +
 ----
 $ mvn spring-boot:run -Dfabric8.skip
@@ -124,7 +124,7 @@ public interface CustomerWS {
 
 ==== Run the SOAP service
 
-. To run the SOAP service locally, run the following Maven command from the project root folder:
+. To run the SOAP service locally, run the following Maven command from the project root folder `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service`:
 +
 ----
 $ mvn camel:run -Dfabric8.skip
