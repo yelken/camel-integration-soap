@@ -17,6 +17,7 @@
     <run.profiles>dev</run.profiles>
     <!-- configure the Fuse version you want to use here -->
     <fuse.version>7.2.0.fuse-720020-redhat-00001</fuse.version>
+    <fabric8.maven.plugin.version>4.1.0</fabric8.maven.plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -208,6 +209,7 @@
                     <plugin>
                         <groupId>io.fabric8</groupId>
                         <artifactId>fabric8-maven-plugin</artifactId>
+                         <version>${fabric8.maven.plugin.version}</version>
                         <configuration>
                             <enricher>
                                 <excludes>

@@ -227,10 +227,9 @@ $ oc policy add-role-to-user view system:serviceaccount:$OCP_PROJECT_PREFIX-fuse
 ----
 $ oc new-app --namespace $OCP_PROJECT_PREFIX-fuse \
    --template=amq-broker-72-basic \
-   -e AMQ_PROTOCOL=openwire,amqp,stomp,mqtt,hornetq \
-   -e AMQ_USER=admin \
-   -e AMQ_PASSWORD=password \
-   -e AMQ_ROLE=admin
+   -p=AMQ_PROTOCOL=openwire,amqp,stomp,mqtt,hornetq \
+   -p=AMQ_USER=admin \
+   -p=AMQ_PASSWORD=password
 ----
 
 . Check that the broker pod is running.
@@ -252,9 +251,9 @@ $ oc project $OCP_PROJECT_PREFIX-fuse
 +
 ----
 $ oc new-app --namespace $OCP_PROJECT_PREFIX-fuse \
-    -e POSTGRESQL_USER=postgres \
-    -e POSTGRESQL_PASSWORD=postgres \
-    -e POSTGRESQL_DATABASE=sampledb \
+    -p POSTGRESQL_USER=postgres \
+    -p POSTGRESQL_PASSWORD=postgres \
+    -p POSTGRESQL_DATABASE=sampledb \
     postgresql-persistent
 ----
 
