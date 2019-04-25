@@ -64,19 +64,19 @@ image::images/architecture-usecase.png[]
 * A terminal client, such as PuTTy for Microsoft Windows
 * A current browser, such as Google Chrome or Mozilla Firefox
 * OPENTLC credentials
-* Enough disk space to install Red Hat CodeReady Studio, Red Hat Fuse, Red Hat AMQ and other programming tools (Maven, OpenShift CLI, Java).
 +
 [IMPORTANT]
 Make sure that the Internet connection is free of corporate proxies or other network rules that prevent access to remote servers on the Internet.
 
 
+///
 .Deployment
 
 The following diagram shows the high level deployment topology in the OpenShift Container Platform cluster used in the lab.
 
 .Deployment Topology
 image::images/AI_Advanced_Deployment_dDagram.png[]
-
+///
 
 :numbered:
 
@@ -94,21 +94,19 @@ This lab shows the set up of Red Hat OpenShift Container Platform cluster, commo
 .Goal
 
 * Access the lab OpenShift Container Platform cluster with your assigned student account to be used for the lab
-* Access the following applications:
-** Red Hat 3scale API Management Multitenant Platform
-** Red Hat 3scale Tenant API Managers and gateway
-** Apicurito Studio
-** Red Hat Fuse Online
 
-
+////
 == Deployment Architecture
 
 The following diagram shows the high level deployment topology in the OpenShift Container Platform cluster.
 
 .Deployment Topology
 image::AI_Advanced_Deployment_dDagram.png[]
+////
 
 == Software Installation
+
+////
 
 === OpenShift Container Platform Cluster:
 
@@ -140,6 +138,7 @@ The following applications need to be deployed to the OpenShift Container Platfo
 . Integrate Dev Portal for SSO with OpenShift identity
 . Template with multi-tenant deployment & creating tenants.
 
+////
 
 ==== Accessing Applications on OpenShift Container Platform
 
