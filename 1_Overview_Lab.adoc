@@ -69,14 +69,14 @@ image::images/architecture-usecase.png[]
 Make sure that the Internet connection is free of corporate proxies or other network rules that prevent access to remote servers on the Internet.
 
 
-///
+////
 .Deployment
 
 The following diagram shows the high level deployment topology in the OpenShift Container Platform cluster used in the lab.
 
 .Deployment Topology
 image::images/AI_Advanced_Deployment_dDagram.png[]
-///
+////
 
 :numbered:
 
