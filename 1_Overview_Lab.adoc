@@ -104,7 +104,6 @@ The following diagram shows the high level deployment topology in the OpenShift 
 image::AI_Advanced_Deployment_dDagram.png[]
 ////
 
-== Software Installation
 
 ////
 === OpenShift Container Platform Cluster:
