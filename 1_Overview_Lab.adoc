@@ -147,9 +147,7 @@ The following applications need to be deployed to the OpenShift Container Platfo
 * link:https://access.redhat.com/downloads/content/290/ver=3.9/rhel---7/3.9.25/x86_64/product-software[OpenShift CLI client^] (version 3.11)
 * link:https://www.soapui.org/downloads/soapui.html[SoapUI^] (latest version)
 
-== Accessing Applications on OpenShift Container Platform
-
-. The following installations must be completed as the user `userX` on the OpenShift Container Platform cluster, where is X is the unique number assigned to your ID.
+== Login to OpenShift Container Platform
 
 . Login to OpenShift Container Platform as user 'userX' with the provided password.
 +
