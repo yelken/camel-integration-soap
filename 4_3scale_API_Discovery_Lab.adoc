@@ -23,12 +23,12 @@ Develop the solution by following the steps below.
 
 === Service
 
-The *i-apitosqlenrich* service created as part of the Red Hat Fuse Online lab needs to be edited to make the service discoverable by 3scale API Management. This ensures that 3scale API Management can automatically scan the services in the OpenShift cluster and ensure that the service is imported correctly.
+The *i-amqtosqlenrich* service created as part of the Red Hat Fuse Online lab needs to be edited to make the service discoverable by 3scale API Management. This ensures that 3scale API Management can automatically scan the services in the OpenShift cluster and ensure that the service is imported correctly.
 
-. Edit the service *i-apitosqlenrich* in the OpenShift project *user$seq-fuse*:
+. Edit the service *i-amqtosqlenrich* in the OpenShift project *user$seq-fuse*:
 +
 ----
-oc edit svc i-apitosqlenrich
+oc edit svc i-amqtosqlenrich
 ----
 . Add the following line under labels:
 +
@@ -58,7 +58,7 @@ The rest of the configuration needs to be done in the 3scale API Management Plat
 +
 image::images/3scale-new-api-start.png[]
 
-. Select the button *Import from OpenShift*. Select your Red Hat Fuse Online namespace and corresponding *i-apitosqlenrich* service.
+. Select the button *Import from OpenShift*. Select your Red Hat Fuse Online namespace and corresponding *i-amqtosqlenrich* service.
 +
 image::images/3scale-new-api-discover.png[]
 
@@ -83,7 +83,7 @@ image::images/3scale-new-api-integrate-mapping.png[]
 . Leave the rest of the default values unchanged and click on *Update & test in Staging Environment*.
 . Click on *Create Application Plan*
 .. *Name*: basic
-.. *System name*: i-apitosqlenrich/basic
+.. *System name*: i-amqtosqlenrich/basic
 +
 image::images/3scale-new-api-integrate-app-plan.png[]
 
