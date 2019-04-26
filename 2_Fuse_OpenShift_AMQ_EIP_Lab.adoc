@@ -83,6 +83,12 @@ NOTE: Notice that the content is enriched, and the GEO is replaced by the correc
 
 ==== Deploy to OpenShift Container Platform
 
+. Create a project in OpenShift Container Platform for the REST service:
++
+----
+$ oc new-project rest-service
+----
+
 . To deploy the application to OpenShift Container Platform, execute the following maven command from the terminal:
 +
 ----
@@ -207,6 +213,12 @@ $ mvn camel:run -Dfabric8.skip
 NOTE: Notice that the account is updated with the sales contact details.
 
 ==== Deploy to OpenShift Container Platform
+
+. Create a project in OpenShift Container Platform for the SOAP service:
++
+----
+$ oc new-project soap-service
+----
 
 . By examining the code, note that the cxf endpoint is set to port 8080, as this is the default HTTP port exposed in the OpenShift Karaf container.
 . Notice the OpenShift YAML files provided for deployment, service, and route configuration.
