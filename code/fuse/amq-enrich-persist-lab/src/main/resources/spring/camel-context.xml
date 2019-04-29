@@ -11,9 +11,10 @@
     <bean class="org.fuse.usecase.ProcessorBean" id="processorBean"/>
     <bean
         class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider" id="jsonProvider"/>
-    <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">        <route id="_route3">
-    <!--             <from id="_from3" uri="direct:usecase"/> -->
-    			<from id="_from3" uri="amqp:queue:accountQueue"/>
+    <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">
+        <!-- De-queue and Unmarshal from XML into Java String -->
+        <route id="_route1">
+    			<from id="_from1" uri="amqp:queue:accountQueue"/>
                 <convertBodyTo id="_convertBodyTo1" type="String"/>
                 <multicast id="_multicast1" parallelProcessing="true" strategyRef="reconcileData">
                     <log id="_log2" loggingLevel="INFO" message="inside multicast"/>
@@ -24,8 +25,8 @@
                 <to id="_to6" uri="direct:insertDB"/>
             </route>
             <!-- Call WebService Client -->
-            <route id="_route5">
-                <from id="_from5" uri="direct://callWSEndpoint"/>
+            <route id="_route2">
+                <from id="_from2" uri="direct://callWSEndpoint"/>
                 <log id="_log12" message="In the SOAP service request: ${body}"/>
                 <unmarshal id="_unmarshal1">
                     <json library="Jackson" unmarshalTypeName="org.globex.Account"/>
@@ -34,8 +35,8 @@
                 <log id="_log10" loggingLevel="INFO" message=">> WebService Response : ${body[0].id}, ${body[0].salesContact}, ${body[0].company.geo}, ${body[0].contact.firstName}, ${body[0].contact.lastName} "/>
             </route>
             <!-- Call REST Client -->
-            <route id="_route6">
-                <from id="_from6" uri="direct://callRestEndpoint"/>
+            <route id="_route3">
+                <from id="_from3" uri="direct://callRestEndpoint"/>
                 <onException id="_onException2">
                     <exception>java.lang.Exception</exception>
                     <redeliveryPolicy maximumRedeliveries="1"/>
@@ -67,8 +68,8 @@
                 <log id="_log6" message=">> REST Response : ${body}"/>
             </route>
             <!-- Insert Records -->
-            <route id="_route7">
-                <from id="_from7" uri="direct:insertDB"/>
+            <route id="_route4">
+                <from id="_from4" uri="direct:insertDB"/>
                 <log id="_log11" message=">> Before Insert : ${body}"/>
                 <bean id="_bean3" method="defineNamedParameters" ref="processorBean"/>
                 <to id="_to9" uri="sql:INSERT INTO USECASE.T_ACCOUNT(CLIENT_ID,SALES_CONTACT,COMPANY_NAME,COMPANY_GEO,COMPANY_ACTIVE,CONTACT_FIRST_NAME,CONTACT_LAST_NAME,CONTACT_ADDRESS,CONTACT_CITY,CONTACT_STATE,CONTACT_ZIP,CONTACT_PHONE,CREATION_DATE,CREATION_USER)                          VALUES                          (:#CLIENT_ID,:#SALES_CONTACT,:#COMPANY_NAME,:#COMPANY_GEO,:#COMPANY_ACTIVE,:#CONTACT_FIRST_NAME,:#CONTACT_LAST_NAME,:#CONTACT_ADDRESS,:#CONTACT_CITY,:#CONTACT_STATE,:#CONTACT_ZIP,:#CONTACT_PHONE,:#CREATION_DATE,:#CREATION_USER);"/>

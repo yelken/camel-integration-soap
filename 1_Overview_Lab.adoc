@@ -2,7 +2,7 @@
 :data-uri:
 :toc2:
 
-== Agile Integration for the Enterprise - Overview Lab
+= Agile Integration for the Enterprise - Overview Lab
 
 In this lab, review the business use case for this Agile Enterprise technical workshop. Next, proceed to set up the environment for the labs in this course.
 

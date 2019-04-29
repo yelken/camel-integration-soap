@@ -2,8 +2,7 @@
 :data-uri:
 :toc2:
 
-
-== Enrich Content and Aggregate Data on Red Hat Fuse Online Lab
+= Enrich Content and Aggregate Data on Red Hat Fuse Online Lab
 
 In this lab, you develop an integration in Red Hat Fuse Online that process the account records in JSON format, and through enrichment and aggregation create a more complete account record. The resulting record is stored in a database.
 
