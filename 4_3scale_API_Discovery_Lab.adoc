@@ -2,8 +2,7 @@
 :data-uri:
 :toc2:
 
-
-== Discover REST API with Red Hat 3scale API Management Lab
+= Discover REST API with Red Hat 3scale API Management Lab
 
 In this lab, you change the Red Hat Fuse Online integration API to make the service discoverable by 3scale API Management. You will then manage the API in 3scale API Management and ensure the requests are routed to the integration through the 3scale API Management Gateway.
 

@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-== Enrich Content and Aggregate Data - Lab
+= Enrich Content and Aggregate Data - Lab
 
 In this lab, you develop routes that process the account records in JSON format, and through enrichment and aggregation create a more complete account record. The resulting record is stored in a database.
 
@@ -28,11 +28,15 @@ image::images/Fuse_Exp_Usecase_Mod2.png[]
 * rest-cxfrs-service
 * amq-enrich-persist-lab
 
+
 == Develop the Solution
 
-=== REST Enrich Microservice
 
-A REST microservice is used as a backend service for this solution. The REST service is provided in the project *rest-cxfrs-service*.
+=== REST Service
+
+A REST Service is used as a backend service for this solution. The REST service is provided in the project *rest-cxfrs-service*.
+The code for the service can be found in the `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service` directory
+
 
 ==== Inspect the REST Service
 
@@ -56,6 +60,7 @@ Account enrich(Account customer);
 * To expose the REST service within Spring, you use the CXF component's `rsServer` server. This is defined in the Application.java.
 
 * Check the application.properties and notice the *cxf-path* and *server.port*.
+
 
 ==== Run the REST service
 
@@ -81,6 +86,7 @@ curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company
 +
 NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location.
 
+
 ==== Deploy to OpenShift Container Platform
 
 . Create a project in OpenShift Container Platform for the REST service:
@@ -99,11 +105,13 @@ $ mvn fabric8:deploy
 
 . You can test the REST service by running the same curl request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
 
+
 === SOAP Web Service
 
-A SOAP Web Service is provided as part of the assets for this lab. This service is developed using CXF-RS, and deployed on Apache Karaf. The service is running on Red Hat Fuse 6.3. This service is available in the project *soap-cxfws-service*.
+A SOAP Web Service is provided as part of the assets for this lab. This service is developed using CXF-RS, and deployed on Apache Karaf. The service is running on Red Hat Fuse 6.3. This service is available in the project *soap-cxfws-service*. The code for the service can be found in the `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service` directory.
 
-==== Inspect the Solution
+
+==== Analyze the SOAP Web Service
 
 . A service is defined in the `CustomerWS` interface using the `@Webservice` annotation that exposes an operation to update the received `Account` object:
 +
@@ -128,7 +136,8 @@ public interface CustomerWS {
 * `serviceClass`: `org.fuse.usecase.service.CustomerWS`
 * `loggingFeatureEnabled`: `true`
 
-==== Run the SOAP service
+
+==== Run the SOAP Web service
 
 . To run the SOAP service locally, run the following Maven command from the project root folder `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service`:
 +
@@ -212,6 +221,7 @@ $ mvn camel:run -Dfabric8.skip
 +
 NOTE: Notice that the account is updated with the sales contact details.
 
+
 ==== Deploy to OpenShift Container Platform
 
 . Create a project in OpenShift Container Platform for the SOAP service:
@@ -232,35 +242,48 @@ $ mvn fabric8:deploy
 
 . You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
 
+
 === Test the Integration Module
 
-Now you will be testing the Camel routes that (1) enrich the Account data with the 2 backend services, (2) aggregate the responses, and finally (3) persist the data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
+Test and analyze the Camel routes that (1) enrich the Account data with help of the 2 backend services, (2) aggregate both the service responses, and finally (3) persist the resulting data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
 
-==== H2 database
 
-The first Camel route updates the records in an embedded H2 database, running on localhost.
+==== Analyze the Camel routes
 
-. Inspect the configuration details in the `pom.xml` and `application-dev.properties` files.
-. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `schema.sql` file.
+. Analyze the `camel-context.xml` file found in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service\src\main\resources\spring` directory.
++
+[NOTE] A link:https://camel.apache.org/camelcontext.html[Camel Context] file contains data routing logic called Camel routes. When activated, it serves as both a runtime and a rule-base for Camel routes that deliver, enrich or transform data in real-time.
++
+. Note the definitions of the 4 Camel routes: *_route1*, *_route2*, *_route3*, *_route4*
 
-You can access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
+. BONUS CHALLENGE: Can a single Camel route invoke both the backend services instead? What are the considerations involved when designing this Camel route, if it is even possible to do so?
 
-NOTE: The console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
 
-==== Develop the Camel routes
+===== Camel Route 1: De-queuing and Multicasting
 
-. Analyze the second Camel route that consumes the JSON objects and starts from the *accountQueue*.
+. Analyze the first Camel route `_route1` that consumes the JSON objects and starts from the *accountQueue*.
 .. Note the AMQP configuration and queues based on the previous lab.
-.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO is done using the `<unmarshal>` processor.
+.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO (aka *Plain Old Java Object*) is done using the `<unmarshal>` processor.
 * JSON library: `jackson`
 * `unmarshalTypeName` attribute: `org.globex.Account`
 * The result is used to multicast the exchange to the REST and web service endpoints.
 +
 IMPORTANT: It is a best practice not to multicast data in parallel. To simplify the legibility of the code, a direct endpoint (`callRestEndpoint`) is used to call the REST service and a different direct endpoint (`callWSEndpoint`) to call the web service service.
 
-==== Define the REST Direct Routes
+. BONUS CHALLENGE: Choose a link:https://camel.apache.org/components.html[Camel component] that you will use to convert data in XML into CSV format. What will the resulting code look like?
 
-. To call the backend services, two Camel routes were created: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
+
+===== Camel Routes 2 and 3: REST and SOAP Service invocations
+
+. Analyze the code pertaining to both Camel routes `_route2` and `_route3` found within the camel-context.file, located in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service` directory.
+
+. From your analysis of the Camelcontext file, note that a single service invocation is made to each of the backend services. These calls are made through the activation of two Camel routes: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
+
+. BONUS CHALLENGE: Can a single Camel route invoke both the backend services instead? What are the considerations involved when designing this Camel route, if it is even possible to do so?
+
+* Analyze the REST Service Camel Route
+
+. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service`.
 
 * To correctly invoke the declared REST service, a HTTP producer component is used and make sure the following `{header,value}` pairs are specified:
 
@@ -269,22 +292,28 @@ IMPORTANT: It is a best practice not to multicast data in parallel. To simplify 
 ** `CamelHttpMethod=POST`
 ** `CamelCxfRsUsingHttpAPI=True`
 
+. BONUS CHALLENGE: Can you re-develop the REST service invocation code, such that it utilizes a link:https://camel.apache.org/netty-http.html[*netty-http*] component instead?
 
-==== The Web Service Direct Route
+* Analyze the SOAP Web Service Camel Route
 
-. Note the direct web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer.
+. Change working directory to `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service`.
+
+. Analyze the web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer. Note that it delivers a SOAP payload.
+
+. BONUS CHALLENGE: Based on your analysis of the existing, how are SOAP Faults handled, if at all? Are there additional SOAP Faults that should be implemented, and how will you do it?
 
 
-==== The Aggregation Strategy
+===== Camel Route 4: Data persistence
 
-. From the results collected by the two services, analyse how the content is aggregated in the `multicast` processor to reconcile the information received from the `CorporateAccount` POJO with the `Account` POJO.
+The last Camel route updates the records in an embedded link:https://www.h2database.com/html/main.html[H2 database], running on localhost.
 
-* This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
+. Inspect the configuration details in the `pom.xml` and `application-dev.properties` files.
+. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `schema.sql` file.
+
+. Access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
 +
-NOTE: The aggregation strategy must be developed within the `AccountAggregator` class.
-
-==== The Aggregated Data into the H2 Database
-
+NOTE: The H2 console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
++
 . Analyze the Apache Camel route that inserts the `Account` information into the `T_ACCOUNT` table of the `ACCOUNT` database.
 ..  The Spring SQL component in the route uses a SQL query to insert the `Account` record within the `option` parameter of the SQL endpoint.
 * Method: `defineNamedParameters(Account account)`
@@ -294,7 +323,25 @@ NOTE: The aggregation strategy must be developed within the `AccountAggregator` 
 
 . After calling the SQL endpoint, add a log message processor to display the contents of the received body.
 
-==== Using a JUnit Test
+
+==== The Data Aggregation Strategy in Java
+
+. From the test results from the execution of both the REST and SOAP web services, analyze how the content is aggregated.
+
+. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-lab/`.
+
+. Analyze all the Java files in this directory, especially the `src/main/java/org/fuse/usecase/AccountAggregator.java` file.
+
+. Note that a `multicast` processor in Camel route `_route1` reconciles the data received from the `CorporateAccount` POJO with the `Account` POJO.
+
+* This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
++
+NOTE: The aggregation strategy must be implemented within the `src/main/java/org/fuse/usecase/AccountAggregator` class found in the `amq-enrich-persist-lab` project.
+
+. BONUS CHALLENGE: In order to safeguard against fraudulent account data, a link:http://camel.apache.org/message-filter.html[*Message Filter* Enterprise Integration Pattern] has to be added to the Camel Route. Can you visualize, or even create, the new Camel route such that a *Message Filter* is included?
+
+
+==== A JUnit Test
 
 . Analyze the JUnit test case that validates the `jackson` ObjectMapper can read the string content of the JSON `Account` message and generate an `Account` object.
 * JUnit test class: `JacksonCompanyTest`
@@ -302,7 +349,9 @@ NOTE: The aggregation strategy must be developed within the `AccountAggregator` 
 . Note the two assert conditions: one to check that the object is not null, and the other to verify that the name of the company is equal to "Robocops".
 
 
-==== Build the `routing` Project and Test it Locally
+==== Build and Test the Integration Project
+
+. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-lab/`.
 
 . On the command line, run the following command in a terminal:
 +
@@ -320,24 +369,25 @@ NOTE: Expect to see differences for `CREATION_DATE`, `SALES_CONTACT`, and `CLIEN
 
 . Check the database to ensure the records are populated correctly in the T_ACCOUNT table.
 
-=== Deploy to OpenShift Container Platform
 
-=== PostgreSQL Database
+==== Deploy the Integration Project to OpenShift Container Platform
 
-When we deploy the project to OpenShift Container Platform, we will use the PostgreSQL database and schema we set up earlier, instead of using the embedded H2 database. You can find the configuration details in the `application.properties` and `deployment.yml` files.
-
-=== Deploying to OpenShift Container Platform
+Finally, you deploy the integration project to OpenShift Container Platform, using the PostgreSQL database and schema set up earlier, instead of using the embedded H2 database.
 
 . Change the server.port to 8080.
-
++
+[NOTE] The configuration details are found in the `application.properties` and `deployment.yml` files.
++
 . In a terminal window, navigate to the project's root folder and run:
 +
 ----
 $ mvn fabric8:deploy -Popenshift
 ----
 
-. Check that the pod *amq-enrich-persist-lab* starts up correctly.
-. Check that the route runs successfully, consuming all 3 messages from accountQueue, and writing to the database.
+. Check that the pod *amq-enrich-persist-lab* starts up successfuly.
 
+. Check that the all four Camel routes run successfully, consuming all 3 messages from accountQueue, and writing to the database.
+
+. Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table.
 
 Congratulations, you have completed this lab.
