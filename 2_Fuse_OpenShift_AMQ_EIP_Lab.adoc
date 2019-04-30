@@ -89,11 +89,15 @@ NOTE: Notice that the content is enriched, and the GEO is replaced by the correc
 
 ==== Deploy to OpenShift Container Platform
 
-. Create a project in OpenShift Container Platform for the REST service:
+. Create a project in OpenShift Container Platform for the SOAP service, REST service and Camel project::
 +
 ----
-$ oc new-project rest-service
+$ oc new-project business-services-user$seq
 ----
++
+IMPORTANT: `user$seq` represents the username in the OpenShift Container Platform cluster. Replace it with your assigned username, for example: `user1`, `user2`.
+You should be able to log in with your OpenShift Container Platform user ID and password.
+
 
 . To deploy the application to OpenShift Container Platform, execute the following maven command from the terminal:
 +
@@ -224,10 +228,11 @@ NOTE: Notice that the account is updated with the sales contact details.
 
 ==== Deploy to OpenShift Container Platform
 
-. Create a project in OpenShift Container Platform for the SOAP service:
+. If you have not don't so, switch project in OpenShift Container Platform for the SOAP service, REST service and Camel project:
+oc new-project rest-service-user$seq
 +
 ----
-$ oc new-project soap-service
+$ oc project business-services-user$seq
 ----
 
 . By examining the code, note that the cxf endpoint is set to port 8080, as this is the default HTTP port exposed in the OpenShift Karaf container.
@@ -250,7 +255,7 @@ Test and analyze the Camel routes that (1) enrich the Account data with help of 
 
 ==== Analyze the Camel routes
 
-. Analyze the `camel-context.xml` file found in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service\src\main\resources\spring` directory.
+. Analyze the `camel-context.xml` file found in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service/src/main/resources/spring` directory.
 +
 [NOTE] A link:https://camel.apache.org/camelcontext.html[Camel Context] file contains data routing logic called Camel routes. When activated, it serves as both a runtime and a rule-base for Camel routes that deliver, enrich or transform data in real-time.
 +
@@ -378,10 +383,10 @@ Finally, you deploy the integration project to OpenShift Container Platform, usi
 +
 [NOTE] The configuration details are found in the `application.properties` and `deployment.yml` files.
 +
-. In a terminal window, create a project in OpenShift Container Platform for the SOAP service:
+. In a terminal window, switch project in OpenShift Container Platform:
 +
 ----
-$ oc new-project enrich-project
+$ oc project business-services-user$seq
 ----
 +
 . In a terminal window, navigate to the project's root folder and run:

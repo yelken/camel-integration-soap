@@ -21,7 +21,7 @@ image::images/enrich_insert_fuse_online.png[]
 
 == Develop the Solution
 
-Develop the solution by creating a new integration in the Red Hat Fuse Online console. You will be provided a Red Hat Fuse Online console URL by your instructor. It should be of the format `https://user$seq-fuse-online.$OCP_DOMAIN`.
+Develop the solution by creating a new integration in the Red Hat Fuse Online console. You will be provided a Red Hat Fuse Online console URL by your instructor. It should be of the format `https://syndesis-fuse-online-user$seq.apps.$OCP_DOMAIN`.
 
 IMPORTANT: `user$seq` represents the username in the OpenShift Container Platform cluster. Replace it with your assigned username, for example: `user1`, `user2`.
 
@@ -50,14 +50,20 @@ image::images/img3.png[]
 
 Create API connectors for the backend API services.
 
-. Upload the REST API spec for the *REST CXFRS Service* Swagger specification using the URL: `http://rest-cxfrs-service-user$seq-fuse-online.$OCP_DOMAIN/rest/swagger.json`.
+. Launch a new web browser window, and type this URL in: `http://rest-cxfrs-service-business-services-user$seq.apps.$OCP_DOMAIN/rest/swagger.json`
+
+. Note that the Swagger document for the *REST CXFRS Service* is displayed:
++
+image::images/swagger.png[]
+
+. Using the Fuse Online console, upload the REST API spec for the *REST CXFRS Service* Swagger specification using the URL: `http://rest-cxfrs-service-business-services-user$seq.apps.$OCP_DOMAIN/rest/swagger.json`.
 +
 * Provide the following details:
 .. *Connector Name*: Rest CXFRS Service
-.. *Host*: `http://cxfrs-rest-service.user$seq:8080`
+.. *Host*: `http://cxfrs-rest-service.user$seq:8080` rest-cxfrs-service-rest-service
 .. *Base URL*: /rest
 +
-. Upload the SOAP API specification for the *Legacy SOAP REST Wrapper* API JSON from the lab asset location: *fuse/05_migrate_fuse6/legacy-soap-rest-wrapper/src/main/resources/swagger.json*
+. Upload the SOAP API specification for the *Legacy SOAP REST Wrapper* API JSON from the lab asset location: *$AI_EXERCISE_HOME/code/fuse/legacy-soap-rest-wrapper/src/main/resources/swagger.json*
 * Provide the following details:
 .. *Connector Name*: SOAP CXFWS Service
 .. *Host*: `http://legacy-soap-rest-wrapper.user$seq:8080`
@@ -98,7 +104,7 @@ IMPORTANT: The SQL commands for creating the tables in public schema are shown i
 ==== *SOAP CXFWS Service*: set up the connection to the API client connector.
 
 . *Authentication Type*: No security
-. *Host*: `http://legacy-soap-rest-wrapper.user1-fuse:8080`
+. *Host*: `http://legacy-soap-rest-wrapper.user$seq-fuse:8080`
 . *Base path*: /api
 . *Name*: SOAPEnrichAPI
 
@@ -243,4 +249,4 @@ CREATE TABLE T_ERROR (
 );
 ----
 
-Congratulations, you have completed the Fuse Online lab.
+Congratulations, you have completed this lab.
