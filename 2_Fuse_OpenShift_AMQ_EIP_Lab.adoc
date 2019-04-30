@@ -378,6 +378,12 @@ Finally, you deploy the integration project to OpenShift Container Platform, usi
 +
 [NOTE] The configuration details are found in the `application.properties` and `deployment.yml` files.
 +
+. In a terminal window, create a project in OpenShift Container Platform for the SOAP service:
++
+----
+$ oc new-project enrich-project
+----
++
 . In a terminal window, navigate to the project's root folder and run:
 +
 ----
