@@ -401,30 +401,32 @@ $ mvn fabric8:deploy -Popenshift
 
 . Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table.
 
-you develop a Camel route to migrate legacy SOAP services to provide a REST API wrapper using Camel.
+
+=== Update SOAP Wrapper Project and Deploy to OpenShift Container Platform
+
+Now, you develop a Camel route to migrate legacy SOAP services to provide a REST API wrapper using Camel.
 
 SOAP-based services are plentiful in many enterprise solutions and are slowly being replaced by RESTful services to simplify their use. A new wizard is available in the latest version of Red Hat Fuse Tooling to help you make the transition with Apache Camel’s Rest DSL. This lab shows how to use the new wizard to transition from older SOAP-based services to more modern REST-based services.
 
-.Goals
+.Goals in this section
 * Create REST API for the Customer SOAP service from previous lab.
 * Design Apache Camel route that exposes REST API consuming JSON.
 * Use the Red Hat Fuse Tooling in Red Hat Developer Studio to create *wsdl2rest* mapping.
 * Deploy and test the solution.
 
-== Import the *legacy-soap-rest-wrapper* Project into CodeReady Studio
+
+==== Import the *legacy-soap-rest-wrapper* Project into CodeReady Studio
 
 . Using the same method you used in the previous lab, import the `legacy-soap-rest-wrapper` project into your CodeReady Studio workspace. Using the Wizard, you will find 1 project:
 
 * legacy-soap-rest-wrapper
 
-== Develop the Solution
-
-
-=== SOAP Web Service
+*This project contains the Legacy SOAP Wrapper REST service that will route and transform REST service requests and responses to and from the existing backend SOAP service.*
 
 The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is used as the backend SOAP service for this part of the lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL is accessible at the URL: link:http://$soap-cxfws-service-route/ws/customerService?wsdl[http://$soap-cxfws-service-route/ws/customerService?wsdl].
 
-==== Create the Camel Route
+
+==== Create the Camel Route for SOAP service migration
 
 . Right-click the *legacy-soap-rest-wrapper* in the Red Hat Fuse Integration perspective and select *New->Camel Rest DSL from WSDL*, or click *File->New->Other…, Red Hat Fuse->Camel Rest DSL from WSDL*.
 . Provide the URL to soap-cxfws-service WSDL and ensure the *legacy-soap-rest-wrapper* project is selected:
@@ -442,16 +444,62 @@ image::images/legacy-soap-wsdl-import-3.png[]
 
 . Inspect the Camel route and notice that the solution is code-complete and ready to run.
 
-==== Run the REST service
 
-. To run the REST service locally, run the following Maven command from the project's root folder:
+==== Update existing Camel Route in *legacy-soap-rest-wrapper* Project [OPTIONAL]
+
+This section is an option to completing the previous section on *Create the Camel Route for SOAP service migration*.
+
+. Locate the `$AI_EXERCISE_HOME/code/fuse/legacy-soap-rest-wrapper/src/main/data/` directory.
+
+. Using your favorite code editor, open the *rest-springboot-context.xml* file. This is the file that contains the Camel routes that will activate the Legacy SOAP Wrapper Rest service.
+
+. Inspect the `UpdateAccount` Camel route.
+
+. Locate the tag `<to id="_to1" uri="cxf:`. This Camel processor makes a call to the SOAP web service hosted on OpenShift Container Platform.
+
+. In a terminal window, obtain the route information for the `soap-cxfws-service` hosted on OpenShift Container Platform:
++
+----
+$ oc get routes -n business-services | grep soap-cxfws-service
+NAME                 HOST/PORT                                                              PATH     SERVICES   PORT      TERMINATION             WILDCARD
+soap-cxfws-service   soap-cxfws-service-soap-service.userY.apps.redhatsummit.opentlc.com             soap-cxfws-service   8080                    None
+soap-default         soap-default-soap-service.userY.apps.redhatsummit.opentlc.com                   soap-cxfws-service   8181                    None
+soap-service         soap-service-soap-service.userY.apps.redhatsummit.opentlc.com                   soap-cxfws-service   8080                    None
+----
++
+. From the results, copy the hostname for the `soap-service` Kubernetes service. In the example shown, that hostname is `soap-service-soap-service.userY.apps.redhatsummit.opentlc.com `
+
+. Return to your favorite code editor, and focus on the `UpdateAccount` Camel route. Update the SOAP service hostname appended to the value of the `uri` parameter of the tag `<to id="_to1" uri="cxf:`.
+
+. Make the such that the SOAP service URI call now contains the correct hostname for the SOAP service hosted on OpenShift Container Platform:
++
+----
+        <route id="updateAccount">
+            <from id="_from1" uri="direct:updateAccount"/>
+            <log id="_log1" loggingLevel="INFO" message="updateAccount"/>
+            <to id="_to1" uri="cxf://http://soap-service-soap-service.userY.apps.redhatsummit.opentlc.com/ws/customerService?serviceClass=org.fuse.usecase.service.CustomerWS&amp;defaultOperationName=updateAccount"/>
+            <setHeader headerName="Content-Type" id="_setHeader1">
+                <constant>application/json</constant>
+            </setHeader>
+            <setBody id="_setBody1">
+                <simple>${body[0]}</simple>
+            </setBody>
+        </route>
+----
++
+. Save your changes.
+
+
+==== Run the Legacy SOAP Wrapper REST service
+
+. To run the Legacy SOAP Wrapper REST service locally, run the following Maven command from the `$AI_EXERCISE_HOME/code/fuse/legacy-soap-rest-wrapper/` directory:
 +
 ----
 $ mvn spring-boot:run -Dfabric8.skip
 ----
-
-. The Camel service should be running on port 808, and can be accessed through URL: link:http://localhost:8080/api/jaxrs/account[http://localhost:8080/api/jaxrs/account].
-. Send a test request to the REST service and check if the backend service is invoked correctly:
++
+. The Camel service, that has just launched, should be running on port 8080, and can be accessed through URL: link:http://localhost:8080/api/jaxrs/account[http://localhost:8080/api/jaxrs/account].
+. Send a test request to the Legacy SOAP Wrapper REST service and check if the backend service is invoked correctly:
 +
 ----
 $ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
@@ -462,6 +510,11 @@ $ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name"
 ----
 {"company":{"active":true,"geo":"NA","name":"Rotobots"},"contact":{"city":"Phoenix","firstName":"Bill","lastName":"Smith","phone":"602-555-1100","state":"AZ","streetAddr":"100 N Park Ave.","zip":"85017"},"id":33,"salesContact":"Bernard Tison"}
 ----
++
+. From the test results, validate that the data currently in the PostgreSQL database was retrieved successfully via the Legacy SOAP Wrapper Rest service .
++
+. BONUS CHALLENGE: Create additional lines of test data in the PostgreSQL database on OpenShift Container Platform. Then, send the previous REST service request to the local Legacy SOAP Wrapper REST service again. Observe that your latest test data appears in the service response.
+
 
 ==== Deploy to OpenShift Container Platform
 
@@ -472,10 +525,22 @@ $ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name"
 $ mvn fabric8:deploy
 ----
 
-. Check that the project is deployed successfully. A pod for the deployment *legacy-soap-rest-wrapper* should be started.
-. Notice the URL of the endpoint for external traffic.
+. Check that the project is deployed successfully. A Kubernetes pod for the deployment *legacy-soap-rest-wrapper* should be started.
 
-. You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as in localhost.
-
+. Take note of the route name of the *legacy-soap-rest-wrapper* service, which is now exposed to external traffic:
++
+----
+$ oc get routes -n business-services | grep legacy-soap
+NAME                       HOST/PORT                                                                       PATH      SERVICES                   PORT      TERMINATION   WILDCARD
+legacy-soap-rest-wrapper   legacy-soap-rest-wrapper-legacy-soap.apps.cluster-490c.sandbox693.opentlc.com             legacy-soap-rest-wrapper   8080                    None
+----
++
+. Repeat the SOAP service test by updating the CURL command, replacing the hostname with the OpenShift service route name for the *legacy-soap-rest-wrapper* hosted on OpenShift Container Platform:
++
+----
+$ curl -k http://legacy-soap-rest-wrapper-legacy-soap.apps.cluster-490c.sandbox693.opentlc.com/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
+----
++
+. Validate that the same REST response was received, as in the previous test.
 
 Congratulations, you have completed this lab.

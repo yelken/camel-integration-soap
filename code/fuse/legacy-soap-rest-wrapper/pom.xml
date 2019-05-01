@@ -13,7 +13,7 @@
     <spring-boot.version>1.5.12.RELEASE</spring-boot.version>
 
     <!-- maven plugin versions -->
-    <fabric8.maven.plugin.version>3.5.33.fuse-000067-redhat-1</fabric8.maven.plugin.version>
+    <fabric8.maven.plugin.version>4.1.0</fabric8.maven.plugin.version>
     <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
   </properties>
@@ -29,7 +29,7 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-  
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -75,8 +75,8 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jackson-starter</artifactId>
-    </dependency>    
-   
+    </dependency>
+
   </dependencies>
   <repositories>
     <repository>
