@@ -19,7 +19,7 @@
         <route id="updateAccount">
             <from id="_from1" uri="direct:updateAccount"/>
             <log id="_log1" loggingLevel="INFO" message="updateAccount"/>
-            <to id="_to1" uri="cxf://http://soap-service-ai-advanced.apps.d764.openshift.opentlc.com/ws/customerService?serviceClass=org.fuse.usecase.service.CustomerWS&amp;defaultOperationName=updateAccount"/>
+            <to id="_to1" uri="cxf://http://soap-service-soap-service.apps.cluster-490c.sandbox693.opentlc.com/ws/customerService?serviceClass=org.fuse.usecase.service.CustomerWS&amp;defaultOperationName=updateAccount"/>
             <setHeader headerName="Content-Type" id="_setHeader1">
                 <constant>application/json</constant>
             </setHeader>
