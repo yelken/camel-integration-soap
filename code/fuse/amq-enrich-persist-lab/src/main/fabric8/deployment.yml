@@ -14,7 +14,7 @@ spec:
           - name: SPRING_APPLICATION_JSON
             value: '{"server":{"undertow":{"io-threads":1, "worker-threads":2 }}}'
           - name: AMQP_HOST
-            value: broker-amq-amqp
+            value: broker-amq-amqp.enterprise-services
           - name: REST_HOST
             value: rest-cxfrs-service
           - name: REST_PORT
@@ -24,7 +24,7 @@ spec:
           - name: SOAP_PORT
             value: 8080               
           - name: POSTGRESQL_SERVICE_NAME
-            value: postgresql
+            value: postgresql.enterprise-services
           - name: POSTGRESQL_SERVICE_DATABASE
             value: sampledb
           - name: POSTGRESQL_SERVICE_USERNAME
