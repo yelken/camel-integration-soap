@@ -15,68 +15,207 @@ In this lab, you develop routes that process the account records in JSON format,
 * Aggregate the messages received using the aggregation EIP pattern
 * Save the aggregated message in an SQL database using the Spring SQL component
 +
-image::images/Fuse_Exp_Usecase_Mod2.png[]
+image::images/lab-02/Fuse_Exp_Usecase_Mod2.png[width="100%"]
 
 :numbered:
 
 
-== Import the Project into Red Hat Developer Studio
+== Import the Projects into Red Hat CodeReady Studio
 
-. In Red Hat CodeReady Studio, import import these three projects located in the `$AI_EXERCISE_HOME/code/fuse/` directory into a new workspace:
+. Start the Red Hat CodeReady Studio application
 
-* soap-cxfws-service
-* rest-cxfrs-service
-* amq-enrich-persist-lab
+. In Red Hat CodeReady Studio, import the projects for this lab.
+.. Select: *File > Import ...*
+.. Select: *Maven > Existing Maven Projects*
++
+image::images/lab-02/import_maven_projects.png[]
 
+. Click *Next*
 
-== Develop the Solution
+. For the *Root Directory*, click the *Browse...*
 
+. Navigate to the directory: `$AI_EXERCISE_HOME/code/fuse/`
 
-=== REST Service
+. Click *Open*
 
-A REST Service is used as a backend service for this solution. The REST service is provided in the project *rest-cxfrs-service*.
-The code for the service can be found in the `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service` directory
+. Select the following projects
+.. soap-cxfws-service
+.. rest-cxfrs-service
+.. amq-enrich-persist-lab
++
+image::images/lab-02/import-selected-projects.png[]
 
+. Click *Finish*
++
+NOTE: During the initial import, there is a small delay while the Maven artifacts are downloaded and the project are built. This could take 1-2 minutes.
 
-==== Inspect the REST Service
+. After a successful import, you will see the projects in the Project Explorer panel.
+
+image::images/lab-02/the-projects.png[]
+
+== Explore the REST Enrich Microservice
+
+A REST microservice is used as a backend service for this solution. The REST service is provided in the project *rest-cxfrs-service*.
 
 The REST service enriches the Account record.
 
-. It consists of the `CustomerRest` REST service with the following annotations:
+. Expand the project *rest-cxfrs-service*
+
+. Expand the node: *src/main/java*
+
+. Expand the project: *com.redhat.gpte.training.springboot_cxfrs_rest*
+
+. Open the class: `CustomerRest.java`
+
+. This class consists of the interface for `CustomerRest` REST service:
 +
 ----
-@Path("/customerservice/")
+package com.redhat.gpte.training.springboot_cxfrs_rest;
+
+import org.globex.Account;
+
+import javax.ws.rs.*;
+
+@Path("/customerservice")
 public interface CustomerRest {
 
-@POST @Path("/enrich") @Consumes("application/json")
-Account enrich(Account customer);
+    @POST @Path("/enrich") @Consumes("application/json") @Produces("application/json")
+    Account enrich(Account customer);
+
+}
+----
+
+. Open the class: `CustomerRestImpl.java`
++
+----
+package com.redhat.gpte.training.springboot_cxfrs_rest;
+
+import org.globex.Account;
+import org.globex.Company;
+
+import io.swagger.annotations.Api;
+
+@Api("/customerservice")
+public class CustomerRestImpl implements CustomerRest {
+
+    private static final String NA_REGION = "NORTH_AMERICA";
+    private static final String SA_REGION = "SOUTH_AMERICA";
+    private static final String WE_REGION = "WEST_AMERICA";
+    private static final String EAST_REGION = "EAST_AMERICA";
+
+    @Override public Account enrich(Account account) {
+        Company company = account.getCompany();
+        String region = company.getGeo();
+        switch (region) {
+        case "NA":
+            company.setGeo(NA_REGION); break;
+        case "SA":
+            company.setGeo(SA_REGION); break;
+        case "WA":
+            company.setGeo(WE_REGION); break;
+        case "EA":
+            company.setGeo(EAST_REGION); break;
+        }
+        account.setCompany(company);
+        return account;
+    }
+}
 ----
 
 * The implementation class contains logic to enrich the `Account` POJO as follows:
 ** Based on the `geo` field of the `company` object, a Java enumerator maps region codes to regions
-** `{"NE,MW,SO,WE"}` corresponds to `{"NORTH_EAST,MIDWEST,SOUTH,WEST"}`
+** `{"NA, SA, WA, EA"}` corresponds to `{"NORTH_AMERICA, SOUTH_AMERICA, WEST_AMERICA, EAST_AMERICA"}`
 ** The enriched `Account` object is returned by the `enrich()` method
 
-* To expose the REST service within Spring, you use the CXF component's `rsServer` server. This is defined in the Application.java.
+. Open the class `SampleRestApplication.java`.
 
-* Check the application.properties and notice the *cxf-path* and *server.port*.
-
-
-==== Run the REST service
-
-. To run the REST service locally, run the following Apache Maven command from the project's root folder `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service`:
+. To expose the REST service within Spring, the CXF component's `rsServer` is annotated with `@Bean`. 
 +
 ----
-$ mvn spring-boot:run -Dfabric8.skip
+package com.redhat.gpte.training.springboot_cxfrs_rest;
+
+import java.util.Arrays;
+
+import org.apache.cxf.Bus;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class SampleRestApplication {
+
+    @Autowired
+    private Bus bus;
+
+    public static void main(String[] args) {
+        SpringApplication.run(SampleRestApplication.class, args);
+    }
+ 
+    @Bean
+    public Server rsServer() {
+        // setup CXF-RS
+        JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
+        endpoint.setBus(bus);
+        endpoint.setProvider(new JacksonJsonProvider());
+        endpoint.setServiceBeans(Arrays.<Object>asList(new CustomerRestImpl()));
+        endpoint.setAddress("/");
+        endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
+        return endpoint.create();
+    }
+}
 ----
+
+. Check the Spring Boot config file in `src/main/resources/application.properties`. Notice the configuration for *cxf.path* and *server.port*.
++
+----
+cxf.path=/rest
+server.port=8080
+...
+----
+
+=== Run the REST service
+
+. Open a terminal window.
+
+. Navigate to the project directory with the following command:
++
+----
+$ cd $AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service
+----
+
+. To run the REST service locally, run the following Apache Maven command :
++
+----
+$ mvn clean spring-boot:run -Dfabric8.skip
+----
+
+. Once the app has started, you will eventually see the following:
++
+----
+....
+2019-04-29 21:21:40.537  INFO 20470 --- [           main] b.c.e.u.UndertowEmbeddedServletContainer : Undertow started on port(s) 8081 (http)
+2019-04-29 21:21:40.541  INFO 20470 --- [           main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 0
+2019-04-29 21:21:40.594  INFO 20470 --- [           main] b.c.e.u.UndertowEmbeddedServletContainer : Undertow started on port(s) 8080 (http)
+2019-04-29 21:21:40.598  INFO 20470 --- [           main] c.r.g.t.s.SampleRestApplication          : Started SampleRestApplication in 5.09 seconds (JVM running for 81.461)
+----
+
+. Make note of the log message: *Started SampleRestApplication in x.yy seconds*
 
 . The REST service should be running on port 8080, and can be accessed through URL: link:http://localhost:8080/rest/customerservice/enrich[http://localhost:8080/rest/customerservice/enrich]
 
-. Try a sample request to the REST endpoint:
+. Open a new terminal window
+
+. Try a sample request to the REST endpoint. Type the following command:
 +
 ----
 curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
 ----
+
 
 . The response should be as follows:
 +
@@ -84,46 +223,107 @@ curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company
 {"clientId":0,"salesRepresentative":null,"company":{"name":"Rotobots","geo":"NORTH_AMERICA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}
 ----
 +
-NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location.
+NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
+=== Deploy to OpenShift Container Platform
 
+. Your account includes an OpenShift project for the services. The project is named *business-services*.
 
-==== Deploy to OpenShift Container Platform
-
-. Create a project in OpenShift Container Platform for the SOAP service, REST service and Camel project::
+. Switch to the *business-services* project.
 +
 ----
-$ oc new-project business-services-user$seq
+$ oc project business-services
 ----
-+
-IMPORTANT: `user$seq` represents the username in the OpenShift Container Platform cluster. Replace it with your assigned username, for example: `user1`, `user2`.
-You should be able to log in with your OpenShift Container Platform user ID and password.
 
-
-. To deploy the application to OpenShift Container Platform, execute the following maven command from the terminal:
+. To deploy the application to OpenShift Container Platform, execute the following Maven command:
 +
 ----
 $ mvn fabric8:deploy
 ----
 
-. Check that the project is deployed successfully. A pod for the deployment *rest-cxfrs-service* should be started. Notice the URL of the endpoint for external traffic.
+NOTE: The deployment process can take 5-10 minutes.
 
-. You can test the REST service by running the same curl request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
-
-
-=== SOAP Web Service
-
-A SOAP Web Service is provided as part of the assets for this lab. This service is developed using CXF-RS, and deployed on Apache Karaf. The service is running on Red Hat Fuse 6.3. This service is available in the project *soap-cxfws-service*. The code for the service can be found in the `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service` directory.
-
-
-==== Analyze the SOAP Web Service
-
-. A service is defined in the `CustomerWS` interface using the `@Webservice` annotation that exposes an operation to update the received `Account` object:
+. Monitor the deployment of the rest-cxfrs-service:
 +
 ----
+$ oc get pods -w
+----
+
+. Wait until you see `READY 1/1` for `rest-cxfrs-service-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
++
+----
+NAME                          READY     STATUS      RESTARTS   AGE
+rest-cxfrs-service-1-6vnwx       1/1       Running     0          2m
+rest-cxfrs-service-s2i-1-build   0/1       Completed   0          3m
+----
+
+. Test the rest-cxfrs-service.
+.. Retrieve the URL of the rest-cxfrs-service application:
++
+----
+$ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --template='{{.spec.host}}')
+----
+
+.. Send a request to the rest-cxfrs-service
++
+----
+curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
+----
+
+.. The response should be as follows:
++
+----
+{"clientId":0,"salesRepresentative":null,"company":{"name":"Rotobots","geo":"NORTH_AMERICA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}
+----
+
+== Inspect the SOAP Web Service
+
+A SOAP Web Service is provided as part of the assets for this lab. This service is developed using CXF-RS, and deployed on Apache Karaf. The service is running on Red Hat Fuse. This service is available in the project *soap-cxfws-service*.
+
+=== View the SOAP Implementation Code
+
+. Expand the project *soap-cxfws-service*
+
+. Expand the node: *src/main/java*
+
+. Expand the project: *org.fuse.usecase.service*
+
+. Open the class: `CustomerWS.java`
+
+. A service is defined in the `CustomerWS` interface using the `@Webservice` annotation
+
+. This exposes an operation to update the received `Account` object:
++
+----
+package org.fuse.usecase.service;
+
+import org.globex.Account;
+import org.globex.CorporateAccount;
+
 @WebService
 public interface CustomerWS {
 
     CorporateAccount updateAccount(Account account);
+
+}
+----
+
+. Open the class: `CustomerWSImpl.java`
+
+. This implementation class handles updating an account that is passed in. 
+
+. Review the code in the `updateAccount` method
++
+----
+    @WebResult(name = "CorporateAccount")
+    @SOAPBinding(parameterStyle = SOAPBinding.ParameterStyle.BARE)
+    public CorporateAccount updateAccount(Account account) {
+        CorporateAccount ca = new CorporateAccount();
+        ca.setId(genRandom());
+        ca.setSalesContact(getRandomSales(sales));
+        ca.setCompany(account.getCompany());
+        ca.setContact(account.getContact());
+        return ca;
+    }
 ----
 
 . Based on the `Account` POJO received, it creates a `CorporateAccount` POJO containing the same fields as `Account`, plus these additional fields:
@@ -131,7 +331,33 @@ public interface CustomerWS {
 * `id`: (int) Set as a random value using 1 to 100 as the range
 * `salesContact`: (String) Randomly populated using a list of contacts
 
-. Uses the `updateAccount` method implemented within the `CustomerWSImpl` class to return `CorporateAccount`.
+=== View the Camel Route
+
+. Open the file: src/main/resources/META-INF/spring/camel-context.xml
+
+. This will show you the design view of the Camel route.
++
+image::images/lab-02/customer-ws-camel-context.png[]
+
+. Click the *Source* tab to see the actual source code for the Camel route.
++
+----
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:osgi="http://www.springframework.org/schema/osgi"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://www.springframework.org/schema/osgi        http://www.springframework.org/schema/osgi/spring-osgi.xsd                 http://camel.apache.org/schema/spring        http://camel.apache.org/schema/spring/camel-spring.xsd  http://camel.apache.org/schema/cxf  http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+    <bean class="org.fuse.usecase.service.CustomerWSImpl" id="customerWSImplBean"/>
+    <cxf:cxfEndpoint address="http://0.0.0.0:8080/ws/customerService"
+        id="customerWebService" loggingFeatureEnabled="true" serviceClass="org.fuse.usecase.service.CustomerWS"/>
+    <camelContext id="_camelContext1" xmlns="http://camel.apache.org/schema/spring">
+        <!-- WebService -->
+        <route id="_route1">
+            <from id="_from1" uri="cxf:bean:customerWebService"/>
+            <bean id="_bean1" method="updateAccount" ref="customerWSImplBean"/>
+        </route>
+    </camelContext>
+</beans>
+----
 
 . Uses an Apache Camel CXF endpoint bean to configure the service and create it using these parameters:
 
@@ -140,18 +366,63 @@ public interface CustomerWS {
 * `serviceClass`: `org.fuse.usecase.service.CustomerWS`
 * `loggingFeatureEnabled`: `true`
 
+=== Run the SOAP service
 
-==== Run the SOAP Web service
+. Open a terminal window.
 
-. To run the SOAP service locally, run the following Maven command from the project root folder `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service`:
+. Navigate to the project directory with the following command:
 +
 ----
-$ mvn camel:run -Dfabric8.skip
+$ cd $AI_EXERCISE_HOME/code/fuse/soap-cxfws-service
 ----
 
-. The Camel CXF service is running on port 8080, and can be accessed through URL: link:http://localhost:8080/ws/customerService[http://localhost:8080/ws/customerService]
+. To run the SOAP service locally, run the following Apache Maven command :
++
+----
+$ mvn clean camel:run -Dfabric8.skip
+----
 
-. You can try a sample request using the SOAP UI:
+. Once the app has started, you will eventually see the following:
++
+----
+...
+org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelContext] - Route: _route1 started and consuming from: Endpoint[cxf://bean:customerWebService]
+org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelContext] - Total 1 routes, of which 1 are started.
+org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelContext] - Apache Camel 2.17.0.redhat-630224 (CamelContext: _camelContext1) started in 1.761 seconds
+----
+
+. The Camel CXF service is running on port 8080. You can view the WSDL in a browser at: link:http://localhost:8080/ws/customerService?wsdl[http://localhost:8080/ws/customerService?wsdl]
+
+=== Test the SOAP Service
+
+In this section, we will test the SOAP service using the *SOAP UI* application. SOAP UI is already installed on your computer. SoapUI is an open-source web service testing application. More details available at: https://www.soapui.org/.
+
+. To test the SOAP service, launch the SOAP UI application. 
+
+. In SOAP UI, create a new project. Select *File > New SOAP Project*
+
+. In the dialog, enter the following values:
+.. Project Name: `customer-service`
+.. Initial WSDL: `http://localhost:8080/ws/customerService?wsdl`
+.. Create Request: (check the box)
++
+image::images/lab-02/new-soap-project.png[]
+
+. Click *OK*
+
+. You will see your new project.
++
+image::images/lab-02/new-soap-project-created.png[]
+
+. Expand the nodes for: *customer-service > CustomerWSServiceSoapBinding > updateAccount*
+
+. Double-click the node: *Request 1*
+
+. Make note of the *request* window
++
+image::images/lab-02/request-window.png[]
+
+. Paste the following text request into the *request* window:
 +
 ----
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.usecase.fuse.org/">
@@ -194,6 +465,10 @@ $ mvn camel:run -Dfabric8.skip
 </soapenv:Envelope>
 ----
 
+. Send the request by clicking the green arrow in the top-left corner to the *Request 1* window.
++
+image::images/lab-02/send-request.png[]
+
 . The response should be as follows:
 +
 ----
@@ -223,72 +498,154 @@ $ mvn camel:run -Dfabric8.skip
 </soap:Envelope>
 ----
 +
-NOTE: Notice that the account is updated with the sales contact details.
+NOTE: Notice that the account is updated with the sales contact details: *<salesContact>*.
 
 
-==== Deploy to OpenShift Container Platform
+=== Deploy to OpenShift Container Platform
 
-. If you have not don't so, switch project in OpenShift Container Platform for the SOAP service, REST service and Camel project:
-oc new-project rest-service-user$seq
-+
-----
-$ oc project business-services-user$seq
-----
-
-. By examining the code, note that the cxf endpoint is set to port 8080, as this is the default HTTP port exposed in the OpenShift Karaf container.
-. Notice the OpenShift YAML files provided for deployment, service, and route configuration.
-. To deploy the application to OpenShift Container Platform, execute the following Maven command from the terminal:
+. To deploy the application to OpenShift Container Platform, execute the following Maven command:
 +
 ----
 $ mvn fabric8:deploy
 ----
 
-. Check that the project is deployed successfully. A pod for the deployment *soap-cxfws-service* should be started. Notice the URL of the endpoint for external traffic.
+NOTE: The deployment process can take 5-10 minutes.
 
-. You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
-
-
-=== Test the Integration Module
-
-Test and analyze the Camel routes that (1) enrich the Account data with help of the 2 backend services, (2) aggregate both the service responses, and finally (3) persist the resulting data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
-
-
-==== Analyze the Camel routes
-
-. Analyze the `camel-context.xml` file found in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service/src/main/resources/spring` directory.
+. Monitor the deployment of the soap-cxfws-service:
 +
-[NOTE] A link:https://camel.apache.org/camelcontext.html[Camel Context] file contains data routing logic called Camel routes. When activated, it serves as both a runtime and a rule-base for Camel routes that deliver, enrich or transform data in real-time.
+----
+$ oc get pods -w
+----
+
+. Wait until you see `READY 1/1` for `soap-cxfws-service-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
 +
-. Note the definitions of the 4 Camel routes: *_route1*, *_route2*, *_route3*, *_route4*
+----
+NAME                          READY     STATUS      RESTARTS   AGE
+soap-cxfws-service-1-6vnwx       1/1       Running     0          2m
+soap-cxfws-service-s2i-1-build   0/1       Completed   0          3m
+----
 
-. BONUS CHALLENGE: Can a single Camel route invoke both the backend services instead? What are the considerations involved when designing this Camel route, if it is even possible to do so?
+. Test the soap-cxfws-service.
+.. Retrieve the URL of the soap-cxfws-service application:
++
+----
+$ export SOAP_CXFWS_URL=http://$(oc get route soap-cxfws-service -o template --template='{{.spec.host}}')
+----
+
+.. Display the URL of the service:
++
+----
+$ echo $SOAP_CXFWS_URL
+----
+
+.. In SOAP UI, update the URL for the service. Replace: `http://localhost:8080` with the value of the _SOAP_CXFWS_URL_ from the previous command.
+
+.. Click the green button to send a request to the soap-cxfws-service
+
+.. The response should be as follows:
++
+----
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns2:updateAccountResponse xmlns:ns2="http://service.usecase.fuse.org/">
+         <return>
+            <company>
+               <active>true</active>
+               <geo>NA</geo>
+               <name>Bill Smith</name>
+            </company>
+            <contact>
+               <city>Baltimore</city>
+               <firstName>Satya</firstName>
+               <lastName>Jayanti</lastName>
+               <phone>143-222-2344</phone>
+               <state>MD</state>
+               <streetAddr>1077 America Ave.</streetAddr>
+               <zip>11751</zip>
+            </contact>
+            <id>44</id>
+            <salesContact>Nandan Joshi</salesContact>
+         </return>
+      </ns2:updateAccountResponse>
+   </soap:Body>
+</soap:Envelope>
+----
+
+== Test the Integration Module
+
+Now you will be testing the Camel routes that (1) enrich the Account data with the 2 backend services, (2) aggregate the responses, and finally (3) persist the data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
+
+=== Camel Route and H2 Database Integration
+
+. Expand the project *amq-enrich-persist-lab*
+
+. Expand the node: *src/main/resources/spring*
+
+. Open the file: `camel-context.xml`
+
+. You will see the Design view of the Camel routes
++
+image::images/lab-02/amq-enrich-routes.png[]
+
+. The Camel route with id: *Route_route7* updates the records in an embedded H2 database, running on localhost.
+
+. Click the *Source* tab to view the source code for the routes.
+
+. Near the bottom of the file is the code for *route7*
++
+----
+        <!-- Insert Records -->
+        <route id="_route7">
+            <from id="_from7" uri="direct:insertDB"/>
+            <log id="_log11" message=">> Before Insert : ${body}"/>
+            <bean id="_bean3" method="defineNamedParameters" ref="processorBean"/>
+            <to id="_to9" uri="sql:INSERT INTO USECASE.T_ACCOUNT(CLIENT_ID,SALES_CONTACT,COMPANY_NAME,COMPANY_GEO,COMPANY_ACTIVE,CONTACT_FIRST_NAME,CONTACT_LAST_NAME,CONTACT_ADDRESS,CONTACT_CITY,CONTACT_STATE,CONTACT_ZIP,CONTACT_PHONE,CREATION_DATE,CREATION_USER)                          VALUES                          (:#CLIENT_ID,:#SALES_CONTACT,:#COMPANY_NAME,:#COMPANY_GEO,:#COMPANY_ACTIVE,:#CONTACT_FIRST_NAME,:#CONTACT_LAST_NAME,:#CONTACT_ADDRESS,:#CONTACT_CITY,:#CONTACT_STATE,:#CONTACT_ZIP,:#CONTACT_PHONE,:#CREATION_DATE,:#CREATION_USER);"/>
+            <log id="_log7" message=">>> Results : ${body}"/>
+        </route>
+
+----
 
 
-===== Camel Route 1: De-queuing and Multicasting
+. Inspect the configuration details in the `pom.xml` and `src/main/resources/application-dev.properties` files.
 
-. Analyze the first Camel route `_route1` that consumes the JSON objects and starts from the *accountQueue*.
-.. Note the AMQP configuration and queues based on the previous lab.
-.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO (aka *Plain Old Java Object*) is done using the `<unmarshal>` processor.
+. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `src/main/resources/schema.sql` file.
+
+////
+You can access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
+
+NOTE: The console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
+////
+
+=== Consuming JSON from a Message Queue 
+
+. Analyze the Camel route with id: *_route3* that consumes the JSON objects and starts from the *accountQueue*.
++
+----
+        <route id="_route3">
+            <from id="_from3" uri="amqp:queue:accountQueue"/>
+            <convertBodyTo id="_convertBodyTo1" type="String"/>
+            <multicast id="_multicast1" parallelProcessing="true" strategyRef="reconcileData">
+                <log id="_log2" loggingLevel="INFO" message="inside multicast"/>
+                <to id="_to4" uri="direct://callRestEndpoint"/>
+                <to id="_to5" uri="direct://callWSEndpoint"/>
+            </multicast>
+            <log id="_log8" loggingLevel="INFO" message="after multicast : ${body}"/>
+            <to id="_to6" uri="direct:insertDB"/>
+        </route>
+
+----
+.. @TODO: Note the AMQP configuration and queues based on the previous lab.
+
+.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO is done using the `<unmarshal>` processor.
 * JSON library: `jackson`
 * `unmarshalTypeName` attribute: `org.globex.Account`
 * The result is used to multicast the exchange to the REST and web service endpoints.
 +
 IMPORTANT: It is a best practice not to multicast data in parallel. To simplify the legibility of the code, a direct endpoint (`callRestEndpoint`) is used to call the REST service and a different direct endpoint (`callWSEndpoint`) to call the web service service.
 
-. BONUS CHALLENGE: Choose a link:https://camel.apache.org/components.html[Camel component] that you will use to convert data in XML into CSV format. What will the resulting code look like?
+=== Define the REST Direct Routes
 
-
-===== Camel Routes 2 and 3: REST and SOAP Service invocations
-
-. Analyze the code pertaining to both Camel routes `_route2` and `_route3` found within the camel-context.file, located in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service` directory.
-
-. From your analysis of the Camelcontext file, note that a single service invocation is made to each of the backend services. These calls are made through the activation of two Camel routes: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
-
-. BONUS CHALLENGE: Can a single Camel route invoke both the backend services instead? What are the considerations involved when designing this Camel route, if it is even possible to do so?
-
-* Analyze the REST Service Camel Route
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service`.
+. To call the backend services, two Camel routes were created: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
 
 * To correctly invoke the declared REST service, a HTTP producer component is used and make sure the following `{header,value}` pairs are specified:
 
@@ -297,28 +654,21 @@ IMPORTANT: It is a best practice not to multicast data in parallel. To simplify 
 ** `CamelHttpMethod=POST`
 ** `CamelCxfRsUsingHttpAPI=True`
 
-. BONUS CHALLENGE: Can you re-develop the REST service invocation code, such that it utilizes a link:https://camel.apache.org/netty-http.html[*netty-http*] component instead?
+=== The Web Service Direct Route
 
-* Analyze the SOAP Web Service Camel Route
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service`.
-
-. Analyze the web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer. Note that it delivers a SOAP payload.
-
-. BONUS CHALLENGE: Based on your analysis of the existing, how are SOAP Faults handled, if at all? Are there additional SOAP Faults that should be implemented, and how will you do it?
+. Note the direct web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer.
 
 
-===== Camel Route 4: Data persistence
+=== The Aggregation Strategy
 
-The last Camel route updates the records in an embedded link:https://www.h2database.com/html/main.html[H2 database], running on localhost.
+. From the results collected by the two services, analyse how the content is aggregated in the `multicast` processor to reconcile the information received from the `CorporateAccount` POJO with the `Account` POJO.
 
-. Inspect the configuration details in the `pom.xml` and `application-dev.properties` files.
-. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `schema.sql` file.
-
-. Access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
+* This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
 +
-NOTE: The H2 console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
-+
+NOTE: The aggregation strategy must be developed within the `AccountAggregator` class.
+
+=== The Aggregated Data into the H2 Database
+
 . Analyze the Apache Camel route that inserts the `Account` information into the `T_ACCOUNT` table of the `ACCOUNT` database.
 ..  The Spring SQL component in the route uses a SQL query to insert the `Account` record within the `option` parameter of the SQL endpoint.
 * Method: `defineNamedParameters(Account account)`
@@ -328,31 +678,12 @@ NOTE: The H2 console will be available only after the routes are started. As the
 
 . After calling the SQL endpoint, add a log message processor to display the contents of the received body.
 
-
-==== The Data Aggregation Strategy in Java
-
-. From the test results from the execution of both the REST and SOAP web services, analyze how the content is aggregated.
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-lab/`.
-
-. Analyze all the Java files in this directory, especially the `src/main/java/org/fuse/usecase/AccountAggregator.java` file.
-
-. Note that a `multicast` processor in Camel route `_route1` reconciles the data received from the `CorporateAccount` POJO with the `Account` POJO.
-
-* This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
-+
-NOTE: The aggregation strategy must be implemented within the `src/main/java/org/fuse/usecase/AccountAggregator` class found in the `amq-enrich-persist-lab` project.
-
-. BONUS CHALLENGE: In order to safeguard against fraudulent account data, a link:http://camel.apache.org/message-filter.html[*Message Filter* Enterprise Integration Pattern] has to be added to the Camel Route. Can you visualize, or even create, the new Camel route such that a *Message Filter* is included?
-
-
-==== A JUnit Test
+=== Using a JUnit Test
 
 . Analyze the JUnit test case that validates the `jackson` ObjectMapper can read the string content of the JSON `Account` message and generate an `Account` object.
 * JUnit test class: `JacksonCompanyTest`
 
 . Note the two assert conditions: one to check that the object is not null, and the other to verify that the name of the company is equal to "Robocops".
-
 
 ==== Build and Test the Integration Project
 
