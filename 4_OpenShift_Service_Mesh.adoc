@@ -294,4 +294,69 @@ image::images/lab-05/grafana-cxfrs-service-details.png[width="100%"]
 
 
 
-== Fault Injection
+== Resiliency
+
+In this section you will learn how to inject faults and test the resiliency of your application. Istio provides a set of failure recovery features that can be taken advantage of by the services in an application. Features include:
+
+* Timeouts
+* Bounded retries with timeout budgets and variable jitter between retries
+* Limits on number of concurrent connections and requests to upstream services
+* Active (periodic) health checks on each member of the load balancing pool
+* Fine-grained circuit breakers (passive health checks) – applied per instance in the load balancing pool
+
+Together, these features enable the service mesh to tolerate failing nodes and prevent localized failures from cascading instability to other nodes. 
+
+=== Create an HTTP abort fault
+
+One way to test microservice resiliency is to introduce an HTTP abort fault. In this section, you will introduce an HTTP abort based on HTTP request headers. If the header to the service includes the magic-word of "breakit", then will generate an HTTP abort.
+
+. @TODO: route traffic to HTTP gateway
+
+. Create a fault injection rule to send an HTTP abort for magic-word breakit:
++
+----
+$ oc apply -f istiofiles/virtual-service-cxfrs-test-abort.yaml
+----
+
+. Confirm the rule was created in the Kiali web console
+.. Move to the Kiali web console. 
+.. On the left hand side, select *Configuration*
+
+** You should see the following screenshot: @TODO - add screenshot
+
+. The file
++
+----
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: cxfrs-service
+  ...
+spec:
+  hosts:
+  - cxfrs-service
+  http:
+  - fault:
+      abort:
+        httpStatus: 500
+        percent: 100
+    match:
+    - headers:
+        magic-word:
+          exact: breakit
+    route:
+    - destination:
+        host: cxfrs-service
+        subset: v1
+  - route:
+    - destination:
+        host: cxfrs-service
+        subset: v1
+----
+
+=== Testing the HTTP abort fault
+
+1. Use the following curl command to test the HTTP abort fault. Notice that it is sending an HTTP request header: `magic-word` `breakit`
+
+
+
