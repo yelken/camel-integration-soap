@@ -2,17 +2,17 @@
 :data-uri:
 :toc2:
 
-= 1. Agile Integration for the Enterprise - Overview Lab
+= Lab 1. Agile Integration for the Enterprise - Overview Lab
 
 Welcome! In this lab, you will review a business use case for this Agile Enterprise technical workshop. Next, you will request an OpenShift Container Platform environment for which you will be able to deploy resources. Finally, you will configure your local workstation with the necessary lab materials to execute the remaining labs. 
 
 .Lab Goals
 
-* Understand the business use case
-* 
-* Examine the developer tools on your local workstation
-* Authenticate the OpenShift client with the OpenShift Container Platform master API
-* Use the OpenShift command line interface (CLI)
+* Review and understand the business use case
+* Obtain a dedicated OpenShift Container Platform environment and login to the environment using the OpenShift web console and Command Line Interface (CLI)
+* Explore preprovisioned assets within OpenShift
+* Utilize developer tools on your local workstation
+* Explore and download workshop lab assets
 
 
 .Business Use Case
@@ -25,7 +25,7 @@ As a result, the C-suite of _Coolstore Inc._ is firmly committed in adopting lin
 
 _Coolstore Inc_ insist on the highest availability and performance service level agreements (SLA) for their new Agile Integration infrastructure. That is why their technical staff has tested and chosen link:https://www.openshift.com/products/container-platform/[*Red OpenShift Container Platform*] to host and workload manage their containerized applications. Thanks to its reliability, scalability and performance, the product met the stringent SLAs set by _Coolstore Inc_. After all, link:https://www.openshift.com/products/container-platform/[*Red OpenShift Container Platform*] is powered by link:https://kubernetes.io/[*Kubernetes*] technology.
 
-With the help of Red Hat, _Coolstore Inc._ has developed the following roadmap to achieving Enterprise Agility:
+With the help of Red Hat, _Coolstore Inc._ has envisioned implementing  the following items to achieving true Enterprise Agility:
 
 * Design Apache Camel routes, deployed on link:https://www.redhat.com/en/technologies/jboss-middleware/fuse[*Red Hat Fuse*] that consume JSON records from link:https://www.redhat.com/en/technologies/jboss-middleware/amq[*Red Hat AMQ*]
 * Use the multicast EIP pattern to distribute the messages to the services
@@ -42,32 +42,15 @@ With the help of Red Hat, _Coolstore Inc._ has developed the following roadmap t
 * Design a hybrid-cloud-based integration solution, using link:https://www.openshift.com/products/fuse[*Fuse Online*], that consumes JSON records from link:https://www.redhat.com/en/technologies/jboss-middleware/amq[*Red Hat AMQ*]
 * Implement a REST-service interface for the cloud-based integration solution
 * Enable service discovery in the cloud-based integration solution
+* Make use of a Service Mesh to reduce the need to include additional libraries into applications to account for common concerns with microservices apoplications.
 * Deploy and test the solution end-to-end
 
-As a second phase of their roadmap, _Coolstore Inc._ has plans to:
-
-* Create an link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] deployment using an Apache Kafka cluster operator
-* Create an link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] publisher and consumer for message delivery and retrieval
-* Create an link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] Connect deployment
-* With a File connector and link:https://access.redhat.com/documentation/en-us/red_hat_amq/7.2/html/using_amq_streams_on_openshift_container_platform/[*Apache Kafka*] Connect, implement a publishing mechanism for customer account records
-* Enhance existing _Coolstore Inc._ portal using new Spring Boot applications, generated using link:https://launch.openshift.io[*Red Hat Developer Launcher*]
-* Enable data persistence capabilities in the Spring Boot applications using Spring Data and JPA
-* Deploy and test the Spring Boot applications on link:https://www.redhat.com/en/technologies/cloud-computing/openshift/application-runtimes[*Red Hat OpenShift Application Runtimes*]
 
 [NOTE]
 As a trusted Enterprise Integration consultant contracted by _Coolstore Inc._, your responsibility is to implement all the steps and milestones of the Agile Enterprise roadmap and fulfill the business requirements of _Coolstore Inc._ You are expected to deliver a comprehensive Enterpise Integration solution at the conclusion of this technical workshop, *based on the architecture diagram shown below.*
 
 image::images/architecture-usecase.png[]
 
-
-////
-.Deployment
-
-The following diagram shows the high level deployment topology in the OpenShift Container Platform cluster used in the lab.
-
-.Deployment Topology
-image::images/AI_Advanced_Deployment_dDagram.png[]
-////
 
 :numbered:
 
@@ -91,19 +74,103 @@ Access to an environment is obtained by requesting a GUID which identifies a par
 .. Lab Code: *TE5CC2 - Agile Integration for the Enterprise*
 .. Activation Key: *<Instructors will provide>*
 .. Email Address: *Your Email Address*
+. Click *Submit*
 
+A unique _GUID_ will be obtained and a page containing the environment details will be displayed. On this page, you will find links to access the OpenShift Command Line Interface (CLI) and the OpenShift Web Console.
 
+== Login to OpenShift Container Platform
 
-== Login to OpenShift Container Platform And Explore the Projects
+Let's login to both the OpenShift web console and to the CLI using the information provided in the previous section. 
 
-. Login to OpenShift Container Platform as user 'userX' with the provided password.
+Credentials for OpenShift are as follows:
+
+*Username*: `user1`
+*Password*: `r3dh4t1!`
+
+=== Login to the OpenShift Web Console
+
+On the environment information page, you will see a link for the OpenShift Web Console. It will be in the format *https://console-openshift-console.apps.cluster-GUID.DOMAIN*
+
+Click on the link provided and login using the provided credentials and when successful, the console will be displayed.
+
+TODO: Insert Screenshot of OpenShift Console
+
+=== Login to the OpenShift Command Line Interface
+
+Many of the operations that will be performed during this workshop will make use of the OpenShift CLI (`oc`). On the environment request page, you will see a link for API access. This is the resource used by the CLI and in the format *https://api.cluster-GUID.DOMAIN:6443*. This value will be referred to as `OPENSHIFT_API` in subsequent steps.
+
+. Login to OpenShift Container Platform as user `user1` with the provided password.
 +
 ----
-$ oc login https://${OPENSHIFT_MASTER} -u user1
+$ oc login https://${OPENSHIFT_API} -u user1
 ----
 
-. When prompted for a password, enter: `r3dh4t1!`
+. Enter the password when prompted. 
 
+A response similar to the following indicates successful authentication to the CLI:
+
+----
+Login successful.
+
+You have access to the following projects and can switch between them with 'oc project <projectname>':
+
+  * business-services
+    enterprise-services
+    fuse-online
+    istio-system
+
+Using project "business-services".
+
+----
+
+=== OpenShift Project Layout
+
+The OpenShhift environment has been preconfigured for this workshop. When you logged in to OpenShift, you were presented with a list of projects that are available to you. A _project_ in OpenShift is a workspace for which you and potentially others can collaborate. 
+
+The following table describes the OpenShift projects and their purpose:
+
+[cols="1,1", options="header"] 
+.OpenShift Projects
+|===
+|Name
+|Description
+
+|`business-services`
+|Location in which microservices applications developed as part of this workshop will reside
+
+|`enterprise-services`
+|Contains shared resources, such as Red Hat AMQ 7 and PostgreSQL
+
+|`fuse-online`
+|Resources related to Fuse Online
+
+|`istio-system`
+|Core components for the Red Hat Service Mesh
+|===
+
+=== Explore OpenShift Projects
+
+Let's take a moment and explore the contents of each project.
+
+. Explore the set enterprise resources that are deployed in the `enterprise-services` project. These include Red Hat AMQ 7 and a PostgreSQL relational database. The database has also already been preconfigured for use in the exercises with the proper schema and tabls.
++
+----
+$ oc get pods -n enterprise-services
+----
++
+. Explore the contents of the `fuse-online` project. The upstream project for Red Hat Fuse Online is called link:https://syndesis.io/[Syndesis]. Many of the assets contained in the deployment of Fuse Online will use this name.
++
+----
+$ oc get pods -n fuse-online
+----
++
+. Explore the contents of the `istio-system` project. This project contains all of the resources related to the Red Hat Service Mesh.
++
+----
+$ oc get pods -n istio-system
+----
++
+. Finally, the `business-servives` project will be used to deploy all of the microservices applications thoughout this workshot. Do not worry that no resources are found currently. This project is empty, but will start to be populated in the next lab.
 
 == Explore Red Hat CodeReady Studio
 
@@ -153,4 +220,4 @@ The subdirectory named `$AI_EXERCISE_HOME/labs` contains the lab assets used in 
 *Congratulations, you have completed this lab.*
 
 [.text-center]
-image:icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=2a_REST_Enrich_Application.adoc]
+image:icons/icon-home.png[align="center",width=128, link=README.adoc] image:icons/icon-next.png[align="right"width=128, link=2_Fuse_OpenShift_AMQ_EIP_Lab.adoc]

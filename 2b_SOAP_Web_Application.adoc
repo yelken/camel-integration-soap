@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= 2b. SOAP Web Application
+= Lab 2b. SOAP Web Application
 
 A SOAP Web Service is also provided as part of the assets for this lab. Red Hat Fuse supports multiple container runtimes including link:JBoss Enterprise Application Platform (EAP)[https://www.redhat.com/en/technologies/jboss-middleware/application-platform], Spring Boot, and link:https://karaf.apache.org/[Apache Karaf]. This service is developed using link:http://cxf.apache.org/docs/jax-rs.html[CXF-RS], and deployed on a Apache Karaf container
 
@@ -284,4 +284,4 @@ $ echo $SOAP_CXFWS_URL
 *You have successfully deployed and tested the SOAP web service!*
 
 [.text-center]
-image:icons/icon-previous.png[align=left, width=128, link=2a_REST_Enrich_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=2a_REST_Enrich_Application.adoc]
+image:images/icons/icon-previous.png[align=left, width=128, link=2a_REST_Enrich_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2c_Integration_Application.adoc]

@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= 2c. Integration Application
+= Lab 2c. Integration Application
 
 Now, with the REST and SOAP services deployed, a third application will be deployed to (1) enrich the Account data with the 2 backend services, (2) aggregate the responses, and finally (3) persist the data into a relational database table. You will be completing the code for this section in the Maven project *amq-enrich-persist-lab*.
 
@@ -158,4 +158,4 @@ $ mvn fabric8:deploy -Popenshift
 *You have successfully deployed and tested the Integration application!*
 
 [.text-center]
-image:icons/icon-previous.png[align=left, width=128, link=2a_REST_Enrich_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=2a_REST_Enrich_Application.adoc]
+image:images/icons/icon-previous.png[align=left, width=128, link=2b_SOAP_Web_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2d_Legacy_Application.adoc]

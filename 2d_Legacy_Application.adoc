@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= 2d. Legacy Application Wrapper
+= Lab 2d. Legacy Application Wrapper
 
 Now, you develop a Camel route to migrate legacy SOAP services to provide a REST API wrapper using Camel.
 
@@ -101,4 +101,4 @@ $ curl -k http://legacy-soap-rest-wrapper-legacy-soap.apps.cluster-490c.sandbox6
 *Congratulations, you have completed each of the modules of this lab.*
 
 [.text-center]
-image:icons/icon-previous.png[align=left, width=128, link=2c_Integration_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=3_Fuse_Online_Enrich_Lab.adoc]
+image:images/icons/icon-previous.png[align=left, width=128, link=2c_Integration_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=3_Fuse_Online_Enrich_Lab.adoc]
