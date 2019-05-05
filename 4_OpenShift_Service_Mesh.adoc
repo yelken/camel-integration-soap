@@ -364,12 +364,12 @@ spec:
 curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' -H 'magic-word: breakit'
 ----
 
-.. The response should be as follows:
+* The response should be as follows:
 +
 ----
 @TODO
 ----
-
++
 NOTE: Notice that the call to the cxfrs-service was aborted. The cxfrs-service was never executed, as a result no data is returned.
 
 . Call the cxfrs-service without passing in the `magic-word` header, the service will execute.
