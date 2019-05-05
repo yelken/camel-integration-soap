@@ -1,0 +1,234 @@
+:scrollbar:
+:data-uri:
+:toc2:
+:linkattrs:
+
+= 2a. REST Based Enrichment Service
+
+A REST microservice is used as a backend service for this solution. The REST service is provided in the maven project *rest-cxfrs-service* within CodeReady Studio.
+
+The REST service enriches the Account record.
+
+. Expand the project *rest-cxfrs-service*
+
+. Expand the node: *src/main/java*
+
+. Expand the package: *com.redhat.labs.agileintegration.rest*
+
+. Open the class: `CustomerRest.java`
+
+. This class consists of the interface for `CustomerRest` REST service:
++
+----
+package com.redhat.labs.agileintegration.rest;
+
+import org.globex.Account;
+
+import javax.ws.rs.*;
+
+@Path("/customerservice")
+public interface CustomerRest {
+
+    @POST @Path("/enrich") @Consumes("application/json") @Produces("application/json")
+    Account enrich(Account customer);
+
+}
+----
+
+. Open the class: `CustomerRestImpl.java`
++
+----
+package com.redhat.labs.agileintegration.rest;
+
+import org.globex.Account;
+import org.globex.Company;
+
+import io.swagger.annotations.Api;
+
+@Api("/customerservice")
+public class CustomerRestImpl implements CustomerRest {
+
+    private static final String NA_REGION = "NORTH_AMERICA";
+    private static final String SA_REGION = "SOUTH_AMERICA";
+    private static final String WE_REGION = "WEST_AMERICA";
+    private static final String EAST_REGION = "EAST_AMERICA";
+
+    @Override public Account enrich(Account account) {
+        Company company = account.getCompany();
+        String region = company.getGeo();
+        switch (region) {
+        case "NA":
+            company.setGeo(NA_REGION); break;
+        case "SA":
+            company.setGeo(SA_REGION); break;
+        case "WA":
+            company.setGeo(WE_REGION); break;
+        case "EA":
+            company.setGeo(EAST_REGION); break;
+        }
+        account.setCompany(company);
+        return account;
+    }
+}
+----
+
+* The implementation class contains logic to enrich the `Account` POJO as follows:
+** Based on the `geo` field of the `company` object, a Java enumerator maps region codes to regions
+** `{"NA, SA, WA, EA"}` corresponds to `{"NORTH_AMERICA, SOUTH_AMERICA, WEST_AMERICA, EAST_AMERICA"}`
+** The enriched `Account` object is returned by the `enrich()` method
+
+. Open the class `SampleRestApplication.java`.
+
+. To expose the REST service within Spring, the CXF component's `rsServer` is annotated with `@Bean`. 
++
+----
+package com.redhat.labs.agileintegration.rest;
+
+import java.util.Arrays;
+
+import org.apache.cxf.Bus;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
+import org.apache.cxf.jaxrs.swagger.Swagger2Feature;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class SampleRestApplication {
+
+    @Autowired
+    private Bus bus;
+
+    public static void main(String[] args) {
+        SpringApplication.run(SampleRestApplication.class, args);
+    }
+ 
+    @Bean
+    public Server rsServer() {
+        // setup CXF-RS
+        JAXRSServerFactoryBean endpoint = new JAXRSServerFactoryBean();
+        endpoint.setBus(bus);
+        endpoint.setProvider(new JacksonJsonProvider());
+        endpoint.setServiceBeans(Arrays.<Object>asList(new CustomerRestImpl()));
+        endpoint.setAddress("/");
+        endpoint.setFeatures(Arrays.asList(new Swagger2Feature()));
+        return endpoint.create();
+    }
+}
+----
+
+. Check the Spring Boot config file in `src/main/resources/application.properties`. Notice the configuration for *cxf.path* and *server.port*.
++
+----
+cxf.path=/rest
+server.port=8080
+...
+----
+
+=== Run the REST service Locally
+
+. Open a terminal window.
+
+. Navigate to the project directory with the following command:
++
+----
+$ cd $AI_EXERCISE_HOME/labs/01_rest-cxfrs-service
+----
+
+. To run the REST service locally, run the following Apache Maven command :
++
+----
+$ mvn clean spring-boot:run -Dfabric8.skip
+----
+
+INFO: The link:https://maven.fabric8.io[Fabric8 Maven Plugin] simplifies deploying Java based applications to OpenShift. It will be used when working with each of the applications. When running locally, the Java argument `-Dfabric8.skip` is used to bypass actions used to prepare for and deploy to OpenShift.
+
+. Once the application has started, you will eventually see the following:
++
+----
+....
+2019-04-29 21:21:40.537  INFO 20470 --- [           main] b.c.e.u.UndertowEmbeddedServletContainer : Undertow started on port(s) 8081 (http)
+2019-04-29 21:21:40.541  INFO 20470 --- [           main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 0
+2019-04-29 21:21:40.594  INFO 20470 --- [           main] b.c.e.u.UndertowEmbeddedServletContainer : Undertow started on port(s) 8080 (http)
+2019-04-29 21:21:40.598  INFO 20470 --- [           main] c.r.g.t.s.SampleRestApplication          : Started SampleRestApplication in 5.09 seconds (JVM running for 81.461)
+----
+
+. Make note of the log message: *Started SampleRestApplication in x.yy seconds*
+
+. The REST service should be running on port 8080, and can be accessed through URL: link:http://localhost:8080/rest/customerservice/enrich[http://localhost:8080/rest/customerservice/enrich]
+
+. Open a new terminal window
+
+. Try a sample request to the REST endpoint. Type the following command:
++
+----
+curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
+----
+
+
+. The response should be as follows:
++
+----
+{"clientId":0,"salesRepresentative":null,"company":{"name":"Rotobots","geo":"NORTH_AMERICA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}
+----
++
+NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
+
+=== Deploy to OpenShift Container Platform
+
+. An OpenShift project is available for the deployment of each of the services within this lab. The project is named *business-services*.
+
+. Switch to the *business-services* project.
++
+----
+$ oc project business-services
+----
+
+. To deploy the application to OpenShift Container Platform, execute the following Maven command:
++
+----
+$ mvn fabric8:deploy
+----
+
+NOTE: The deployment process can take 5-10 minutes.
+
+. Monitor the deployment of the rest-cxfrs-service:
++
+----
+$ oc get pods -w
+----
+
+. Wait until you see `READY 1/1` for `rest-cxfrs-service-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
++
+----
+NAME                          READY     STATUS      RESTARTS   AGE
+rest-cxfrs-service-1-6vnwx       1/1       Running     0          2m
+rest-cxfrs-service-s2i-1-build   0/1       Completed   0          3m
+----
+
+. Test the rest-cxfrs-service.
+.. Retrieve the URL of the rest-cxfrs-service application:
++
+----
+$ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --template='{{.spec.host}}')
+----
+
+.. Send a request to the rest-cxfrs-service
++
+----
+curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
+----
+
+.. The response should be as follows:
++
+----
+{"clientId":0,"salesRepresentative":null,"company":{"name":"Rotobots","geo":"NORTH_AMERICA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}
+----
+
+*You have successfully deployed and tested the REST web service!*
+
+[.text-center]
+image:icons/icon-previous.png[align=left, width=128, link=2_Fuse_OpenShift_AMQ_EIP_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=2b_SOAP_Web_Application.adoc]

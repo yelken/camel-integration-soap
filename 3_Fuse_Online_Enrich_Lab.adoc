@@ -251,4 +251,7 @@ CREATE TABLE T_ERROR (
 );
 ----
 
-Congratulations, you have completed this lab.
+*Congratulations, you have completed this lab.*
+
+[.text-center]
+image:icons/icon-previous.png[align=left, width=128, link=2d_Legacy_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=4_OpenShift_Service_Mesh.adoc]
