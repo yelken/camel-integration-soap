@@ -170,7 +170,7 @@ To show the capabilities of Kiali, you need to generate some sample data.
 . Move back to your terminal window:
 +
 ----
-$ cd $AI_EXERCISE_HOME/code
+$ cd $AI_EXERCISE_HOME/labs/lab04
 ----
 
 . Retrieve the URL of the rest-cxfrs-service application:
@@ -182,7 +182,7 @@ $ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --t
 . Generate data:
 +
 ----
-$ script/run-all.sh
+$ scripts/run-all.sh
 ----
 
 * Let this script continue to run.
@@ -310,6 +310,8 @@ Together, these features enable the service mesh to tolerate failing nodes and p
 
 One way to test microservice resiliency is to introduce an HTTP abort fault. In this section, you will introduce an HTTP abort based on HTTP request headers. If the header to the service includes the magic-word of "breakit", then will generate an HTTP abort.
 
+. In your terminal window, stop the previous script: run-all.sh
+
 . @TODO: route traffic to HTTP gateway
 
 . Create a fault injection rule to send an HTTP abort for magic-word breakit:
@@ -356,7 +358,28 @@ spec:
 
 === Testing the HTTP abort fault
 
-1. Use the following curl command to test the HTTP abort fault. Notice that it is sending an HTTP request header: `magic-word` `breakit`
+. Use the following curl command to test the HTTP abort fault. The command will send a request to the rest-cxfrs-service. Notice that it is sending an HTTP request header: `magic-word` `breakit`
++
+----
+curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' -H 'magic-word: breakit'
+----
+
+.. The response should be as follows:
++
+----
+@TODO
+----
+
+NOTE: Notice that the call to the cxfrs-service was aborted. The cxfrs-service was never executed, as a result no data is returned.
+
+. Call the cxfrs-service without passing in the `magic-word` header, the service will execute.
++
+----
+curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' 
+----
+
+* The cxfrs-service is executed as desired. As a result, the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
 
 
+*You have successfully deployed and tested the REST web service in the OpenShift Service Mesh!*
 
