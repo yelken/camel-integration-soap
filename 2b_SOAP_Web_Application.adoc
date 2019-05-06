@@ -17,7 +17,7 @@ This service is found in the Maven project *soap-cxfws-service*.
 
 . Expand the package: *com.redhat.labs.agileintegration.service*
 
-. Open the class: `CustomerWS.java`
+. Open the file: `CustomerWS.java`
 
 . A service is defined in the `CustomerWS` interface using the `@Webservice` annotation
 
@@ -65,7 +65,7 @@ public interface CustomerWS {
 
 The primary integration logic is contained in Camel routes. Routes can be defined either declaratively using a Java DSL or Spring based XML. This application is using the Spring XML approach. Review the contents of the Spring XML based camel context.
 
-. Open the file: src/main/resources/META-INF/spring/camel-context.xml
+. Open the file: `src/main/resources/META-INF/spring/camel-context.xml`
 
 . This will show you the design view of the Camel route.
 +
@@ -105,7 +105,7 @@ image::images/lab-02/customer-ws-camel-context.png[]
 . Navigate to the project directory with the following command:
 +
 ----
-$ cd $AI_EXERCISE_HOME/labs/lab02/soap-cxfws-service
+$ cd $AI_EXERCISE_HOME/labs/lab02/02_soap-cxfws-service
 ----
 
 . To run the SOAP service locally, run the following Apache Maven command :
@@ -129,9 +129,18 @@ org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelCon
 
 In this section, we will test the SOAP web service using the an inclued Web Service Tester within CodeReady Studio. The web service tester is only one of many included tools available within the product.
 
-. To test the SOAP service, open the Web Service Tester View. Select *Window > Show View > Other*. Select *JBoss Web Tools > Web Service Tester*. 
+. To test the SOAP service, open the Web Service Tester View. 
+.. Select *Window > Show View > Other*. 
+.. Select *JBoss Tools Web Services > Web Service Tester*. 
 +
-A new window will appear on the bottom portion of the window. 
+image::images/lab-02/select-jboss-web-service-tester.png[]
+
++
+. A new window will appear on the bottom portion of the window. 
++
+image::images/lab-02/web-service-tester-blank.png[]
+
+
 . In the empty textbox, enter the following value for the location of the WSDL file: `http://localhost:8080/ws/customerService?wsdl`
 . Change the request type to `POST
 . Paste the following text request into the *Request Body* textbox:
@@ -176,6 +185,8 @@ A new window will appear on the bottom portion of the window.
    </soapenv:Body>
 </soapenv:Envelope>
 ----
++
+image::images/lab-02/soap-request.png[]
 
 . Send the request by clicking the green arrow in the top-right corner of the view next to the _POST_ requst type.
 
@@ -273,13 +284,15 @@ $ echo $SOAP_CXFWS_URL
                <streetAddr>1077 America Ave.</streetAddr>
                <zip>11751</zip>
             </contact>
-            <id>44</id>
-            <salesContact>Nandan Joshi</salesContact>
+            <id>43</id>
+            <salesContact>Guillaume Nodet</salesContact>
          </return>
       </ns2:updateAccountResponse>
    </soap:Body>
 </soap:Envelope>
 ----
+
+NOTE: The `<salesContact>` is randomly generated. Your output may be slightly different from above.
 
 *You have successfully deployed and tested the SOAP web service!*
 
