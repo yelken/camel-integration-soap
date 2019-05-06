@@ -1,4 +1,8 @@
-# Agile Integration for the Enterprise
+:scrollbar:
+:data-uri:
+:linkattrs:
+
+= Agile Integration for the Enterprise
 
 Organizations invest in a deep portfolio of technologies to meet diverse business requirements.The interconnectivity of these systems are fundamental to the success of the business. To keep pace with the competition, solutions must achieve scalability in order to meet market demand, as well as, to meet business stakeholder requirements. Agile Integration is the key to the success of organizations seeking to scale and support demanding stakeholder expectations.
 
@@ -16,9 +20,13 @@ In this lab, attendees will learn to use Red Hat’s integration portfolio for v
 
 Get ready to transform your organization into an Agile Enterprise!
 
-## Labs
+== Labs
 
-* Lab 1 - Introduction and Lab Overview
-* Lab 2 - Agile Integration for Developers
-* Lab 3 - Agile Integration for Business Users
-* Lab 4 - Agile Integration for Quality Assurance
+* link:1_Overview_Lab.adoc[Lab 1 - Introduction and Lab Overview]
+* link:2_Fuse_OpenShift_AMQ_EIP_Lab.adoc[Lab 2 - Agile Integration for Developers]
+* link:3_Fuse_Online_Enrich_Lab.adoc[Lab 3 - Agile Integration for Business Users]
+* link:2_Fuse_OpenShift_AMQ_EIP_Lab.adoc[Lab 4 - Agile Integration for Quality Assurance]
+
+== Resources
+
+* link:i_Resources.adoc[Resources]

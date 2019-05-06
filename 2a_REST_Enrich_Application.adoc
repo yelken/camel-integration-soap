@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= 2a. REST Based Enrichment Service
+= Lab 2a. REST Based Enrichment Service
 
 A REST microservice is used as a backend service for this solution. The REST service is provided in the maven project *rest-cxfrs-service* within CodeReady Studio.
 
@@ -231,4 +231,4 @@ curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo
 *You have successfully deployed and tested the REST web service!*
 
 [.text-center]
-image:icons/icon-previous.png[align=left, width=128, link=2_Fuse_OpenShift_AMQ_EIP_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=2b_SOAP_Web_Application.adoc]
+image:images/icons/icon-previous.png[align=left, width=128, link=2_Fuse_OpenShift_AMQ_EIP_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2b_SOAP_Web_Application.adoc]

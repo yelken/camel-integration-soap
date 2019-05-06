@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-== OpenShift Service Mesh - Lab
+== Lab 4 - OpenShift Service Mesh
 
 == Goals
 
@@ -381,5 +381,7 @@ curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo
 * The cxfrs-service is executed as desired. As a result, the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
 
 
-*You have successfully deployed and tested the REST web service in the OpenShift Service Mesh!*
+*You have successfully deployed and tested the REST web service in the OpenShift Service Mesh and have completed all lab exercises!*
 
+[.text-center]
+image:images/icons/icon-previous.png[align=left, width=128, link=3_Fuse_Online_Enrich_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=Conclusion.adoc]

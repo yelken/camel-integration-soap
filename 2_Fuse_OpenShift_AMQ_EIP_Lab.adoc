@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= 2. Enrich Content and Aggregate Data - Lab
+= Lab 2. Enrich Content and Aggregate Data - Lab
 
 _Coolstore Inc._ desires the ability to use a variety of services in order for them to integrate with different systems within their organization. These services range from REST and SOAP based web services, messaging, along with relational databases. They have created a number of applications that not only implement these protocols, but connect to existing enterprise services.
 
@@ -65,5 +65,5 @@ image::images/lab-02/the-projects.png[]
 This lab is broken down into multiple submodules, separated by each microservice that will be deployed. With the projects imported into CodeReady Studio, proceed to the first microservice which is a REST based application to enrich content.
 
 [.text-center]
-image:icons/icon-previous.png[align=left, width=128, link=2_Fuse_OpenShift_AMQ_EIP_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.md] image:icons/icon-next.png[align="right"width=128, link=2b_SOAP_Web_Application.adoc]
+image:images/icons/icon-previous.png[align=left, width=128, link=1_Overview_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2a_REST_Enrich_Application.adoc]
 
