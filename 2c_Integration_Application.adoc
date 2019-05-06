@@ -37,17 +37,6 @@ image::images/lab-02/amq-enrich-routes.png[]
 
 ----
 
-////
-. Inspect the configuration details in the `pom.xml` and `src/main/resources/application-dev.properties` files.
-
-. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `src/main/resources/schema.sql` file.
-
-
-You can access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
-
-NOTE: The console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
-////
-
 === Consuming JSON from a Message Queue 
 
 . Analyze the Camel route with id: *_route3* that consumes the JSON objects and starts from the *accountQueue*.
