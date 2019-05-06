@@ -113,11 +113,11 @@ The results of this integration is stored in a relational database.
 .. The named parameters are defined using a `Map<String, Object>` created within a bean that is called by the route to set the body, before calling the SQL endpoint.
 * Bean: `ProcessorBean.class`
 
-. After calling the SQL endpoint, add a log message processor to display the contents of the received body.
+. After calling the SQL endpoint, add a log message processor to display the contents of the received body. 
 
 ==== Build and Test the Integration Project
 
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-lab/`.
+. Change working directory to `$AI_EXERCISE_HOME/labs/lab02/03_amq-enrich-persist-lab/`.
 
 . On the command line, run the following command in a terminal:
 +
@@ -148,11 +148,29 @@ Finally, you deploy the integration project to OpenShift Container Platform, usi
 $ mvn fabric8:deploy -Popenshift
 ----
 
-. Check that the pod  *amq-enrich-persist-lab-xxxxx* starts up successfuly.
+NOTE: The deployment process can take 5-10 minutes.
+
+. Monitor the deployment of the amq-enrich-persist-lab:
++
+----
+$ oc get pods -w
+----
+
+. Wait until you see `READY 1/1` for `amq-enrich-persist-lab-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
++
+----
+NAME                          READY     STATUS      RESTARTS   AGE
+amq-enrich-persist-lab-1-6vnwx       1/1       Running     0          2m
+amq-enrich-persist-lab-s2i-1-build   0/1       Completed   0          3m
+----
 
 . Check that the all four Camel routes run successfully, consuming all 3 messages from accountQueue, and writing to the database.
 
+@TODO: Give steps on how to check the routes ran
+
 . Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table.
+
+@TODO: Give steps on how to check the database
 
 
 *You have successfully deployed and tested the Integration application!*

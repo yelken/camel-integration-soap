@@ -15,9 +15,9 @@ The REST service enriches the Account record.
 
 . Expand the package: *com.redhat.labs.agileintegration.rest*
 
-. Open the class: `CustomerRest.java`
+. Open the file: `CustomerRest.java`
 
-. This class consists of the interface for `CustomerRest` REST service:
+. This file consists of the interface for `CustomerRest` REST service: 
 +
 ----
 package com.redhat.labs.agileintegration.rest;
@@ -135,7 +135,7 @@ server.port=8080
 . Navigate to the project directory with the following command:
 +
 ----
-$ cd $AI_EXERCISE_HOME/labs/01_rest-cxfrs-service
+$ cd $AI_EXERCISE_HOME/labs/lab02/01_rest-cxfrs-service
 ----
 
 . To run the REST service locally, run the following Apache Maven command :
@@ -219,7 +219,7 @@ $ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --t
 .. Send a request to the rest-cxfrs-service
 +
 ----
-curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
+curl -k ${REST_CXFRS_URL}/rest/customerservice/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
 ----
 
 .. The response should be as follows:
