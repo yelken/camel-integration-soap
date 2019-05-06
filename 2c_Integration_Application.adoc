@@ -125,7 +125,7 @@ NOTE: The deployment process can take 5-10 minutes.
 . Monitor the deployment of the amq-enrich-persist-lab:
 +
 ----
-$ oc get pods -w
+$ oc get pods -w -n business-services
 ----
 
 . Wait until you see `READY 1/1` for `amq-enrich-persist-lab-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
@@ -139,7 +139,7 @@ amq-enrich-persist-lab-s2i-1-build   0/1       Completed   0          3m
 . Check that all four Camel routes started successfully. Type the following command:
 +
 ----
-oc logs -f pods/amq-enrich-persist-lab-1-ttd89
+oc logs -f pods/<pod name> -n business-services
 ----
 
 * You should see the following output. Make note of the logs referring to the *routex started and consuming*
@@ -157,7 +157,7 @@ oc logs -f pods/amq-enrich-persist-lab-1-ttd89
 . Retrieve the URL of the AMQ Message Broker. In a terminal window, type the following:
 +
 ----
-$ export AMQ_BROKER_URL=http://$(oc get route console -n enterprise-services -o template --template='{{.spec.host}}')
+$ export AMQ_BROKER_URL=http://$(oc get route console -n enterprise-services -o template --template='{{.spec.host}}' -n enterprise-services)
 ----
 
 . Display the URL for the AMQ Broker
@@ -232,7 +232,7 @@ image:images/lab-02/blank-send.png[]
 . View the logs to make sure the Camel routes processed the message.
 +
 ----
-oc logs -f pods/amq-enrich-persist-lab-1-ttd89
+$ oc logs -f pods/amq-enrich-persist-lab-1-ttd89 -n business-services
 ----
 
 * You should see logs regarding the processing of the message. At the end, you will see the following logs
@@ -250,13 +250,13 @@ oc logs -f pods/amq-enrich-persist-lab-1-ttd89
 .. Retrieve the name of the Postres database pod
 +
 ----
-oc get pods -n enterprise-services | grep postgresql
+$ oc get pods -n enterprise-services | grep postgresql
 ----
 
 .. Access the Postgres database pod
 +
 ----
-oc -n enterprise-services rsh <pod name>
+$ oc -n enterprise-services rsh <pod name>
 ----
 
 .. Log into the database
@@ -288,6 +288,12 @@ SELECT client_id, contact_first_name, contact_last_name, creation_date, creation
         42 | Bill               | Smith             | 2019-05-06 20:24:53.094 | fuse_usecase
 (1 row)
 
+. Exit out of the postgres datbase pod
++
+----
+sampledb-# \q
+sh-4.2$ exit
+----
 ----
 
 
