@@ -104,33 +104,16 @@ The results of this integration is stored in a relational database.
 
 . After calling the SQL endpoint, add a log message processor to display the contents of the received body. 
 
-==== Build and Test the Integration Project
-
-. Change working directory to `$AI_EXERCISE_HOME/labs/lab02/03_amq-enrich-persist-lab/`.
-
-. On the command line, run the following command in a terminal:
-+
-----
-$ mvn spring-boot:run -Dfabric8.skip
-----
-
-* You will see output similar to the following:
-+
-----
-{CONTACT_STATE=NC, SALES_CONTACT=Guillaume Nodet, CREATION_USER=fuse_usecase, CREATION_DATE=2015-12-11 18:18:01.55, CONTACT_PHONE=600-555-7000, CONTACT_CITY=Raleigh, CONTACT_ADDRESS=1101 Smith St., COMPANY_NAME=MountainBikers, COMPANY_ACTIVE=true, CLIENT_ID=46, CONTACT_LAST_NAME=Jungle, CONTACT_ZIP=27519, COMPANY_GEO=SOUTH_AMERICA, CONTACT_FIRST_NAME=George}
-----
-+
-NOTE: Expect to see differences for `CREATION_DATE`, `SALES_CONTACT`, and `CLIENT_ID` because they are generated values.
-
-. Check the database to ensure the records are populated correctly in the T_ACCOUNT table.
-
-
 ==== Deploy the Camel Integration Project to OpenShift Container Platform
 
-Finally, you deploy the integration project to OpenShift Container Platform, using the PostgreSQL database in the _enterprise-services_ project
+In this section you will deploy the integration project to OpenShift Container Platform, using the PostgreSQL database in the _enterprise-services_ project
 
-. navigate to the project's root folder at `$AI_EXERCISE_HOME/labs/lab02/03_amq-enrich-persist-lab`.
+. In a terminal window, navigate to the project's root folder:
 +
+----
+$ cd $AI_EXERCISE_HOME/labs/lab02/03_amq-enrich-persist-lab
+----
+
 . Build and deploy the application into OpenShift
 +
 ----
