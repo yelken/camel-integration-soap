@@ -164,9 +164,21 @@ amq-enrich-persist-lab-1-6vnwx       1/1       Running     0          2m
 amq-enrich-persist-lab-s2i-1-build   0/1       Completed   0          3m
 ----
 
-. Check that the all four Camel routes run successfully, consuming all 3 messages from accountQueue, and writing to the database.
+. Check that all four Camel routes started successfully. Type the following command:
++
+----
+oc logs -f pods/amq-enrich-persist-lab-1-ttd89
+----
 
-@TODO: Give steps on how to check the routes ran
+* You should see the following output. Make note of the logs referring to the *routex started and consuming*
++
+----
+...
+
+03:08:16.871 [main] INFO o.a.camel.spring.SpringCamelContext - Route: _route1 started and consuming from: amqp://queue:accountQueue 03:08:16.873 [main] INFO o.a.camel.spring.SpringCamelContext - Route: _route2 started and consuming from: direct://callWSEndpoint 03:08:16.873 [main] INFO o.a.camel.spring.SpringCamelContext - Route: _route3 started and consuming from: direct://callRestEndpoint 03:08:16.874 [main] INFO o.a.camel.spring.SpringCamelContext - Route: _route4 started and consuming from: direct://insertDB 03:08:16.874 [main] INFO o.a.camel.spring.SpringCamelContext - Total 4 routes, of which 4 are started
+
+...
+----
 
 . Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table.
 
