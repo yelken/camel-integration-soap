@@ -3,9 +3,13 @@
 :toc2:
 :linkattrs:
 
-= Enrich Content and Aggregate Data - Lab
+= Lab 2. Enrich Content and Aggregate Data - Lab
 
-In this lab, you develop routes that process the account records in JSON format, and through enrichment and aggregation create a more complete account record. The resulting record is stored in a database.
+_Coolstore Inc._ desires the ability to use a variety of services in order for them to integrate with different systems within their organization. These services range from REST and SOAP based web services, messaging, along with relational databases. They have created a number of applications that not only implement these protocols, but connect to existing enterprise services.
+
+Their goal is to expand the scalability of these services and simplify the integration with their existing enterprise services by using the OpenShift Container Platform to simpifty their needs.
+
+In this lab, you will take the role of a developer to deploy multiple micrososervices based applications which make use of Apache Camel to process account records in JSON format and store the results in a relational database. By leveraging enrichment and aggregation integration patterns, the properties of the account records is enhanced to produce a more complete representation of an account.
 
 .Goals
 * Design Apache Camel routes that consume JSON records from Red Hat AMQ
@@ -14,533 +18,52 @@ In this lab, you develop routes that process the account records in JSON format,
 * Consume from the backend REST service
 * Aggregate the messages received using the aggregation EIP pattern
 * Save the aggregated message in an SQL database using the Spring SQL component
+* Migrate a legacy web services application
 +
-image::images/Fuse_Exp_Usecase_Mod2.png[]
+image::images/lab-02/Fuse_Exp_Usecase_Mod2.png[width="100%"]
+
 
 :numbered:
 
 
-== Import the Project into Red Hat Developer Studio
+== Import the Projects into Red Hat CodeReady Studio
 
-. In Red Hat CodeReady Studio, import import these three projects located in the `$AI_EXERCISE_HOME/code/fuse/` directory into a new workspace:
+Each of the applications within this lab are link:https://maven.apache.org/[Maven] based Java applications. The first step is to import the projects into Red Hat CodeReady Studio. 
 
-* soap-cxfws-service
-* rest-cxfrs-service
-* amq-enrich-persist-lab
+. Start the Red Hat CodeReady Studio application
 
-
-== Develop the Solution
-
-
-=== REST Service
-
-A REST Service is used as a backend service for this solution. The REST service is provided in the project *rest-cxfrs-service*.
-The code for the service can be found in the `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service` directory
-
-
-==== Inspect the REST Service
-
-The REST service enriches the Account record.
-
-. It consists of the `CustomerRest` REST service with the following annotations:
+. In Red Hat CodeReady Studio, import the projects for this lab.
+.. Select: *File > Import ...*
+.. Select: *Maven > Existing Maven Projects*
 +
-----
-@Path("/customerservice/")
-public interface CustomerRest {
+image::images/lab-02/import_maven_projects.png[]
 
-@POST @Path("/enrich") @Consumes("application/json")
-Account enrich(Account customer);
-----
+. Click *Next*
 
-* The implementation class contains logic to enrich the `Account` POJO as follows:
-** Based on the `geo` field of the `company` object, a Java enumerator maps region codes to regions
-** `{"NE,MW,SO,WE"}` corresponds to `{"NORTH_EAST,MIDWEST,SOUTH,WEST"}`
-** The enriched `Account` object is returned by the `enrich()` method
+. For the *Root Directory*, click the *Browse...*
 
-* To expose the REST service within Spring, you use the CXF component's `rsServer` server. This is defined in the Application.java.
+. Navigate to the directory: `$AI_EXERCISE_HOME/labs/lab02`
 
-* Check the application.properties and notice the *cxf-path* and *server.port*.
+. Click *Open*
 
-
-==== Run the REST service
-
-. To run the REST service locally, run the following Apache Maven command from the project's root folder `$AI_EXERCISE_HOME/code/fuse/rest-cxfrs-service`:
+. Select the following projects
+.. 01_rest-cxfrs-service
+.. 02_soap-cxfws-service
+.. 03_amq-enrich-persist-lab
+.. 04_legacy-rest-soap-wrapper
 +
-----
-$ mvn spring-boot:run -Dfabric8.skip
-----
+image::images/lab-02/import-selected-projects.png[]
 
-. The REST service should be running on port 8080, and can be accessed through URL: link:http://localhost:8080/rest/customerservice/enrich[http://localhost:8080/rest/customerservice/enrich]
-
-. Try a sample request to the REST endpoint:
+. Click *Finish*
 +
-----
-curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
-----
+NOTE: During the initial import, there is delay while the Maven artifacts are downloaded and the project are built.
 
-. The response should be as follows:
-+
-----
-{"clientId":0,"salesRepresentative":null,"company":{"name":"Rotobots","geo":"NORTH_AMERICA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}
-----
-+
-NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location.
+. After a successful import, you will see the projects in the Project Explorer panel.
 
+image::images/lab-02/the-projects.png[]
 
-==== Deploy to OpenShift Container Platform
+This lab is broken down into multiple submodules, separated by each microservice that will be deployed. With the projects imported into CodeReady Studio, proceed to the first microservice which is a REST based application to enrich content.
 
-. Create a project in OpenShift Container Platform for the SOAP service, REST service and Camel project::
-+
-----
-$ oc new-project business-services-user$seq
-----
-+
-IMPORTANT: `user$seq` represents the username in the OpenShift Container Platform cluster. Replace it with your assigned username, for example: `user1`, `user2`.
-You should be able to log in with your OpenShift Container Platform user ID and password.
+[.text-center]
+image:images/icons/icon-previous.png[align=left, width=128, link=1_Overview_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2a_REST_Enrich_Application.adoc]
 
-
-. To deploy the application to OpenShift Container Platform, execute the following maven command from the terminal:
-+
-----
-$ mvn fabric8:deploy
-----
-
-. Check that the project is deployed successfully. A pod for the deployment *rest-cxfrs-service* should be started. Notice the URL of the endpoint for external traffic.
-
-. You can test the REST service by running the same curl request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
-
-
-=== SOAP Web Service
-
-A SOAP Web Service is provided as part of the assets for this lab. This service is developed using CXF-RS, and deployed on Apache Karaf. The service is running on Red Hat Fuse 6.3. This service is available in the project *soap-cxfws-service*. The code for the service can be found in the `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service` directory.
-
-
-==== Analyze the SOAP Web Service
-
-. A service is defined in the `CustomerWS` interface using the `@Webservice` annotation that exposes an operation to update the received `Account` object:
-+
-----
-@WebService
-public interface CustomerWS {
-
-    CorporateAccount updateAccount(Account account);
-----
-
-. Based on the `Account` POJO received, it creates a `CorporateAccount` POJO containing the same fields as `Account`, plus these additional fields:
-
-* `id`: (int) Set as a random value using 1 to 100 as the range
-* `salesContact`: (String) Randomly populated using a list of contacts
-
-. Uses the `updateAccount` method implemented within the `CustomerWSImpl` class to return `CorporateAccount`.
-
-. Uses an Apache Camel CXF endpoint bean to configure the service and create it using these parameters:
-
-* `id`: `customerWebService`
-* `address`: `http://localhost:8080/ws/customerService`
-* `serviceClass`: `org.fuse.usecase.service.CustomerWS`
-* `loggingFeatureEnabled`: `true`
-
-
-==== Run the SOAP Web service
-
-. To run the SOAP service locally, run the following Maven command from the project root folder `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service`:
-+
-----
-$ mvn camel:run -Dfabric8.skip
-----
-
-. The Camel CXF service is running on port 8080, and can be accessed through URL: link:http://localhost:8080/ws/customerService[http://localhost:8080/ws/customerService]
-
-. You can try a sample request using the SOAP UI:
-+
-----
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.usecase.fuse.org/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <ser:updateAccount>
-         <!--Optional:-->
-         <arg0>
-            <clientId>0</clientId>
-            <!--Optional:-->
-            <company>
-               <active>true</active>
-               <!--Optional:-->
-               <geo>NA</geo>
-               <!--Optional:-->
-               <name>Bill Smith</name>
-            </company>
-            <!--Optional:-->
-            <contact>
-               <!--Optional:-->
-               <city>Baltimore</city>
-               <!--Optional:-->
-               <firstName>Satya</firstName>
-               <!--Optional:-->
-               <lastName>Jayanti</lastName>
-               <!--Optional:-->
-               <phone>143-222-2344</phone>
-               <!--Optional:-->
-               <state>MD</state>
-               <!--Optional:-->
-               <streetAddr>1077 America Ave.</streetAddr>
-               <!--Optional:-->
-               <zip>11751</zip>
-            </contact>
-            <!--Optional:-->
-            <salesRepresentative>?</salesRepresentative>
-         </arg0>
-      </ser:updateAccount>
-   </soapenv:Body>
-</soapenv:Envelope>
-----
-
-. The response should be as follows:
-+
-----
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-      <ns2:updateAccountResponse xmlns:ns2="http://service.usecase.fuse.org/">
-         <return>
-            <company>
-               <active>true</active>
-               <geo>NA</geo>
-               <name>Bill Smith</name>
-            </company>
-            <contact>
-               <city>Baltimore</city>
-               <firstName>Satya</firstName>
-               <lastName>Jayanti</lastName>
-               <phone>143-222-2344</phone>
-               <state>MD</state>
-               <streetAddr>1077 America Ave.</streetAddr>
-               <zip>11751</zip>
-            </contact>
-            <id>44</id>
-            <salesContact>Nandan Joshi</salesContact>
-         </return>
-      </ns2:updateAccountResponse>
-   </soap:Body>
-</soap:Envelope>
-----
-+
-NOTE: Notice that the account is updated with the sales contact details.
-
-
-==== Deploy to OpenShift Container Platform
-
-. If you have not don't so, switch project in OpenShift Container Platform for the SOAP service, REST service and Camel project:
-oc new-project rest-service-user$seq
-+
-----
-$ oc project business-services-user$seq
-----
-
-. By examining the code, note that the cxf endpoint is set to port 8080, as this is the default HTTP port exposed in the OpenShift Karaf container.
-. Notice the OpenShift YAML files provided for deployment, service, and route configuration.
-. To deploy the application to OpenShift Container Platform, execute the following Maven command from the terminal:
-+
-----
-$ mvn fabric8:deploy
-----
-
-. Check that the project is deployed successfully. A pod for the deployment *soap-cxfws-service* should be started. Notice the URL of the endpoint for external traffic.
-
-. You can test the SOAP service by running the same SOAP UI request above, replacing the localhost URL with the remote URL. The response received should be the same as for localhost.
-
-
-=== Test the Integration Module
-
-Test and analyze the Camel routes that (1) enrich the Account data with help of the 2 backend services, (2) aggregate both the service responses, and finally (3) persist the resulting data into a database table. You will be completing the code for this section in the project *amq-enrich-persist-lab*.
-
-
-==== Analyze the Camel routes
-
-. Analyze the `camel-context.xml` file found in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service/src/main/resources/spring` directory.
-+
-[NOTE] A link:https://camel.apache.org/camelcontext.html[Camel Context] file contains data routing logic called Camel routes. When activated, it serves as both a runtime and a rule-base for Camel routes that deliver, enrich or transform data in real-time.
-+
-. Note the definitions of the 4 Camel routes: *_route1*, *_route2*, *_route3*, *_route4*
-
-. BONUS CHALLENGE: Can a single Camel route invoke both the backend services instead? What are the considerations involved when designing this Camel route, if it is even possible to do so?
-
-
-===== Camel Route 1: De-queuing and Multicasting
-
-. Analyze the first Camel route `_route1` that consumes the JSON objects and starts from the *accountQueue*.
-.. Note the AMQP configuration and queues based on the previous lab.
-.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO (aka *Plain Old Java Object*) is done using the `<unmarshal>` processor.
-* JSON library: `jackson`
-* `unmarshalTypeName` attribute: `org.globex.Account`
-* The result is used to multicast the exchange to the REST and web service endpoints.
-+
-IMPORTANT: It is a best practice not to multicast data in parallel. To simplify the legibility of the code, a direct endpoint (`callRestEndpoint`) is used to call the REST service and a different direct endpoint (`callWSEndpoint`) to call the web service service.
-
-. BONUS CHALLENGE: Choose a link:https://camel.apache.org/components.html[Camel component] that you will use to convert data in XML into CSV format. What will the resulting code look like?
-
-
-===== Camel Routes 2 and 3: REST and SOAP Service invocations
-
-. Analyze the code pertaining to both Camel routes `_route2` and `_route3` found within the camel-context.file, located in the `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service` directory.
-
-. From your analysis of the Camelcontext file, note that a single service invocation is made to each of the backend services. These calls are made through the activation of two Camel routes: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
-
-. BONUS CHALLENGE: Can a single Camel route invoke both the backend services instead? What are the considerations involved when designing this Camel route, if it is even possible to do so?
-
-* Analyze the REST Service Camel Route
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-service`.
-
-* To correctly invoke the declared REST service, a HTTP producer component is used and make sure the following `{header,value}` pairs are specified:
-
-** `Content-Type=application/json`
-** `Accept=application/json`
-** `CamelHttpMethod=POST`
-** `CamelCxfRsUsingHttpAPI=True`
-
-. BONUS CHALLENGE: Can you re-develop the REST service invocation code, such that it utilizes a link:https://camel.apache.org/netty-http.html[*netty-http*] component instead?
-
-* Analyze the SOAP Web Service Camel Route
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/soap-cxfws-service`.
-
-. Analyze the web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the Camel CXF Producer. Note that it delivers a SOAP payload.
-
-. BONUS CHALLENGE: Based on your analysis of the existing, how are SOAP Faults handled, if at all? Are there additional SOAP Faults that should be implemented, and how will you do it?
-
-
-===== Camel Route 4: Data persistence
-
-The last Camel route updates the records in an embedded link:https://www.h2database.com/html/main.html[H2 database], running on localhost.
-
-. Inspect the configuration details in the `pom.xml` and `application-dev.properties` files.
-. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `schema.sql` file.
-
-. Access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
-+
-NOTE: The H2 console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
-+
-. Analyze the Apache Camel route that inserts the `Account` information into the `T_ACCOUNT` table of the `ACCOUNT` database.
-..  The Spring SQL component in the route uses a SQL query to insert the `Account` record within the `option` parameter of the SQL endpoint.
-* Method: `defineNamedParameters(Account account)`
-
-.. The named parameters are defined using a `Map<String, Object>` created within a bean that is called by the route to set the body, before calling the SQL endpoint.
-* Bean: `ProcessorBean.class`
-
-. After calling the SQL endpoint, add a log message processor to display the contents of the received body.
-
-
-==== The Data Aggregation Strategy in Java
-
-. From the test results from the execution of both the REST and SOAP web services, analyze how the content is aggregated.
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-lab/`.
-
-. Analyze all the Java files in this directory, especially the `src/main/java/org/fuse/usecase/AccountAggregator.java` file.
-
-. Note that a `multicast` processor in Camel route `_route1` reconciles the data received from the `CorporateAccount` POJO with the `Account` POJO.
-
-* This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
-+
-NOTE: The aggregation strategy must be implemented within the `src/main/java/org/fuse/usecase/AccountAggregator` class found in the `amq-enrich-persist-lab` project.
-
-. BONUS CHALLENGE: In order to safeguard against fraudulent account data, a link:http://camel.apache.org/message-filter.html[*Message Filter* Enterprise Integration Pattern] has to be added to the Camel Route. Can you visualize, or even create, the new Camel route such that a *Message Filter* is included?
-
-
-==== A JUnit Test
-
-. Analyze the JUnit test case that validates the `jackson` ObjectMapper can read the string content of the JSON `Account` message and generate an `Account` object.
-* JUnit test class: `JacksonCompanyTest`
-
-. Note the two assert conditions: one to check that the object is not null, and the other to verify that the name of the company is equal to "Robocops".
-
-
-==== Build and Test the Integration Project
-
-. Change working directory to `$AI_EXERCISE_HOME/code/fuse/amq-enrich-persist-lab/`.
-
-. On the command line, run the following command in a terminal:
-+
-----
-$ mvn spring-boot:run -Dfabric8.skip
-----
-
-* You will see output similar to the following:
-+
-----
-{CONTACT_STATE=NC, SALES_CONTACT=Guillaume Nodet, CREATION_USER=fuse_usecase, CREATION_DATE=2015-12-11 18:18:01.55, CONTACT_PHONE=600-555-7000, CONTACT_CITY=Raleigh, CONTACT_ADDRESS=1101 Smith St., COMPANY_NAME=MountainBikers, COMPANY_ACTIVE=true, CLIENT_ID=46, CONTACT_LAST_NAME=Jungle, CONTACT_ZIP=27519, COMPANY_GEO=SOUTH_AMERICA, CONTACT_FIRST_NAME=George}
-----
-+
-NOTE: Expect to see differences for `CREATION_DATE`, `SALES_CONTACT`, and `CLIENT_ID` because they are generated values.
-
-. Check the database to ensure the records are populated correctly in the T_ACCOUNT table.
-
-
-==== Deploy the Camel Integration Project to OpenShift Container Platform
-
-Finally, you deploy the integration project to OpenShift Container Platform, using the PostgreSQL database and schema set up earlier, instead of using the embedded H2 database.
-
-. Change the server.port to 8080.
-+
-[NOTE] The configuration details are found in the `application.properties` and `deployment.yml` files.
-+
-. In a terminal window, switch project in OpenShift Container Platform:
-+
-----
-$ oc project business-services-user$seq
-----
-+
-. In a terminal window, navigate to the project's root folder and run:
-+
-----
-$ mvn fabric8:deploy -Popenshift
-----
-
-. Check that the pod *amq-enrich-persist-lab* starts up successfuly.
-
-. Check that the all four Camel routes run successfully, consuming all 3 messages from accountQueue, and writing to the database.
-
-. Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table.
-
-
-=== Update SOAP Wrapper Project and Deploy to OpenShift Container Platform
-
-Now, you develop a Camel route to migrate legacy SOAP services to provide a REST API wrapper using Camel.
-
-SOAP-based services are plentiful in many enterprise solutions and are slowly being replaced by RESTful services to simplify their use. A new wizard is available in the latest version of Red Hat Fuse Tooling to help you make the transition with Apache Camel’s Rest DSL. This lab shows how to use the new wizard to transition from older SOAP-based services to more modern REST-based services.
-
-.Goals in this section
-* Create REST API for the Customer SOAP service from previous lab.
-* Design Apache Camel route that exposes REST API consuming JSON.
-* Use the Red Hat Fuse Tooling in Red Hat Developer Studio to create *wsdl2rest* mapping.
-* Deploy and test the solution.
-
-
-==== Import the *legacy-soap-rest-wrapper* Project into CodeReady Studio
-
-. Using the same method you used in the previous lab, import the `legacy-soap-rest-wrapper` project into your CodeReady Studio workspace. Using the Wizard, you will find 1 project:
-
-* legacy-soap-rest-wrapper
-
-*This project contains the Legacy SOAP Wrapper REST service that will route and transform REST service requests and responses to and from the existing backend SOAP service.*
-
-The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is used as the backend SOAP service for this part of the lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL is accessible at the URL: link:http://$soap-cxfws-service-route/ws/customerService?wsdl[http://$soap-cxfws-service-route/ws/customerService?wsdl].
-
-
-==== Create the Camel Route for SOAP service migration
-
-. Right-click the *legacy-soap-rest-wrapper* in the Red Hat Fuse Integration perspective and select *New->Camel Rest DSL from WSDL*, or click *File->New->Other…, Red Hat Fuse->Camel Rest DSL from WSDL*.
-. Provide the URL to soap-cxfws-service WSDL and ensure the *legacy-soap-rest-wrapper* project is selected:
-+
-image::images/legacy-soap-wsdl-import.png[]
-
-. Click *Next*.
-. Keep the default values of fields unchanged and click *Finish*.
-+
-image::images/legacy-soap-wsdl-import-2.png[]
-
-. Now you should see the Java classes and the Spring context XML *rest-springboot-context.xml*.
-+
-image::images/legacy-soap-wsdl-import-3.png[]
-
-. Inspect the Camel route and notice that the solution is code-complete and ready to run.
-
-
-==== Update existing Camel Route in *legacy-soap-rest-wrapper* Project [OPTIONAL]
-
-This section is an option to completing the previous section on *Create the Camel Route for SOAP service migration*.
-
-. Locate the `$AI_EXERCISE_HOME/code/fuse/legacy-soap-rest-wrapper/src/main/data/` directory.
-
-. Using your favorite code editor, open the *rest-springboot-context.xml* file. This is the file that contains the Camel routes that will activate the Legacy SOAP Wrapper Rest service.
-
-. Inspect the `UpdateAccount` Camel route.
-
-. Locate the tag `<to id="_to1" uri="cxf:`. This Camel processor makes a call to the SOAP web service hosted on OpenShift Container Platform.
-
-. In a terminal window, obtain the route information for the `soap-cxfws-service` hosted on OpenShift Container Platform:
-+
-----
-$ oc get routes -n business-services | grep soap-cxfws-service
-NAME                 HOST/PORT                                                              PATH     SERVICES   PORT      TERMINATION             WILDCARD
-soap-cxfws-service   soap-cxfws-service-soap-service.userY.apps.redhatsummit.opentlc.com             soap-cxfws-service   8080                    None
-soap-default         soap-default-soap-service.userY.apps.redhatsummit.opentlc.com                   soap-cxfws-service   8181                    None
-soap-service         soap-service-soap-service.userY.apps.redhatsummit.opentlc.com                   soap-cxfws-service   8080                    None
-----
-+
-. From the results, copy the hostname for the `soap-service` Kubernetes service. In the example shown, that hostname is `soap-service-soap-service.userY.apps.redhatsummit.opentlc.com `
-
-. Return to your favorite code editor, and focus on the `UpdateAccount` Camel route. Update the SOAP service hostname appended to the value of the `uri` parameter of the tag `<to id="_to1" uri="cxf:`.
-
-. Make the such that the SOAP service URI call now contains the correct hostname for the SOAP service hosted on OpenShift Container Platform:
-+
-----
-        <route id="updateAccount">
-            <from id="_from1" uri="direct:updateAccount"/>
-            <log id="_log1" loggingLevel="INFO" message="updateAccount"/>
-            <to id="_to1" uri="cxf://http://soap-service-soap-service.userY.apps.redhatsummit.opentlc.com/ws/customerService?serviceClass=org.fuse.usecase.service.CustomerWS&amp;defaultOperationName=updateAccount"/>
-            <setHeader headerName="Content-Type" id="_setHeader1">
-                <constant>application/json</constant>
-            </setHeader>
-            <setBody id="_setBody1">
-                <simple>${body[0]}</simple>
-            </setBody>
-        </route>
-----
-+
-. Save your changes.
-
-
-==== Run the Legacy SOAP Wrapper REST service
-
-. To run the Legacy SOAP Wrapper REST service locally, run the following Maven command from the `$AI_EXERCISE_HOME/code/fuse/legacy-soap-rest-wrapper/` directory:
-+
-----
-$ mvn spring-boot:run -Dfabric8.skip
-----
-+
-. The Camel service, that has just launched, should be running on port 8080, and can be accessed through URL: link:http://localhost:8080/api/jaxrs/account[http://localhost:8080/api/jaxrs/account].
-. Send a test request to the Legacy SOAP Wrapper REST service and check if the backend service is invoked correctly:
-+
-----
-$ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
-----
-
-. The response should be as below:
-+
-----
-{"company":{"active":true,"geo":"NA","name":"Rotobots"},"contact":{"city":"Phoenix","firstName":"Bill","lastName":"Smith","phone":"602-555-1100","state":"AZ","streetAddr":"100 N Park Ave.","zip":"85017"},"id":33,"salesContact":"Bernard Tison"}
-----
-+
-. From the test results, validate that the data currently in the PostgreSQL database was retrieved successfully via the Legacy SOAP Wrapper Rest service .
-+
-. BONUS CHALLENGE: Create additional lines of test data in the PostgreSQL database on OpenShift Container Platform. Then, send the previous REST service request to the local Legacy SOAP Wrapper REST service again. Observe that your latest test data appears in the service response.
-
-
-==== Deploy to OpenShift Container Platform
-
-
-. To deploy the application to OpenShift Container Platform, execute the following Maven command from the terminal:
-+
-----
-$ mvn fabric8:deploy
-----
-
-. Check that the project is deployed successfully. A Kubernetes pod for the deployment *legacy-soap-rest-wrapper* should be started.
-
-. Take note of the route name of the *legacy-soap-rest-wrapper* service, which is now exposed to external traffic:
-+
-----
-$ oc get routes -n business-services | grep legacy-soap
-NAME                       HOST/PORT                                                                       PATH      SERVICES                   PORT      TERMINATION   WILDCARD
-legacy-soap-rest-wrapper   legacy-soap-rest-wrapper-legacy-soap.apps.cluster-490c.sandbox693.opentlc.com             legacy-soap-rest-wrapper   8080                    None
-----
-+
-. Repeat the SOAP service test by updating the CURL command, replacing the hostname with the OpenShift service route name for the *legacy-soap-rest-wrapper* hosted on OpenShift Container Platform:
-+
-----
-$ curl -k http://legacy-soap-rest-wrapper-legacy-soap.apps.cluster-490c.sandbox693.opentlc.com/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
-----
-+
-. Validate that the same REST response was received, as in the previous test.
-
-Congratulations, you have completed this lab.

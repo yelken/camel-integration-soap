@@ -1,0 +1,14 @@
+:scrollbar:
+:data-uri:
+:toc2:
+:linkattrs:
+
+= Resources
+
+The following resources will aid in the completion of the workshop
+
+* Lab Guide: link:http://bit.ly/summit2019-agile-integration-lab[]
+* Environment Management: https://www.opentlc.com/gg/gg.cgi?profile=generic_summit[]
+* OpenShift Credentials
+** Username: `user1`
+** Password: `r3dh4t1!`

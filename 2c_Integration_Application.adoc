@@ -1,0 +1,179 @@
+:scrollbar:
+:data-uri:
+:toc2:
+:linkattrs:
+
+= Lab 2c. Integration Application
+
+Now, with the REST and SOAP services deployed, a third application will be deployed to (1) enrich the Account data with the 2 backend services, (2) aggregate the responses, and finally (3) persist the data into a relational database table. You will be completing the code for this section in the Maven project *amq-enrich-persist-lab*.
+
+=== Camel Route and Database Integration
+
+. Expand the project *amq-enrich-persist-lab*
+
+. Expand the node: *src/main/resources/spring*
+
+. Open the file: `camel-context.xml`
+
+. You will see the Design view of the Camel routes
++
+image::images/lab-02/amq-enrich-routes.png[]
+
+. The Camel route with id: *Route_route7* updates the records in a relational database.
+
+. Click the *Source* tab to view the source code for the routes.
+
+. Near the bottom of the file is the code for *route7*
++
+----
+        <!-- Insert Records -->
+        <route id="_route7">
+            <from id="_from7" uri="direct:insertDB"/>
+            <log id="_log11" message=">> Before Insert : ${body}"/>
+            <bean id="_bean3" method="defineNamedParameters" ref="processorBean"/>
+            <to id="_to9" uri="sql:INSERT INTO USECASE.T_ACCOUNT(CLIENT_ID,SALES_CONTACT,COMPANY_NAME,COMPANY_GEO,COMPANY_ACTIVE,CONTACT_FIRST_NAME,CONTACT_LAST_NAME,CONTACT_ADDRESS,CONTACT_CITY,CONTACT_STATE,CONTACT_ZIP,CONTACT_PHONE,CREATION_DATE,CREATION_USER)                          VALUES                          (:#CLIENT_ID,:#SALES_CONTACT,:#COMPANY_NAME,:#COMPANY_GEO,:#COMPANY_ACTIVE,:#CONTACT_FIRST_NAME,:#CONTACT_LAST_NAME,:#CONTACT_ADDRESS,:#CONTACT_CITY,:#CONTACT_STATE,:#CONTACT_ZIP,:#CONTACT_PHONE,:#CREATION_DATE,:#CREATION_USER);"/>
+            <log id="_log7" message=">>> Results : ${body}"/>
+        </route>
+
+----
+
+////
+. Inspect the configuration details in the `pom.xml` and `src/main/resources/application-dev.properties` files.
+
+. Inspect a SQL script for creating the USECASE schema and the table required is provided in the `src/main/resources/schema.sql` file.
+
+
+You can access the H2 console by opening the URL: link:http://localhost:8080/h2-console[http://localhost:8080/h2-console]. Please enter the JDBC URL as *jdbc:h2:mem:testdb* and log in.
+
+NOTE: The console will be available only after the routes are started. As the database is embedded, it does not persist data once the route is shut down.
+////
+
+=== Consuming JSON from a Message Queue 
+
+. Analyze the Camel route with id: *_route3* that consumes the JSON objects and starts from the *accountQueue*.
++
+----
+        <route id="_route3">
+            <from id="_from3" uri="amqp:queue:accountQueue"/>
+            <convertBodyTo id="_convertBodyTo1" type="String"/>
+            <multicast id="_multicast1" parallelProcessing="true" strategyRef="reconcileData">
+                <log id="_log2" loggingLevel="INFO" message="inside multicast"/>
+                <to id="_to4" uri="direct://callRestEndpoint"/>
+                <to id="_to5" uri="direct://callWSEndpoint"/>
+            </multicast>
+            <log id="_log8" loggingLevel="INFO" message="after multicast : ${body}"/>
+            <to id="_to6" uri="direct:insertDB"/>
+        </route>
+
+----
+.. The AMQP Camel component reads messages from a queue called _accountQueue_. The connection details are contained within two locations
+... A spring boot configuration file called *application.properties* within the *src/main/resources* folder.
+... As environment variables  defined in the _deployment.yml_ descriptor  within the file located at *src/main/fabric8/deployment.yml* file. This can be located by expanding the *src* folder in the project explorer view.
+.. Note the how the message content is converted to a string, and how unmarshalling from JSON content to a POJO is done using the `<unmarshal>` processor.
+* JSON library: `jackson`
+* `unmarshalTypeName` attribute: `org.globex.Account`
+* The result is used to multicast the exchange to the REST and web service endpoints.
++
+IMPORTANT: It is a best practice not to multicast data in parallel. To simplify the legibility of the code, a link:https://camel.apache.org/direct.html[direct] endpoint (`callRestEndpoint`) is used to call the REST service and a different direct endpoint (`callWSEndpoint`) to call the web service service.
+
+===  The REST Direct Routes
+
+. To call the backend services, two Camel routes were created: one starting with `direct:callRestEndpoint` and the other with `direct:callWSEndpoint`.
+
+* To correctly invoke the declared REST service, a link:https://camel.apache.org/http.html[HTTP producer] component is used and make sure the following `{header,value}` pairs are specified:
+
+** `Content-Type=application/json`
+** `Accept=application/json`
+** `CamelHttpMethod=POST`
+** `CamelCxfRsUsingHttpAPI=True`
+
+These are defined using the `<setHeader>` tag and defining link:https://camel.apache.org/constant.html[constant] values.
+
+=== The Web Service Direct Route
+
+. Note the direct web service route that starts with the `direct://callWSEndpoint` endpoint and calls the web service using the link:https://camel.apache.org/cxf.html[Camel CXF Producer].
+
+
+=== The Aggregation Strategy
+
+. Camel allows you to link:https://camel.apache.org/aggregator2.html[aggregate] the results from multiple sources. From the results collected by the two services, analyse how the content is aggregated in the `multicast` processor to reconcile the information received from the `CorporateAccount` POJO with the `Account` POJO.
+
+* The aggregation strategy is defined in the `AccountAggregator` class within the *com.redhat.labs.agileintegration.businesslogic* package.
+* This new `Account` POJO contains the aggregated result that is sent to another Apache Camel route to insert the row into the database.
+
+
+=== The Aggregated Data into the Relational Database
+
+The results of this integration is stored in a relational database.
+
+. Analyze the Apache Camel route that inserts the `Account` information into the `T_ACCOUNT` table of the `ACCOUNT` database.
+..  The link:http://camel.apache.org/sql-component.html[Spring SQL component] in the route uses a SQL query to insert the `Account` record within the `option` parameter of the SQL endpoint.
+* Method: `defineNamedParameters(Account account)`
+
+.. The named parameters are defined using a `Map<String, Object>` created within a bean that is called by the route to set the body, before calling the SQL endpoint.
+* Bean: `ProcessorBean.class`
+
+. After calling the SQL endpoint, add a log message processor to display the contents of the received body. 
+
+==== Build and Test the Integration Project
+
+. Change working directory to `$AI_EXERCISE_HOME/labs/lab02/03_amq-enrich-persist-lab/`.
+
+. On the command line, run the following command in a terminal:
++
+----
+$ mvn spring-boot:run -Dfabric8.skip
+----
+
+* You will see output similar to the following:
++
+----
+{CONTACT_STATE=NC, SALES_CONTACT=Guillaume Nodet, CREATION_USER=fuse_usecase, CREATION_DATE=2015-12-11 18:18:01.55, CONTACT_PHONE=600-555-7000, CONTACT_CITY=Raleigh, CONTACT_ADDRESS=1101 Smith St., COMPANY_NAME=MountainBikers, COMPANY_ACTIVE=true, CLIENT_ID=46, CONTACT_LAST_NAME=Jungle, CONTACT_ZIP=27519, COMPANY_GEO=SOUTH_AMERICA, CONTACT_FIRST_NAME=George}
+----
++
+NOTE: Expect to see differences for `CREATION_DATE`, `SALES_CONTACT`, and `CLIENT_ID` because they are generated values.
+
+. Check the database to ensure the records are populated correctly in the T_ACCOUNT table.
+
+
+==== Deploy the Camel Integration Project to OpenShift Container Platform
+
+Finally, you deploy the integration project to OpenShift Container Platform, using the PostgreSQL database in the _enterprise-services_ project
+
+. navigate to the project's root folder at `$AI_EXERCISE_HOME/labs/lab02/03_amq-enrich-persist-lab`.
++
+. Build and deploy the application into OpenShift
++
+----
+$ mvn fabric8:deploy -Popenshift
+----
+
+NOTE: The deployment process can take 5-10 minutes.
+
+. Monitor the deployment of the amq-enrich-persist-lab:
++
+----
+$ oc get pods -w
+----
+
+. Wait until you see `READY 1/1` for `amq-enrich-persist-lab-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
++
+----
+NAME                          READY     STATUS      RESTARTS   AGE
+amq-enrich-persist-lab-1-6vnwx       1/1       Running     0          2m
+amq-enrich-persist-lab-s2i-1-build   0/1       Completed   0          3m
+----
+
+. Check that the all four Camel routes run successfully, consuming all 3 messages from accountQueue, and writing to the database.
+
+@TODO: Give steps on how to check the routes ran
+
+. Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table.
+
+@TODO: Give steps on how to check the database
+
+
+*You have successfully deployed and tested the Integration application!*
+
+[.text-center]
+image:images/icons/icon-previous.png[align=left, width=128, link=2b_SOAP_Web_Application.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2d_Legacy_Application.adoc]
