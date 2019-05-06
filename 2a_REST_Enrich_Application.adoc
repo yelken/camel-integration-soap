@@ -198,7 +198,7 @@ NOTE: The deployment process can take 5-10 minutes.
 . Monitor the deployment of the rest-cxfrs-service:
 +
 ----
-$ oc get pods -w
+$ oc get pods -w -n business-services
 ----
 
 . Wait until you see `READY 1/1` for `rest-cxfrs-service-x-xyz`. Press `<CTRL+C>` once the services are `Running`.
@@ -213,7 +213,7 @@ rest-cxfrs-service-s2i-1-build   0/1       Completed   0          3m
 .. Retrieve the URL of the rest-cxfrs-service application:
 +
 ----
-$ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --template='{{.spec.host}}')
+$ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --template='{{.spec.host}}' -n business-services) 
 ----
 
 .. Send a request to the rest-cxfrs-service
