@@ -223,7 +223,7 @@ image::images/lab-03/fuse-online-start-integration.png[width="90%"]
 image::images/lab-03/fuse-online-integration-1.png[width="90%"]
 +
 . Select Output type:
-.. *Select Type*:  `JSON Schema`
+.. *Select Type*:  `JSON Instance`
 .. *Definition*: Paste the following:
 +
 ----
