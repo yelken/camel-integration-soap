@@ -16,7 +16,7 @@ In this lab, you will take on the role as a business user to develop an integrat
 * Save the aggregated message in an SQL database
 +
 .Red Hat Fuse Online Enrich Integration
-image::images/enrich_insert_fuse_online.png[]
+image::images/enrich_insert_fuse_online.png[width="90%"]
 
 
 :numbered:
@@ -38,7 +38,7 @@ $ echo $FUSE_ONLINE_URL
 . Login as `user1` using your OpenShift credentials
 . Accept the self signed certificate and click `Allow` when presented to allow OpenShift and Fuse Online access to your credentials. Afterward, the Fuse Console will be displayed.
 +
-image::images/lab-03/fuse-online-console.png[]
+image::images/lab-03/fuse-online-console.png[width="90%"]
 
 
 === Extensions
@@ -50,16 +50,16 @@ The extension is available in the lab assets location *$AI_EXERCISE_HOME/labs/la
 . From the Fuse Online overview page, click *Customizatons* on the lefthand navigation bar and click *Extensions* on the top.
 . Click the *Import Extension* button and navigate to the file location mentioned previously.
 +
-image::images/lab-03/fuse-online-extensions.png[]
+image::images/lab-03/fuse-online-extensions.png[width="90%"]
 +
 . Click the Import Extension button at the bottom of the page.
 +
-image::images/lab-03/fuse-online-import-extension.png[]
+image::images/lab-03/fuse-online-import-extension.png[width="90%"]
 +
 
 . Validate that the new *Manage Headers* extension is now available in your Fuse Online instance.
 +
-image::images/lab-03/fuse-online-validate-extension.png[]
+image::images/lab-03/fuse-online-validate-extension.png[width="90%"]
 
 
 === API Client Connectors
