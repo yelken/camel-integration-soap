@@ -140,8 +140,8 @@ image::images/lab-02/select-jboss-web-service-tester.png[]
 +
 image::images/lab-02/web-service-tester-blank.png[]
 
-. In the empty textbox, enter the following value for the location of the WSDL file: `http://localhost:8080/ws/customerService?wsdl`
-. Change the request type to `POST
+. In the empty textbox, enter the following value for the location of the WSDL file: `http://localhost:8080/ws/customerService`
+. Change the request type to *POST*
 . Paste the following text request into the *Request Body* textbox:
 +
 ----

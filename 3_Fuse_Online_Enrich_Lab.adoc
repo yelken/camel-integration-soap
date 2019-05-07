@@ -16,7 +16,7 @@ In this lab, you will take on the role as a business user to develop an integrat
 * Save the aggregated message in an SQL database
 +
 .Red Hat Fuse Online Enrich Integration
-image::images/enrich_insert_fuse_online.png[]
+image::images/enrich_insert_fuse_online.png[width="90%"]
 
 
 :numbered:
@@ -38,7 +38,7 @@ $ echo $FUSE_ONLINE_URL
 . Login as `user1` using your OpenShift credentials
 . Accept the self signed certificate and click `Allow` when presented to allow OpenShift and Fuse Online access to your credentials. Afterward, the Fuse Console will be displayed.
 +
-image::images/lab-03/fuse-online-console.png[]
+image::images/lab-03/fuse-online-console.png[width="90%"]
 
 
 === Extensions
@@ -50,23 +50,23 @@ The extension is available in the lab assets location *$AI_EXERCISE_HOME/labs/la
 . From the Fuse Online overview page, click *Customizatons* on the lefthand navigation bar and click *Extensions* on the top.
 . Click the *Import Extension* button and navigate to the file location mentioned previously.
 +
-image::images/lab-03/fuse-online-extensions.png[]
+image::images/lab-03/fuse-online-extensions.png[width="90%"]
 +
 . Click the Import Extension button at the bottom of the page.
 +
-image::images/lab-03/fuse-online-import-extension.png[]
+image::images/lab-03/fuse-online-import-extension.png[width="90%"]
 +
 
 . Validate that the new *Manage Headers* extension is now available in your Fuse Online instance.
 +
-image::images/lab-03/fuse-online-validate-extension.png[]
+image::images/lab-03/fuse-online-validate-extension.png[width="90%"]
 
 
 === API Client Connectors
 
 link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.2/html/integrating_applications_with_fuse_online/customizing_ug#developing-rest-api-client-connectors_custom[API Connectors] are a mechanism within Fuse Online to integrate with external endpoints. API Connectors can be defined within the *Customizations* page within the *API Connectors tab*
 
-image::images/lab-03/fuse-online-api-connectors.png[]
+image::images/lab-03/fuse-online-api-connectors.png[width="90%"]
 
 Create API connectors for the previously deployed `rest-cxfrs-service` from the `business-services` project. The API provides a link:https://swagger.io/[Swagger] resource which describes the available API.
 
@@ -85,12 +85,12 @@ $ echo $REST_CXFRS_SWAGGER_URL
 . Click *Create API Connector* to a new API Connector
 . On the _Upload OpenAPI Specification_ step, select *Use a URL* and paste in the URL previously obtained.
 +
-image::images/lab-03/fuse-online-create-rest-api-1.png[]
+image::images/lab-03/fuse-online-create-rest-api-1.png[width="90%"]
 +
 . Click *Next*
 . Review the imported schema and click *Next*
 +
-image::images/lab-03/fuse-online-create-rest-api-2.png[]
+image::images/lab-03/fuse-online-create-rest-api-2.png[width="90%"]
 +
 . On the Security page, leave the default _No Security_ and click *Next*
 . On the _Review/Edit Connector Details_ page, enter the following details:
@@ -99,20 +99,20 @@ image::images/lab-03/fuse-online-create-rest-api-2.png[]
 .. *Base URL*: /rest
 . Click *Create API Connector* to create the API
 +
-image::images/lab-03/fuse-online-create-rest-api-3.png[]
+image::images/lab-03/fuse-online-create-rest-api-3.png[width="90%"]
 +
 . Validate the new _Rest CXFRS Service_ is visible
 +
-image::images/lab-03/fuse-online-api-connectors-2.png[]
+image::images/lab-03/fuse-online-api-connectors-2.png[width="90%"]
 +
 . Create another API Connector for the _legacy-soap-rest-wrapper_ application previously deployed from the `business-services` project by first clicking the *Create API Connector* Button
 . The JSON Swagger schema is available in the *Legacy SOAP REST Wrapper* project locally. Upload the SOAP API specification for the *Legacy SOAP REST Wrapper* API JSON by selecting *Browse* from the lab asset location: *$AI_EXERCISE_HOME/labs/lab02/04_legacy-soap-rest-wrapper/src/main/resources/swagger.json*
 +
-image::images/lab-03/fuse-online-create-rest-api-4.png[]
+image::images/lab-03/fuse-online-create-rest-api-4.png[width="90%"]
 +
 . Confirm the schema is valid and select *Next*
 +
-image::images/lab-03/fuse-online-create-rest-api-5.png[]
+image::images/lab-03/fuse-online-create-rest-api-5.png[width="90%"]
 +
 . Click *Next* on both of the _Review Actions_ and _Specify Security_ pages
 * On the _Review/Edit Connector Details_ page, enter the following details:
@@ -120,12 +120,12 @@ image::images/lab-03/fuse-online-create-rest-api-5.png[]
 .. *Host*: `http://legacy-soap-rest-wrapper.business-services:8080`
 .. *Base URL*: /api
 +
-image::images/lab-03/fuse-online-create-rest-api-6.png[]
+image::images/lab-03/fuse-online-create-rest-api-6.png[width="90%"]
 +
 . Click *Next* to create the new API Connector
 . Validate both connectors are present
 +
-image::images/lab-03/fuse-online-api-connectors-3.png[]
+image::images/lab-03/fuse-online-api-connectors-3.png[width="90%"]
 
 
 === Connection
@@ -138,11 +138,11 @@ The Red Hat AMQ broker deployed in the *enterprise-services* project will once a
 
 . Create a new _Connector_ by clicking on the *Connections* link on the lefthand side and then *Create Connector*
 +
-image::images/lab-03/fuse-online-connectors-1.png[]
+image::images/lab-03/fuse-online-connectors-1.png[width="90%"]
 +
 . Select *AMQP Message Broker*
 +
-image::images/lab-03/fuse-online-amqp-connector.png[]
+image::images/lab-03/fuse-online-amqp-connector.png[width="90%"]
 +
 . On the _AMQP Message Broker Configuration_ page, provide the following details:
 .. *Connection URI*: `amqp://broker-amq-amqp.enterprise-services:5672`
@@ -150,11 +150,11 @@ image::images/lab-03/fuse-online-amqp-connector.png[]
 .. *Password*: `password`
 . Retain the rest of the values as default and click *Validate* to verify the connection and then click *Next*.
 +
-image::images/lab-03/fuse-online-amqp-connector-2.png[]
+image::images/lab-03/fuse-online-amqp-connector-2.png[width="90%"]
 +
 . Set `AMQPBrokerConnection` as the *Connection Name* and click *Create*
 +
-image::images/lab-03/fuse-online-connectors-2.png[]
+image::images/lab-03/fuse-online-connectors-2.png[width="90%"]
 
 ==== *Database*: 
 
@@ -198,7 +198,7 @@ Set up the connection to the API client connector using the connector created pr
 
 You should have the following connectors now available for use.
 
-image::images/lab-03/fuse-online-connectors-3.png[]
+image::images/lab-03/fuse-online-connectors-3.png[width="90%"]
 
 
 === Develop the Integration Module
@@ -209,18 +209,18 @@ Lets create an _Integration_ to develop the route depicted previously.
 
 . Integrations are managed by clicking on the *Integrations* tab on the lefthand selecting the *Create Integration* button.
 +
-image::images/lab-03/fuse-online-integrations-1.png[]
+image::images/lab-03/fuse-online-integrations-1.png[width="90%"]
 +
 . Select *AMQPBrokerConnection* as the starting connection
 +
-image::images/lab-03/fuse-online-start-integration.png[]
+image::images/lab-03/fuse-online-start-integration.png[width="90%"]
 +
 .. Select *Subscribe for messages* and click *Next*
 .. *Destination*: `fuseOnlineAccountQueue`
 .. *Destination Type*: `Queue`
 .. Click *Next*
 +
-image::images/lab-03/fuse-online-integration-1.png[]
+image::images/lab-03/fuse-online-integration-1.png[width="90%"]
 +
 . Select Output type:
 .. *Select Type*:  `JSON Schema`
@@ -232,7 +232,7 @@ image::images/lab-03/fuse-online-integration-1.png[]
 .. *Data Type Name*: Account
 .. Select *Done*
 +
-image::images/lab-03/fuse-online-integration-2.png[]
+image::images/lab-03/fuse-online-integration-2.png[width="90%"]
 +
 . Choose a *Finish Connection* 
 .. Select *UsecaseDB*
@@ -252,39 +252,39 @@ INSERT INTO T_ACCOUNT(CLIENT_ID,SALES_CONTACT,COMPANY_NAME,COMPANY_GEO,COMPANY_A
 .. Click *Done*
 . Below the _Log_ step, click the *+* and click *Add a Connection*
 +
-image::images/lab-03/fuse-online-integration-3.png[]
+image::images/lab-03/fuse-online-integration-3.png[width="90%"]
 +
 . Add the *RestEnrichAPI* Connection .
 .. Choose Action *POST /customerservice/enrich*.
 . Add a *Step* prior to the *RestEnrichAPI*
 +
-image::images/lab-03/fuse-online-integration-4.png[]
+image::images/lab-03/fuse-online-integration-4.png[width="90%"]
 +
 .. Select *Data Mapper*
 .. Expand the *Account* instance on the _Source_ and the *Request* instance on the _Target_. Map with their corresponding fields.
 +
-image::images/lab-03/fuse-online-integration-5.png[]
+image::images/lab-03/fuse-online-integration-5.png[width="90%"]
 .. Click *Done* to complete the mapping
 +
 . Add a _Connection_ underneath the *RestEnrichAPI* connection
 +
-image::images/lab-03/fuse-online-integration-6.png[]
+image::images/lab-03/fuse-online-integration-6.png[width="90%"]
 +
 .. Select the *SoapEnrichAPI* connection.
 .. In the _Choose an Action_ page, select *Enrich and Update a user account*.
 . Add a *Step* before the *SoapEnrichAPI* connection.
 +
-image::images/lab-03/fuse-online-integration-7.png[]
+image::images/lab-03/fuse-online-integration-7.png[width="90%"]
 +
 .. Select *Data Mapper* 
 .. Expand the *Response* instance on the _Source_ and the *Request* instance on the _Target_. Map with their corresponding fields.
 +
-image::images/lab-03/fuse-online-integration-8.png[]
+image::images/lab-03/fuse-online-integration-8.png[width="90%"]
 +
 .. Click *Done* to complete the mapping
 . Add a Step immediately after the *RestEnrichService*.
 +
-image::images/lab-03/fuse-online-integration-8.png[]
+image::images/lab-03/fuse-online-integration-8.png[width="90%"]
 +
 .. Select *Log*
 .. Check *Message Body*.
@@ -309,7 +309,7 @@ NOTE: The *Transfer-Encoding* header is added by Camel during the call to REST s
 .. Map the *fuse_online* Constant to the SQL Parameter *CREATION_USER*
 .. Map the remaining values from the *Response* field in _Sources_ to the *SQL Parameter* on the _Target_
 +
-image::images/lab-03/fuse-online-integration-11.png[]
+image::images/lab-03/fuse-online-integration-11.png[width="90%"]
 +
 .. Click Done
 . With all the _Steps_ and _Connections_ for the integrtation defined, select *Publish* on the top right
@@ -322,7 +322,7 @@ The resulting integration should look as follows:
 
 Once an integration is published, a new image containing the integration is created. It will take a few minutes for the build to complete. Once complete, the resulting integration will appear as follows:
 
-image::images/lab-03/fuse-online-integration-12.png[]
+image::images/lab-03/fuse-online-integration-12.png[width="90%"]
 
 A new pod with the name starting with *i-amqtosqlenrich* is deployed in the `fuse-online` project and contains the integration that was created earlier.
 
@@ -352,11 +352,11 @@ image:images/lab-02/amq-landing-page.png[]
 .. Username: *admin* 
 .. Password: *admin*
 +
-image:images/lab-02/amq-login-page.png[]
+image:images/lab-02/amq-login-page.png[width="90%"]
 
 . This will show the main welcome page.
 +
-image:images/lab-02/amq-welcome-page.png[]
+image:images/lab-02/amq-welcome-page.png[width="90%"]
 
 . In the top navigation bar, click *Artemis*
 +
@@ -397,7 +397,7 @@ image:images/lab-02/blank-send.png[]
 . Click *Send Message*
 . Return to the Fuse Online Web Console integration page and check the *Activity* tab of the *AMQToSQLEnrich* integration.
 +
-image::images/lab-03/fuse-online-integration-13.png[]
+image::images/lab-03/fuse-online-integration-13.png[width="90%"]
 
 Finally, validate the message was successfully persisted to the PostgreSQL database by querying the T_ACCOUNT table. 
 
