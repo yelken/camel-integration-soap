@@ -98,7 +98,7 @@ image::images/lab-04/kiali-login.png[]
 
 . At the login screen, enter the default credentials:
 * *Username*: `admin`
-* *Password*: `redhat`
+* *Password*: `admin`
 
 . For a successful login, you will see the main Kiali screen.
 +
@@ -106,41 +106,18 @@ image::images/lab-04/kiali-main-screen-start.png[width="100%"]
 
 . At the moment, there none of the services have an istio sidecar associated with them. As a result, the services are not available in the service mesh. We'll cover that in a later section.
 
-=== Update Security Context Constraints
-
-. Update the Security Context Constraints (SCCs) by adding the service account to the `anyuid` and `privileged` SCCs in the `business_services` namespace:
-+
-----
-$ export BUSINESS_SERVICES=business-services
-
-$ oc adm policy add-scc-to-user anyuid -z default -n $BUSINESS_SERVICES --as=system:admin
-
-$ oc adm policy add-scc-to-user privileged -z default -n $BUSINESS_SERVICES --as=system:admin
-----
-
 === Deploy Services into Service Mesh
 
-. Edit the deployment config for the `rest-cxfrs-service`. 
+. Patch each of the services in the `business-services` project to be included in the Istio service mesh. 
 +
 ----
-$ oc edit deploymentconfig/rest-cxfrs-service
-----
-
-. Move to the line 46, you should see the following text
-+
-----
-        fabric8.io/git-url: https://gitlab.com/redhatsummitlabs/agile-integration-for-the-enterprise.git
-----
-
-. Just after this line, add the following line
-+
-----
-        sidecar.istio.io/inject: "true"
+$ oc patch dc amq-enrich-persist-lab -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"}}}}}' -n business-services
+$ oc patch dc legacy-soap-rest-wrapper -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"}}}}}' -n business-services
+$ oc patch dc rest-cxfrs-service -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"}}}}}' -n business-services
+$ oc patch dc soap-cxfws-service -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"}}}}}' -n business-services
 ----
 
 * When deploying an application into the Red Hat OpenShift Service Mesh you must opt in to injection by specifying the `sidecar.istio.io/inject` annotation with a value of true. Service Mesh relies on the existence of a proxy sidecar within the application’s pod to provide service mesh capabilities to the application.  Sidecar injection occurs at pod creation time.
-
-. Save the deployment config file and exit the editor.
 
 * By updating the deployment config, the old version of the pod is killed and a new one is created based on the updated deployment config. This new deployment config will inject the sidecar. As a result, we'll see two containers in the pods (1 for the application and 1 for the sidecar).
 
@@ -157,10 +134,14 @@ $ oc get pods -w
 [source,texinfo]
 ----
 NAME                          READY     STATUS    RESTARTS   AGE
-rest-cxfrs-service-6b576ffcf8-g6b48   2/2       Running   0          1m
+amq-enrich-persist-lab-2-r8zkx         2/2       Running     0          5m24s
+legacy-soap-rest-wrapper-2-nw2nd       2/2       Running     0          5m17s
+rest-cxfrs-service-6-bq7b9             2/2       Running     0          8m9s
+soap-cxfws-service-2-jpdqk             2/2       Running     0          5m15s
 ----
 
 . Press *Ctrl+C* to exit.
+.
 
 === Generate Sample Data
 
@@ -308,35 +289,19 @@ Together, these features enable the service mesh to tolerate failing nodes and p
 
 === Create an HTTP abort fault
 
-One way to test microservice resiliency is to introduce an HTTP abort fault. In this section, you will introduce an HTTP abort based on HTTP request headers. If the header to the service includes the magic-word of "breakit", then will generate an HTTP abort.
+One way to test microservice resiliency is to introduce an HTTP abort fault. In this section, you will introduce an HTTP abort based on HTTP request headers. If the header to the service includes the magic-word of "breakit", then will generate an HTTP error. This is achieved by creating a link:https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/#VirtualService[VirtualService] with the following definition:
 
 . In your terminal window, stop the previous script: run-all.sh
-
-. @TODO: route traffic to HTTP gateway
-
-. Create a fault injection rule to send an HTTP abort for magic-word breakit:
-+
-----
-$ oc apply -f istiofiles/virtual-service-cxfrs-test-abort.yaml
-----
-
-. Confirm the rule was created in the Kiali web console
-.. Move to the Kiali web console. 
-.. On the left hand side, select *Configuration*
-
-** You should see the following screenshot: @TODO - add screenshot
-
-. The file
+. A fault injection rule is defined within an Istio `VirtualService` object to send an HTTP abort whenever the header magic-word breakit is present:
 +
 ----
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: cxfrs-service
-  ...
+  name: rest-cxfrs-service
 spec:
   hosts:
-  - cxfrs-service
+  - rest-cxfrs-service
   http:
   - fault:
       abort:
@@ -348,38 +313,65 @@ spec:
           exact: breakit
     route:
     - destination:
-        host: cxfrs-service
-        subset: v1
+        host: rest-cxfrs-service
   - route:
     - destination:
-        host: cxfrs-service
-        subset: v1
+        host: rest-cxfrs-service
 ----
++
+. Create the `VirtualServive`
++
+----
+$ oc apply -f istiofiles/virtual-service-cxfrs-test-abort.yaml
+----
++
+. Confirm the rule was created in the Kiali web console
+.. Move to the Kiali web console. 
+.. On the left hand side, select *Istio Config*
+.. Verify the `VirtualService` is present
++
+image::images/lab-04/kiali-istio-config.png[width="100%"]
+
 
 === Testing the HTTP abort fault
 
+To verify the HTTP abort fault logic, we are going to simulate a call from the `legacy-soap-rest-wrapper` service to the `rest-cxfrs-service` application. 
+
+. Obtain a remote shell session in the `legacy-soap-rest-wrapper` pod
++
+----
+$ oc -n business-services rsh -c spring-boot $(oc get pods -n business-services -l deploymentconfig=legacy-soap-rest-wrapper -o name)
+----
++
 . Use the following curl command to test the HTTP abort fault. The command will send a request to the rest-cxfrs-service. Notice that it is sending an HTTP request header: `magic-word` `breakit`
 +
 ----
-curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' -H 'magic-word: breakit'
+curl -H 'magic-word: breakit' -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' http://rest-cxfrs-service:8080/rest/customerservice/enrich
 ----
 
 * The response should be as follows:
 +
 ----
-@TODO
+fault filter abort
 ----
 +
-NOTE: Notice that the call to the cxfrs-service was aborted. The cxfrs-service was never executed, as a result no data is returned.
+NOTE: Notice that the call to the cxfrs-service was aborted.
 
 . Call the cxfrs-service without passing in the `magic-word` header, the service will execute.
 +
 ----
-curl -k ${REST_CXFRS_URL}/enrich -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' 
+curl -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' http://rest-cxfrs-service:8080/rest/customerservice/enrich
 ----
-
++
 * The cxfrs-service is executed as desired. As a result, the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
+. Exit the pod
++
+----
+$ exit
+----
++
 
+By being able to leverage a Service Mesh, _Coolstore Inc._ is able to add additional logic to manage the lifecycle of their microservices without having to package additional libraries into their applications.
 
 *You have successfully deployed and tested the REST web service in the OpenShift Service Mesh and have completed all lab exercises!*
 
