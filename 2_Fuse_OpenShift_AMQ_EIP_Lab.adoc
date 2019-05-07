@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= Lab 2. Enrich Content and Aggregate Data - Lab
+= Lab 2. Agile Integration for Developers
 
 _Coolstore Inc._ desires the ability to use a variety of services in order for them to integrate with different systems within their organization. These services range from REST and SOAP based web services, messaging, along with relational databases. They have created a number of applications that not only implement these protocols, but connect to existing enterprise services.
 
@@ -28,7 +28,7 @@ image::images/lab-02/Fuse_Exp_Usecase_Mod2.png[width="100%"]
 
 == Import the Projects into Red Hat CodeReady Studio
 
-Each of the applications within this lab are link:https://maven.apache.org/[Maven] based Java applications. The first step is to import the projects into Red Hat CodeReady Studio. 
+Each of the applications within this lab are link:https://maven.apache.org/[Maven] based Java applications. The first step is to import the projects into Red Hat CodeReady Studio.
 
 . Start the Red Hat CodeReady Studio application
 
@@ -66,4 +66,3 @@ This lab is broken down into multiple submodules, separated by each microservice
 
 [.text-center]
 image:images/icons/icon-previous.png[align=left, width=128, link=1_Overview_Lab.adoc] image:images/icons/icon-home.png[align="center",width=128, link=README.adoc] image:images/icons/icon-next.png[align="right"width=128, link=2a_REST_Enrich_Application.adoc]
-
