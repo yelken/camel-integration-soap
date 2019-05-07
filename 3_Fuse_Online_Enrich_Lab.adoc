@@ -2,9 +2,9 @@
 :data-uri:
 :toc2:
 
-= Lab 3 - Enrich Content and Aggregate Data on Red Hat Fuse Online Lab
+= Lab 3. Agile Integration for Business Users
 
-While the previous lab focused on how developers can work with the application code and resources, _Coolstore Inc._ has an entire team of business users who want to be able to participate in the technologies surronding Agile Integration and offload some of the work from the development team. Fortunately, Fuse Online is an online offering that provides a easy to use interface to create integration solutions. 
+While the previous lab focused on how developers can work with the application code and resources, _Coolstore Inc._ has an entire team of business users who want to be able to participate in the technologies surronding Agile Integration and offload some of the work from the development team. Fortunately, Fuse Online is an online offering that provides a easy to use interface to create integration solutions.
 
 In this lab, you will take on the role as a business user to develop an integration in link:https://www.redhat.com/en/technologies/jboss-middleware/fuse-online[Red Hat Fuse Online] that process the account records in JSON format from the entperise AMQ broker and integrate with the existing integration to enrich and aggregate the content to create a more complete account record. The resulting record is stored in a database.
 
@@ -130,7 +130,7 @@ image::images/lab-03/fuse-online-api-connectors-3.png[width="90%"]
 
 === Connection
 
-A link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.2/html-single/connecting_fuse_online_to_applications_and_services/index#supported-connectors_connectors[Connector] is a way to integrate with an existing application. 
+A link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.2/html-single/connecting_fuse_online_to_applications_and_services/index#supported-connectors_connectors[Connector] is a way to integrate with an existing application.
 
 ==== *AMQP Message Broker*
 
@@ -156,7 +156,7 @@ image::images/lab-03/fuse-online-amqp-connector-2.png[width="90%"]
 +
 image::images/lab-03/fuse-online-connectors-2.png[width="90%"]
 
-==== *Database*: 
+==== *Database*:
 
 Next, create a connector to the PostgreSQL database deployed in the *enterprise-services* project.
 
@@ -203,7 +203,7 @@ image::images/lab-03/fuse-online-connectors-3.png[width="90%"]
 
 === Develop the Integration Module
 
-Instead of spending time to develop Camel based routes (as was completed in lab 2), we will create an Integration within Fuse Online. As you have seen, working with Fuse Online is facilitated in a user interface and instead of developing routes manually. 
+Instead of spending time to develop Camel based routes (as was completed in lab 2), we will create an Integration within Fuse Online. As you have seen, working with Fuse Online is facilitated in a user interface and instead of developing routes manually.
 
 Lets create an _Integration_ to develop the route depicted previously.
 
@@ -234,11 +234,11 @@ image::images/lab-03/fuse-online-integration-1.png[width="90%"]
 +
 image::images/lab-03/fuse-online-integration-2.png[width="90%"]
 +
-. Choose a *Finish Connection* 
+. Choose a *Finish Connection*
 .. Select *UsecaseDB*
 . Choose an Action
 .. Select *Invoke SQL*
-.. Paste in the following for *SQL Statement*: 
+.. Paste in the following for *SQL Statement*:
 +
 ----
 INSERT INTO T_ACCOUNT(CLIENT_ID,SALES_CONTACT,COMPANY_NAME,COMPANY_GEO,COMPANY_ACTIVE,CONTACT_FIRST_NAME,CONTACT_LAST_NAME,CONTACT_ADDRESS,CONTACT_CITY,CONTACT_STATE,CONTACT_ZIP,CONTACT_PHONE,CREATION_DATE,CREATION_USER)                          VALUES                          (:#CLIENT_ID,:#SALES_CONTACT,:#COMPANY_NAME,:#COMPANY_GEO,:#COMPANY_ACTIVE,:#CONTACT_FIRST_NAME,:#CONTACT_LAST_NAME,:#CONTACT_ADDRESS,:#CONTACT_CITY,:#CONTACT_STATE,:#CONTACT_ZIP,:#CONTACT_PHONE,current_timestamp,:#CREATION_USER);
@@ -276,7 +276,7 @@ image::images/lab-03/fuse-online-integration-6.png[width="90%"]
 +
 image::images/lab-03/fuse-online-integration-7.png[width="90%"]
 +
-.. Select *Data Mapper* 
+.. Select *Data Mapper*
 .. Expand the *Response* instance on the _Source_ and the *Request* instance on the _Target_. Map with their corresponding fields.
 +
 image::images/lab-03/fuse-online-integration-8.png[width="90%"]
@@ -291,7 +291,7 @@ image::images/lab-03/fuse-online-integration-8.png[width="90%"]
 .. Enter `After REST Service` into the *Custom Text* textbox.
 .. Click `Done`
 . Add a Step immediately after the *RestEnrichService* and immediately before the *Log* step created in the previous action.
-.. Select *Remove Header* 
+.. Select *Remove Header*
 .. Enter Header *Transfer-Encoding* into the textbox.
 .. Click *Done*
 +
@@ -326,7 +326,7 @@ image::images/lab-03/fuse-online-integration-12.png[width="90%"]
 
 A new pod with the name starting with *i-amqtosqlenrich* is deployed in the `fuse-online` project and contains the integration that was created earlier.
 
-Validate the integration by first sending a message to the `fuseOnlineAccountQueue` in the AMQ broker. 
+Validate the integration by first sending a message to the `fuseOnlineAccountQueue` in the AMQ broker.
 
 . Retrieve the URL of the AMQ Message Broker. In a terminal window, type the following:
 +
@@ -349,7 +349,7 @@ image:images/lab-02/amq-landing-page.png[]
 * This will show the login page of the Management Console
 
 . Enter the following credentials:
-.. Username: *admin* 
+.. Username: *admin*
 .. Password: *admin*
 +
 image:images/lab-02/amq-login-page.png[width="90%"]
@@ -399,7 +399,7 @@ image:images/lab-02/blank-send.png[]
 +
 image::images/lab-03/fuse-online-integration-13.png[width="90%"]
 
-Finally, validate the message was successfully persisted to the PostgreSQL database by querying the T_ACCOUNT table. 
+Finally, validate the message was successfully persisted to the PostgreSQL database by querying the T_ACCOUNT table.
 
 . Access the Postgres database pod
 +
@@ -419,7 +419,7 @@ sh-4.2$ PGPASSWORD=$POSTGRESQL_PASSWORD psql -h postgresql $POSTGRESQL_DATABASE 
 psql (10.6)
 Type "help" for help.
 
-sampledb=# 
+sampledb=#
 ----
 
 . Query the database to ensure the records are populated correctly in the T_ACCOUNT table.

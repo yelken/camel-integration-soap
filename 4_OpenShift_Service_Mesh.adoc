@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-== Lab 4 - OpenShift Service Mesh
+== Lab 4. Agile Integration for Quality Assurance
 
 == Goals
 
@@ -108,7 +108,7 @@ image::images/lab-04/kiali-main-screen-start.png[width="100%"]
 
 === Deploy Services into Service Mesh
 
-. Patch each of the services in the `business-services` project to be included in the Istio service mesh. 
+. Patch each of the services in the `business-services` project to be included in the Istio service mesh.
 +
 ----
 $ oc patch dc amq-enrich-persist-lab -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"true"}}}}}' -n business-services
@@ -146,7 +146,7 @@ soap-cxfws-service-2-jpdqk             2/2       Running     0          5m15s
 === Generate Sample Data
 
 
-To show the capabilities of Kiali, you need to generate some sample data. 
+To show the capabilities of Kiali, you need to generate some sample data.
 
 . Move back to your terminal window:
 +
@@ -213,9 +213,9 @@ image::images/lab-04/kiali-service-details.png[width="100%"]
 * At the bottom, you can see the service's workloads, which display the pod(s).
 
 
-== Grafana 
+== Grafana
 
-Out of the box, you also get additional monitoring with Grafana. 
+Out of the box, you also get additional monitoring with Grafana.
 
 https://grafana.com/[Grafana] is an open platform for data analysis and visualization. Grafana lets you create graphs and dashboards based on data from various monitoring systems, and it specializes in the display and analysis of this data. It is lightweight, easy to install, and it looks beautiful. In particular, Grafana supports querying Prometheus.
 
@@ -247,7 +247,7 @@ $ echo $GRAFANA_URL
 +
 image::images/lab-04/grafana-home-start.png[width="100%"]
 
-** The Grafana Istio dashboard gives you quick insight into how your system is doing. 
+** The Grafana Istio dashboard gives you quick insight into how your system is doing.
 
 . On far left panel, select: *Dashboards > Manage*
 +
@@ -285,7 +285,7 @@ In this section you will learn how to inject faults and test the resiliency of y
 * Active (periodic) health checks on each member of the load balancing pool
 * Fine-grained circuit breakers (passive health checks) – applied per instance in the load balancing pool
 
-Together, these features enable the service mesh to tolerate failing nodes and prevent localized failures from cascading instability to other nodes. 
+Together, these features enable the service mesh to tolerate failing nodes and prevent localized failures from cascading instability to other nodes.
 
 === Create an HTTP abort fault
 
@@ -326,7 +326,7 @@ $ oc apply -f istiofiles/virtual-service-cxfrs-test-abort.yaml
 ----
 +
 . Confirm the rule was created in the Kiali web console
-.. Move to the Kiali web console. 
+.. Move to the Kiali web console.
 .. On the left hand side, select *Istio Config*
 .. Verify the `VirtualService` is present
 +
@@ -335,7 +335,7 @@ image::images/lab-04/kiali-istio-config.png[width="100%"]
 
 === Testing the HTTP abort fault
 
-To verify the HTTP abort fault logic, we are going to simulate a call from the `legacy-soap-rest-wrapper` service to the `rest-cxfrs-service` application. 
+To verify the HTTP abort fault logic, we are going to simulate a call from the `legacy-soap-rest-wrapper` service to the `rest-cxfrs-service` application.
 
 . Obtain a remote shell session in the `legacy-soap-rest-wrapper` pod
 +

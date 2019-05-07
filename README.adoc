@@ -25,7 +25,7 @@ Get ready to transform your organization into an Agile Enterprise!
 * link:1_Overview_Lab.adoc[Lab 1 - Introduction and Lab Overview]
 * link:2_Fuse_OpenShift_AMQ_EIP_Lab.adoc[Lab 2 - Agile Integration for Developers]
 * link:3_Fuse_Online_Enrich_Lab.adoc[Lab 3 - Agile Integration for Business Users]
-* link:2_Fuse_OpenShift_AMQ_EIP_Lab.adoc[Lab 4 - Agile Integration for Quality Assurance]
+* link:4_OpenShift_Service_Mesh[Lab 4 - Agile Integration for Quality Assurance]
 
 == Resources
 
