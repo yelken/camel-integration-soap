@@ -397,7 +397,7 @@ image:images/lab-02/blank-send.png[]
 . Click *Send Message*
 . Return to the Fuse Online Web Console integration page and check the *Activity* tab of the *AMQToSQLEnrich* integration.
 +
-image::images/lab-03/fuse-online-integration-13.png[]
+image::images/lab-03/fuse-online-integration-13.png[width="90%"]
 
 Finally, validate the message was successfully persisted to the PostgreSQL database by querying the T_ACCOUNT table. 
 
