@@ -247,16 +247,10 @@ $ oc logs -f pods/amq-enrich-persist-lab-1-ttd89 -n business-services
 
 . Check the PostgreSQL database, on OpenShift Container Platform, to ensure the records are populated correctly in the T_ACCOUNT table. 
 
-.. Retrieve the name of the Postres database pod
-+
-----
-$ oc get pods -n enterprise-services | grep postgresql
-----
-
 .. Access the Postgres database pod
 +
 ----
-$ oc -n enterprise-services rsh <pod name>
+$  oc -n enterprise-services rsh $(oc get pods -n enterprise-services -l name=postgresql -o name)
 ----
 
 .. Log into the database
@@ -287,14 +281,15 @@ SELECT client_id, contact_first_name, contact_last_name, creation_date, creation
 -----------+--------------------+-------------------+-------------------------+---------------
         42 | Bill               | Smith             | 2019-05-06 20:24:53.094 | fuse_usecase
 (1 row)
-
+----
++
 . Exit out of the postgres datbase pod
 +
 ----
 sampledb-# \q
 sh-4.2$ exit
 ----
-----
+
 
 
 *You have successfully deployed and tested the Integration application!*
