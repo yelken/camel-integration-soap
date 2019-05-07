@@ -136,13 +136,15 @@ amq-enrich-persist-lab-1-6vnwx       1/1       Running     0          2m
 amq-enrich-persist-lab-s2i-1-build   0/1       Completed   0          3m
 ----
 
-. Check that all four Camel routes started successfully. Type the following command:
+. Check that all four Camel routes started successfully. Type the following command. 
 +
 ----
 oc logs -f pods/<pod name> -n business-services
 ----
++
+NOTE: Be sure to update the *<pod name>* with the name of your *amq-enrich-persist-lab-a-xyz* pod
 
-* You should see the following output. Make note of the logs referring to the *routex started and consuming*
+* You should see the following output. Make note of the logs referring to the *routeXYZ started and consuming*
 +
 ----
 ...
