@@ -234,8 +234,10 @@ image:images/lab-02/blank-send.png[]
 . View the logs to make sure the Camel routes processed the message.
 +
 ----
-$ oc logs -f pods/amq-enrich-persist-lab-1-ttd89 -n business-services
+oc logs -f pods/<pod name> -n business-services
 ----
++
+NOTE: Be sure to update the *<pod name>* with the name of your *amq-enrich-persist-lab-a-xyz* pod
 
 * You should see logs regarding the processing of the message. At the end, you will see the following logs
 +
