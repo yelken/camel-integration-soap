@@ -180,11 +180,11 @@ image:images/lab-02/amq-landing-page.png[]
 .. Username: *admin*
 .. Password: *admin*
 +
-image:images/lab-02/amq-login-page.png[]
+image:images/lab-02/amq-login-page.png[width="90%"]
 
 . This will show the main welcome page.
 +
-image:images/lab-02/amq-welcome-page.png[]
+image:images/lab-02/amq-welcome-page.png[width="90%"]
 
 . In the top navigation bar, click *Artemis*
 +
