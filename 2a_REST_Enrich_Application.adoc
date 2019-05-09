@@ -177,7 +177,7 @@ curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company
 +
 NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
 
-. Terminate the Maven process, by hitting *CTRL + C*
+. Terminate the Maven process, by pressing `<CTRL+C>`
 
 === Deploy to OpenShift Container Platform
 

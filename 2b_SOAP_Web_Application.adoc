@@ -246,7 +246,7 @@ Payload: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><
 
 ----
 
-. Terminate the Maven process, by hitting *CTRL + C*
+. Terminate the Maven process, by pressing `<CTRL+C>`
 
 === Deploy to OpenShift Container Platform
 
