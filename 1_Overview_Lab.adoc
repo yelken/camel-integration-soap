@@ -4,7 +4,7 @@
 
 = Lab 1. Agile Integration for the Enterprise - Overview Lab
 
-Welcome! In this lab, you will review a business use case for this Agile Enterprise technical workshop. Next, you will request an OpenShift Container Platform environment for which you will be able to deploy resources. Finally, you will configure your local workstation with the necessary lab materials to execute the remaining labs. 
+Welcome! In this lab, you will review a business use case for this Agile Enterprise technical workshop. Next, you will request an OpenShift Container Platform environment for which you will be able to deploy resources. Finally, you will configure your local workstation with the necessary lab materials to execute the remaining labs.
 
 .Lab Goals
 
@@ -63,11 +63,11 @@ image::images/architecture-usecase.png[]
 
 == OpenShift Hosted Environment
 
-A dedicated environemnt of the OpenShift Container Platform version 4 will be used throughout this workshop and each attendees is given their own dedicated cluster. 
+A dedicated environemnt of the OpenShift Container Platform version 4 will be used throughout this workshop and each attendees is given their own dedicated cluster.
 
 === Obtain a OpenShift Environment
 
-Access to an environment is obtained by requesting a GUID which identifies a particular environment configuration for the workshop. 
+Access to an environment is obtained by requesting a GUID which identifies a particular environment configuration for the workshop.
 
 . Navigate to the following *URL*: https://www.opentlc.com/gg/gg.cgi?profile=generic_summit
 +
@@ -85,7 +85,7 @@ image::lab-01/guid-grabber-2.png[width="70%"]
 
 == Login to OpenShift Container Platform
 
-Let's login to both the OpenShift web console and to the CLI using the information provided in the previous section. 
+Let's login to both the OpenShift web console and to the CLI using the information provided in the previous section.
 
 Credentials for OpenShift are as follows:
 
@@ -113,7 +113,7 @@ Many of the operations that will be performed during this workshop will make use
 $ oc login ${OPENSHIFT_API} -u user1
 ----
 
-. Enter the password when prompted. 
+. Enter the password when prompted.
 
 A response similar to the following indicates successful authentication to the CLI:
 
@@ -133,11 +133,11 @@ Using project "business-services".
 
 === OpenShift Project Layout
 
-The OpenShhift environment has been preconfigured for this workshop. When you logged in to OpenShift, you were presented with a list of projects that are available to you. A _project_ in OpenShift is a workspace for which you and potentially others can collaborate. 
+The OpenShift environment has been preconfigured for this workshop. When you logged in to OpenShift, you were presented with a list of projects that are available to you. A _project_ in OpenShift is a workspace for which you and potentially others can collaborate. 
 
 The following table describes the OpenShift projects and their purpose:
 
-[cols="1,1", options="header"] 
+[cols="1,1", options="header"]
 .OpenShift Projects
 |===
 |Name
@@ -182,7 +182,7 @@ $ oc get pods -n istio-system
 
 == Explore Red Hat CodeReady Studio
 
-Red Hat CodeReady Studio is an integrated development environment (IDE) that combines both tooling and runtime components, including Eclipse plug-ins, best-of-breed open source tools, and the Red Hat(R) JBoss(R) Enterprise Application Platform (JBoss EAP). Red Hat CodeReady Studio is just one of multiple IDE options available for enterprise development needs. Additional support is available for Visual Studio Code and IDEA IntellJ. 
+Red Hat CodeReady Studio is an integrated development environment (IDE) that combines both tooling and runtime components, including Eclipse plug-ins, best-of-breed open source tools, and the Red Hat(R) JBoss(R) Enterprise Application Platform (JBoss EAP). Red Hat CodeReady Studio is just one of multiple IDE options available for enterprise development needs. Additional support is available for Visual Studio Code and IDEA IntellJ.
 
 image::lab-01/codeready-generic-screenshot.png[width="90%"]
 
