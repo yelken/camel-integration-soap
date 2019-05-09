@@ -175,7 +175,10 @@ Next, create a connection to the PostgreSQL database deployed in the *enterprise
 
 Set up the connection to the API client connector using the connector created previously.
 
-. Select *Rest CXFRS Service*
+image::images/lab-03/rest-cxfrs-service.png[width="90%"]
+
+. Select the *Customizations* menu tab.
+. Select *Rest CXFRS Service* from the list of *API Client Connectors*
 . Confirm the following details
 .. *Authentication Type*: No security
 .. *Host*: `http://rest-cxfrs-service.business-services:8080`
