@@ -288,6 +288,8 @@ $ echo $SOAP_CXFWS_URL
 .. In the Web Service Tester within CodeReady Studio, update the URL for the service. Replace: `http://localhost:8080` with the value of the _SOAP_CXFWS_URL_ from the previous command.
 
 .. Click the green button to send a request to the soap-cxfws-service
++
+image::images/lab-02/ws-test-ocp.png[]
 
 .. The response should be as follows:
 +
@@ -317,6 +319,7 @@ $ echo $SOAP_CXFWS_URL
    </soap:Body>
 </soap:Envelope>
 ----
+
 
 NOTE: The `<salesContact>` is randomly generated. Your output may be slightly different from above.
 
