@@ -136,13 +136,15 @@ amq-enrich-persist-lab-1-6vnwx       1/1       Running     0          2m
 amq-enrich-persist-lab-s2i-1-build   0/1       Completed   0          3m
 ----
 
-. Check that all four Camel routes started successfully. Type the following command.
+. Use the following command to *tail* the log of the AMQ broker pod, for inspection:
 +
 ----
 oc logs -f <pod name> -n business-services
 ----
 +
 NOTE: Be sure to update the *<pod name>* with the name of your *amq-enrich-persist-lab-a-xyz* pod
+
+. Check in the pod log, that all four Camel routes started successfully.
 
 * You should see the following output. Make note of the logs referring to the *routeXYZ started and consuming*
 +
@@ -231,13 +233,7 @@ image:images/lab-02/blank-send.png[]
 
 . Keep all of the other defaults and click *Send Message*.
 
-. View the logs to make sure the Camel routes processed the message.
-+
-----
-oc logs -f pods/<pod name> -n business-services
-----
-+
-NOTE: Be sure to update the *<pod name>* with the name of your *amq-enrich-persist-lab-a-xyz* pod
+. Switch back to the terminal window displaying the log of the AMQ broker pod.
 
 * You should see logs regarding the processing of the message. At the end, you will see the following logs
 +
