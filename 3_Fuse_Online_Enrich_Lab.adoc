@@ -380,7 +380,7 @@ image:images/lab-02/click-queues.png[]
 . Select the queue named *fuseOnlineAccountQueue* and click it's *attributes* link
 +
 +
-image:images/lab-02/click-attributes.png[]
+image:images/lab-03/click-attributes.png[]
 
 . In top-right, click the drop-down arrow and select *Send*
 +
