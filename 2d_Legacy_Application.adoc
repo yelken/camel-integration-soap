@@ -22,7 +22,7 @@ SOAP-based services are plentiful in many enterprise solutions and are slowly be
 
 *This project contains the Legacy SOAP Wrapper REST service that will route and transform REST service requests and responses to and from the existing backend SOAP service.*
 
-The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is used as the backend SOAP service for this part of the lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL is accessible at the URL: link:http://$soap-cxfws-service-route/ws/customerService?wsdl[http://$soap-cxfws-service-route/ws/customerService?wsdl].
+The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is used as the backend SOAP service for this part of the lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL file is accessible at the URL: link:http://$soap-cxfws-service-route/ws/customerService?wsdl[http://$soap-cxfws-service-route/ws/customerService?wsdl].
 
 
 ==== Create the Camel Route for SOAP service migration
@@ -30,7 +30,7 @@ The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is us
 . Right-click the *legacy-soap-rest-wrapper*
 .. Select *New->Camel Rest DSL from WSDL*
 
-. Provide the URL to soap-cxfws-service WSDL and ensure the *legacy-soap-rest-wrapper* project is selected:
+. Provide the URL to soap-cxfws-service WSDL file and ensure the *legacy-soap-rest-wrapper* project is selected:
 +
 image::images/lab-02/camel-rest-dsl-from-wsdl.png[]
 
