@@ -175,21 +175,23 @@ Next, create a connection to the PostgreSQL database deployed in the *enterprise
 
 Set up the connection to the API client connector using the connector created previously.
 
-image::images/lab-03/rest-cxfrs-service.png[width="90%"]
-
-. Select the *Customizations* menu tab.
-. Select *Rest CXFRS Service* from the list of *API Client Connectors*
+. Select the *Connections* menu tab.
+. Select *Rest CXFRS Service* from the list of connectors
++
+image::images/lab-03/rest-service-connector.png[width="90%"]
++
 . Confirm the following details
 .. *Authentication Type*: No security
 .. *Host*: `http://rest-cxfrs-service.business-services:8080`
 .. *Base path*: `/rest`
 . Select *Next*
-. Enter `RESTEnrichAPI` as the *Name* and click *Create*
+. Enter `RESTEnrichAPI` as the *Connection Name* and click *Create*
 
 ==== *SOAP CXFWS Service*:
 
 Set up the connection to the API client connector using the connector created previously
 
+. Select the *Connections* menu tab.
 . Click *Create Connection* to create another new connection
 . Select *SOAP CXFWS Service*
 . Confirm the following details
@@ -197,7 +199,7 @@ Set up the connection to the API client connector using the connector created pr
 . *Host*: `http://legacy-soap-rest-wrapper.business-services:8080`
 . *Base path*: `/api`
 . Select *Next*
-. Enter `SOAPEnrichAPI` as the *Name* and click *Create*
+. Enter `SOAPEnrichAPI` as the *Connection Name* and click *Create*
 
 You should have the following connectors now available for use.
 
@@ -295,7 +297,7 @@ image::images/lab-03/fuse-online-integration-8.png[width="90%"]
 .. Click `Done`
 . Add a Step immediately after the *RestEnrichService* and immediately before the *Log* step created in the previous action.
 .. Select *Remove Header*
-.. Enter Header *Transfer-Encoding* into the textbox.
+.. Enter *Transfer-Encoding* into the *Header name* field.
 .. Click *Done*
 +
 NOTE: The *Transfer-Encoding* header is added by Camel during the call to REST service. This header will cause errors if passed to the subsequent SOAP service. Hence, the header needs to be removed before the next API call.
@@ -308,24 +310,28 @@ NOTE: The *Transfer-Encoding* header is added by Camel during the call to REST s
 .. Select *Data Mapper*
 .. Define a new _Constant_ value by expanding *Constants* and selecting the *+* sign
 .. Enter `fuse_online` into the textbox and confirm *String* as the _Value Type_
-.. Click Done
+.. Click *Save*.
 .. Map the *fuse_online* Constant to the SQL Parameter *CREATION_USER*
 .. Map the remaining values from the *Response* field in _Sources_ to the *SQL Parameter* on the _Target_
+.. Click Done.
 +
 image::images/lab-03/fuse-online-integration-11.png[width="90%"]
 +
-.. Click Done
-. With all the _Steps_ and _Connections_ for the integrtation defined, select *Publish* on the top right
+*With all the _Steps_ and _Connections_ for the Integration in place, you are ready to finalize the design.*
++
+. Select *Publish* on the top right.
 . Name the Integration *AMQToSQLEnrich*.
-. Select *Publish* once again to complete the integration
-
-The resulting integration should look as follows:
+. Select *Publish* once again to complete the integration design phase.
++
+image::images/lab-03/integration-design.png[width="90%"]
++
+. The resulting integration should resemble this:
++
+image::images/lab-03/fuse-online-integration-12.png[width="90%"]
 
 === Publish and Test the Integration Module
 
 Once an integration is published, a new image containing the integration is created. It will take a few minutes for the build to complete. Once complete, the resulting integration will appear as follows:
-
-image::images/lab-03/fuse-online-integration-12.png[width="90%"]
 
 A new pod with the name starting with *i-amqtosqlenrich* is deployed in the `fuse-online` project and contains the integration that was created earlier.
 
