@@ -17,7 +17,7 @@ The REST service enriches the Account record.
 
 . Open the file: `CustomerRest.java`
 
-. This file consists of the interface for `CustomerRest` REST service: 
+. This file consists of the interface for `CustomerRest` REST service:
 +
 ----
 package com.redhat.labs.agileintegration.rest;
@@ -79,7 +79,7 @@ public class CustomerRestImpl implements CustomerRest {
 
 . Open the class `SampleRestApplication.java`.
 
-. To expose the REST service within Spring, the CXF component's `rsServer` is annotated with `@Bean`. 
+. To expose the REST service within Spring, the CXF component's `rsServer` is annotated with `@Bean`.
 +
 ----
 package com.redhat.labs.agileintegration.rest;
@@ -105,7 +105,7 @@ public class SampleRestApplication {
     public static void main(String[] args) {
         SpringApplication.run(SampleRestApplication.class, args);
     }
- 
+
     @Bean
     public Server rsServer() {
         // setup CXF-RS
@@ -177,6 +177,8 @@ curl -k http://localhost:8080/rest/customerservice/enrich -X POST  -d '{"company
 +
 NOTE: Notice that the content is enriched, and the GEO is replaced by the correct location. We passed in `"geo":"NA"` and the response correctly is enriched with `"geo":"NORTH_AMERICA"`
 
+. Terminate the Maven process, by pressing `<CTRL+C>`
+
 === Deploy to OpenShift Container Platform
 
 . An OpenShift project is available for the deployment of each of the services within this lab. The project is named *business-services*.
@@ -213,7 +215,7 @@ rest-cxfrs-service-s2i-1-build   0/1       Completed   0          3m
 .. Retrieve the URL of the rest-cxfrs-service application:
 +
 ----
-$ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --template='{{.spec.host}}' -n business-services) 
+$ export REST_CXFRS_URL=http://$(oc get route rest-cxfrs-service -o template --template='{{.spec.host}}' -n business-services)
 ----
 
 .. Send a request to the rest-cxfrs-service

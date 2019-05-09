@@ -95,8 +95,11 @@ image::images/lab-03/fuse-online-create-rest-api-2.png[width="90%"]
 . On the Security page, leave the default _No Security_ and click *Next*
 . On the _Review/Edit Connector Details_ page, enter the following details:
 .. *Connector Name*: Rest CXFRS Service
-.. *Host*: `http://rest-cxfrs-service.business-services:8080`
+.. *Host*: `http://rest-cxfrs-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 .. *Base URL*: /rest
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
++
 . Click *Create API Connector* to create the API
 +
 image::images/lab-03/fuse-online-create-rest-api-3.png[width="90%"]
@@ -117,8 +120,10 @@ image::images/lab-03/fuse-online-create-rest-api-5.png[width="90%"]
 . Click *Next* on both of the _Review Actions_ and _Specify Security_ pages
 * On the _Review/Edit Connector Details_ page, enter the following details:
 .. *Connector Name*: SOAP CXFWS Service
-.. *Host*: `http://legacy-soap-rest-wrapper.business-services:8080`
+.. *Host*: `http://soap-cxfws-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 .. *Base URL*: /api
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
 +
 image::images/lab-03/fuse-online-create-rest-api-6.png[width="90%"]
 +
@@ -130,13 +135,13 @@ image::images/lab-03/fuse-online-api-connectors-3.png[width="90%"]
 
 === Connection
 
-A link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.2/html-single/connecting_fuse_online_to_applications_and_services/index#supported-connectors_connectors[Connector] is a way to integrate with an existing application.
+A link:https://access.redhat.com/documentation/en-us/red_hat_fuse/7.2/html-single/connecting_fuse_online_to_applications_and_services/index#supported-connectors_connectors[Connection] is a way to integrate with an existing application.
 
 ==== *AMQP Message Broker*
 
 The Red Hat AMQ broker deployed in the *enterprise-services* project will once again be used as the initial entry point:
 
-. Create a new _Connector_ by clicking on the *Connections* link on the lefthand side and then *Create Connector*
+. Create a new _Connection_ by clicking on the *Connections* link on the lefthand side and then *Create Connection*
 +
 image::images/lab-03/fuse-online-connectors-1.png[width="90%"]
 +
@@ -158,9 +163,9 @@ image::images/lab-03/fuse-online-connectors-2.png[width="90%"]
 
 ==== *Database*:
 
-Next, create a connector to the PostgreSQL database deployed in the *enterprise-services* project.
+Next, create a connection to the PostgreSQL database deployed in the *enterprise-services* project.
 
-. Click *Create Connector* to create another new connection
+. Click *Create Connection* to create another new connection
 . Select *Database*
 . Provide the following details
 .. *Connection URL*: `jdbc:postgresql://postgresql.enterprise-services:5432/sampledb`
@@ -175,26 +180,37 @@ Next, create a connector to the PostgreSQL database deployed in the *enterprise-
 
 Set up the connection to the API client connector using the connector created previously.
 
-. Select *Rest CXFRS Service*
+. Select the *Connections* menu tab.
+. Select *Rest CXFRS Service* from the list of connectors
++
+image::images/lab-03/rest-service-connector.png[width="90%"]
++
 . Confirm the following details
 .. *Authentication Type*: No security
-.. *Host*: `http://rest-cxfrs-service.business-services:8080`
+.. *Host*: `http://rest-cxfrs-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 .. *Base path*: `/rest`
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
++
 . Select *Next*
-. Enter `RESTEnrichAPI` as the *Name* and click *Create*
+. Enter `RESTEnrichAPI` as the *Connection Name* and click *Create*
 
 ==== *SOAP CXFWS Service*:
 
 Set up the connection to the API client connector using the connector created previously
 
-. Click *Create Connector* to create another new connection
+. Select the *Connections* menu tab.
+. Click *Create Connection* to create another new connection
 . Select *SOAP CXFWS Service*
 . Confirm the following details
 . *Authentication Type*: No security
-. *Host*: `http://legacy-soap-rest-wrapper.business-services:8080`
+. *Host*: `http://soap-cxfws-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 . *Base path*: `/api`
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
++
 . Select *Next*
-. Enter `SOAPEnrichAPI` as the *Name* and click *Create*
+. Enter `SOAPEnrichAPI` as the *Connection Name* and click *Create*
 
 You should have the following connectors now available for use.
 
@@ -292,7 +308,7 @@ image::images/lab-03/fuse-online-integration-8.png[width="90%"]
 .. Click `Done`
 . Add a Step immediately after the *RestEnrichService* and immediately before the *Log* step created in the previous action.
 .. Select *Remove Header*
-.. Enter Header *Transfer-Encoding* into the textbox.
+.. Enter *Transfer-Encoding* into the *Header name* field.
 .. Click *Done*
 +
 NOTE: The *Transfer-Encoding* header is added by Camel during the call to REST service. This header will cause errors if passed to the subsequent SOAP service. Hence, the header needs to be removed before the next API call.
@@ -305,24 +321,28 @@ NOTE: The *Transfer-Encoding* header is added by Camel during the call to REST s
 .. Select *Data Mapper*
 .. Define a new _Constant_ value by expanding *Constants* and selecting the *+* sign
 .. Enter `fuse_online` into the textbox and confirm *String* as the _Value Type_
-.. Click Done
+.. Click *Save*.
 .. Map the *fuse_online* Constant to the SQL Parameter *CREATION_USER*
 .. Map the remaining values from the *Response* field in _Sources_ to the *SQL Parameter* on the _Target_
+.. Click Done.
 +
 image::images/lab-03/fuse-online-integration-11.png[width="90%"]
 +
-.. Click Done
-. With all the _Steps_ and _Connections_ for the integrtation defined, select *Publish* on the top right
+*With all the _Steps_ and _Connections_ for the Integration in place, you are ready to finalize the design.*
++
+. Select *Publish* on the top right.
 . Name the Integration *AMQToSQLEnrich*.
-. Select *Publish* once again to complete the integration
-
-The resulting integration should look as follows:
+. Select *Publish* once again to complete the integration design phase.
++
+image::images/lab-03/integration-design.png[width="90%"]
++
+. The resulting integration should resemble this:
++
+image::images/lab-03/fuse-online-integration-12.png[width="90%"]
 
 === Publish and Test the Integration Module
 
 Once an integration is published, a new image containing the integration is created. It will take a few minutes for the build to complete. Once complete, the resulting integration will appear as follows:
-
-image::images/lab-03/fuse-online-integration-12.png[width="90%"]
 
 A new pod with the name starting with *i-amqtosqlenrich* is deployed in the `fuse-online` project and contains the integration that was created earlier.
 
@@ -371,7 +391,7 @@ image:images/lab-02/click-queues.png[]
 . Select the queue named *fuseOnlineAccountQueue* and click it's *attributes* link
 +
 +
-image:images/lab-02/click-attributes.png[]
+image:images/lab-03/click-attributes.png[]
 
 . In top-right, click the drop-down arrow and select *Send*
 +
