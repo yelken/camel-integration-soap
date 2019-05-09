@@ -145,13 +145,13 @@ $ export LEGACY_SOAP_URL=http://$(oc get route legacy-soap-rest-wrapper -o templ
 $ echo $LEGACY_SOAP_URL
 ----
 
-.. Test the SOAP service :
+.. Repeatedly test the SOAP service using this CURL command:
 +
 ----
 $ curl -k ${LEGACY_SOAP_URL}/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
 ----
 +
-. Validate that the same REST response was received, as in the previous test.
+. Validate that the same set of REST responses was received, as in the previous test.
 
 *Congratulations, you have completed each of the modules of this lab.*
 
