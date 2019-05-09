@@ -107,7 +107,17 @@ image::lab-01/openshift-web-console.png[width="70%"]
 
 Many of the operations that will be performed during this workshop will make use of the OpenShift CLI (`oc`). On the environment request page, you will see a link for API access. This is the resource used by the CLI and in the format *https://api.cluster-GUID.DOMAIN:6443*. This value will be referred to as `OPENSHIFT_API` in subsequent steps.
 
-. Login to OpenShift Container Platform as user `user1` with the provided password.
+The laptop for which you are using has the OpenShift executable for both version 3 and 4 in the `~/bin` folder. Since version 4 is being utilized in this workshop, create a symbolic link to the `ocp4` binary by executing the following command:
+
+----
+$ ln -s ~/bin/ocp4 ~/bin/oc
+----
+
+You will now be able to use `oc` and have the command execute the correct binary.
+
+Now, let's login to OpenShift
+
+. Login to OpenShift Container Platform as user `user1` with the password provided above.
 +
 ----
 $ oc login ${OPENSHIFT_API} -u user1
