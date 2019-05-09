@@ -53,7 +53,7 @@ image::images/lab-02/import_maven_projects.png[]
 .. 04_legacy-rest-soap-wrapper
 +
 [NOTE]
-Check the box next to the project you intend to import, and click *Finish* to begin the import process for that project. Repeat for the remainder of the projects.
+Navigate into the folder of the project you intend to import, check the box next to the `pom.xml` file, and click *Finish* to begin the import process for that project. Repeat until all projects are imported.
 +
 //image::images/lab-02/import-selected-projects.png[]
 . Click *Finish*
