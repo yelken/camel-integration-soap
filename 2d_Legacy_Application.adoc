@@ -22,7 +22,7 @@ SOAP-based services are plentiful in many enterprise solutions and are slowly be
 
 *This project contains the Legacy SOAP Wrapper REST service that will route and transform REST service requests and responses to and from the existing backend SOAP service.*
 
-The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is used as the backend SOAP service for this part of the lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL file is accessible at the URL: link:http://$soap-cxfws-service-route/ws/customerService?wsdl[http://$soap-cxfws-service-route/ws/customerService?wsdl].
+The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is used as the backend SOAP service for this part of the lab. This service is developed using CXF-WS, and deployed on Karaf. The service is running on Red Hat Fuse 6.3. Make sure the SOAP service is deployed to OpenShift Container Platform and the WSDL is accessible at the URL: link:http://$soap-cxfws-service-route/ws/customerService?wsdl[http://$soap-cxfws-service-route/ws/customerService?wsdl].
 
 
 ==== Create the Camel Route for SOAP service migration
@@ -30,7 +30,7 @@ The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is us
 . Right-click the *legacy-soap-rest-wrapper*
 .. Select *New->Camel Rest DSL from WSDL*
 
-. Provide the URL to soap-cxfws-service WSDL file and ensure the *legacy-soap-rest-wrapper* project is selected:
+. Provide the URL to soap-cxfws-service WSDL and ensure the *legacy-soap-rest-wrapper* project is selected:
 +
 image::images/lab-02/camel-rest-dsl-from-wsdl.png[]
 
@@ -67,6 +67,8 @@ image::images/lab-02/camel-rest-dsl-from-wsdl-3.png[]
     </dependency>
 ----
 
+. Save your changes.
+
 ==== Run the Legacy SOAP Wrapper REST service Locally
 
 . To run the Legacy SOAP Wrapper REST service locally, run the following Maven command from the `$AI_EXERCISE_HOME/labs/lab02/04_legacy-soap-rest-wrapper/` directory:
@@ -77,19 +79,32 @@ $ mvn spring-boot:run -Dfabric8.skip
 +
 . The Camel service, that has just launched, should be running on port 8080, and can be accessed through URL: link:http://localhost:8080/api/jaxrs/account[http://localhost:8080/api/jaxrs/account].
 
-. Send a test request to the Legacy SOAP Wrapper REST service and check if the backend service is invoked correctly:
+. Send a CURL request to the Legacy SOAP Wrapper REST service and check if the backend service is invoked correctly:
 +
 ----
 $ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json'
 ----
 
-. The response should be as below:
+. The response should be similar to the one shown here, with the possible exception of the *"id"* and *"salesContact"* values:
 +
 ----
 {"company":{"active":true,"geo":"NA","name":"Rotobots"},"contact":{"city":"Phoenix","firstName":"Bill","lastName":"Smith","phone":"602-555-1100","state":"AZ","streetAddr":"100 N Park Ave.","zip":"85017"},"id":33,"salesContact":"Bernard Tison"}
 ----
 
-. Terminate the Maven process, by pressing `<CTRL+C>`
+. Re-send a CURL request to the Legacy SOAP Wrapper REST service. Repeat this test as many times as you wish.
+
+* Notice that the *"id"* and *"salesContact"* values alternate with each test.
+
+. Note the log entries, indicating the number of CURL requests processed, appear in the terminal window where the CamelContext is active:
++
+----
+01:29:20.990 [http-nio-0.0.0.0-8080-exec-1] INFO  updateAccount - updateAccount
+01:30:02.116 [http-nio-0.0.0.0-8080-exec-3] INFO  updateAccount - updateAccount
+01:30:06.046 [http-nio-0.0.0.0-8080-exec-5] INFO  updateAccount - updateAccount
+01:30:07.667 [http-nio-0.0.0.0-8080-exec-7] INFO  updateAccount - updateAccount
+01:30:08.562 [http-nio-0.0.0.0-8080-exec-9] INFO  updateAccount - updateAccount
+01:30:09.404 [http-nio-0.0.0.0-8080-exec-1] INFO  updateAccount - updateAccount
+----
 
 ==== Deploy to OpenShift Container Platform
 
