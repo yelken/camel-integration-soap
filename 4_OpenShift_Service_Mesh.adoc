@@ -343,7 +343,7 @@ To verify the HTTP abort fault logic, we are going to simulate a call from the `
 $ oc -n business-services rsh -c spring-boot $(oc get pods -n business-services -l deploymentconfig=legacy-soap-rest-wrapper -o name)
 ----
 +
-. Use the following curl command to test the HTTP abort fault. The command will send a request to the rest-cxfrs-service. Notice that it is sending an HTTP request header: `magic-word` `breakit`
+. At the shell, use the following curl command to test the HTTP abort fault. The command will send a request to the rest-cxfrs-service. Notice that it is sending an HTTP request header: `magic-word` `breakit`
 +
 ----
 curl -H 'magic-word: breakit' -X POST  -d '{"company":{"name":"Rotobots","geo":"NA","active":true},"contact":{"firstName":"Bill","lastName":"Smith","streetAddr":"100 N Park Ave.","city":"Phoenix","state":"AZ","zip":"85017","phone":"602-555-1100"}}' -H 'content-type: application/json' http://rest-cxfrs-service:8080/rest/customerservice/enrich

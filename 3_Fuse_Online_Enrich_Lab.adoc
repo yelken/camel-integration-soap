@@ -95,8 +95,11 @@ image::images/lab-03/fuse-online-create-rest-api-2.png[width="90%"]
 . On the Security page, leave the default _No Security_ and click *Next*
 . On the _Review/Edit Connector Details_ page, enter the following details:
 .. *Connector Name*: Rest CXFRS Service
-.. *Host*: `http://rest-cxfrs-service.business-services:8080`
+.. *Host*: `http://rest-cxfrs-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 .. *Base URL*: /rest
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
++
 . Click *Create API Connector* to create the API
 +
 image::images/lab-03/fuse-online-create-rest-api-3.png[width="90%"]
@@ -117,8 +120,10 @@ image::images/lab-03/fuse-online-create-rest-api-5.png[width="90%"]
 . Click *Next* on both of the _Review Actions_ and _Specify Security_ pages
 * On the _Review/Edit Connector Details_ page, enter the following details:
 .. *Connector Name*: SOAP CXFWS Service
-.. *Host*: `http://legacy-soap-rest-wrapper.business-services:8080`
+.. *Host*: `http://soap-cxfws-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 .. *Base URL*: /api
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
 +
 image::images/lab-03/fuse-online-create-rest-api-6.png[width="90%"]
 +
@@ -182,8 +187,11 @@ image::images/lab-03/rest-service-connector.png[width="90%"]
 +
 . Confirm the following details
 .. *Authentication Type*: No security
-.. *Host*: `http://rest-cxfrs-service.business-services:8080`
+.. *Host*: `http://rest-cxfrs-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 .. *Base path*: `/rest`
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
++
 . Select *Next*
 . Enter `RESTEnrichAPI` as the *Connection Name* and click *Create*
 
@@ -196,8 +204,11 @@ Set up the connection to the API client connector using the connector created pr
 . Select *SOAP CXFWS Service*
 . Confirm the following details
 . *Authentication Type*: No security
-. *Host*: `http://legacy-soap-rest-wrapper.business-services:8080`
+. *Host*: `http://soap-cxfws-service-business-services.apps.cluster-GUID.sandbox389.opentlc.com`
 . *Base path*: `/api`
++
+[NOTE] *Substitute GUID in the Host URL with your GUID*
++
 . Select *Next*
 . Enter `SOAPEnrichAPI` as the *Connection Name* and click *Create*
 
