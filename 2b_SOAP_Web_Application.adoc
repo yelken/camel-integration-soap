@@ -320,6 +320,11 @@ image::images/lab-02/ws-test-ocp.png[]
 </soap:Envelope>
 ----
 
+.. Analyze the log of the *soap-cxfws-service* pod using the OpenShift Console:
++
+image::images/lab-02/log-msg-soap-svc-ocp.png[]
+
+.. Notice the log entries indicating that inbound and outbound messages were processed and generated respectively by the containerized SOAP service.
 
 NOTE: The `<salesContact>` is randomly generated. Your output may be slightly different from above.
 
