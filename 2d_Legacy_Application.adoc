@@ -27,7 +27,7 @@ The SOAP Web Service *soap-cxfws-service* which you have earlier deployed, is us
 
 ==== Create the Camel Route for SOAP service migration
 
-. Right-click the *legacy-soap-rest-wrapper* 
+. Right-click the *legacy-soap-rest-wrapper*
 .. Select *New->Camel Rest DSL from WSDL*
 
 . Provide the URL to soap-cxfws-service WSDL and ensure the *legacy-soap-rest-wrapper* project is selected:
@@ -89,6 +89,7 @@ $ curl -k http://localhost:8080/api/jaxrs/account -X PUT  -d '{"company":{"name"
 {"company":{"active":true,"geo":"NA","name":"Rotobots"},"contact":{"city":"Phoenix","firstName":"Bill","lastName":"Smith","phone":"602-555-1100","state":"AZ","streetAddr":"100 N Park Ave.","zip":"85017"},"id":33,"salesContact":"Bernard Tison"}
 ----
 
+. Terminate the Maven process, by hitting *CTRL + C*
 
 ==== Deploy to OpenShift Container Platform
 

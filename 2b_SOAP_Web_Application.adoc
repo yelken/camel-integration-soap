@@ -39,7 +39,7 @@ public interface CustomerWS {
 
 . Open the class: `CustomerWSImpl.java`
 
-. This implementation class handles updating an account that is passed in. 
+. This implementation class handles updating an account that is passed in.
 
 . Review the code in the `updateAccount` method
 +
@@ -129,14 +129,14 @@ org.apache.camel.spring.Main.main() INFO [org.apache.camel.spring.SpringCamelCon
 
 In this section, we will test the SOAP web service using the an inclued Web Service Tester within CodeReady Studio. The web service tester is only one of many included tools available within the product.
 
-. To test the SOAP service, open the Web Service Tester View. 
-.. Select *Window > Show View > Other*. 
-.. Select *JBoss Tools Web Services > Web Service Tester*. 
+. To test the SOAP service, open the Web Service Tester View.
+.. Select *Window > Show View > Other*.
+.. Select *JBoss Tools Web Services > Web Service Tester*.
 +
 image::images/lab-02/select-jboss-web-service-tester.png[]
 
 +
-. A new window will appear on the bottom portion of the window. 
+. A new window will appear on the bottom portion of the window.
 +
 image::images/lab-02/web-service-tester-blank.png[]
 
@@ -220,6 +220,33 @@ image::images/lab-02/soap-request.png[]
 +
 NOTE: Notice that the account is updated with the sales contact details: *<salesContact>*.
 
+. Observe the following entries in the terminal window, indicating that the inbound message was sucessfully processed:
++
+----
+
+qtp1307779318-19 INFO [org.apache.cxf.services.CustomerWSService.CustomerWSPort.CustomerWS] - Inbound Message
+----------------------------
+ID: 1
+Address: http://localhost:8080/ws/customerService
+Encoding: ISO-8859-1
+Http-Method: POST
+Content-Type: application/x-www-form-urlencoded
+Headers: {Accept=[text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2], Cache-Control=[no-cache], connection=[keep-alive], Content-Length=[803], content-type=[application/x-www-form-urlencoded], Host=[localhost:8080], Pragma=[no-cache], User-Agent=[Java/1.8.0_212]}
+Payload: <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.agileintegration.labs.redhat.com/"><soapenv:Header/><soapenv:Body><ser:updateAccount><!--Optional:--><arg0><clientId>0</clientId><!--Optional:--><company><active>true</active><!--Optional:--><geo>NA</geo><!--Optional:--><name>Bill Smith</name></company><!--Optional:--><contact><!--Optional:--><city>Baltimore</city><!--Optional:--><firstName>Satya</firstName><!--Optional:--><lastName>Jayanti</lastName><!--Optional:--><phone>143-222-2344</phone><!--Optional:--><state>MD</state><!--Optional:--><streetAddr>1077 America Ave.</streetAddr><!--Optional:--><zip>11751</zip></contact><!--Optional:--><salesRepresentative>?</salesRepresentative></arg0></ser:updateAccount></soapenv:Body></soapenv:Envelope>
+--------------------------------------
+qtp1307779318-19 INFO [org.apache.cxf.services.CustomerWSService.CustomerWSPort.CustomerWS] - Outbound Message
+---------------------------
+ID: 1
+Response-Code: 200
+Encoding: ISO-8859-1
+Content-Type: text/xml
+Headers: {Accept=[text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2], breadcrumbId=[ID-doubleh-indahouse-41809-1557419068114-0-1], Host=[localhost:8080], User-Agent=[Java/1.8.0_212]}
+Payload: <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:updateAccountResponse xmlns:ns2="http://service.agileintegration.labs.redhat.com/"><return><company><active>true</active><geo>NA</geo><name>Bill Smith</name></company><contact><city>Baltimore</city><firstName>Satya</firstName><lastName>Jayanti</lastName><phone>143-222-2344</phone><state>MD</state><streetAddr>1077 America Ave.</streetAddr><zip>11751</zip></contact><id>36</id><salesContact>Jeff Bride</salesContact></return></ns2:updateAccountResponse></soap:Body></soap:Envelope>
+--------------------------------------
+
+----
+
+. Terminate the Maven process, by hitting *CTRL + C*
 
 === Deploy to OpenShift Container Platform
 
